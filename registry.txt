@@ -1,0 +1,11 @@
+# Tidex Awesome Skills 技能登记表
+# 格式（| 分隔，一行一个技能，# 开头为注释行）：
+# 名称|原作者|上游仓库地址|开源协议|一句话简介
+nuwa-skill|alchaincyf|https://github.com/alchaincyf/nuwa-skill.git|MIT|女娲造人：从一手语料蒸馏心智模型与专属人物视角技能工厂
+yao-meta-skill|yaojingang|https://github.com/yaojingang/yao-meta-skill.git|MIT|Skill OS 2.0：技能全生命周期建模、中间表示编译、严苛评测与治理系统
+darwin-skill|alchaincyf|https://github.com/alchaincyf/darwin-skill.git|MIT|达尔文：基于严苛双重评测的自主技能进化与持续优化引擎
+huashu-design|alchaincyf|https://github.com/alchaincyf/huashu-design.git|MIT|HTML 原生设计系统：高保真原型/交互动画/演示幻灯片/MP4导出
+huashu-md-html|alchaincyf|https://github.com/alchaincyf/huashu-md-html.git|MIT|出版级 Markdown 多向流水线：万物转MD与出版级版式排版
+huashu-excel|alchaincyf|https://github.com/alchaincyf/huashu-excel.git|MIT|花叔数据分析大师：脏表体检/对齐口径/透视核算与专业报表
+tramstop-skill|alchaincyf|https://github.com/alchaincyf/tramstop-skill.git|MIT|电车站：证据驱动的去AI味实证方法论与真实经验注入
+zhangxuefeng-skill|alchaincyf|https://github.com/alchaincyf/zhangxuefeng-skill.git|MIT|张雪峰思维操作系统：高考志愿/考研抉择/职业规划突破

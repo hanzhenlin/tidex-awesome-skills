@@ -1,0 +1,26 @@
+{
+  "name": "yao-meta-skill",
+  "version": "2.1.0",
+  "owner": "Yao Team",
+  "updated_at": "2026-08-17",
+  "review_due": "2026-11-15",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "library",
+  "context_budget_tier": "production",
+  "review_cadence": "quarterly",
+  "skill_ir_source": "skill-ir/examples/yao-meta-skill.json",
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible",
+    "vscode"
+  ],
+  "factory_components": [
+    "templates",
+    "references",
+    "scripts",
+    "reports"
+  ]
+}

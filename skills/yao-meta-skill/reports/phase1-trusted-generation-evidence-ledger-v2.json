@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "report": "phase1-trusted-generation-visual-report-v2.html",
+  "baseline_commit": "4cbb6d19f76b556162072070adddb3490017308e",
+  "evidence_head": "94e8c7e18aa60f3457011cac243832dfe33263cb",
+  "data_baseline": "2026-08-16",
+  "evidence": {
+    "overall_maturity": {
+      "status": "derived",
+      "inputs": ["five-contract scoring rubric", "ten equal-weight dimensions"]
+    },
+    "context_change": {
+      "status": "verified",
+      "sources": ["reports/context_budget.json", "baseline reports/context_budget.json"]
+    },
+    "quality_gates": {
+      "status": "verified",
+      "sources": [
+        "reports/benchmark_reproducibility.json",
+        "reports/evidence_consistency.json",
+        "reports/conformance_matrix.json",
+        "reports/phase1_trigger_holdout.json",
+        "reports/context_budget.json",
+        "reports/provider_output_evaluation.json",
+        "reports/provider_output_adjudication.json"
+      ]
+    },
+    "repair_inventory": {
+      "status": "verified",
+      "sources": ["reports/phase1-review-repair-checklist.md"]
+    },
+    "provider_matrix": {
+      "status": "verified",
+      "sources": [
+        "evals/output/provider_matrix.json",
+        "reports/provider_output_evaluation.json",
+        "reports/provider_review_lineage.json"
+      ]
+    },
+    "human_review": {
+      "status": "verified",
+      "sources": [
+        "reports/provider_output_adjudication.json",
+        "reports/provider_output_answer_commitment.json",
+        "reports/provider_review_lineage.json"
+      ]
+    },
+    "package_and_release": {
+      "status": "verified",
+      "sources": [
+        "reports/package_verification.json",
+        "reports/registry_audit.json",
+        "reports/install_simulation.json",
+        "reports/artifact-index.json"
+      ]
+    }
+  },
+  "external_gaps": [
+    "world-class evidence intake pending",
+    "native permission enforcement evidence pending",
+    "real-client telemetry evidence pending"
+  ]
+}

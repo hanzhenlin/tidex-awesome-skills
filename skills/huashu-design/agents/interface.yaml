@@ -1,0 +1,26 @@
+interface:
+  display_name: "Huashu Design"
+  short_description: "HTML 原生设计系统：高保真原型、交互动画、演示幻灯片、设计哲学与 MP4 导出"
+  default_prompt: "使用 $huashu-design 帮我设计高保真 HTML 原型、交互动画或演示幻灯片。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

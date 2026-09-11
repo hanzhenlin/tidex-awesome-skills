@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yao.example/schemas/provider-matrix.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "provider",
+    "api_key_env",
+    "api_format",
+    "models",
+    "limits",
+    "promotion",
+    "world_class_counts_as_completion"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "provider": {"const": "deepseek"},
+    "api_key_env": {"const": "DEEPSEEK_API_KEY"},
+    "api_format": {"const": "chat-completions"},
+    "models": {
+      "type": "array",
+      "prefixItems": [
+        {"$ref": "#/$defs/flash"},
+        {"$ref": "#/$defs/pro"}
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "limits": {
+      "type": "object",
+      "required": ["max_calls", "max_total_tokens", "timeout_seconds"],
+      "properties": {
+        "max_calls": {"const": 40},
+        "max_total_tokens": {"const": 250000},
+        "timeout_seconds": {"const": 60}
+      },
+      "additionalProperties": false
+    },
+    "promotion": {
+      "type": "object",
+      "required": [
+        "pair_count",
+        "with_skill_min_wins",
+        "per_model_min_wins",
+        "critical_failure_max",
+        "fleiss_kappa_min",
+        "reviewer_count"
+      ],
+      "properties": {
+        "pair_count": {"const": 20},
+        "with_skill_min_wins": {"const": 15},
+        "per_model_min_wins": {"const": 7},
+        "critical_failure_max": {"const": 0},
+        "fleiss_kappa_min": {"const": 0.4},
+        "reviewer_count": {"const": 3}
+      },
+      "additionalProperties": false
+    },
+    "world_class_counts_as_completion": {"const": false}
+  },
+  "$defs": {
+    "modelContract": {
+      "type": "object",
+      "required": ["model", "thinking", "temperature", "max_output_tokens"],
+      "properties": {
+        "model": {"type": "string"},
+        "thinking": {"const": "disabled"},
+        "temperature": {"const": 0},
+        "max_output_tokens": {"const": 3000}
+      },
+      "additionalProperties": false
+    },
+    "flash": {
+      "allOf": [
+        {"$ref": "#/$defs/modelContract"},
+        {"properties": {"model": {"const": "deepseek-v4-flash"}}}
+      ]
+    },
+    "pro": {
+      "allOf": [
+        {"$ref": "#/$defs/modelContract"},
+        {"properties": {"model": {"const": "deepseek-v4-pro"}}}
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.1-public",
+  "summary": {
+    "critical_failure_count": 0,
+    "failure_count": 0,
+    "fleiss_kappa": 0.7321,
+    "model_with_skill_wins": {
+      "deepseek-v4-flash": 10,
+      "deepseek-v4-pro": 9
+    },
+    "pair_count": 20,
+    "reviewer_count": 3,
+    "with_skill_pair_wins": 19,
+    "with_skill_vote_count": 56,
+    "baseline_vote_count": 4,
+    "unanimous_with_skill_pair_count": 18,
+    "split_with_skill_pair_count": 1,
+    "unanimous_baseline_pair_count": 1
+  },
+  "pairs": [
+    {
+      "pair_id": "deepseek-v4-flash:near-neighbor-decline",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:governance-owner",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:trusted-publish",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:canonical-ir-contract",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:near-neighbor-decline",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:output-evidence",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:release-candidate-gates",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:rollback-boundary",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:create-routeable-skill",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:trusted-publish",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "baseline",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:rollback-boundary",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:create-routeable-skill",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:output-evidence",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:security-gates",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:security-gates",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:governance-owner",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:trigger-boundary",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-flash:release-candidate-gates",
+      "model": "deepseek-v4-flash",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:canonical-ir-contract",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "baseline",
+        "baseline",
+        "baseline"
+      ],
+      "majority_role": "baseline"
+    },
+    {
+      "pair_id": "deepseek-v4-pro:trigger-boundary",
+      "model": "deepseek-v4-pro",
+      "ratings": [
+        "with_skill",
+        "with_skill",
+        "with_skill"
+      ],
+      "majority_role": "with_skill"
+    }
+  ],
+  "failures": [],
+  "quality_promotion": {
+    "eligible": true,
+    "status": "eligible",
+    "thresholds": {
+      "critical_failure_max": 0,
+      "fleiss_kappa_min": 0.4,
+      "pair_count": 20,
+      "per_model_min_wins": 7,
+      "reviewer_count": 3,
+      "with_skill_min_wins": 15
+    }
+  },
+  "evidence_binding": {
+    "blind_pack_sha256": "ed8601ce3ac7dbc1a58c75f1df7a9d04bd6e569c74992f34c1bee8524408e7fc"
+  },
+  "world_class_evidence": {
+    "counts_as_completion": false,
+    "reason": "Internal blind-review promotion does not close the world-class ledger.",
+    "status": "pending"
+  },
+  "public_evidence": {
+    "generated_at": "2026-08-16",
+    "source_run_id": "phase1-provider-zh-cn-adjudicated-20260816",
+    "reviewer_decision_reasons_published": false,
+    "reviewer_identifiers_published": false
+  }
+}

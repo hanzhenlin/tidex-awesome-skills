@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "schema_version": "2.0",
+  "generated_at": "2026-08-17",
+  "previous": {
+    "name": "yao-meta-skill",
+    "version": "1.0.0",
+    "targets": [
+      "openai",
+      "claude",
+      "generic"
+    ]
+  },
+  "current": {
+    "name": "yao-meta-skill",
+    "version": "2.1.0",
+    "targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible",
+      "vscode"
+    ]
+  },
+  "summary": {
+    "declared_bump": "major",
+    "recommended_bump": "minor",
+    "breaking_change_count": 0,
+    "added_target_count": 2,
+    "metadata_change_count": 1,
+    "checksum_change_count": 2,
+    "failure_count": 0,
+    "warning_count": 0
+  },
+  "upgrade_diff": {
+    "name_changed": false,
+    "added_targets": [
+      "agent-skills-compatible",
+      "vscode"
+    ],
+    "removed_targets": [],
+    "compatibility_changes": [
+      {
+        "target": "agent-skills",
+        "from": "missing",
+        "to": "pass",
+        "direction": "improved"
+      },
+      {
+        "target": "agent-skills-compatible",
+        "from": "missing",
+        "to": "pass",
+        "direction": "improved"
+      },
+      {
+        "target": "vscode",
+        "from": "missing",
+        "to": "pass",
+        "direction": "improved"
+      }
+    ],
+    "metadata_changes": [
+      {
+        "field": "description",
+        "from": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes.",
+        "to": "Create, improve, or evaluate an existing skill from workflows, prompts, SOPs, scripts. Use for migration/release/package, routing, evals/tests, install/trust checks, 优化已有 skill, 补 trigger 评测. Exclude summary/translation/docs, brainstorming, one-off prompts, copy-only edits, outline-only requests."
+      }
+    ],
+    "checksum_changes": [
+      {
+        "field": "archive_sha256",
+        "from": "",
+        "to": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7"
+      },
+      {
+        "field": "package_sha256",
+        "from": "0000000000000000000000000000000000000000000000000000000000000000",
+        "to": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+      }
+    ]
+  },
+  "release_notes": [
+    "Recommended version bump: minor.",
+    "Added targets: agent-skills-compatible, vscode.",
+    "Package or archive checksum changed; reviewers should verify package artifacts before release.",
+    "Package verification evidence: reports/package_verification.md."
+  ],
+  "failures": [],
+  "warnings": [],
+  "artifacts": {
+    "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
+    "current_package": "reports/registry_audit.json",
+    "json": "reports/upgrade_check.json",
+    "markdown": "reports/upgrade_check.md"
+  }
+}

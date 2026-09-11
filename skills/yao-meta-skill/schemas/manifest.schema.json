@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://yao.example/schemas/manifest.schema.json",
+  "title": "Yao Agent Skill Manifest",
+  "type": "object",
+  "required": ["name", "version", "owner", "updated_at"],
+  "properties": {
+    "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"},
+    "owner": {"type": "string", "minLength": 1},
+    "updated_at": {"type": "string", "format": "date"},
+    "review_due": {"type": "string", "format": "date"},
+    "skill_ir_source": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+\\.json$"
+    },
+    "status": {"enum": ["active", "deprecated", "archived", "experimental"]},
+    "maturity_tier": {"enum": ["scaffold", "reusable", "production", "library", "governed"]},
+    "lifecycle_stage": {"type": "string"},
+    "context_budget_tier": {"type": "string"},
+    "review_cadence": {"type": "string"},
+    "skill_archetype": {"type": "string"},
+    "target_platforms": {"type": "array", "items": {"type": "string"}},
+    "factory_components": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

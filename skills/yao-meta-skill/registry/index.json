@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-08-17",
+  "package_count": 1,
+  "packages": [
+    {
+      "name": "yao-meta-skill",
+      "version": "2.1.0",
+      "maturity": "governed",
+      "owner": "Yao Team",
+      "targets": [
+        "openai",
+        "claude",
+        "generic",
+        "agent-skills-compatible",
+        "vscode"
+      ],
+      "package_metadata": "registry/packages/yao-meta-skill.json",
+      "package_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8"
+    }
+  ]
+}

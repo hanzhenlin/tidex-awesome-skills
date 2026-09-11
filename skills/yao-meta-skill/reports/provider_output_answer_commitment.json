@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.1-public",
+  "status": "private-answer-key-isolated",
+  "pair_count": 20,
+  "blind_pack_sha256": "ed8601ce3ac7dbc1a58c75f1df7a9d04bd6e569c74992f34c1bee8524408e7fc",
+  "answer_key_sha256": "df8c1198e0d604766c11e87b19319e9c7c917049b2b15ae6f524a9d8c6714ade"
+}

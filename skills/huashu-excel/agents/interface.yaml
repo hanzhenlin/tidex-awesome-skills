@@ -1,0 +1,26 @@
+interface:
+  display_name: "Huashu Excel Master"
+  short_description: "花叔数据分析全流程大师：脏表体检、清洗规范、对齐口径、计算核算与专业报表交付"
+  default_prompt: "使用 $huashu-excel 对表格数据进行体检、清洗、透视核算并生成经得起推敲的分析报告。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

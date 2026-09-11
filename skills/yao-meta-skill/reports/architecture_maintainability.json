@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-08-17",
+  "skill_dir": ".",
+  "summary": {
+    "python_file_count": 259,
+    "script_file_count": 174,
+    "test_file_count": 85,
+    "internal_module_count": 83,
+    "cli_script_count": 96,
+    "command_handler_count": 74,
+    "entrypoint_command_handler_count": 17,
+    "command_module_count": 8,
+    "warn_line_threshold": 900,
+    "watch_line_threshold": 720,
+    "early_watch_line_threshold": 600,
+    "block_line_threshold": 1500,
+    "largest_file_lines": 719,
+    "watchlist_count": 0,
+    "early_watchlist_count": 7,
+    "hotspot_count": 0,
+    "blocker_count": 0,
+    "decision": "pass"
+  },
+  "largest_files": [
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 719,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_evidence_consistency.py",
+      "lines": 719,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 706,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 700,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 670,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_world_class_operator_runbook.py",
+      "lines": 651,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_output_review_adjudication.py",
+      "lines": 600,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 597,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/intent_clarification.py",
+      "lines": 592,
+      "kind": "internal-module",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "lines": 592,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "scripts/world_class_evidence_contract.py",
+      "lines": 592,
+      "kind": "internal-module",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_skill_overview.py",
+      "lines": 588,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    }
+  ],
+  "watchlist": [],
+  "early_watchlist": [
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "lines": 719,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_evidence_consistency.py",
+      "lines": 719,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 706,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 700,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 670,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_world_class_operator_runbook.py",
+      "lines": 651,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_output_review_adjudication.py",
+      "lines": 600,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    }
+  ],
+  "hotspots": [],
+  "actions": [],
+  "artifacts": {
+    "json": "reports/architecture_maintainability.json",
+    "markdown": "reports/architecture_maintainability.md"
+  }
+}

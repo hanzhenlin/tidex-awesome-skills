@@ -1,0 +1,26 @@
+interface:
+  display_name: "Darwin Skill"
+  short_description: "达尔文.skill：基于 autoresearch 与严苛双重评测的自主技能进化与优化引擎"
+  default_prompt: "使用 $darwin-skill 对目标技能进行质量体检、9维评分与自主进化优化。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

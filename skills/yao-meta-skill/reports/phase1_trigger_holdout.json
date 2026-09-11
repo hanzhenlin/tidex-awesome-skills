@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-08-12",
+  "summary": {
+    "precision": 1.0,
+    "recall": 0.917,
+    "false_positives": 0,
+    "false_negatives": 1,
+    "hard_negative_false_positives": 0,
+    "existing_suite_case_count": 66,
+    "existing_suite_false_positives": 0,
+    "existing_suite_false_negatives": 0,
+    "skill_body_tokens": 767,
+    "initial_load_tokens": 945,
+    "decision": "pass"
+  },
+  "thresholds": {
+    "precision_min": 0.95,
+    "recall_min": 0.9,
+    "hard_negative_false_positive_max": 0,
+    "existing_suite_case_count": 66,
+    "existing_suite_regression_max": 0,
+    "skill_body_tokens_max": 780,
+    "initial_load_tokens_exclusive_max": 950
+  },
+  "checks": {
+    "holdout_lock": true,
+    "precision": true,
+    "recall": true,
+    "hard_negative_false_positives": true,
+    "existing_suite": true,
+    "skill_body_tokens": true,
+    "initial_load_tokens": true,
+    "release_metadata": true
+  },
+  "frozen_holdout": {
+    "path": "evals/blind_holdout/trigger_cases_v2.json",
+    "sha256": "b146ce62cea6a9d7b246207e737668e109d048509b678e93e242e0013036f760",
+    "frozen_at": "2026-08-12",
+    "case_count": 30
+  },
+  "misfires": [
+    {
+      "bucket": "should_trigger",
+      "family": "migrate_existing_skill",
+      "prompt": "Migrate our Claude skill to Codex while preserving behavior, route boundaries, and conformance tests.",
+      "score": 0.314,
+      "reason": "false_negative",
+      "matched_desired_concepts": [
+        "eval_optimize",
+        "iterate_existing_skill"
+      ],
+      "matched_negative_concepts": []
+    }
+  ]
+}

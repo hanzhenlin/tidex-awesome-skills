@@ -1,0 +1,26 @@
+interface:
+  display_name: "Huashu MD-HTML Pipeline"
+  short_description: "出版级 Markdown 多向流水线：万物转干净 MD，MD 转出版级 HTML/DOCX/PDF/EPUB"
+  default_prompt: "使用 $huashu-md-html 将目标内容转为干净 Markdown，或将 Markdown 渲染为出版级版式。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

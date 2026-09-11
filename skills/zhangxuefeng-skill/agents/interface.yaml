@@ -1,0 +1,26 @@
+interface:
+  display_name: "Zhang Xuefeng Perspective"
+  short_description: "张雪峰思维操作系统：高考志愿、考研抉择、职业规划与社会竞争阶梯破局"
+  default_prompt: "切换到 $zhangxuefeng-perspective 视角，用张雪峰的核心心智模型与决策启发式帮我深度分析。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

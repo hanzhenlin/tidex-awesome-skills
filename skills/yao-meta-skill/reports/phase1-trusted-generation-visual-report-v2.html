@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="zh-CN" data-heading-flow="stacked-full-width" data-container-style="open-flat" data-chart-alignment="left" data-language-mode="bilingual" data-default-language="zh-CN" data-report-typography="editorial-serif">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Yao Meta Skill">
+  <meta name="description" content="Yao Meta Skill 第一阶段可信生成内核、能力跃迁、证据账本与外部质量链可视化报告">
+  <meta name="generator" content="Yao HTML Report Skill · Kami Typesetting Adaptation">
+  <title>Yao Meta Skill 1.2.0 第一阶段可信生成内核可视化报告</title>
+  <style>
+    :root {
+      --report-max-width: 1250px;
+      --report-content-width: 1206px;
+      --section-title-size: 40px;
+      --section-title-size-mobile: 30px;
+      --module-title-size: 16px;
+      --white: #ffffff;
+      --ink: #141413;
+      --ink-soft: #3d3d3a;
+      --muted: #6b6a64;
+      --line: #e8e6dc;
+      --line-soft: #f1f0eb;
+      --navy: #1b365d;
+      --navy-2: #2d5a8a;
+      --navy-soft: #eef2f7;
+      --amber: #9b5a15;
+      --amber-soft: #fff4e6;
+      --green: #29674c;
+      --green-soft: #e9f5ef;
+      --before: #9faab3;
+      --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", Georgia, serif;
+      --sans: var(--serif);
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #ffffff; color: var(--ink); font-family: var(--sans); font-synthesis: none; line-height: 1.58; letter-spacing: .01em; text-rendering: optimizeLegibility; }
+    a { color: inherit; }
+    button { font: inherit; }
+    .skip { position: fixed; z-index: 120; top: 8px; left: 8px; padding: 9px 13px; border: 1px solid var(--navy); background: #ffffff; color: var(--navy); transform: translateY(-160%); }
+    .skip:focus { transform: translateY(0); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 3px; }
+    .progress { position: fixed; z-index: 115; inset: 0 auto auto 0; width: 0; height: 3px; background: var(--navy); }
+    nav[data-sticky-nav] { position: sticky; z-index: 100; top: 0; background: #ffffff; border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: var(--report-max-width); min-height: 64px; margin: 0 auto; padding: 0 22px; display: flex; align-items: center; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; color: var(--navy); text-decoration: none; }
+    .brand-mark { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--navy); border-radius: 0; background: #ffffff; color: var(--navy); font: 500 11px/1 var(--mono); }
+    .brand-copy { font-size: 12px; font-weight: 500; line-height: 1.25; }
+    .nav-links { display: flex; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { min-height: 44px; padding: 11px; color: var(--muted); font-size: 12px; text-decoration: none; white-space: nowrap; }
+    .nav-links a[aria-current="true"] { color: var(--navy); font-weight: 600; }
+    .nav-status { margin-left: auto; flex: 0 0 auto; color: var(--amber); font: 11px/1.3 var(--mono); }
+    .language-switch { min-height: 40px; flex: 0 0 auto; padding: 7px 10px; border: 1px solid var(--line); border-radius: 0; color: var(--ink); background: #ffffff; cursor: pointer; font: 500 12px/1.35 var(--sans); }
+    .language-switch:hover { border-color: var(--navy); color: var(--navy); }
+    [data-language-option="zh-CN"] { color: var(--navy); font-weight: 600; }
+    body[data-active-language="en"] [data-language-option="zh-CN"] { color: var(--muted); font-weight: 400; }
+    body[data-active-language="en"] [data-language-option="en"] { color: var(--navy); font-weight: 600; }
+    main { overflow: hidden; }
+    .wrap { width: min(calc(100% - 44px), var(--report-content-width)); margin: 0 auto; }
+    .eyebrow, .section-no, .viz-label { color: var(--navy); font: 500 10px/1.45 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .hero { padding: 74px 0 62px; }
+    .hero-layout { display: block; width: 100%; }
+    h1 { max-width: none; margin: 15px 0 20px; font-size: clamp(50px, 6vw, 80px); font-weight: 500; line-height: 1.1; letter-spacing: -.02em; text-wrap: wrap; }
+    .hero-lede { max-width: none; margin: 0; color: var(--ink-soft); font-size: clamp(18px, 2vw, 23px); line-height: 1.58; text-wrap: pretty; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 27px; }
+    .tag { display: inline-flex; align-items: center; min-height: 31px; padding: 5px 10px; border-radius: 0; font-size: 11px; }
+    .tag.ok { color: var(--green); background: var(--green-soft); }
+    .tag.pending { color: var(--amber); background: var(--amber-soft); }
+    .decision { width: 100%; margin-top: 38px; }
+    .decision b { display: block; margin-bottom: 8px; color: var(--navy); font-size: 17px; }
+    .decision p { margin: 0; color: var(--ink-soft); font-size: 13px; }
+    .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+    .meta-k { color: var(--muted); font: 9px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .meta-v { margin-top: 4px; color: var(--ink-soft); font-size: 12px; overflow-wrap: anywhere; }
+    .section { padding: 78px 0; scroll-margin-top: 66px; }
+    [data-report-heading], [data-section-heading], [data-module-heading] { display: block; width: 100%; }
+    [data-report-title], [data-report-description], [data-section-title], [data-section-description], [data-module-title], [data-module-description] { display: block; width: 100%; max-width: none; }
+    [data-report-title], [data-section-title], [data-module-title] { text-wrap: wrap; }
+    [data-report-description], [data-section-description], [data-module-description] { text-wrap: pretty; }
+    .section-head { display: block; width: 100%; margin-bottom: 38px; }
+    .section h2 { max-width: none; margin: 9px 0 0; font-size: var(--section-title-size); font-weight: 500; line-height: 1.16; letter-spacing: -.02em; text-wrap: wrap; }
+    .section-desc { margin: 14px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; text-wrap: pretty; }
+    .metric-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; }
+    .metric { min-width: 0; padding: 12px 0 18px; }
+    .metric + .metric { padding-left: 0; }
+    .metric strong { display: block; color: var(--navy); font-size: clamp(27px, 3vw, 42px); line-height: 1; letter-spacing: -.035em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .metric span { display: block; margin-top: 8px; color: var(--ink-soft); font-size: 11px; }
+    .metric small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .viz-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+    .uplift-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+    .uplift-delta { grid-column: 1 / -1; grid-row: 2; }
+    .uplift-rubric { grid-column: 1; grid-row: 3; }
+    .uplift-context { grid-column: 2; grid-row: 3; }
+    figure { margin: 0; }
+    .viz { min-width: 0; padding: 23px 0 26px; border: 0; border-radius: 0; background: #ffffff; }
+    .viz.wide { grid-column: 1 / -1; }
+    .viz h3 { margin: 6px 0 0; font-size: var(--module-title-size); font-weight: 500; line-height: 1.35; text-wrap: wrap; }
+    .question { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .viz-body { margin-top: 20px; }
+    figcaption { margin-top: 18px; color: var(--ink-soft); font-size: 11px; }
+    .overall-track { position: relative; isolation: isolate; height: 92px; margin: 4px 15px 0; }
+    .overall-track::before { content: ""; position: absolute; z-index: 0; top: 45px; left: 0; right: 0; height: 2px; background: var(--line); }
+    .overall-track::after { content: ""; position: absolute; z-index: 0; top: 45px; left: 40%; width: 58%; height: 3px; background: var(--navy); }
+    .overall-dot { position: absolute; z-index: 1; top: 31px; width: 29px; height: 29px; border-radius: 0; transform: translateX(-50%); display: grid; place-items: center; font: 500 9px/1 var(--mono); }
+    .overall-dot.before { left: 40%; border: 2px solid var(--before); background: white; color: var(--muted); }
+    .overall-dot.after { left: 98%; background: var(--navy); color: white; box-shadow: 0 0 0 3px white, 0 0 0 4px var(--navy); }
+    .overall-label { position: absolute; top: 66px; transform: translateX(-50%); color: var(--muted); font-size: 10px; white-space: nowrap; }
+    .overall-label.before { left: 40%; }
+    .overall-label.after { left: 98%; color: var(--navy); }
+    .dual-rail { display: grid; gap: 17px; }
+    .rail { display: grid; grid-template-columns: 130px 1fr 74px; gap: 13px; align-items: center; }
+    .rail-name { font-size: 11px; }
+    .rail-track { height: 17px; background: var(--line-soft); }
+    .rail-fill { width: var(--w); height: 100%; background: var(--navy); }
+    .rail.pending .rail-fill { background: var(--amber); }
+    .rail-val { color: var(--navy); font: 10px/1.3 var(--mono); text-align: right; white-space: nowrap; }
+    .rail.pending .rail-val { color: var(--amber); }
+    .slope-list { display: grid; gap: 4px; }
+    .slope-row { display: grid; grid-template-columns: 155px minmax(180px, 1fr) 72px minmax(230px, 1.1fr); gap: 17px; align-items: center; min-height: 75px; padding: 12px 0; }
+    .slope-name { font-size: 13px; }
+    .contract { display: block; margin-top: 2px; color: var(--muted); font: 9px/1.4 var(--mono); }
+    .slope-line { position: relative; height: 28px; }
+    .slope-line::before { content: ""; position: absolute; top: 14px; left: 0; right: 0; height: 1px; background: var(--line); }
+    .slope-line::after { content: ""; position: absolute; top: 14px; left: var(--b); width: calc(var(--a) - var(--b)); height: 2px; background: var(--navy); }
+    .dot { position: absolute; top: 9px; width: 11px; height: 11px; border-radius: 0; transform: translateX(-50%); }
+    .dot.b { left: var(--b); border: 1px solid var(--before); background: white; }
+    .dot.a { left: var(--a); background: var(--navy); box-shadow: 0 0 0 2px white, 0 0 0 3px var(--navy); }
+    .slope-score { color: var(--navy); font: 10px/1.4 var(--mono); text-align: right; white-space: nowrap; }
+    .lift { color: var(--ink-soft); font-size: 11px; }
+    .lift b { color: var(--navy); }
+    .delta-bars { display: grid; gap: 10px; }
+    .uplift-delta .delta-bars { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, auto); grid-auto-flow: column; column-gap: 40px; }
+    .delta-row { display: grid; grid-template-columns: 132px 1fr 40px; gap: 14px; align-items: center; min-height: 25px; }
+    .delta-name { color: var(--ink-soft); font-size: 10px; line-height: 1.35; }
+    .delta-track { height: 10px; background: var(--line-soft); }
+    .delta-fill { width: var(--w); height: 100%; background: var(--navy); }
+    .delta-val { color: var(--navy); font: 500 10px/1.3 var(--mono); text-align: right; }
+    .rubric { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; counter-reset: rubric-step; }
+    .rubric-cell { min-height: 92px; display: block; padding: 7px 0; border: 0; border-radius: 0; counter-increment: rubric-step; }
+    .rubric-cell::before { content: "0" counter(rubric-step); display: block; margin-bottom: 9px; color: var(--muted); font: 9px/1 var(--mono); letter-spacing: .08em; }
+    .rubric-cell b { display: block; color: var(--navy); font: 500 18px/1 var(--mono); text-align: left; font-variant-numeric: tabular-nums; }
+    .rubric-cell span { display: block; margin-top: 9px; color: var(--ink-soft); font-size: 10px; line-height: 1.4; }
+    .context-pairs { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .context-pair { min-height: 58px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 7px 0; background: #ffffff; }
+    .uplift-context .context-pair { min-height: 42px; padding-block: 4px; }
+    .context-pair b { color: var(--navy); font-size: 11px; line-height: 1.45; }
+    .context-values { display: flex; align-items: baseline; justify-content: flex-end; gap: 8px; margin: 0; white-space: nowrap; }
+    .context-values strong { color: var(--before); font-size: 22px; font-variant-numeric: tabular-nums; }
+    .context-values i { color: var(--navy); font-style: normal; }
+    .context-values em { color: var(--navy); font-size: 27px; font-style: normal; font-variant-numeric: tabular-nums; }
+    .milestones { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .milestone { position: relative; padding: 46px 22px 19px 0; border-top: 1px solid var(--line); }
+    .milestone + .milestone { padding-left: 22px; }
+    .milestone::before { content: ""; position: absolute; top: -6px; left: 0; width: 11px; height: 11px; border-radius: 0; background: var(--navy); }
+    .milestone h3 { margin: 6px 0 7px; font-size: 17px; }
+    .milestone p { margin: 0; color: var(--muted); font-size: 10px; }
+    .milestone small { display: block; margin-top: 10px; color: var(--navy); font: 9px/1.4 var(--mono); }
+    .consumer-loop { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; align-items: stretch; }
+    .consumer { min-height: 90px; padding: 13px 0; border: 0; border-radius: 0; text-align: left; }
+    .consumer b { color: var(--navy); font-size: 11px; }
+    .consumer span { display: block; margin-top: 7px; color: var(--muted); font-size: 9px; }
+    .priority { display: grid; gap: 15px; }
+    .priority-row { display: grid; grid-template-columns: 58px 1fr 42px; gap: 12px; align-items: center; }
+    .priority-name, .priority-val { font: 10px/1.3 var(--mono); }
+    .priority-val { color: var(--muted); text-align: right; }
+    .priority-track { height: 16px; background: var(--line-soft); }
+    .priority-fill { width: var(--w); height: 100%; background: var(--navy); }
+    .priority-row.p2 .priority-fill { background: var(--navy-2); }
+    .priority-row.p3 .priority-fill { background: var(--before); }
+    .risk-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .risk { min-height: 101px; padding: 14px 0; background: #ffffff; }
+    .risk b { color: var(--navy); font-size: 11px; }
+    .risk span { display: block; margin-top: 7px; color: var(--ink-soft); font-size: 9px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; margin: 30px 0 12px; }
+    .filter { min-width: 63px; min-height: 40px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink-soft); cursor: pointer; }
+    .filter[aria-pressed="true"] { border-color: var(--navy); background: var(--navy-soft); color: var(--navy); }
+    .filter:active { transform: translateY(1px); }
+    .repair-list { display: grid; gap: 2px; }
+    .repair { display: grid; grid-template-columns: 53px 42px minmax(0, .9fr) minmax(0, 1.15fr); gap: 15px; padding: 14px 0 18px; }
+    .rid { color: var(--muted); font: 10px/1.55 var(--mono); }
+    .prio { width: fit-content; height: fit-content; padding: 2px 5px; border-radius: 0; color: var(--navy); background: var(--navy-soft); font: 9px/1.45 var(--mono); }
+    .problem, .fix { color: var(--ink-soft); font-size: 11px; }
+    .fix b { color: var(--navy); }
+    [hidden] { display: none !important; }
+    .gate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .gate { min-height: 113px; padding: 15px 0; border: 0; border-radius: 0; }
+    .gate b { color: var(--navy); font-size: 11px; }
+    .gate strong { display: block; margin-top: 9px; color: var(--navy); font-size: 23px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .gate span { display: block; margin-top: 8px; color: var(--muted); font-size: 9px; }
+    .ledger { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .ledger-cell { padding: 15px 0; background: #ffffff; }
+    .ledger-cell b { color: var(--navy); font-size: 10px; }
+    .ledger-cell strong { display: block; margin-top: 7px; font-size: 27px; line-height: 1; font-variant-numeric: tabular-nums; }
+    .ledger-cell span { display: block; margin-top: 7px; color: var(--muted); font-size: 9px; }
+    .provider { display: grid; grid-template-columns: 126px repeat(4, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
+    .p-cell { min-height: 50px; display: grid; place-items: center; padding: 9px; background: white; color: var(--ink-soft); font-size: 10px; text-align: center; }
+    .p-cell.head { color: var(--navy); background: var(--navy-soft); font-weight: 500; }
+    .p-cell.side { color: var(--navy); background: #ffffff; font-weight: 500; }
+    .p-cell.pending { color: var(--amber); background: var(--amber-soft); }
+    .review-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 11px; align-items: stretch; }
+    .review-node { min-height: 122px; padding: 16px; border: 1px solid var(--line); border-radius: 0; }
+    .review-node b { color: var(--navy); font-size: 11px; }
+    .review-node span { display: block; margin-top: 7px; color: var(--muted); font-size: 9px; }
+    .arrow { align-self: center; color: var(--navy); font-family: var(--mono); }
+    .thresholds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .threshold { padding: 14px 0; background: #ffffff; }
+    .threshold strong { color: var(--navy); font-size: 21px; line-height: 1; }
+    .threshold span { display: block; margin-top: 7px; color: var(--ink-soft); font-size: 9px; }
+    .dependency { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .dep { min-height: 135px; padding: 17px 0; border: 0; border-radius: 0; }
+    .dep small { color: var(--navy); font: 500 9px/1.4 var(--mono); }
+    .dep h3 { margin: 8px 0 7px; font-size: 14px; }
+    .dep p { margin: 0; color: var(--muted); font-size: 9px; }
+    .boundary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+    .boundary-cell { padding: 15px 0; }
+    .boundary-cell b { color: var(--amber); font-size: 11px; }
+    .boundary-cell span { display: block; margin-top: 7px; color: var(--muted); font-size: 9px; }
+    footer { padding: 32px 0 50px; color: var(--muted); font-size: 10px; }
+    .footer { display: flex; justify-content: space-between; gap: 30px; }
+    .mono { font-family: var(--mono); }
+    @media (max-width: 980px) {
+      .nav-status { display: none; }
+      .metric-row { grid-template-columns: repeat(3, 1fr); }
+      .slope-row { grid-template-columns: 140px minmax(160px, 1fr) 68px; }
+      .lift { grid-column: 2 / -1; padding-bottom: 6px; }
+      .milestones { grid-template-columns: repeat(2, 1fr); }
+      .milestone:nth-child(3), .milestone:nth-child(4) { margin-top: 30px; }
+      .consumer-loop { grid-template-columns: repeat(3, 1fr); }
+      .gate-grid { grid-template-columns: repeat(2, 1fr); }
+      .dependency { grid-template-columns: repeat(2, 1fr); }
+      .uplift-detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: calc(100% - 32px); }
+      .nav-inner { padding: 0 16px; gap: 10px; }
+      .brand-copy { display: none; }
+      .nav-links a { padding-inline: 9px; }
+      .hero { padding: 55px 0 46px; }
+      h1 { font-size: 42px; }
+      .hero-lede { font-size: 16px; }
+      .hero-meta, .metric-row, .viz-grid, .rubric, .context-pairs, .milestones, .consumer-loop, .risk-matrix, .gate-grid, .ledger, .thresholds, .dependency, .boundary { grid-template-columns: 1fr; }
+      .uplift-delta, .uplift-rubric, .uplift-context { grid-column: 1; grid-row: auto; }
+      .uplift-delta .delta-bars { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
+      .rubric { grid-template-columns: 1fr; gap: 4px; }
+      .rubric-cell { min-height: 44px; display: grid; grid-template-columns: 28px minmax(0, 1fr) 42px; gap: 12px; align-items: center; }
+      .rubric-cell::before { grid-column: 1; margin-bottom: 0; }
+      .rubric-cell b { grid-column: 3; grid-row: 1; text-align: right; }
+      .rubric-cell span { grid-column: 2; grid-row: 1; margin-top: 0; }
+      .metric + .metric { padding-left: 0; border-left: 0; }
+      .section { padding: 60px 0; scroll-margin-top: 63px; }
+      .section h2 { font-size: var(--section-title-size-mobile); }
+      .viz { padding: 18px 0 24px; }
+      .overall-track { margin-inline: 18px; }
+      .overall-dot.after, .overall-label.after { left: 94%; }
+      .slope-row { grid-template-columns: 1fr 74px; gap: 6px 11px; padding: 15px 0; }
+      .slope-line { grid-column: 1 / -1; grid-row: 2; }
+      .slope-score { grid-column: 2; grid-row: 1; }
+      .lift { grid-column: 1 / -1; grid-row: 3; }
+      .milestone, .milestone + .milestone { margin-top: 0; padding: 42px 0 22px; }
+      .repair { grid-template-columns: 49px 39px 1fr; gap: 9px; }
+      .fix { grid-column: 3; }
+      .provider { grid-template-columns: 80px repeat(4, minmax(57px, 1fr)); }
+      .p-cell { min-width: 0; padding: 7px 3px; font-size: 8px; overflow-wrap: anywhere; }
+      .review-flow { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); justify-self: center; }
+      .footer { display: block; }
+      .footer span { display: block; margin-top: 7px; }
+    }
+    @media print {
+      nav[data-sticky-nav], .progress, .filters { display: none; }
+      .section { break-before: page; }
+      .viz, .repair { break-inside: avoid; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body data-active-language="zh-CN">
+  <a class="skip" href="#main-content">跳到正文</a>
+  <div class="progress" aria-hidden="true"></div>
+  <nav data-sticky-nav aria-label="报告目录">
+    <div class="nav-inner">
+      <a class="brand" href="#top"><span class="brand-mark">YM</span><span class="brand-copy">Yao Meta Skill<br>Phase 1</span></a>
+      <div class="nav-links"><a href="#decision">01 判断</a><a href="#uplift">02 跃迁</a><a href="#core">03 内核</a><a href="#repairs">04 修复</a><a href="#ledger">05 账本</a><a href="#quality">06 质量链</a><a href="#next">07 下一步</a></div>
+      <div class="nav-status">1.2.0 candidate</div>
+      <button class="language-switch" type="button" data-language-switch data-button-tone="light" aria-label="切换为英文" aria-pressed="false"><span data-language-option="zh-CN">简中</span><span aria-hidden="true"> / </span><span data-language-option="en">EN</span></button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <header class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-layout">
+          <div><header data-report-heading><div class="eyebrow">Trusted Generation Core · Decision Report</div><h1 data-report-title>第一阶段真实质量晋级已经通过</h1><p class="hero-lede" data-report-description>工程成熟度由 40 分提升到 100 分，DeepSeek 40 次真实调用全部成功，with-skill 在 20 对三人盲评中获得 19 对多数票胜出</p></header><div class="hero-tags"><span class="tag ok">本地工程闭环完成</span><span class="tag ok">内部质量晋级 eligible</span><span class="tag pending">world-class 账本 pending</span></div></div>
+          <aside class="decision"><b>发布判断</b><p>1.2.0 已完成第一阶段真实输出评测，内部质量晋级四项门槛全部通过；公开报告可以引用本轮固定样本结果，world-class 声明继续由独立证据账本控制</p></aside>
+        </div>
+        <div class="hero-meta"><div><div class="meta-k">Data baseline</div><div class="meta-v">2026-08-16</div></div><div><div class="meta-k">Review branch</div><div class="meta-v mono">codex/phase1-zh-output-eval</div></div><div><div class="meta-k">Evaluation source</div><div class="meta-v mono">94e8c7e18aa60f3457011cac243832dfe33263cb</div></div></div>
+      </div>
+    </header>
+
+    <section class="section" id="decision">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>01 · Decision cockpit</div><h2 data-section-title>工程门禁与内部质量晋级都已完成，公开 world-class 仍由独立账本控制</h2><p class="section-desc" data-section-description>工程成熟度、真实调用、盲评偏好与公开声明边界分别保留清晰口径</p></div>
+        <div class="metric-row"><div class="metric"><strong>100 / 100</strong><span>当前工程成熟度</span><small>十维等权平均</small></div><div class="metric"><strong>40 / 40</strong><span>真实 Provider 调用</span><small>零失败</small></div><div class="metric"><strong>19 / 20</strong><span>with-skill 多数票</span><small>固定样本偏好率 95%</small></div><div class="metric"><strong>56 / 60</strong><span>评审原始票数</span><small>三位独立评审</small></div><div class="metric"><strong>0.7321</strong><span>Fleiss' kappa</span><small>门槛 0.40</small></div></div>
+        <div class="viz-grid">
+          <figure class="viz" data-module-heading data-chart="decision-overall-maturity" data-question="整体工程成熟度发生了什么变化" data-conclusion="成熟度由四十分提升到一百分" data-source-status="derived" data-evidence-key="overall_maturity" role="img" aria-label="整体工程成熟度从四十分提升到一百分">
+            <div class="viz-label">Maturity track</div><h3 data-module-title>总体成熟度提升 60 分</h3><p class="question" data-module-description>问题：整体工程成熟度发生了什么变化</p><div class="viz-body overall-track"><span class="overall-dot before">40</span><span class="overall-dot after">100</span><span class="overall-label before">优化前</span><span class="overall-label after">优化后</span></div><figcaption>结论：正式 Provider 与三人盲评完成后，十个工程维度的等权平均由 40 分提升到 100 分</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="decision-dual-rail" data-question="工程完成、质量晋级和公开声明分别处于什么状态" data-conclusion="工程与内部质量门禁通过，world-class账本保持待完成" data-source-status="verified" data-evidence-key="quality_gates" role="img" aria-label="工程完成、内部质量晋级与公开声明状态">
+            <div class="viz-label">Decision rails</div><h3 data-module-title>工程、质量与公开声明保持三条判断轨道</h3><p class="question" data-module-description>问题：工程完成、质量晋级和公开声明分别处于什么状态</p><div class="viz-body dual-rail"><div class="rail"><div class="rail-name">本地工程门禁</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">ready</div></div><div class="rail"><div class="rail-name">Provider matrix</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">40 / 40</div></div><div class="rail"><div class="rail-name">三人盲评</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">3 / 3</div></div><div class="rail"><div class="rail-name">内部质量晋级</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">eligible</div></div><div class="rail pending"><div class="rail-name">world-class 账本</div><div class="rail-track"><div class="rail-fill" style="--w:0%"></div></div><div class="rail-val">pending</div></div></div><figcaption>结论：第一阶段内部质量晋级已完成，world-class 声明继续保持关闭</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="uplift">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>02 · Capability uplift</div><h2 data-section-title>最大增量来自可信证据、安全恢复和三人盲评治理</h2><p class="section-desc" data-section-description>优化前采用提交 4cbb6d1，优化后采用最终复核证据，每个维度由五项可核验契约构成</p></div>
+        <div class="viz-grid uplift-detail-grid">
+          <figure class="viz wide" data-module-heading data-chart="uplift-ten-dimension-slope" data-question="十个核心维度分别提升了多少" data-conclusion="十个维度全部达到五项契约完整状态" data-source-status="derived" data-evidence-key="overall_maturity" role="img" aria-label="十个核心维度前后得分坡度图">
+            <div class="viz-label">Ten dimensions</div><h3 data-module-title>十维能力从分散约定升级为可验证契约</h3><p class="question" data-module-description>问题：十个核心维度分别提升了多少</p>
+            <div class="viz-body slope-list">
+              <div class="slope-row"><div class="slope-name">可信证据发布<span class="contract">1 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:20%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">20→100</div><div class="lift"><b>+80</b> · run 隔离、不可变发布、索引、pointer-last、恢复</div></div>
+              <div class="slope-row"><div class="slope-name">Canonical Skill IR<span class="contract">2 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:40%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">40→100</div><div class="lift"><b>+60</b> · manifest、resolver、schema、identity、统一消费者</div></div>
+              <div class="slope-row"><div class="slope-name">Provider 评测契约<span class="contract">1 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:20%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">20→100</div><div class="lift"><b>+80</b> · 双模型、40 次真实调用、预算预留、raw 隔离、零失败</div></div>
+              <div class="slope-row"><div class="slope-name">三人盲评治理<span class="contract">0 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:0%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">0→100</div><div class="lift"><b>+100</b> · 中性 A/B、私有答案、身份注册、三人提交、统一裁决</div></div>
+              <div class="slope-row"><div class="slope-name">触发边界<span class="contract">2 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:40%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">40→100</div><div class="lift"><b>+60</b> · frozen holdout、hard negative、近邻、门槛、回归</div></div>
+              <div class="slope-row"><div class="slope-name">上下文效率<span class="contract">3 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:60%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">60→100</div><div class="lift"><b>+40</b> · 首载 987→947，正文 794→764，预算门槛通过</div></div>
+              <div class="slope-row"><div class="slope-name">打包与安装<span class="contract">3 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:60%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">60→100</div><div class="lift"><b>+40</b> · 确定性 ZIP、实际 hash、同步、portable index、安装</div></div>
+              <div class="slope-row"><div class="slope-name">安全与恢复<span class="contract">1 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:20%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">20→100</div><div class="lift"><b>+80</b> · lock、路径防护、journal、故障注入、脱敏</div></div>
+              <div class="slope-row"><div class="slope-name">跨平台 Conformance<span class="contract">4 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:80%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">80→100</div><div class="lift"><b>+20</b> · 五目标保持全通过，语义一致性得到加固</div></div>
+              <div class="slope-row"><div class="slope-name">审计可复现性<span class="contract">3 / 5 → 5 / 5</span></div><div class="slope-line" style="--b:60%;--a:100%"><i class="dot b"></i><i class="dot a"></i></div><div class="slope-score">60→100</div><div class="lift"><b>+40</b> · 41 项检查、4×83 回放、source contract、bundle</div></div>
+            </div><figcaption>结论：三人盲评治理提升 100 分，Provider 评测契约提升 80 分，十个维度全部达到五项契约完整状态</figcaption>
+          </figure>
+          <figure class="viz uplift-delta" data-module-heading data-chart="uplift-delta-ranking" data-question="十个维度的增量如何排序" data-conclusion="三人盲评治理以一百分增量领先" data-source-status="derived" data-evidence-key="overall_maturity" role="img" aria-label="十个维度增量排序条形图">
+            <div class="viz-label">Delta ranking</div><h3 data-module-title>三人盲评治理成为最大能力增量</h3><p class="question" data-module-description>问题：十个维度的增量如何排序</p><div class="viz-body delta-bars"><div class="delta-row"><div class="delta-name">三人盲评治理</div><div class="delta-track"><div class="delta-fill" style="--w:100%"></div></div><div class="delta-val">+100</div></div><div class="delta-row"><div class="delta-name">可信证据发布</div><div class="delta-track"><div class="delta-fill" style="--w:80%"></div></div><div class="delta-val">+80</div></div><div class="delta-row"><div class="delta-name">Provider 契约</div><div class="delta-track"><div class="delta-fill" style="--w:80%"></div></div><div class="delta-val">+80</div></div><div class="delta-row"><div class="delta-name">安全与恢复</div><div class="delta-track"><div class="delta-fill" style="--w:80%"></div></div><div class="delta-val">+80</div></div><div class="delta-row"><div class="delta-name">Canonical IR</div><div class="delta-track"><div class="delta-fill" style="--w:60%"></div></div><div class="delta-val">+60</div></div><div class="delta-row"><div class="delta-name">触发边界</div><div class="delta-track"><div class="delta-fill" style="--w:60%"></div></div><div class="delta-val">+60</div></div><div class="delta-row"><div class="delta-name">上下文效率</div><div class="delta-track"><div class="delta-fill" style="--w:40%"></div></div><div class="delta-val">+40</div></div><div class="delta-row"><div class="delta-name">打包与安装</div><div class="delta-track"><div class="delta-fill" style="--w:40%"></div></div><div class="delta-val">+40</div></div><div class="delta-row"><div class="delta-name">审计可复现</div><div class="delta-track"><div class="delta-fill" style="--w:40%"></div></div><div class="delta-val">+40</div></div><div class="delta-row"><div class="delta-name">Conformance</div><div class="delta-track"><div class="delta-fill" style="--w:20%"></div></div><div class="delta-val">+20</div></div></div><figcaption>结论：真实调用与三人盲评补齐后，能力增量进一步集中到输出质量治理</figcaption>
+          </figure>
+          <figure class="viz uplift-rubric" data-module-heading data-chart="uplift-scoring-rubric" data-question="每个维度的分数如何计算" data-conclusion="五项工程契约每项二十分，未完成项不计分" data-source-status="derived" data-evidence-key="overall_maturity" role="img" aria-label="五项工程契约评分尺">
+            <div class="viz-label">Scoring rubric</div><h3 data-module-title>每个维度由五项契约构成</h3><p class="question" data-module-description>问题：每个维度的分数如何计算</p><div class="viz-body rubric"><div class="rubric-cell"><b>20</b><span>入口或声明</span></div><div class="rubric-cell"><b>20</b><span>执行或解析</span></div><div class="rubric-cell"><b>20</b><span>边界或安全</span></div><div class="rubric-cell"><b>20</b><span>测试或回归</span></div><div class="rubric-cell"><b>20</b><span>发布或完成</span></div></div><figcaption>结论：正式 Provider 与三人盲评完成后，十个维度均取得五项契约完整分</figcaption>
+          </figure>
+          <figure class="viz uplift-context" data-module-heading data-chart="uplift-context-change" data-question="入口上下文成本发生了什么变化" data-conclusion="初始载入减少四十 tokens，正文减少三十 tokens" data-source-status="verified" data-evidence-key="context_change" role="img" aria-label="初始载入与正文token前后对比">
+            <div class="viz-label">Context economy</div><h3 data-module-title>入口成本下降并进入两个预算门槛</h3><p class="question" data-module-description>问题：入口上下文成本发生了什么变化</p><div class="viz-body context-pairs"><div class="context-pair"><b>初始载入 tokens</b><div class="context-values"><strong>987</strong><i>→</i><em>947</em></div></div><div class="context-pair"><b>SKILL.md 正文 tokens</b><div class="context-values"><strong>794</strong><i>→</i><em>764</em></div></div></div><figcaption>结论：初始载入下降约 4.1%，正文下降 30 tokens，分别进入 950 与 780 预算</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="core">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>03 · Trusted core</div><h2 data-section-title>四个里程碑组成从运行、语义、评测到发布判断的控制链</h2><p class="section-desc" data-section-description>每个阶段都向下一阶段交付可验证输入，减少跨工具语义漂移和状态失真</p></div>
+        <div class="milestones"><div class="milestone"><div class="viz-label">M1 · 5bf7efb</div><h3>可信运行</h3><p>不可变 run、发布锁、恢复协议、portable evidence</p><small>83 / 83 · replay pass</small></div><div class="milestone"><div class="viz-label">M2 · ac19921</div><h3>Canonical IR</h3><p>显式 resolver、全量 schema、统一消费者</p><small>5 / 5 · conformance</small></div><div class="milestone"><div class="viz-label">M3 · 4f0e96d</div><h3>正式评测</h3><p>双模型 40 调用、20 对 A/B、三位 reviewer</p><small>40 / 40 · quality eligible</small></div><div class="milestone"><div class="viz-label">M4 · 4e5cede</div><h3>入口门禁</h3><p>冻结 holdout、66 例回归、上下文预算</p><small>P 1.000 · R 0.917</small></div></div>
+        <div class="viz-grid">
+          <figure class="viz wide" data-module-heading data-chart="core-consumer-loop" data-question="Canonical Skill IR 如何统一官方消费者" data-conclusion="六类官方消费者共享同一个解析与校验结果" data-source-status="qualitative" data-evidence-key="quality_gates" role="img" aria-label="Canonical Skill IR六类官方消费者闭环">
+            <div class="viz-label">Consumer loop</div><h3 data-module-title>单一 IR 结果驱动六类官方表面</h3><p class="question" data-module-description>问题：Canonical Skill IR 如何统一官方消费者</p><div class="viz-body consumer-loop"><div class="consumer"><b>Compiler</b><span>目标编译</span></div><div class="consumer"><b>Packager</b><span>归档构建</span></div><div class="consumer"><b>Registry</b><span>元数据审计</span></div><div class="consumer"><b>Conformance</b><span>目标一致性</span></div><div class="consumer"><b>Overview</b><span>能力解释</span></div><div class="consumer"><b>Review Studio</b><span>状态决策</span></div></div><figcaption>结论：官方消费者停止 wildcard 扫描，语义结果由同一 resolver 提供</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="repairs">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>04 · Repair structure</div><h2 data-section-title>27 项修复优先收敛假阳性、证据混用、身份泄漏和崩溃恢复</h2><p class="section-desc" data-section-description>实际修复清单包含 P1 15 项、P2 9 项、P3 3 项，可按优先级筛选</p></div>
+        <div class="viz-grid">
+          <figure class="viz" data-module-heading data-chart="repair-priority-bars" data-question="修复项如何按优先级分布" data-conclusion="十五项P1构成本轮主要修复工作" data-source-status="verified" data-evidence-key="repair_inventory" role="img" aria-label="二十七项修复优先级分布">
+            <div class="viz-label">Priority mix</div><h3 data-module-title>P1 占 15 项</h3><p class="question" data-module-description>问题：修复项如何按优先级分布</p><div class="viz-body priority"><div class="priority-row"><div class="priority-name">P1</div><div class="priority-track"><div class="priority-fill" style="--w:100%"></div></div><div class="priority-val">15</div></div><div class="priority-row p2"><div class="priority-name">P2</div><div class="priority-track"><div class="priority-fill" style="--w:60%"></div></div><div class="priority-val">9</div></div><div class="priority-row p3"><div class="priority-name">P3</div><div class="priority-track"><div class="priority-fill" style="--w:20%"></div></div><div class="priority-val">3</div></div></div><figcaption>结论：P1 占全部修复的 55.6%，重点消除状态失真与安全风险</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="repair-risk-closure" data-question="修复工作关闭了哪些主要风险面" data-conclusion="发布、评测、盲评、语义、安装和审计六类风险均形成控制点" data-source-status="qualitative" data-evidence-key="repair_inventory" role="img" aria-label="六类主要风险面收敛矩阵">
+            <div class="viz-label">Risk closure</div><h3 data-module-title>六类风险面获得明确控制点</h3><p class="question" data-module-description>问题：修复工作关闭了哪些主要风险面</p><div class="viz-body risk-matrix"><div class="risk"><b>发布一致性</b><span>确定性 ZIP、实际 hash、pointer-last</span></div><div class="risk"><b>失败恢复</b><span>advisory lock、journal、故障注入</span></div><div class="risk"><b>评测真值</b><span>正式阶段字段、旧证据隔离</span></div><div class="risk"><b>盲评完整性</b><span>随机 A/B、身份绑定、finalizer</span></div><div class="risk"><b>语义一致性</b><span>schema、identity、统一 resolver</span></div><div class="risk"><b>审计可复现</b><span>4×83 回放、source contract、bundle</span></div></div><figcaption>结论：风险控制从分散校验升级为端到端契约</figcaption>
+          </figure>
+        </div>
+        <div class="filters" aria-label="修复筛选"><button class="filter" type="button" data-filter="all" aria-pressed="true">全部 27</button><button class="filter" type="button" data-filter="p1" aria-pressed="false">P1 15</button><button class="filter" type="button" data-filter="p2" aria-pressed="false">P2 9</button><button class="filter" type="button" data-filter="p3" aria-pressed="false">P3 3</button></div>
+        <div class="repair-list" aria-label="修复清单">
+          <article class="repair" data-priority="p1"><div class="rid">R-01</div><div class="prio">P1</div><div class="problem">残留锁导致异常退出后的错误阻断</div><div class="fix"><b>advisory lock</b> 随进程退出释放</div></article><article class="repair" data-priority="p1"><div class="rid">R-02</div><div class="prio">P1</div><div class="problem">dry-run 触发遗留事务恢复写入</div><div class="fix"><b>dry-run 零写入</b>与显式恢复</div></article><article class="repair" data-priority="p1"><div class="rid">R-03</div><div class="prio">P1</div><div class="problem">发布与 pointer 存在崩溃窗口</div><div class="fix"><b>snapshot + transaction + pointer-last</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-04</div><div class="prio">P1</div><div class="problem">artifact、index、manifest 可能部分写入</div><div class="fix"><b>mutation journal</b> 自动回滚</div></article><article class="repair" data-priority="p1"><div class="rid">R-05</div><div class="prio">P1</div><div class="problem">run 与 raw output 路径逃逸</div><div class="fix"><b>trusted-root 与 symlink 拒绝</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-06</div><div class="prio">P1</div><div class="problem">ZIP 与报告 hash 漂移</div><div class="fix"><b>非自引用 scope 与确定性 ZIP</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-07</div><div class="prio">P1</div><div class="problem">sync 在 attestation 后重建 ZIP</div><div class="fix"><b>保留并验证正式 ZIP</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-08</div><div class="prio">P1</div><div class="problem">发布包缺少可移植证据入口</div><div class="fix"><b>portable pointer + index</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-09</div><div class="prio">P1</div><div class="problem">正式 0/40 与旧 10-run 混用</div><div class="fix"><b>正式阶段状态字段</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-10</div><div class="prio">P1</div><div class="problem">Operator 指向旧单模型流程</div><div class="fix"><b>固定双模型与三人 finalizer</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-11</div><div class="prio">P1</div><div class="problem">盲评包泄漏角色信息</div><div class="fix"><b>密码学随机 A/B 与答案隔离</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-12</div><div class="prio">P1</div><div class="problem">Reviewer 身份仅靠自我声明</div><div class="fix"><b>受控 reviewer registry</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-13</div><div class="prio">P1</div><div class="problem">三人盲评缺少恢复入口</div><div class="fix"><b>evidence-finalize-review</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-14</div><div class="prio">P1</div><div class="problem">250k token 上限可能越界</div><div class="fix"><b>请求前保守预留</b></div></article><article class="repair" data-priority="p1"><div class="rid">R-15</div><div class="prio">P1</div><div class="problem">Provider 异常可能泄漏正文或凭证</div><div class="fix"><b>错误分类与脱敏摘要</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-16</div><div class="prio">P2</div><div class="problem">runner 执行位置导致语义漂移</div><div class="fix"><b>固定 skill_dir 与运行参数</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-17</div><div class="prio">P2</div><div class="problem">40 次未完整即可生成 blind pack</div><div class="fix"><b>精确成功集合</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-18</div><div class="prio">P2</div><div class="problem">IR resolver 仅校验部分字段</div><div class="fix"><b>全量 schema 与 identity</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-19</div><div class="prio">P2</div><div class="problem">官方消费者仍有 wildcard 扫描</div><div class="fix"><b>统一 resolver</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-20</div><div class="prio">P2</div><div class="problem">provenance 引用悬空提交</div><div class="fix"><b>clean HEAD source contract</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-21</div><div class="prio">P2</div><div class="problem">Review Studio 混显两阶段证据</div><div class="fix"><b>legacy 与正式阶段分栏</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-22</div><div class="prio">P2</div><div class="problem">CI 在 verification 后重建 archive</div><div class="fix"><b>package-check 前移</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-26</div><div class="prio">P2</div><div class="problem">ignored snapshots 进入 ZIP</div><div class="fix"><b>source discovery 排除 snapshots</b></div></article><article class="repair" data-priority="p2"><div class="rid">R-27</div><div class="prio">P2</div><div class="problem">package 与 registry 状态循环依赖</div><div class="fix"><b>metadata parity 独立重算</b></div></article><article class="repair" data-priority="p3"><div class="rid">R-23</div><div class="prio">P3</div><div class="problem">M1 至 M4 缺少独立 CI 记录</div><div class="fix"><b>四个 detached worktree 回放</b></div></article><article class="repair" data-priority="p3"><div class="rid">R-24</div><div class="prio">P3</div><div class="problem">系统 make 受 Xcode license 影响</div><div class="fix"><b>优先 Command Line Tools make</b></div></article><article class="repair" data-priority="p3"><div class="rid">R-25</div><div class="prio">P3</div><div class="problem">tests/tmp 遗留目录干扰审计</div><div class="fix"><b>精确清理 scratch</b></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ledger">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>05 · Evidence ledger</div><h2 data-section-title>评测证据已经接入工程账本，公开汇总与本地原始材料保持隔离</h2><p class="section-desc" data-section-description>仓库保存可复核指标、哈希与血缘，本地不可变 run 保存原始输出、评审理由和身份注册信息</p></div>
+        <div class="viz-grid">
+          <figure class="viz wide" data-module-heading data-chart="ledger-gate-grid" data-question="八项机器门禁是否达到发布阈值" data-conclusion="八项机器门禁全部达到当前工程阈值" data-source-status="verified" data-evidence-key="quality_gates" role="img" aria-label="八项机器门禁矩阵">
+            <div class="viz-label">Gate ledger</div><h3 data-module-title>工程门禁与真实质量门槛共同通过</h3><p class="question" data-module-description>问题：八项机器门禁是否达到发布阈值</p><div class="viz-body gate-grid"><div class="gate"><b>当前完整 CI</b><strong>83 / 83</strong><span>全部通过</span></div><div class="gate"><b>真实调用</b><strong>40 / 40</strong><span>零失败</span></div><div class="gate"><b>盲评多数票</b><strong>19 / 20</strong><span>门槛 15 / 20</span></div><div class="gate"><b>评审一致性</b><strong>0.7321</strong><span>门槛 0.40</span></div><div class="gate"><b>Conformance</b><strong>5 / 5</strong><span>五目标全通过</span></div><div class="gate"><b>Trigger Precision</b><strong>1.000</strong><span>阈值 0.95</span></div><div class="gate"><b>Trigger Recall</b><strong>0.917</strong><span>阈值 0.90</span></div><div class="gate"><b>初始加载</b><strong>947</strong><span>预算 950 tokens</span></div></div><figcaption>结论：本地工程、真实调用和三人盲评已经形成一致的第一阶段质量判断</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="ledger-public-boundary" data-question="哪些评测材料进入公开仓库" data-conclusion="公开仓库只保存四份脱敏机器证据" data-source-status="verified" data-evidence-key="package_and_release" role="img" aria-label="公开评测证据与本地私有材料边界">
+            <div class="viz-label">Privacy boundary</div><h3 data-module-title>四份公开机器证据连接本地不可变 run</h3><p class="question" data-module-description>问题：哪些评测材料进入公开仓库</p><div class="viz-body ledger"><div class="ledger-cell"><b>Public JSON</b><strong>4</strong><span>汇总、裁决、承诺、血缘</span></div><div class="ledger-cell"><b>Raw outputs</b><strong>40</strong><span>仅保留在本地</span></div><div class="ledger-cell"><b>Review packets</b><strong>3</strong><span>理由与身份不公开</span></div></div><figcaption>结论：公开数据可验证结果与哈希，模型正文和评审身份继续隔离</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="ledger-release-boundary" data-question="内部质量晋级与公开声明如何分界" data-conclusion="第一阶段质量晋级通过，world-class状态继续关闭" data-source-status="verified" data-evidence-key="quality_gates" role="img" aria-label="内部质量晋级与公开声明边界">
+            <div class="viz-label">Claim boundary</div><h3 data-module-title>内部晋级与 world-class 采用独立门槛</h3><p class="question" data-module-description>问题：内部质量晋级与公开声明如何分界</p><div class="viz-body dual-rail"><div class="rail"><div class="rail-name">engineering_gates</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">ready</div></div><div class="rail"><div class="rail-name">phase1_quality</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">eligible</div></div><div class="rail pending"><div class="rail-name">world_class_ready</div><div class="rail-track"><div class="rail-fill" style="--w:0%"></div></div><div class="rail-val">false</div></div></div><figcaption>结论：公开报告可以引用本轮固定样本结果，world-class 声明继续保持关闭</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quality">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>06 · Real output evaluation</div><h2 data-section-title>真实质量链完成 40 次调用和 60 票裁决，四项晋级门槛全部通过</h2><p class="section-desc" data-section-description>20 对固定样本记录多数票结果、分模型表现、一致性、关键失败和预算消耗</p></div>
+        <div class="viz-grid">
+          <figure class="viz" data-module-heading data-chart="quality-provider-matrix" data-question="四十次正式调用由哪些组合构成" data-conclusion="两个模型各完成二十次真实调用" data-source-status="verified" data-evidence-key="provider_matrix" role="img" aria-label="DeepSeek四十次真实调用矩阵">
+            <div class="viz-label">Provider matrix</div><h3 data-module-title>2 模型 × 10 案例 × 2 variant</h3><p class="question" data-module-description>问题：四十次正式调用由哪些组合构成</p><div class="viz-body provider"><div class="p-cell head">模型</div><div class="p-cell head">案例</div><div class="p-cell head">Baseline</div><div class="p-cell head">With Skill</div><div class="p-cell head">完成</div><div class="p-cell side">V4 Flash</div><div class="p-cell">10</div><div class="p-cell">10</div><div class="p-cell">10</div><div class="p-cell">20 / 20</div><div class="p-cell side">V4 Pro</div><div class="p-cell">10</div><div class="p-cell">10</div><div class="p-cell">10</div><div class="p-cell">20 / 20</div></div><figcaption>结论：DeepSeek V4 Flash 与 V4 Pro 共完成 40 次真实调用，失败数为 0</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="quality-review-flow" data-question="三人盲评如何保护评审完整性" data-conclusion="中性材料、独立提交和统一裁决共同控制盲评风险" data-source-status="verified" data-evidence-key="human_review" role="img" aria-label="三人独立盲评与裁决流程">
+            <div class="viz-label">Blind review</div><h3 data-module-title>20 对中性 A/B 完成三人独立裁决</h3><p class="question" data-module-description>问题：三人盲评如何保护评审完整性</p><div class="viz-body review-flow"><div class="review-node"><b>随机 A/B</b><span>角色中性材料与私有答案隔离</span></div><div class="arrow">→</div><div class="review-node"><b>三人独立提交</b><span>每位评审完成 20 对判断</span></div><div class="arrow">→</div><div class="review-node"><b>统一裁决</b><span>多数票、kappa、关键失败与模型门槛</span></div></div><figcaption>结论：三位评审各完成 20 对独立判断，全部提交通过完整性校验</figcaption>
+          </figure>
+          <figure class="viz wide" data-module-heading data-chart="quality-promotion-thresholds" data-question="四项质量晋级条件的实际结果是多少" data-conclusion="总胜出、分模型、一致性和关键失败四项全部通过" data-source-status="verified" data-evidence-key="provider_matrix" role="img" aria-label="质量晋级四项门槛与实际结果">
+            <div class="viz-label">Promotion thresholds</div><h3 data-module-title>四项质量晋级门槛全部通过</h3><p class="question" data-module-description>问题：四项质量晋级条件的实际结果是多少</p><div class="viz-body thresholds"><div class="threshold"><strong>19 / 20</strong><span>with-skill 总胜出，门槛 15</span></div><div class="threshold"><strong>10 / 10 · 9 / 10</strong><span>Flash 与 Pro，门槛各 7</span></div><div class="threshold"><strong>0.7321</strong><span>Fleiss' kappa，门槛 0.40</span></div><div class="threshold"><strong>0</strong><span>critical failure，要求 0</span></div></div><figcaption>结论：内部质量晋级状态更新为 eligible，world-class 账本保持 pending</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="quality-vote-outcome" data-question="三位评审的六十票如何分布" data-conclusion="五十六票选择with-skill，四票选择baseline" data-source-status="derived" data-evidence-key="human_review" role="img" aria-label="三位评审六十票分布">
+            <div class="viz-label">Vote outcome</div><h3 data-module-title>56 / 60 原始票选择 with-skill</h3><p class="question" data-module-description>问题：三位评审的六十票如何分布</p><div class="viz-body ledger"><div class="ledger-cell"><b>with-skill</b><strong>56</strong><span>93.3% 原始票</span></div><div class="ledger-cell"><b>baseline</b><strong>4</strong><span>6.7% 原始票</span></div><div class="ledger-cell"><b>多数票胜出</b><strong>19 / 20</strong><span>固定样本偏好率 95%</span></div></div><figcaption>结论：19 / 20 描述本轮固定样本多数票偏好，不能换算为通用能力提升百分比</figcaption>
+          </figure>
+          <figure class="viz" data-module-heading data-chart="quality-agreement" data-question="三位评审之间的一致性如何" data-conclusion="十八对一致选择with-skill，一对分歧，一对一致选择baseline" data-source-status="derived" data-evidence-key="human_review" role="img" aria-label="三位评审一致性分布">
+            <div class="viz-label">Reviewer agreement</div><h3 data-module-title>18 对获得三人一致选择 with-skill</h3><p class="question" data-module-description>问题：三位评审之间的一致性如何</p><div class="viz-body thresholds"><div class="threshold"><strong>18</strong><span>三人一致 with-skill</span></div><div class="threshold"><strong>1</strong><span>2:1 选择 with-skill</span></div><div class="threshold"><strong>1</strong><span>三人一致 baseline</span></div><div class="threshold"><strong>0.7321</strong><span>Fleiss' kappa</span></div></div><figcaption>结论：一致性显著高于 0.40 门槛，同时保留一个可复盘的失败样本</figcaption>
+          </figure>
+          <figure class="viz wide" data-module-heading data-chart="quality-model-result" data-question="两个模型的质量与预算表现有什么差异" data-conclusion="Flash十对全胜，Pro九对胜出，总token占预算百分之十六点四" data-source-status="verified" data-evidence-key="provider_matrix" role="img" aria-label="DeepSeek两个模型胜出与token预算表现">
+            <div class="viz-label">Model result</div><h3 data-module-title>Flash 10 / 10，Pro 9 / 10</h3><p class="question" data-module-description>问题：两个模型的质量与预算表现有什么差异</p><div class="viz-body dual-rail"><div class="rail"><div class="rail-name">V4 Flash 胜出</div><div class="rail-track"><div class="rail-fill" style="--w:100%"></div></div><div class="rail-val">10 / 10</div></div><div class="rail"><div class="rail-name">V4 Pro 胜出</div><div class="rail-track"><div class="rail-fill" style="--w:90%"></div></div><div class="rail-val">9 / 10</div></div><div class="rail"><div class="rail-name">Flash tokens</div><div class="rail-track"><div class="rail-fill" style="--w:53.2%"></div></div><div class="rail-val">21,785</div></div><div class="rail"><div class="rail-name">Pro tokens</div><div class="rail-track"><div class="rail-fill" style="--w:46.8%"></div></div><div class="rail-val">19,153</div></div><div class="rail"><div class="rail-name">总预算使用</div><div class="rail-track"><div class="rail-fill" style="--w:16.4%"></div></div><div class="rail-val">40,938 / 250k</div></div></div><figcaption>结论：两个模型都通过 7 / 10 门槛，Pro 的唯一失败样本成为下一轮优化入口</figcaption>
+          </figure>
+          <figure class="viz wide" data-module-heading data-chart="quality-loss-learning" data-question="唯一baseline胜出的案例暴露了什么问题" data-conclusion="Canonical IR契约需要补强完整性和验收定义" data-source-status="inferred" data-evidence-key="human_review" role="img" aria-label="Canonical IR唯一失败样本学习点">
+            <div class="viz-label">Failure learning</div><h3 data-module-title>Canonical IR 输出契约需要更完整</h3><p class="question" data-module-description>问题：唯一 baseline 胜出的案例暴露了什么问题</p><div class="viz-body risk-matrix"><div class="risk"><b>案例</b><span>deepseek-v4-pro:canonical-ir-contract，baseline 以 3:0 胜出</span></div><div class="risk"><b>短板</b><span>定义、字段说明、适配器职责、可追溯验证和验收条件偏短</span></div><div class="risk"><b>下一步</b><span>补强 Canonical IR 完整性，并把失败形态加入新 holdout</span></div></div><figcaption>结论：下一轮先修复契约完整性，再通过独立 holdout 验证改进</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="next">
+      <div class="wrap">
+        <div class="section-head" data-section-heading><div class="section-no" data-section-number>07 · Next iteration</div><h2 data-section-title>下一轮重点从完成证据转向修复失败样本和扩展泛化验证</h2><p class="section-desc" data-section-description>优先补强 Canonical IR 输出完整性，再扩展案例、评审轮换与 world-class 证据接入</p></div>
+        <figure class="viz wide" data-module-heading data-chart="next-dependency-chain" data-question="下一轮迭代应按什么顺序推进" data-conclusion="先修失败形态，再扩展样本和独立验证" data-source-status="inferred" data-evidence-key="human_review" role="img" aria-label="下一轮四步迭代优先级">
+          <div class="viz-label">Iteration path</div><h3 data-module-title>四步放大真实评测带来的学习价值</h3><p class="question" data-module-description>问题：下一轮迭代应按什么顺序推进</p><div class="viz-body dependency"><div class="dep"><small>STEP 01</small><h3>补强 Canonical IR</h3><p>增加定义、字段、职责、可追溯验证和验收条件</p></div><div class="dep"><small>STEP 02</small><h3>扩展独立 holdout</h3><p>把失败形态转成新案例，保持训练与验收隔离</p></div><div class="dep"><small>STEP 03</small><h3>轮换评审与模型</h3><p>扩大任务类型与评审者覆盖，观察结果稳定性</p></div><div class="dep"><small>STEP 04</small><h3>接入 world-class 账本</h3><p>提交可验证证据包，并补齐原生权限和真实客户端遥测</p></div></div><figcaption>结论：下一轮先验证失败修复是否泛化，再扩大公开声明范围</figcaption>
+        </figure>
+        <div class="boundary"><div class="boundary-cell"><b>内部质量状态</b><span>第一阶段晋级 eligible</span></div><div class="boundary-cell"><b>公开结果口径</b><span>20 对固定样本中 19 对多数票胜出</span></div><div class="boundary-cell"><b>声明边界</b><span>world-class 账本继续保持 pending</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer"><div>Yao Meta Skill · Trusted Generation Core · Phase 1</div><span>报告生成 2026-08-16 · 数据基线 2026-08-16</span></div></footer>
+  <script data-report-i18n>
+    const progress = document.querySelector('.progress');
+    const links = [...document.querySelectorAll('.nav-links a')];
+    const sections = links.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${max > 0 ? window.scrollY / max * 100 : 0}%`;
+      let current = sections[0];
+      sections.forEach((section) => { if (section.getBoundingClientRect().top <= 100) current = section; });
+      links.forEach((link) => link.setAttribute('aria-current', String(link.getAttribute('href') === `#${current.id}`)));
+    };
+    document.addEventListener('scroll', update, { passive: true });
+    update();
+    const filters = [...document.querySelectorAll('.filter')];
+    const repairs = [...document.querySelectorAll('.repair')];
+    filters.forEach((button) => button.addEventListener('click', () => {
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      const choice = button.dataset.filter;
+      repairs.forEach((row) => { row.hidden = choice !== 'all' && row.dataset.priority !== choice; });
+    }));
+    const translations = new Map([
+      ["跳到正文", "Skip to content"],
+      ["01 判断", "01 Decision"], ["02 跃迁", "02 Uplift"], ["03 内核", "03 Core"],
+      ["04 修复", "04 Repairs"], ["05 账本", "05 Ledger"], ["06 质量链", "06 Quality"], ["07 下一步", "07 Next"],
+      ["简中", "ZH"],
+      ["第一阶段真实质量晋级已经通过", "Phase 1 has passed its real-output quality promotion"],
+      ["工程成熟度由 40 分提升到 100 分，DeepSeek 40 次真实调用全部成功，with-skill 在 20 对三人盲评中获得 19 对多数票胜出", "Engineering maturity rose from 40 to 100. All 40 DeepSeek calls succeeded, and with-skill won the majority vote in 19 of 20 three-reviewer blind pairs"],
+      ["内部质量晋级 eligible", "Internal quality promotion eligible"], ["world-class 账本 pending", "World-class ledger pending"],
+      ["1.2.0 已完成第一阶段真实输出评测，内部质量晋级四项门槛全部通过；公开报告可以引用本轮固定样本结果，world-class 声明继续由独立证据账本控制", "Version 1.2.0 has completed the Phase 1 real-output evaluation and passed all four internal promotion gates. Public reports may cite the scoped benchmark result, while world-class claims remain governed by a separate evidence ledger"],
+      ["工程门禁与内部质量晋级都已完成，公开 world-class 仍由独立账本控制", "Engineering gates and internal quality promotion are complete; public world-class claims remain controlled by a separate ledger"],
+      ["工程成熟度、真实调用、盲评偏好与公开声明边界分别保留清晰口径", "Engineering maturity, real calls, blind-review preference, and public-claim boundaries retain distinct definitions"],
+      ["真实 Provider 调用", "Real provider calls"], ["零失败", "Zero failures"],
+      ["with-skill 多数票", "With-skill majority wins"], ["固定样本偏好率 95%", "95% paired preference in the fixed sample"],
+      ["评审原始票数", "Raw reviewer votes"], ["三位独立评审", "Three independent reviewers"], ["门槛 0.40", "Threshold 0.40"],
+      ["总体成熟度提升 60 分", "Overall maturity increased by 60 points"],
+      ["结论：正式 Provider 与三人盲评完成后，十个工程维度的等权平均由 40 分提升到 100 分", "Conclusion: After completing the formal provider matrix and three-reviewer blind evaluation, the equal-weight average across ten engineering dimensions rose from 40 to 100"],
+      ["工程、质量与公开声明保持三条判断轨道", "Engineering, quality, and public claims use three separate decision tracks"],
+      ["问题：工程完成、质量晋级和公开声明分别处于什么状态", "Question: What are the states of engineering completion, quality promotion, and public claims?"],
+      ["内部质量晋级", "Internal quality promotion"], ["world-class 账本", "World-class ledger"],
+      ["结论：第一阶段内部质量晋级已完成，world-class 声明继续保持关闭", "Conclusion: Phase 1 internal quality promotion is complete, while world-class claims remain closed"],
+      ["· 双模型、40 次真实调用、预算预留、raw 隔离、零失败", "· Two models, 40 real calls, budget reservation, raw-output isolation, and zero failures"],
+      ["· 中性 A/B、私有答案、身份注册、三人提交、统一裁决", "· Neutral A/B, private answer key, identity registry, three submissions, and unified adjudication"],
+      ["结论：三人盲评治理提升 100 分，Provider 评测契约提升 80 分，十个维度全部达到五项契约完整状态", "Conclusion: Three-reviewer governance gained 100 points, the provider contract gained 80, and all ten dimensions now satisfy all five contracts"],
+      ["三人盲评治理成为最大能力增量", "Three-reviewer governance became the largest capability gain"],
+      ["结论：真实调用与三人盲评补齐后，能力增量进一步集中到输出质量治理", "Conclusion: Completing real calls and blind review shifted the largest gains toward output-quality governance"],
+      ["结论：正式 Provider 与三人盲评完成后，十个维度均取得五项契约完整分", "Conclusion: After the formal provider run and three-reviewer evaluation, all ten dimensions satisfy all five contracts"],
+      ["评测证据已经接入工程账本，公开汇总与本地原始材料保持隔离", "Evaluation evidence now feeds the engineering ledger, with public aggregates separated from local source materials"],
+      ["仓库保存可复核指标、哈希与血缘，本地不可变 run 保存原始输出、评审理由和身份注册信息", "The repository stores reviewable metrics, hashes, and lineage; the local immutable run stores raw outputs, reviewer reasons, and identity records"],
+      ["工程门禁与真实质量门槛共同通过", "Engineering gates and real-output quality thresholds pass together"],
+      ["真实调用", "Real calls"], ["盲评多数票", "Blind-review majority"], ["门槛 15 / 20", "Threshold 15/20"],
+      ["评审一致性", "Reviewer agreement"],
+      ["结论：本地工程、真实调用和三人盲评已经形成一致的第一阶段质量判断", "Conclusion: Local engineering, real calls, and three-reviewer blind evaluation now support one consistent Phase 1 quality decision"],
+      ["四份公开机器证据连接本地不可变 run", "Four public machine-evidence files link to the local immutable run"],
+      ["问题：哪些评测材料进入公开仓库", "Question: Which evaluation materials enter the public repository?"],
+      ["汇总、裁决、承诺、血缘", "Aggregate, adjudication, commitment, and lineage"], ["仅保留在本地", "Kept local only"], ["理由与身份不公开", "Reasons and identities stay private"],
+      ["结论：公开数据可验证结果与哈希，模型正文和评审身份继续隔离", "Conclusion: Public data verifies results and hashes while model text and reviewer identities remain isolated"],
+      ["内部晋级与 world-class 采用独立门槛", "Internal promotion and world-class use separate gates"],
+      ["问题：内部质量晋级与公开声明如何分界", "Question: Where is the boundary between internal quality promotion and public claims?"],
+      ["结论：公开报告可以引用本轮固定样本结果，world-class 声明继续保持关闭", "Conclusion: Public reports may cite this fixed-sample result while world-class claims remain closed"],
+      ["真实质量链完成 40 次调用和 60 票裁决，四项晋级门槛全部通过", "The real-output quality chain completed 40 calls and 60 reviewer votes, passing all four promotion gates"],
+      ["20 对固定样本记录多数票结果、分模型表现、一致性、关键失败和预算消耗", "Twenty fixed pairs record majority outcomes, per-model performance, agreement, critical failures, and budget use"],
+      ["完成", "Completed"],
+      ["结论：DeepSeek V4 Flash 与 V4 Pro 共完成 40 次真实调用，失败数为 0", "Conclusion: DeepSeek V4 Flash and V4 Pro completed 40 real calls with zero failures"],
+      ["20 对中性 A/B 完成三人独立裁决", "Twenty neutral A/B pairs completed independent three-reviewer adjudication"],
+      ["角色中性材料与私有答案隔离", "Role-neutral materials separated from the private answer key"],
+      ["每位评审完成 20 对判断", "Each reviewer completed 20 pair decisions"],
+      ["结论：三位评审各完成 20 对独立判断，全部提交通过完整性校验", "Conclusion: All three reviewers completed 20 independent decisions, and every submission passed integrity validation"],
+      ["四项质量晋级门槛全部通过", "All four quality-promotion gates pass"],
+      ["问题：四项质量晋级条件的实际结果是多少", "Question: What are the actual results for the four promotion conditions?"],
+      ["with-skill 总胜出，门槛 15", "Total with-skill wins, threshold 15"], ["Flash 与 Pro，门槛各 7", "Flash and Pro, threshold 7 each"],
+      ["Fleiss' kappa，门槛 0.40", "Fleiss' kappa, threshold 0.40"], ["critical failure，要求 0", "Critical failures, required 0"],
+      ["结论：内部质量晋级状态更新为 eligible，world-class 账本保持 pending", "Conclusion: Internal quality promotion is now eligible; the world-class ledger remains pending"],
+      ["56 / 60 原始票选择 with-skill", "56 of 60 raw votes selected with-skill"],
+      ["问题：三位评审的六十票如何分布", "Question: How are the 60 reviewer votes distributed?"],
+      ["93.3% 原始票", "93.3% of raw votes"], ["6.7% 原始票", "6.7% of raw votes"], ["多数票胜出", "Majority pair wins"],
+      ["结论：19 / 20 描述本轮固定样本多数票偏好，不能换算为通用能力提升百分比", "Conclusion: 19/20 is the majority preference in this fixed sample and cannot be converted into a general capability-improvement percentage"],
+      ["18 对获得三人一致选择 with-skill", "Eighteen pairs received unanimous with-skill selections"],
+      ["问题：三位评审之间的一致性如何", "Question: How consistent were the three reviewers?"],
+      ["三人一致 with-skill", "Unanimous with-skill"], ["2:1 选择 with-skill", "2:1 for with-skill"], ["三人一致 baseline", "Unanimous baseline"],
+      ["结论：一致性显著高于 0.40 门槛，同时保留一个可复盘的失败样本", "Conclusion: Agreement is well above the 0.40 threshold and leaves one failure sample for focused review"],
+      ["Flash 10 / 10，Pro 9 / 10", "Flash 10/10, Pro 9/10"],
+      ["问题：两个模型的质量与预算表现有什么差异", "Question: How do the two models differ in quality and budget use?"],
+      ["V4 Flash 胜出", "V4 Flash wins"], ["V4 Pro 胜出", "V4 Pro wins"], ["总预算使用", "Total budget used"],
+      ["结论：两个模型都通过 7 / 10 门槛，Pro 的唯一失败样本成为下一轮优化入口", "Conclusion: Both models pass the 7/10 gate; Pro's single losing sample becomes the next optimization target"],
+      ["Canonical IR 输出契约需要更完整", "The Canonical IR output contract needs greater completeness"],
+      ["问题：唯一 baseline 胜出的案例暴露了什么问题", "Question: What did the only baseline-winning case reveal?"],
+      ["案例", "Case"], ["deepseek-v4-pro:canonical-ir-contract，baseline 以 3:0 胜出", "deepseek-v4-pro:canonical-ir-contract, baseline won 3:0"],
+      ["短板", "Gap"], ["定义、字段说明、适配器职责、可追溯验证和验收条件偏短", "Definitions, field details, adapter responsibilities, traceability checks, and acceptance criteria were too brief"],
+      ["下一步", "Next step"], ["补强 Canonical IR 完整性，并把失败形态加入新 holdout", "Strengthen Canonical IR completeness and add the failure shape to a new holdout"],
+      ["结论：下一轮先修复契约完整性，再通过独立 holdout 验证改进", "Conclusion: The next iteration should fix contract completeness and verify the change with an independent holdout"],
+      ["下一轮重点从完成证据转向修复失败样本和扩展泛化验证", "The next iteration shifts from evidence completion to fixing the failure sample and expanding generalization checks"],
+      ["优先补强 Canonical IR 输出完整性，再扩展案例、评审轮换与 world-class 证据接入", "First strengthen Canonical IR output completeness, then expand cases, reviewer rotation, and world-class evidence intake"],
+      ["四步放大真实评测带来的学习价值", "Four steps turn the real evaluation into the next learning loop"],
+      ["问题：下一轮迭代应按什么顺序推进", "Question: In what order should the next iteration proceed?"],
+      ["补强 Canonical IR", "Strengthen Canonical IR"], ["增加定义、字段、职责、可追溯验证和验收条件", "Add definitions, fields, responsibilities, traceability checks, and acceptance criteria"],
+      ["扩展独立 holdout", "Expand the independent holdout"], ["把失败形态转成新案例，保持训练与验收隔离", "Turn the failure shape into a new case and preserve train/evaluation separation"],
+      ["轮换评审与模型", "Rotate reviewers and models"], ["扩大任务类型与评审者覆盖，观察结果稳定性", "Expand task and reviewer coverage to observe result stability"],
+      ["接入 world-class 账本", "Feed the world-class ledger"], ["提交可验证证据包，并补齐原生权限和真实客户端遥测", "Submit verifiable evidence packets and complete native permissions plus real-client telemetry"],
+      ["结论：下一轮先验证失败修复是否泛化，再扩大公开声明范围", "Conclusion: Verify that the failure fix generalizes before expanding public claims"],
+      ["内部质量状态", "Internal quality status"], ["第一阶段晋级 eligible", "Phase 1 promotion eligible"],
+      ["公开结果口径", "Public result scope"], ["20 对固定样本中 19 对多数票胜出", "Majority wins in 19 of 20 fixed pairs"],
+      ["world-class 账本继续保持 pending", "The world-class ledger remains pending"],
+      ["报告生成 2026-08-16 · 数据基线 2026-08-16", "Report generated 2026-08-16 · Data baseline 2026-08-16"],
+      ["第一阶段已经形成可信生成内核", "Phase 1 has established a trusted generation core"],
+      ["工程能力成熟度由 40 分提升到 96 分，可信运行、单一语义、正式评测基础设施和入口门禁已经接入同一条证据链", "Engineering maturity rose from 40 to 96 as trusted runs, canonical semantics, formal evaluation infrastructure, and entry gates converged on one evidence chain"],
+      ["本地工程闭环完成", "Local engineering loop complete"], ["真实质量证据待完成", "Real quality evidence pending"],
+      ["发布判断", "Release decision"],
+      ["1.2.0 已具备继续进入真实评测的工程条件，正式 DeepSeek 40 次调用和三人盲评完成前，质量晋级与 world-class 声明继续关闭", "Version 1.2.0 has the engineering foundation for real evaluation. Quality promotion and world-class claims remain closed until 40 formal DeepSeek calls and the three-reviewer blind evaluation are complete"],
+      ["工程候选已经就绪，质量晋级仍由两条外部证据链控制", "The engineering candidate is ready, while two external evidence chains still control quality promotion"],
+      ["成熟度评分描述可验证的工程能力，模型输出质量保持独立判断", "The maturity score measures verifiable engineering capability; model output quality remains a separate decision"],
+      ["当前工程成熟度", "Current engineering maturity"], ["十维等权平均", "Equal-weight average across ten dimensions"],
+      ["复核修复项", "Review fixes"], ["当前完整 CI", "Current full CI"], ["全部通过", "All passed"],
+      ["证据一致性", "Evidence consistency"], ["零警告零失败", "Zero warnings, zero failures"], ["正式 Provider", "Formal provider runs"],
+      ["总体成熟度提升 56 分", "Overall maturity increased by 56 points"],
+      ["问题：整体工程成熟度发生了什么变化", "Question: How did overall engineering maturity change?"],
+      ["优化前", "Before"], ["优化后", "After"],
+      ["结论：十个工程维度的等权平均由 40 分提升到 96 分", "Conclusion: The equal-weight average across ten engineering dimensions rose from 40 to 96"],
+      ["工程与质量分处两条轨道", "Engineering and quality follow separate tracks"],
+      ["问题：工程完成与质量晋级分别处于什么状态", "Question: What are the current states of engineering completion and quality promotion?"],
+      ["本地工程门禁", "Local engineering gates"], ["三人盲评", "Three-reviewer blind evaluation"], ["质量晋级", "Quality promotion"],
+      ["结论：工程候选状态可继续，公开质量声明仍保持关闭", "Conclusion: The engineering candidate can proceed, while public quality claims remain closed"],
+      ["最大增量来自可信证据、安全恢复和三人盲评治理", "The largest gains came from trusted evidence, safe recovery, and three-reviewer governance"],
+      ["优化前采用提交 4cbb6d1，优化后采用最终复核证据，每个维度由五项可核验契约构成", "The baseline uses commit 4cbb6d1 and the after state uses final review evidence. Each dimension contains five verifiable contracts"],
+      ["十维能力从分散约定升级为可验证契约", "Ten capabilities moved from scattered conventions to verifiable contracts"],
+      ["问题：十个核心维度分别提升了多少", "Question: How much did each of the ten core dimensions improve?"],
+      ["可信证据发布", "Trusted evidence publishing"],
+      ["· run 隔离、不可变发布、索引、pointer-last、恢复", "· Run isolation, immutable releases, indexing, pointer-last, and recovery"],
+      ["· manifest、resolver、schema、identity、统一消费者", "· Manifest, resolver, schema, identity, and unified consumers"],
+      ["Provider 评测契约", "Provider evaluation contract"],
+      ["· 双模型、40-run、预算预留、raw 隔离，正式运行待完成", "· Two models, 40 runs, budget reservation, and raw-output isolation; formal runs remain pending"],
+      ["三人盲评治理", "Three-reviewer governance"],
+      ["· 中性 A/B、私有答案、身份注册、finalizer，真人提交待完成", "· Neutral A/B, private answer key, identity registry, and finalizer; human submissions remain pending"],
+      ["触发边界", "Trigger boundary"],
+      ["· frozen holdout、hard negative、近邻、门槛、回归", "· Frozen holdout, hard negatives, near-neighbor cases, thresholds, and regression checks"],
+      ["上下文效率", "Context efficiency"],
+      ["· 首载 987→947，正文 794→764，预算门槛通过", "· Initial load 987→947 and body 794→764; both budget gates pass"],
+      ["打包与安装", "Packaging and installation"],
+      ["· 确定性 ZIP、实际 hash、同步、portable index、安装", "· Deterministic ZIP, actual hash, synchronization, portable index, and installation"],
+      ["安全与恢复", "Security and recovery"],
+      ["· lock、路径防护、journal、故障注入、脱敏", "· Locking, path protection, journal, fault injection, and redaction"],
+      ["跨平台 Conformance", "Cross-platform conformance"],
+      ["· 五目标保持全通过，语义一致性得到加固", "· All five targets remain green and semantic consistency is strengthened"],
+      ["审计可复现性", "Audit reproducibility"],
+      ["· 41 项检查、4×83 回放、source contract、bundle", "· 41 checks, 4×83 replays, source contract, and bundle"],
+      ["结论：可信发布、安全恢复和盲评治理各提升 80 分，构成本轮最大跃迁", "Conclusion: Trusted publishing, safe recovery, and blind-review governance each gained 80 points, the largest improvements in this iteration"],
+      ["三项基础能力并列最大增量", "Three foundational capabilities share the largest gain"],
+      ["问题：十个维度的增量如何排序", "Question: How do the gains rank across the ten dimensions?"],
+      ["Provider 契约", "Provider contract"], ["审计可复现", "Audit reproducibility"],
+      ["结论：增量排序显示本轮重点落在可信执行与治理控制面", "Conclusion: The ranking shows this iteration concentrated on trusted execution and governance controls"],
+      ["每个维度由五项契约构成", "Each dimension consists of five contracts"],
+      ["问题：每个维度的分数如何计算", "Question: How is each dimension scored?"],
+      ["入口或声明", "Entry or declaration"], ["执行或解析", "Execution or resolution"], ["边界或安全", "Boundary or safety"],
+      ["测试或回归", "Test or regression"], ["发布或完成", "Release or completion"],
+      ["结论：外部 Provider 与真人评审的完成项当前保持零分", "Conclusion: Completion points for the external provider and human review remain at zero"],
+      ["入口成本下降并进入两个预算门槛", "Entry cost fell within both budget thresholds"],
+      ["问题：入口上下文成本发生了什么变化", "Question: How did entry-context cost change?"],
+      ["初始载入 tokens", "Initial-load tokens"], ["SKILL.md 正文 tokens", "SKILL.md body tokens"],
+      ["结论：初始载入下降约 4.1%，正文下降 30 tokens，分别进入 950 与 780 预算", "Conclusion: Initial load fell by about 4.1% and body cost fell by 30 tokens, entering the 950 and 780 budgets"],
+      ["四个里程碑组成从运行、语义、评测到发布判断的控制链", "Four milestones form a control chain from runs and semantics to evaluation and release decisions"],
+      ["每个阶段都向下一阶段交付可验证输入，减少跨工具语义漂移和状态失真", "Each stage supplies verifiable input to the next, reducing semantic drift and state distortion across tools"],
+      ["可信运行", "Trusted runs"], ["不可变 run、发布锁、恢复协议、portable evidence", "Immutable runs, publish lock, recovery protocol, and portable evidence"],
+      ["显式 resolver、全量 schema、统一消费者", "Explicit resolver, complete schema, and unified consumers"],
+      ["正式评测", "Formal evaluation"], ["双模型 40 调用、20 对 A/B、三位 reviewer", "Two models, 40 calls, 20 A/B pairs, and three reviewers"],
+      ["入口门禁", "Entry gates"], ["冻结 holdout、66 例回归、上下文预算", "Frozen holdout, 66 regression cases, and context budgets"],
+      ["单一 IR 结果驱动六类官方表面", "One IR result drives six official surfaces"],
+      ["问题：Canonical Skill IR 如何统一官方消费者", "Question: How does Canonical Skill IR unify official consumers?"],
+      ["目标编译", "Target compilation"], ["归档构建", "Archive build"], ["元数据审计", "Metadata audit"],
+      ["目标一致性", "Target consistency"], ["能力解释", "Capability explanation"], ["状态决策", "State decisions"],
+      ["结论：官方消费者停止 wildcard 扫描，语义结果由同一 resolver 提供", "Conclusion: Official consumers stop wildcard scanning and receive semantic results from one resolver"],
+      ["27 项修复优先收敛假阳性、证据混用、身份泄漏和崩溃恢复", "Twenty-seven fixes prioritize false positives, mixed evidence, identity leakage, and crash recovery"],
+      ["实际修复清单包含 P1 15 项、P2 9 项、P3 3 项，可按优先级筛选", "The repair inventory contains 15 P1, 9 P2, and 3 P3 items and can be filtered by priority"],
+      ["P1 占 15 项", "P1 accounts for 15 items"], ["问题：修复项如何按优先级分布", "Question: How are repairs distributed by priority?"],
+      ["结论：P1 占全部修复的 55.6%，重点消除状态失真与安全风险", "Conclusion: P1 represents 55.6% of all repairs and focuses on state distortion and security risk"],
+      ["六类风险面获得明确控制点", "Six risk surfaces gained explicit controls"],
+      ["问题：修复工作关闭了哪些主要风险面", "Question: Which major risk surfaces did the repairs close?"],
+      ["发布一致性", "Release consistency"], ["确定性 ZIP、实际 hash、pointer-last", "Deterministic ZIP, actual hash, and pointer-last"],
+      ["失败恢复", "Failure recovery"], ["advisory lock、journal、故障注入", "Advisory lock, journal, and fault injection"],
+      ["评测真值", "Evaluation truth"], ["正式阶段字段、旧证据隔离", "Formal-phase fields and legacy-evidence isolation"],
+      ["盲评完整性", "Blind-review integrity"], ["随机 A/B、身份绑定、finalizer", "Random A/B, identity binding, and finalizer"],
+      ["语义一致性", "Semantic consistency"], ["schema、identity、统一 resolver", "Schema, identity, and unified resolver"],
+      ["4×83 回放、source contract、bundle", "4×83 replays, source contract, and bundle"],
+      ["结论：风险控制从分散校验升级为端到端契约", "Conclusion: Risk control advanced from scattered checks to end-to-end contracts"],
+      ["全部 27", "All 27"],
+      ["残留锁导致异常退出后的错误阻断", "Stale locks caused false blocking after abnormal exit"], ["随进程退出释放", "Releases with process exit"],
+      ["dry-run 触发遗留事务恢复写入", "Dry-run triggered recovery writes for a legacy transaction"], ["dry-run 零写入", "Dry-run performs zero writes"], ["与显式恢复", "with explicit recovery"],
+      ["发布与 pointer 存在崩溃窗口", "Publishing and pointer updates had a crash window"],
+      ["artifact、index、manifest 可能部分写入", "Artifact, index, and manifest could be partially written"], ["自动回滚", "Automatic rollback"],
+      ["run 与 raw output 路径逃逸", "Run and raw-output path escape"], ["trusted-root 与 symlink 拒绝", "Trusted-root enforcement and symlink rejection"],
+      ["ZIP 与报告 hash 漂移", "ZIP and report hash drift"], ["非自引用 scope 与确定性 ZIP", "Non-self-referential scope and deterministic ZIP"],
+      ["sync 在 attestation 后重建 ZIP", "Sync rebuilt the ZIP after attestation"], ["保留并验证正式 ZIP", "Preserve and verify the formal ZIP"],
+      ["发布包缺少可移植证据入口", "The release package lacked a portable evidence entry"],
+      ["正式 0/40 与旧 10-run 混用", "Formal 0/40 state was mixed with the legacy 10-run evidence"], ["正式阶段状态字段", "Formal-phase status fields"],
+      ["Operator 指向旧单模型流程", "Operator guidance pointed to the legacy single-model flow"], ["固定双模型与三人 finalizer", "Fixed dual-model flow and three-reviewer finalizer"],
+      ["盲评包泄漏角色信息", "Blind-review packets leaked role information"], ["密码学随机 A/B 与答案隔离", "Cryptographic A/B randomization and isolated answer key"],
+      ["Reviewer 身份仅靠自我声明", "Reviewer identity relied on self-declaration"], ["受控 reviewer registry", "Controlled reviewer registry"],
+      ["三人盲评缺少恢复入口", "The three-reviewer flow lacked a recovery entry"],
+      ["250k token 上限可能越界", "The 250k token cap could be exceeded"], ["请求前保守预留", "Conservative reservation before each request"],
+      ["Provider 异常可能泄漏正文或凭证", "Provider errors could leak output text or credentials"], ["错误分类与脱敏摘要", "Error classification and redacted summaries"],
+      ["runner 执行位置导致语义漂移", "Runner working directory caused semantic drift"], ["固定 skill_dir 与运行参数", "Pinned skill_dir and run parameters"],
+      ["40 次未完整即可生成 blind pack", "A blind pack could be generated before all 40 runs completed"], ["精确成功集合", "Exact successful-run set"],
+      ["IR resolver 仅校验部分字段", "The IR resolver validated only part of the schema"], ["全量 schema 与 identity", "Complete schema and identity validation"],
+      ["官方消费者仍有 wildcard 扫描", "Official consumers still used wildcard scanning"], ["统一 resolver", "Unified resolver"],
+      ["provenance 引用悬空提交", "Provenance referenced unreachable commits"], ["Review Studio 混显两阶段证据", "Review Studio mixed evidence from two phases"],
+      ["legacy 与正式阶段分栏", "Separate legacy and formal-phase views"], ["CI 在 verification 后重建 archive", "CI rebuilt the archive after verification"],
+      ["package-check 前移", "Move package-check before verification"], ["ignored snapshots 进入 ZIP", "Ignored snapshots entered the ZIP"],
+      ["source discovery 排除 snapshots", "Exclude snapshots from source discovery"], ["package 与 registry 状态循环依赖", "Package and registry state formed a cycle"],
+      ["metadata parity 独立重算", "Independent metadata-parity recomputation"], ["M1 至 M4 缺少独立 CI 记录", "M1 through M4 lacked independent CI records"],
+      ["四个 detached worktree 回放", "Replay in four detached worktrees"], ["系统 make 受 Xcode license 影响", "System make was blocked by the Xcode license"],
+      ["优先 Command Line Tools make", "Prefer Command Line Tools make"], ["tests/tmp 遗留目录干扰审计", "Leftover tests/tmp directories interfered with audit"],
+      ["精确清理 scratch", "Precisely clean scratch directories"],
+      ["证据账本已经把测试、归档、安装、兼容性与入口门禁连成一致判断", "The evidence ledger now aligns tests, archives, installation, compatibility, and entry gates into one decision"],
+      ["阅读面只展示结果与口径，内部证据映射保存在独立台账", "The reading surface shows results and definitions; internal evidence mappings remain in a separate ledger"],
+      ["八项机器门禁全部通过", "All eight machine gates pass"], ["问题：八项机器门禁是否达到发布阈值", "Question: Do the eight machine gates meet the release threshold?"],
+      ["里程碑回放", "Milestone replays"], ["M1 至 M4", "M1 through M4"], ["五目标全通过", "All five targets pass"],
+      ["阈值 0.95", "Threshold 0.95"], ["阈值 0.90", "Threshold 0.90"], ["预算 780 tokens", "Budget 780 tokens"],
+      ["初始加载", "Initial load"], ["预算 950 tokens", "Budget 950 tokens"],
+      ["结论：当前工程状态支持继续进入正式质量评测", "Conclusion: The current engineering state supports proceeding to formal quality evaluation"],
+      ["不可变证据与正式归档形成双重锁定", "Immutable evidence and the formal archive form a dual lock"],
+      ["问题：最终证据发布包含多少可核验产物", "Question: How many verifiable artifacts are included in the final evidence release?"],
+      ["不可变证据产物", "Immutable evidence artifacts"], ["一致性通过", "Consistency passed"],
+      ["结论：正式归档、索引和机器报告共享一致判断", "Conclusion: The formal archive, index, and machine reports share one consistent decision"],
+      ["工程候选与公开声明采用不同门槛", "Engineering candidacy and public claims use different thresholds"],
+      ["问题：工程发布判断与公开质量声明如何分界", "Question: Where is the boundary between engineering release and public quality claims?"],
+      ["结论：工程候选可以继续，公开优越性与 world-class 声明保持关闭", "Conclusion: The engineering candidate can proceed; superiority and world-class claims remain closed"],
+      ["正式质量链固定为 40 次调用、20 对材料、三人独立评审和四项晋级门槛", "The formal quality chain is fixed at 40 calls, 20 pairs, three independent reviewers, and four promotion thresholds"],
+      ["基础设施已经固化参数、预算、身份与裁决规则，当前缺口是外部凭证和真人提交", "The infrastructure fixes parameters, budgets, identity, and adjudication rules. The remaining gaps are external credentials and human submissions"],
+      ["2 模型 × 10 案例 × 2 variant", "2 models × 10 cases × 2 variants"], ["问题：四十次正式调用由哪些组合构成", "Question: Which combinations make up the 40 formal calls?"],
+      ["模型", "Model"], ["案例", "Cases"], ["当前", "Current"],
+      ["结论：矩阵结构已经固定，当前正式成功调用为 0 / 40", "Conclusion: The matrix structure is fixed and formal successful calls currently stand at 0/40"],
+      ["中性 A/B 经三位 reviewer 独立裁决", "Neutral A/B pairs receive independent decisions from three reviewers"],
+      ["问题：三人盲评如何保护评审完整性", "Question: How does the three-reviewer blind evaluation protect review integrity?"],
+      ["随机 A/B", "Random A/B"], ["角色中性公开包与私有答案隔离", "Role-neutral public packets with a separate private answer key"],
+      ["三人独立提交", "Three independent submissions"], ["packet、submission 与身份绑定", "Packets and submissions bound to reviewer identity"],
+      ["统一裁决", "Unified adjudication"], ["多数票、kappa、关键失败与模型门槛", "Majority vote, kappa, critical failures, and per-model thresholds"],
+      ["结论：评审基础设施已完成，真人评审当前为 0 / 3", "Conclusion: Review infrastructure is complete; human reviews currently stand at 0/3"],
+      ["四项条件共同决定质量晋级", "Four conditions jointly determine quality promotion"],
+      ["问题：质量晋级必须同时满足哪些条件", "Question: Which conditions must all pass for quality promotion?"],
+      ["with-skill 总胜出", "Total with-skill wins"], ["每个模型胜出", "Wins per model"],
+      ["结论：任何一项缺失都会保持质量晋级为 pending", "Conclusion: If any condition is missing, quality promotion remains pending"],
+      ["阶段一完成只剩一条固定依赖链", "One fixed dependency chain remains for Phase 1 completion"],
+      ["配置 Provider、执行矩阵、完成三人评审、裁决并重新发布证据", "Configure the provider, execute the matrix, complete three reviews, adjudicate, and republish evidence"],
+      ["四步完成真实质量晋级闭环", "Four steps complete the real quality-promotion loop"],
+      ["问题：从当前状态到阶段一完成需要哪些连续动作", "Question: Which sequential actions lead from the current state to Phase 1 completion?"],
+      ["配置 Provider", "Configure provider"], ["通过环境变量提供凭证，凭证不进入日志和证据产物", "Provide credentials through environment variables; credentials never enter logs or evidence artifacts"],
+      ["执行 40 次矩阵", "Execute the 40-run matrix"], ["固定双模型、温度、超时、输出与总 token 上限", "Fix both models, temperature, timeout, output limit, and total token cap"],
+      ["完成三人盲评", "Complete three-reviewer blind evaluation"], ["每位 reviewer 独立评审 20 对材料并提交身份绑定结果", "Each reviewer independently judges 20 pairs and submits identity-bound results"],
+      ["裁决与重新发布", "Adjudicate and republish"], ["验证四项阈值并刷新不可变证据与阶段完成状态", "Verify all four thresholds and refresh immutable evidence plus phase-completion status"],
+      ["结论：外部证据完成并通过阈值后，阶段一质量状态才具备更新资格", "Conclusion: Phase 1 quality status can be updated only after external evidence is complete and passes all thresholds"],
+      ["Provider 缺口", "Provider gap"], ["正式矩阵当前为 0 / 40", "Formal matrix currently 0/40"],
+      ["人工评审缺口", "Human-review gap"], ["三位 reviewer 当前为 0 / 3", "Reviewers currently 0/3"],
+      ["声明边界", "Claim boundary"], ["质量晋级与 world-class 继续保持 pending", "Quality promotion and world-class status remain pending"],
+      ["报告生成 2026-08-13 · 数据基线 2026-08-12", "Report generated 2026-08-13 · Data baseline 2026-08-12"]
+    ]);
+    const textNodes = [];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement?.closest('script, style') || !node.nodeValue.trim()
+          ? NodeFilter.FILTER_REJECT
+          : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const key = node.nodeValue.trim();
+      if (!translations.has(key)) continue;
+      const leading = node.nodeValue.match(/^\s*/)?.[0] || '';
+      const trailing = node.nodeValue.match(/\s*$/)?.[0] || '';
+      textNodes.push({ node, zh: node.nodeValue, en: `${leading}${translations.get(key)}${trailing}` });
+    }
+    const languageSwitch = document.querySelector('[data-language-switch]');
+    languageSwitch.addEventListener('click', () => {
+      const previousScrollX = window.scrollX;
+      const previousScrollY = window.scrollY;
+      document.documentElement.style.overflowAnchor = 'none';
+      const english = document.body.dataset.activeLanguage !== 'en';
+      textNodes.forEach((item) => { item.node.nodeValue = english ? item.en : item.zh; });
+      document.body.dataset.activeLanguage = english ? 'en' : 'zh-CN';
+      document.documentElement.lang = english ? 'en' : 'zh-CN';
+      document.title = english
+        ? 'Yao Meta Skill 1.2.0 Phase 1 Trusted Generation Core Visual Report'
+        : 'Yao Meta Skill 1.2.0 第一阶段可信生成内核可视化报告';
+      languageSwitch.setAttribute('aria-pressed', String(english));
+      languageSwitch.setAttribute('aria-label', english ? 'Switch to Chinese' : '切换为英文');
+      document.querySelector('nav[data-sticky-nav]').setAttribute('aria-label', english ? 'Report navigation' : '报告目录');
+      document.querySelector('.filters').setAttribute('aria-label', english ? 'Repair filters' : '修复筛选');
+      document.querySelector('.repair-list').setAttribute('aria-label', english ? 'Repair inventory' : '修复清单');
+      document.querySelectorAll('[data-chart]').forEach((chart) => {
+        const title = chart.querySelector('[data-module-title]')?.textContent.trim() || '';
+        const question = (chart.querySelector('[data-module-description]')?.textContent.trim() || '').replace('问题：', '').replace('Question: ', '');
+        const conclusion = (chart.querySelector('figcaption')?.textContent.trim() || '').replace('结论：', '').replace('Conclusion: ', '');
+        chart.dataset.question = question;
+        chart.dataset.conclusion = conclusion;
+        chart.setAttribute('aria-label', `${title}. ${question}`);
+      });
+      requestAnimationFrame(() => {
+        window.scrollTo(previousScrollX, previousScrollY);
+        requestAnimationFrame(() => {
+          window.scrollTo(previousScrollX, previousScrollY);
+          document.documentElement.style.overflowAnchor = '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

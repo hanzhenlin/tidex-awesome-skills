@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "status": "frozen",
+  "frozen_at": "2026-08-12",
+  "recommended_threshold": 0.33,
+  "should_trigger": [
+    {
+      "text": "Turn this repeated customer-research handoff into a reusable agent skill with clear inputs, outputs, and trigger tests.",
+      "family": "workflow_to_skill"
+    },
+    {
+      "text": "Refactor this existing skill so its description routes correctly and its package passes installation checks.",
+      "family": "iterate_existing_skill"
+    },
+    {
+      "text": "Evaluate this team skill's trigger precision, output quality, and release readiness, then propose concrete fixes.",
+      "family": "evaluate_existing_skill"
+    },
+    {
+      "text": "Package this maintained workflow skill for the shared library with manifest, interface, trust, and rollback evidence.",
+      "family": "package_for_team"
+    },
+    {
+      "text": "Migrate our Claude skill to Codex while preserving behavior, route boundaries, and conformance tests.",
+      "family": "migrate_existing_skill"
+    },
+    {
+      "text": "Create a reusable skill from these SOP fragments, scripts, notes, and prompt history for quarterly team use.",
+      "family": "complex_multi_asset"
+    },
+    {
+      "text": "Prepare this governed skill for a 1.2 release with evidence publication, registry checks, and install simulation.",
+      "family": "release_packaging"
+    },
+    {
+      "text": "Add hard-negative route evals and tighten the activation description on this existing agent capability.",
+      "family": "trigger_boundary"
+    },
+    {
+      "text": "Convert this recurring incident review playbook into a maintained skill package with owner and review cadence.",
+      "family": "governed_workflow"
+    },
+    {
+      "text": "把这套重复的内容审核流程、提示词和脚本沉淀成团队可复用的 skill，并补触发评测。",
+      "family": "cn_workflow_to_skill"
+    },
+    {
+      "text": "优化这个已有 skill 的触发边界、输出评测、打包发布和安装验证。",
+      "family": "cn_iterate_existing_skill"
+    },
+    {
+      "text": "把这个 Claude skill 迁移成可发布的 Codex skill 包，同时保留回滚和信任证据。",
+      "family": "cn_migrate_release"
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "text": "Summarize this skill design document for leadership; keep it as a one-page note and create no skill files.",
+      "family": "hard_negative_summary"
+    },
+    {
+      "text": "Translate the SKILL.md explanation into Japanese without changing or packaging the skill.",
+      "family": "hard_negative_translation"
+    },
+    {
+      "text": "Brainstorm possible agent-skill ideas for next quarter; discussion only, no implementation or package.",
+      "family": "hard_negative_brainstorm"
+    },
+    {
+      "text": "Review this workflow and explain its weak points in plain English. Do not turn it into a reusable capability.",
+      "family": "hard_negative_explain"
+    },
+    {
+      "text": "Write release notes for the existing skill version that was already shipped; no skill changes or validation work.",
+      "family": "hard_negative_release_copy"
+    },
+    {
+      "text": "Create a wiki page describing how skill routing works, and keep the result as documentation only.",
+      "family": "hard_negative_documentation"
+    },
+    {
+      "text": "Give me a one-off prompt that imitates this workflow for today's task, without creating reusable assets.",
+      "family": "hard_negative_one_off"
+    },
+    {
+      "text": "Audit the Python implementation in this repository for security bugs; the repository happens to contain a skill.",
+      "family": "hard_negative_code_audit"
+    },
+    {
+      "text": "Design a landing page for our skill marketplace and write its headline and CTA.",
+      "family": "hard_negative_product_design"
+    },
+    {
+      "text": "把这个 skill 的介绍总结成三条给老板看，不要修改或生成任何 skill 文件。",
+      "family": "cn_hard_negative_summary"
+    },
+    {
+      "text": "翻译这份 skill 使用说明，保持结构原样，只做文档交付。",
+      "family": "cn_hard_negative_translation"
+    },
+    {
+      "text": "先头脑风暴几个 skill 方向，停在讨论阶段，不做打包、评测或发布。",
+      "family": "cn_hard_negative_brainstorm"
+    }
+  ],
+  "near_neighbor": [
+    {
+      "text": "Draft an outline for a possible reusable skill, then stop before creating files or tests.",
+      "family": "future_outline"
+    },
+    {
+      "text": "Turn this process into a reusable checklist template for the wiki, with no agent execution package.",
+      "family": "template_only"
+    },
+    {
+      "text": "Assess whether this workflow might justify a skill someday; provide a recommendation only.",
+      "family": "feasibility_only"
+    },
+    {
+      "text": "Polish the default prompt inside this skill, but leave the skill package and behavior unchanged.",
+      "family": "copy_edit_only"
+    },
+    {
+      "text": "整理一个未来可能做成 skill 的大纲，先不要创建文件、评测或安装包。",
+      "family": "cn_future_outline"
+    },
+    {
+      "text": "把流程做成知识库模板和检查清单即可，不进入 agent skill 的执行与发布。",
+      "family": "cn_template_only"
+    }
+  ]
+}

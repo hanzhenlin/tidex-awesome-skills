@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "frozen_file": "evals/blind_holdout/trigger_cases_v2.json",
+  "sha256": "b146ce62cea6a9d7b246207e737668e109d048509b678e93e242e0013036f760",
+  "case_count": 30,
+  "frozen_at": "2026-08-12"
+}
