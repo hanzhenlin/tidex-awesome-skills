@@ -163,10 +163,18 @@ resolve_skill_source() {
         fi
     fi
 
-    # 2) 内置快照兜底
+    # 2) 内置快照兜底（从 snapshots.lock 读取精确版本锚点展示给用户）
     if [ -d "${snapshot_dir}" ]; then
         RESOLVED_PATH="${snapshot_dir}"
-        RESOLVED_TAG="内置快照"
+        local anchor=""
+        if [ -f "${SCRIPT_DIR}/snapshots.lock" ]; then
+            anchor="$(grep "^${name}|" "${SCRIPT_DIR}/snapshots.lock" | head -1 | cut -d'|' -f2,3 | tr '|' '@')"
+        fi
+        if [ -n "${anchor}" ]; then
+            RESOLVED_TAG="内置快照@${anchor}"
+        else
+            RESOLVED_TAG="内置快照@未锚定"
+        fi
         return 0
     fi
 

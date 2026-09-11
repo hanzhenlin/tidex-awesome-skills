@@ -4,7 +4,13 @@
 #
 # 用途：遍历 registry.txt 登记表，从各原作者上游仓库拉取最新源码，
 #       原子替换 skills/ 下的内置快照，保证兜底源始终可用且不过时。
+# 版本锚点：每次同步都把上游 commit SHA 与同步日期写入 snapshots.lock，
+#           安装器降级到快照时会把该精确版本展示给用户。
 # 说明：本脚本只改工作副本，不代替策展人提交；审阅刷新报告后自行 commit/push。
+#
+# 用法：
+#   ./sync.sh                # 同步登记表全部技能
+#   ./sync.sh nuwa-skill     # 只同步指定技能
 # ==============================================================================
 
 set -e
@@ -19,6 +25,7 @@ RESET="\033[0m"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REGISTRY_FILE="${SCRIPT_DIR}/registry.txt"
 SNAPSHOT_DIR="${SCRIPT_DIR}/skills"
+LOCK_FILE="${SCRIPT_DIR}/snapshots.lock"
 WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "${WORK_DIR}"' EXIT
 
@@ -36,6 +43,16 @@ load_registry() {
     done < "${REGISTRY_FILE}"
 }
 
+# 更新 snapshots.lock 中某技能的版本锚点（name|commit_sha|sync_date）
+update_lock() {
+    local name="$1" sha="$2" sync_date="$3"
+    local tmp_lock="${WORK_DIR}/lock.tmp"
+    touch "${LOCK_FILE}"
+    grep -v "^${name}|" "${LOCK_FILE}" > "${tmp_lock}" 2>/dev/null || true
+    echo "${name}|${sha}|${sync_date}" >> "${tmp_lock}"
+    mv "${tmp_lock}" "${LOCK_FILE}"
+}
+
 sync_one() {
     local name="$1" upstream="$2"
     local snapshot="${SNAPSHOT_DIR}/${name}"
@@ -48,26 +65,30 @@ sync_one() {
             clone --depth 1 "${upstream}" "${tmp}" >/dev/null 2>&1 \
         && ! git -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=25 \
             clone --depth 1 "${ssh_url}" "${tmp}" >/dev/null 2>&1; then
-        echo -e "  ${RED}✗ 上游拉取失败（仓库搬家/删除/断网），快照保持原样${RESET}"
+        echo -e "  ${RED}✗ 上游拉取失败（仓库搬家/删除/断网），快照与锚点保持原样${RESET}"
         FAILED+=("${name}")
         return 0
     fi
+
+    # 关键顺序：先取上游 commit 锚点，再删除 .git
+    local sha
+    sha="$(git -C "${tmp}" rev-parse HEAD)"
     rm -rf "${tmp}/.git"
 
     if [ -d "${snapshot}" ]; then
         if diff -qr "${snapshot}" "${tmp}" >/dev/null 2>&1; then
             echo -e "  ${CYAN}• 与上游一致，无需更新${RESET}"
             UNCHANGED+=("${name}")
+            # 内容一致也补写锚点，修复历史快照缺锚点的情况
+            update_lock "${name}" "${sha}" "$(date +%F)"
             return 0
         fi
         rm -rf "${snapshot}"
     fi
     mkdir -p "${SNAPSHOT_DIR}"
     cp -R "${tmp}" "${snapshot}"
-    local commit
-    commit="$(git -C "${WORK_DIR}/${name}" rev-parse HEAD 2>/dev/null || true)"
-    # clone 后 .git 已删，改从临时 clone 记录；此处直接从缓存重新查不可行，简单标记日期
-    echo -e "  ${GREEN}✓ 快照已刷新为上游最新版${RESET}"
+    update_lock "${name}" "${sha}" "$(date +%F)"
+    echo -e "  ${GREEN}✓ 快照已刷新为上游最新版 (${sha:0:7} @ $(date +%F))${RESET}"
     UPDATED+=("${name}")
 }
 
@@ -83,8 +104,21 @@ main() {
     R_NAME=(); R_UPSTREAM=()
     load_registry
 
-    local i
-    for i in "${!R_NAME[@]}"; do
+    # 支持选择性同步：./sync.sh [技能名...]，无参数则全量同步
+    local targets=() i want found
+    if [ $# -gt 0 ]; then
+        for want in "$@"; do
+            found=""
+            for i in "${!R_NAME[@]}"; do
+                [ "${R_NAME[$i]}" = "$want" ] && { targets+=("$i"); found=1; break; }
+            done
+            [ -z "$found" ] && { echo -e "${RED}[✗] 登记表中不存在技能: ${want}${RESET}"; exit 1; }
+        done
+    else
+        targets=("${!R_NAME[@]}")
+    fi
+
+    for i in "${targets[@]}"; do
         sync_one "${R_NAME[$i]}" "${R_UPSTREAM[$i]}"
     done
 
