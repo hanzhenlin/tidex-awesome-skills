@@ -1,0 +1,26 @@
+interface:
+  display_name: "Nuwa Skill"
+  short_description: "女娲造人：思维框架提炼、认知操作系统建模与专属人物视角蒸馏工厂"
+  default_prompt: "使用 $nuwa-skill 帮我蒸馏提取目标人物或思维主题的心智模型与决策启发式，生成符合 Agent Skills 规范的独立技能。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"
