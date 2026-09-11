@@ -100,6 +100,8 @@ bash install.sh --target /path/to/project/.agents/skills
 bash install.sh              # 交互式菜单安装
 bash install.sh --all        # 一键全量安装
 bash install.sh -l           # 查看登记表与全端挂载状态大盘
+bash install.sh -d           # 【环境医生】全系统宿主环境体检（排查死链/垃圾备份/非标目录）
+bash install.sh -d --fix     # 一键安全清理失效死链与历史备份残留
 bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤用户配置）
 ./uninstall.sh               # 快捷卸载脚本
 ./sync.sh                    # 【策展人工具】从各上游自动刷新内置快照

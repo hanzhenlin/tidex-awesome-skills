@@ -488,6 +488,124 @@ do_uninstall() {
     echo "============================================================"
 }
 
+do_doctor() {
+    load_registry
+    print_banner
+    echo -e "${BOLD}🩺 正在对全系统 Agent 技能宿主环境执行全身体检...${RESET}\n"
+
+    read -r -a target_dirs <<< "$(detect_agent_paths)"
+    local broken_links=()
+    local backup_items=()
+    local non_standard_skills=()
+    local external_skills_count=0
+    local awesome_mounted_count=0
+
+    local target_dir item item_name
+    for target_dir in "${target_dirs[@]}"; do
+        echo -e "${BOLD}▶ 检查宿主目录:${RESET} ${CYAN}${target_dir}${RESET}"
+        if [ ! -d "${target_dir}" ]; then
+            echo -e "  ${YELLOW}• 宿主环境尚未初始化（目录不存在），跳过${RESET}\n"
+            continue
+        fi
+
+        local dir_clean=true
+
+        # 1. 扫描死链 (Broken symlinks)
+        while IFS= read -r -d '' item; do
+            if [ -L "${item}" ] && [ ! -e "${item}" ]; then
+                broken_links+=("${item}")
+                echo -e "  ${RED}[✗ 失效死链]${RESET} $(basename "${item}") -> $(readlink "${item}")"
+                dir_clean=false
+            fi
+        done < <(find "${target_dir}" -maxdepth 1 -type l -print0 2>/dev/null)
+
+        # 2. 扫描历史遗留备份目录 (.bak_*)
+        while IFS= read -r -d '' item; do
+            backup_items+=("${item}")
+            echo -e "  ${YELLOW}[⚠ 历史备份残留]${RESET} $(basename "${item}")"
+            dir_clean=false
+        done < <(find "${target_dir}" -maxdepth 1 -name "*.bak*" -print0 2>/dev/null)
+
+        # 3. 扫描各技能状态与标准度
+        for item in "${target_dir}"/*; do
+            [ -e "${item}" ] || continue
+            item_name="$(basename "${item}")"
+            case "${item_name}" in
+                .*|"#SyncVersion"|*.bak*) continue ;;
+            esac
+
+            if [ -L "${item}" ]; then
+                local link_target
+                link_target="$(readlink "${item}")"
+                if is_own_mount "${link_target}"; then
+                    ((awesome_mounted_count++)) || true
+                else
+                    ((external_skills_count++)) || true
+                fi
+            elif [ -d "${item}" ]; then
+                ((external_skills_count++)) || true
+                # 检查是否缺失标准 SKILL.md
+                if [ ! -f "${item}/SKILL.md" ]; then
+                    non_standard_skills+=("${item}")
+                    echo -e "  ${YELLOW}[⚠ 非标/损坏技能]${RESET} ${item_name} (缺少 SKILL.md 入口)"
+                    dir_clean=false
+                fi
+            fi
+        done
+
+        if $dir_clean; then
+            echo -e "  ${GREEN}✔ 未发现死链与垃圾残留${RESET}"
+        fi
+        echo ""
+    done
+
+    echo "============================================================"
+    echo -e "${BOLD}📋 体检报告与诊断摘要:${RESET}"
+    echo -e "  • 🌟 已成功挂载的明星精选技能: ${GREEN}${awesome_mounted_count}${RESET} 处"
+    echo -e "  • 📦 本地独立/第三方技能: ${CYAN}${external_skills_count}${RESET} 个"
+    echo -e "  • 💔 失效软链接 (Broken Symlinks): ${#broken_links[@]} 处"
+    echo -e "  • 🗑️  历史备份垃圾 (.bak 残留): ${#backup_items[@]} 处"
+    echo -e "  • ⚠️  缺少 SKILL.md 的非标目录: ${#non_standard_skills[@]} 处"
+    echo "============================================================"
+
+    # 发现问题时提供安全修复或自动清理
+    if [ ${#broken_links[@]} -gt 0 ] || [ ${#backup_items[@]} -gt 0 ]; then
+        if [ "${AUTO_FIX:-false}" = "true" ]; then
+            echo -e "\n${BOLD}${GREEN}⚡ 正在自动清理失效死链与历史备份...${RESET}"
+            for item in "${broken_links[@]}"; do
+                rm -f "${item}" 2>/dev/null && echo -e "  [✔ 已移除死链] ${item}"
+            done
+            for item in "${backup_items[@]}"; do
+                rm -rf "${item}" 2>/dev/null && echo -e "  [✔ 已移除备份] ${item}"
+            done
+            echo -e "${BOLD}${GREEN}✔ 清理完毕！环境已恢复清爽。${RESET}"
+        else
+            echo -e "\n${BOLD}🛠️ 修复指引:${RESET}"
+            echo -e "  您可以运行 ${CYAN}bash install.sh --doctor --fix${RESET} 自动一键清理；"
+            echo "  或者手动执行以下命令:"
+            if [ ${#broken_links[@]} -gt 0 ]; then
+                for item in "${broken_links[@]}"; do
+                    echo "    rm \"${item}\""
+                done
+            fi
+            if [ ${#backup_items[@]} -gt 0 ]; then
+                for item in "${backup_items[@]}"; do
+                    echo "    rm -rf \"${item}\""
+                done
+            fi
+        fi
+    fi
+
+    # 生态联动提示
+    if [ "$external_skills_count" -gt 5 ] || [ ${#non_standard_skills[@]} -gt 0 ]; then
+        echo -e "\n${BOLD}${CYAN}💡 进阶治理建议:${RESET}"
+        echo -e "  检测到您的环境中拥有较多独立/非标技能。如果您需要进行跨 Agent 契约标准化"
+        echo -e "  （如补齐 agents/interface.yaml、规范 frontmatter）、代码级治理或任务流水线管理，"
+        echo -e "  推荐使用我们的自研开源工程套件:"
+        echo -e "  👉 ${BOLD}Tidex Agent Skills (原创库)${RESET}: ${GREEN}https://github.com/hanzhenlin/tidex-agent-skills${RESET}\n"
+    fi
+}
+
 do_list() {
     load_registry
     print_banner
@@ -539,6 +657,7 @@ show_help() {
   --force               静默模式下改为"备份后替换"
 
 其他选项:
+  -d, --doctor          对全系统 Agent 技能宿主环境执行全身体检（排查死链/垃圾备份/非标目录）
   -u, --uninstall       安全卸载本套件挂载的软链接
   -l, --list            查看登记表与各宿主环境挂载状态
   -t, --target <DIR>    安装到指定目录（如某项目的 .agents/skills）
@@ -552,11 +671,14 @@ HELPEOF
 
 main() {
     local args=()
+    local run_doctor=false
     while [ $# -gt 0 ]; do
         case "$1" in
             -h|--help) show_help; exit 0 ;;
             -u|--uninstall) do_uninstall; exit 0 ;;
             -l|--list) do_list; exit 0 ;;
+            -d|--doctor) run_doctor=true; shift ;;
+            --fix) AUTO_FIX=true; shift ;;
             -t|--target)
                 [ -z "$2" ] && { echo -e "${RED}[✗] --target 需要指定目录路径！${RESET}"; exit 1; }
                 TARGET_DIR="$2"; shift 2 ;;
@@ -566,6 +688,11 @@ main() {
             *) args+=("$1"); shift ;;
         esac
     done
+
+    if $run_doctor; then
+        do_doctor
+        exit 0
+    fi
 
     SELECTED=()
     local has_all=false has_names=false a
