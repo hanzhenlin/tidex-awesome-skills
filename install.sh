@@ -21,8 +21,8 @@ RESET="\033[0m"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REGISTRY_FILE="${SCRIPT_DIR}/registry.txt"
 SNAPSHOT_DIR="${SCRIPT_DIR}/skills"
-CACHE_ROOT="${HOME}/.tidex-awesome-skills/upstream"
-GLOBAL_STORE_DIR="${HOME}/.tidex-awesome-skills"
+CACHE_ROOT="${HOME}/.tidex/tidex-awesome-skills/cache/upstream"
+GLOBAL_STORE_DIR="${HOME}/.tidex/tidex-awesome-skills/store"
 
 # 运行模式标记
 FORCE=false          # --force：静默模式下冲突时备份替换
@@ -55,12 +55,11 @@ normalize_url() {
     echo "$1" | tr 'A-Z' 'a-z' | sed -e 's#\.git$##' -e 's#/$##'
 }
 
-# 判断路径是否由本套件创建（指向缓存目录或仓库快照目录）
+# 判断路径是否由本套件创建（指向项目专属缓存目录或仓库快照目录）
 is_own_mount() {
     local t="$1"
     case "$(normalize_url "$t")" in
-        *".tidex-awesome-skills"*) return 0 ;;
-        *"tidex-awesome-skills/skills"*) return 0 ;;
+        *".tidex/tidex-awesome-skills"*|*"tidex-awesome-skills/skills"*) return 0 ;;
         *) return 1 ;;
     esac
 }
@@ -74,6 +73,45 @@ is_interactive_tty() {
     [ "${TIDEX_INTERACTIVE:-}" = "1" ] && return 0
     [ -t 0 ] && return 0
     return 1
+}
+
+# ------------------------------------------------------------------------------
+# 安装前置：老环境嗅探净化与缓存迁移
+# ------------------------------------------------------------------------------
+pre_install_migration_and_cleanup() {
+    echo -e "${BOLD}[0/3] 正在执行老环境嗅探与规范性体检...${RESET}"
+    local clean_status=true
+
+    # 1. 嗅探并迁移旧版隐藏缓存 ~/.tidex-awesome-skills
+    local legacy_cache="${HOME}/.tidex-awesome-skills"
+    if [ -d "${legacy_cache}" ]; then
+        if [ -d "${legacy_cache}/upstream" ] && [ ! -d "${CACHE_ROOT}" ]; then
+            mkdir -p "$(dirname "${CACHE_ROOT}")"
+            mv "${legacy_cache}/upstream" "${CACHE_ROOT}"
+            echo -e "  ${GREEN}[✔ 缓存迁移]${RESET} 已将上游源码缓存平滑迁入: ${CACHE_ROOT}"
+        fi
+        rm -rf "${legacy_cache}"
+        echo -e "  ${GREEN}[✔ 历史清理]${RESET} 已清理旧版隐藏目录: ~/.tidex-awesome-skills"
+        clean_status=false
+    fi
+
+    # 2. 嗅探用户根目录下的平铺仓库 ~/tidex-awesome-skills
+    local flat_repo="${HOME}/tidex-awesome-skills"
+    if [ -d "${flat_repo}" ] && [ "${flat_repo}" != "${SCRIPT_DIR}" ]; then
+        if [ ! -d "${GLOBAL_STORE_DIR}" ]; then
+            mkdir -p "$(dirname "${GLOBAL_STORE_DIR}")"
+            mv "${flat_repo}" "${GLOBAL_STORE_DIR}"
+            echo -e "  ${GREEN}[✔ 根目录净化]${RESET} 已将平铺仓库 ~/tidex-awesome-skills 自动归口收纳至 ${GLOBAL_STORE_DIR}"
+            clean_status=false
+        fi
+    elif [ "${SCRIPT_DIR}" = "${flat_repo}" ]; then
+        NEED_PURIFY_NOTICE=true
+    fi
+
+    if $clean_status; then
+        echo -e "  ${GREEN}✔ 本地环境整洁合规，无历史冲突残留${RESET}"
+    fi
+    echo ""
 }
 
 # ------------------------------------------------------------------------------
@@ -146,6 +184,13 @@ resolve_skill_source() {
     local upstream="${R_UPSTREAM[$idx]}"
     local cache_dir="${CACHE_ROOT}/${name}"
     local snapshot_dir="${SNAPSHOT_DIR}/${name}"
+
+    # 若指定了 --snapshot 或 --offline，直接使用本地快照
+    if [ "${USE_SNAPSHOT:-false}" = "true" ] && [ -d "${snapshot_dir}" ]; then
+        RESOLVED_PATH="${snapshot_dir}"
+        RESOLVED_TAG="本地内置快照"
+        return 0
+    fi
 
     # 1) 上游实时拉取（缓存已存在则 ff 更新，更新失败重新克隆）
     if command -v git >/dev/null 2>&1; then
@@ -335,6 +380,7 @@ detect_agent_paths() {
 do_install() {
     load_registry
     print_banner
+    pre_install_migration_and_cleanup
 
     local selected=("$@")
     echo -e "${BOLD}[1/3] 解析技能来源（上游实时优先，快照兜底）...${RESET}"
@@ -398,6 +444,23 @@ do_install() {
             echo -e "  • ${line}"
         done
         echo -e "  ${YELLOW}如需强制覆盖同名技能，请追加 --force 重新运行。${RESET}"
+    fi
+
+    if [ "${NEED_PURIFY_NOTICE:-false}" = "true" ]; then
+        echo ""
+        echo -e "${YELLOW}💡 [根目录净化建议] 检测到当前目录位于 ~/tidex-awesome-skills。${RESET}"
+        echo -e "${YELLOW}   若您希望让主目录更清爽，可退回上一级后将本项目收纳至标准托管库:${RESET}"
+        echo -e "   cd ~ && mv ~/tidex-awesome-skills ~/.tidex/tidex-awesome-skills/store"
+    fi
+
+    # 尾部静默检查新版本（仅在有新版本时友好提醒）
+    if [ -f "${SCRIPT_DIR}/scripts/check_update.py" ] && command -v python3 >/dev/null 2>&1; then
+        local update_msg
+        update_msg="$(python3 "${SCRIPT_DIR}/scripts/check_update.py" --project "tidex-awesome-skills" --repo "hanzhenlin/tidex-awesome-skills" 2>/dev/null || true)"
+        if [[ "${update_msg}" == *"发现新版本"* ]]; then
+            echo ""
+            echo -e "${CYAN}${update_msg}${RESET}"
+        fi
     fi
     echo "============================================================"
 }
@@ -657,6 +720,7 @@ show_help() {
   --force               静默模式下改为"备份后替换"
 
 其他选项:
+  -c, --check-update   检查 GitHub 是否有新版本发布
   -d, --doctor          对全系统 Agent 技能宿主环境执行全身体检（排查死链/垃圾备份/非标目录）
   -u, --uninstall       安全卸载本套件挂载的软链接
   -l, --list            查看登记表与各宿主环境挂载状态
@@ -664,7 +728,7 @@ show_help() {
   -h, --help            显示本帮助
 
 双源机制:
-  安装时优先 git clone --depth 1 拉取原作者上游最新源码（缓存于 ~/.tidex-awesome-skills/upstream），
+  安装时优先 git clone --depth 1 拉取原作者上游最新源码（缓存于 ~/.tidex/tidex-awesome-skills/cache/upstream），
   失败（断网/仓库搬家/已删除）自动降级使用仓库内置快照，账单中明确标注实际来源。
 HELPEOF
 }
@@ -677,6 +741,14 @@ main() {
             -h|--help) show_help; exit 0 ;;
             -u|--uninstall) do_uninstall; exit 0 ;;
             -l|--list) do_list; exit 0 ;;
+            -c|--check-update)
+                if [ -f "${SCRIPT_DIR}/scripts/check_update.py" ] && command -v python3 >/dev/null 2>&1; then
+                    python3 "${SCRIPT_DIR}/scripts/check_update.py" --project "tidex-awesome-skills" --repo "hanzhenlin/tidex-awesome-skills" --force
+                else
+                    echo -e "${RED}[✗] 未找到更新检查脚本或未安装 python3。${RESET}"
+                fi
+                exit 0
+                ;;
             -d|--doctor) run_doctor=true; shift ;;
             --fix) AUTO_FIX=true; shift ;;
             -t|--target)
@@ -684,6 +756,7 @@ main() {
                 TARGET_DIR="$2"; shift 2 ;;
             --all) args+=("__ALL__"); shift ;;
             --force) FORCE=true; shift ;;
+            --snapshot|--offline) USE_SNAPSHOT=true; shift ;;
             -*) echo -e "${RED}[✗] 未知选项: $1（--help 查看用法）${RESET}"; exit 1 ;;
             *) args+=("$1"); shift ;;
         esac
