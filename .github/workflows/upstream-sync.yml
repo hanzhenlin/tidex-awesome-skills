@@ -1,0 +1,56 @@
+name: Upstream Skills Sync Robot
+
+on:
+  schedule:
+    # 每天北京时间凌晨 04:00 (UTC 20:00) 自动定时巡检
+    - cron: '0 20 * * *'
+  # 支持在 GitHub 网页端随时手动点击一键触发测试
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git environment
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run sync.sh to check upstream skills
+        run: |
+          chmod +x ./sync.sh
+          ./sync.sh
+
+      - name: Detect changes and auto commit & bump version
+        run: |
+          # 检查 snapshots.lock 或 skills 快照是否有变动
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "[✓] 所有上游开源技能均无变动，保持最新状态。"
+            exit 0
+          fi
+
+          echo "[!] 检测到上游作者更新了代码，正在自动升级版本并推送..."
+
+          # 读取并递增版本号 (如 1.0.0 -> 1.0.1)
+          CURRENT_VER="$(cat VERSION | tr -d '[:space:]')"
+          [ -z "${CURRENT_VER}" ] && CURRENT_VER="1.0.0"
+          
+          IFS='.' read -r MAJOR MINOR PATCH <<< "${CURRENT_VER}"
+          NEW_PATCH=$((PATCH + 1))
+          NEW_VER="${MAJOR}.${MINOR}.${NEW_PATCH}"
+          echo "${NEW_VER}" > VERSION
+
+          echo "版本已递增: v${CURRENT_VER} -> v${NEW_VER}"
+
+          # 提交变动并推送到 main 分支
+          git add skills/ snapshots.lock VERSION
+          git commit -m "chore(upstream): sync latest upstream skills and bump version to v${NEW_VER} [skip ci]"
+          git push origin main
