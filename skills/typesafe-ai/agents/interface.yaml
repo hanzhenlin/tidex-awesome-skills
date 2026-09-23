@@ -1,0 +1,26 @@
+interface:
+  display_name: "TypeSafe AI"
+  short_description: "TypeSafe：将自然语言与应用状态转化为类型化判断与概率的 System One AI 编程原语"
+  default_prompt: "使用 $typesafe-ai 进行类型化决策建模或构建基于 Jev 模型的结构化判断能力。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "metadata-adapter"
+    claude: "neutral-source-plus-adapter"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-with-vscode-notes"

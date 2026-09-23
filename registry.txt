@@ -9,3 +9,4 @@ huashu-md-html|alchaincyf|https://github.com/alchaincyf/huashu-md-html.git|MIT|�
 huashu-excel|alchaincyf|https://github.com/alchaincyf/huashu-excel.git|MIT|花叔数据分析大师：脏表体检/对齐口径/透视核算与专业报表
 tramstop-skill|alchaincyf|https://github.com/alchaincyf/tramstop-skill.git|MIT|电车站：证据驱动的去AI味实证方法论与真实经验注入
 zhangxuefeng-skill|alchaincyf|https://github.com/alchaincyf/zhangxuefeng-skill.git|MIT|张雪峰思维操作系统：高考志愿/考研抉择/职业规划突破
+typesafe-ai|TypeSafe|https://github.com/typesafe-ai/skills.git|MIT|TypeSafe AI：将 System One 决策模型（Jev）转化为可类型化编程原语
