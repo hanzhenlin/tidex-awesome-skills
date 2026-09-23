@@ -20,7 +20,7 @@
 
 ---
 
-## 🧭 精选明星技能大盘（已收录 8 款顶级神作）
+## 🧭 精选明星技能大盘（已收录 10 款顶级神作）
 
 ### 🧬 1. 元技能与认知进化操作系统 (Meta & Evolution)
 
@@ -29,6 +29,7 @@
 | **`nuwa-skill`**<br>(女娲造人) | [花叔 @alchaincyf](https://github.com/alchaincyf/nuwa-skill) | MIT | • 从一手语料（著作/访谈/决策史）蒸馏认知操作系统<br>• 提炼心智模型、决策启发式、表达 DNA 与行为反模式<br>• 内置 15+ 精品人物视角范例（马斯克/乔布斯/费曼等） | `女娲`、`造skill`、`造人`、`蒸馏XX`、`做个XX视角`、`我想提升决策质量` |
 | **`yao-meta-skill`**<br>(Skill OS 2.0) | [Yao Team @yaojingang](https://github.com/yaojingang/yao-meta-skill) | MIT | • **Yielding AI Outcomes**：全生命周期技能工程系统<br>• 引入 Skill IR（中间表示）实现多端编译器（OpenAI/Claude/Codex/VS Code）<br>• 严苛 Output Eval Lab 评测实验室 + Review Studio 2.0 门禁看板 | `yao-meta-skill`、`制作skill`、`Skill OS`、`评测skill`、`skill治理` |
 | **`darwin-skill`**<br>(达尔文进化) | [花叔 @alchaincyf](https://github.com/alchaincyf/darwin-skill) | MIT | • 借鉴 Karpathy autoresearch 的自主实验进化循环<br>• 吸收微软 SkillLens 9 维静态评分 + SkillOpt 动态验证<br>• 自动化：评估→改进→实测验证→棘轮保留/回滚 | `达尔文`、`darwin`、`优化skill`、`skill评分`、`自动优化`、`skill review` |
+| **`typesafe-ai`**<br>(决策模型编程原语) | [TypeSafe @typesafe-ai](https://github.com/typesafe-ai/skills) | MIT | • 将 System One 决策模型（Jev）转化为可类型化编程原语<br>• 自然语言与应用状态转化为 Choice/Noul/Score 等强类型判定与置信度<br>• 为复杂 AI Agent 提供可组合、可约束的确定性决策微原语 | `typesafe-ai`、`类型化决策`、`Jev`、`状态判断`、`System One` |
 
 ---
 
@@ -37,6 +38,7 @@
 | 技能名称 | 原创作者 / 来源 | 协议 | 技能定位与核心能力 | 常见触发词 |
 | :--- | :--- | :--- | :--- | :--- |
 | **`huashu-design`**<br>(花叔设计系统) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-design) | MIT | • **HTML 原生设计系统（24k+ Stars 神作，全量资产完整收录）**<br>• 高保真 Web/App 原型、演示幻灯片、交互动画、可视化<br>• 内置 20 种设计哲学、5 维专家评审机制、全套配乐与音效库、MP4 导出 | `设计`、`原型`、`幻灯片`、`PPT`、`动画`、`可视化`、`design` |
+| **`handraw-style`**<br>(手绘风格与排版图型) | [yang0 @yang0](https://github.com/yang0/handraw-style) | MIT | • **277 种手绘插画体系 (#001–#277) + 119 种排版图型 + 30 种经典主题色**<br>• 实时审美推理与动态搭配：未指定编号时 AI 实时开放式匹配最优画风与色彩组合<br>• 图文一体海报设计、多格条漫与文章配图规划，输出中英双语提示词与画廊兜底 | `手绘风格`、`生图提示词`、`画风编号`、`排版图型`、`海报设计`、`handraw-style`、`文章配图` |
 | **`huashu-md-html`**<br>(出版级文档流水线) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-md-html) | MIT | • 落地「Markdown 生产，多端消费」多向出版级流水线<br>• 任意文件（PDF/DOCX/PPTX/音频/网页）提取转为干净 Markdown<br>• Markdown 加工为出版级 HTML、DOCX、PDF（A4/A5/大32开）、EPUB3 | `md转html`、`出版级排版`、`排版`、`万物转md`、`格式转换` |
 | **`huashu-excel`**<br>(数据分析大师) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-excel) | MIT | • 严肃数据分析全流程：体检脏表→数据清洗→定口径→算指标→对账→报告<br>• 极简轻量（依赖仅 `openpyxl`），让每个算出来的数字经得起追问 | `数据分析`、`分析表格`、`清洗Excel`、`对账`、`算指标` |
 | **`tramstop-skill`**<br>(电车站去AI味) | [花叔 @alchaincyf](https://github.com/alchaincyf/tramstop-skill) | MIT | • 实证驱动的「去 AI 腔」方法论（来自四版本真实盲测对照实验）<br>• 四层 AI 味诊断：词汇层、句式层、结构层、经验层<br>• 结构外科手术 + 真实经验素材注入，拒绝假大空套话 | `去AI味`、`AI味太重`、`像AI写的`、`没人味`、`降AI感`、`humanize` |
