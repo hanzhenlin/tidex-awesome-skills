@@ -1,0 +1,3 @@
+timestamp	commit	skill	old_score	new_score	status	dimension	note	eval_mode
+2026-09-24T14:20	baseline	code-refine-feature	-	65.5	baseline	-	对话历史真实踩坑基线评估	dry_run
+2026-09-24T14:35	11b5003	code-refine-feature	65.5	95.1	keep	可执行具体性+失败模式	融入对话历史实战经验(引包/防全表/文档代码权责/连锁自检/提交隔离)	paired
