@@ -299,6 +299,26 @@
     "name_en": "Asymmetric Hero & Group Cluster Card"
   },
   {
+    "id": "SC-021",
+    "category": "social-card",
+    "name": "自适应双拼照片转译社媒卡",
+    "image": "../../../images/layouts/social-cards/SC-021.webp",
+    "prompt_file": "layouts/SC-021.md",
+    "keywords": [
+      "自适应双拼",
+      "竖版左右拼",
+      "横版上下拼",
+      "照片转译",
+      "实景转绘",
+      "前后对比",
+      "真实与艺术",
+      "微排版",
+      "四周负空间",
+      "四周留白"
+    ],
+    "name_en": "Adaptive Split Photo-to-Art Social Card"
+  },
+  {
     "id": "IG-001",
     "category": "infographic",
     "name": "标题金字塔图标信息图",
@@ -331,18 +351,20 @@
   {
     "id": "IG-003",
     "category": "infographic",
-    "name": "多行左右对比信息图",
+    "name": "多行左文右图信息图",
     "image": "../../../images/layouts/infographics/IG-003.webp",
     "prompt_file": "layouts/IG-003.md",
     "keywords": [
-      "多行对比",
+      "多行图文",
+      "左文右图",
       "主标题",
-      "左侧文字",
-      "右侧图片",
-      "逐行比较",
+      "行程路线",
+      "图鉴速览",
+      "分类清单",
+      "多行对比",
       "信息图"
     ],
-    "name_en": "Multi-Row Side-by-Side Comparison"
+    "name_en": "Multi-Row Left-Text Right-Image Infographic"
   },
   {
     "id": "IG-004",

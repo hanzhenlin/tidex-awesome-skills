@@ -6,7 +6,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **277 distinct hand-drawn illustration styles** (`001`–`277`), **119 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **30 curated classic monochrome colors** (`C-01`–`C-30`).
+This repository curates **278 distinct hand-drawn illustration styles** (`001`–`278`), **120 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **30 curated classic monochrome colors** (`C-01`–`C-30`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -16,8 +16,8 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
-| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 277 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **119 Layout Compositions**: 19 Social Cards, 32 Infographics, 68 Comic Storyboards ready out-of-the-box. |
+| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 278 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
+| **Monotonous composition; hard to format complex graphics** | **120 Layout Compositions**: 20 Social Cards, 32 Infographics, 68 Comic Storyboards ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **30 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
@@ -47,7 +47,7 @@ The assistant will automatically clone the repository and configure all styles, 
 
 ### 1. Smart Recommendation Mode (Zero Friction: No IDs Required)
 If you don't want to browse through indexes, **simply describe what you want to illustrate**! The Skill analyzes your theme's mood, domain, and context, then **automatically pairs the best-matching hand-drawn style with an optimal classic monochrome theme color** (including an aesthetic rationale):
-- *Zero-parameter prompt*: `Generate a healing illustration of a cat sunbathing by the window`
+- *Zero-parameter prompt*: `Generate a prompt for a healing illustration of a cat sunbathing on a windowsill, pick the style and theme color for me (can combine)`
   > 💡 *Recommended Pairing*: Style `#018 · Minimal Deadpan Dialogue Cartoon` + Color `C-26 · Persimmon Orange` (Rationale: warm, comforting, and relaxed atmosphere), outputting production-ready bilingual prompts immediately.
 - *Completion*: If you specify only a style (e.g., `Style 276, Theme: Future of AI`), the Skill auto-recommends a harmonious color (e.g., `C-01 Klein Blue`). If you specify only a color, it auto-recommends a fitting style.
 
@@ -88,6 +88,15 @@ editorial风格：Contemporary Literati Ink Cartoon Editorial 风格
 ```
 </details>
 
+### 4. Pro Tips: The Universal Poster Mindset (Treat Infographics as High-Density Posters)
+Feeling constrained by pre-canned infographic layouts? **Don't let rigid grids trap your imagination!**
+The essence of an infographic is an information-dense visual poster. Simply tell the Skill your **time slots, core metrics, steps, and usage scenarios**; the model natively weaves timeline nodes, scenery illustrations, and typography into a cohesive editorial layout:
+- **Travel Itineraries**: *Chiang Mai 5-Day Roaming (Day 1 Itinerary)* (Timed routes + landmarks + Northern Thai cuisine & tips)
+- **Outdoor Gear Guides**: *Ultralight Mountain Camping Packing Guide* (3 core systems knolling lay flat + 8kg limit, workwear style)
+- **Lifestyle Skills**: *Beginner Pour-Over Coffee Guide* (1:15 ratio + 3-stage pulse pouring timeline + flavor wheel)
+
+💡 **[👉 Click to read the full Tutorials & Pro Tips Guide (TUTORIALS_en.md)](TUTORIALS_en.md)** (Covers the Universal Poster Mindset, Dynamic Recommendation, Triad Assembly, Dual-Mode Switching, and Multi-Model Tiering with complete copyable prompts).
+
 ---
 
 ## Two Prompt Modes, Instant Switching
@@ -113,7 +122,7 @@ The illustration below shows text integrated harmoniously with the visual compos
 
 By default, the Skill crafts copyable prompts. When you explicitly request image generation, it optimizes the output based on verified model capabilities:
 
-- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 277 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
+- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 278 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
 - **Third-Party & General Models (Midjourney, Flux, Stable Diffusion, Imagen, Gemini, etc.)**: Employs the rock-solid **Reference Image Fallback** strategy. The Skill provides a 1024x1024 4-grid standard reference image or file path, ensuring 100% faithful reproduction of linework, texture, and color palette without prompt drift.
 - **Open for Community Benchmarks**: Capability definitions reside in `skills/handdraw-style-prompter/references/model_capabilities.json`. Pull requests for other model evaluations are warmly welcomed!
 
@@ -135,23 +144,23 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (001�
 
 ![Featured Styles Preview (001–016)](images/A_001-016.webp)
 
-- 🖼️ **[👉 Browse All Style Sheets (001–277 Full Visual Contact Sheets)](STYLES_en.md)**
-- 📄 **[View Detailed Style Metadata (277 Styles Table & Core Traits)](styles_200_reorganized.md)**
+- 🖼️ **[👉 Browse All Style Sheets (001–278 Full Visual Contact Sheets)](STYLES_en.md)**
+- 📄 **[View Detailed Style Metadata (278 Styles Table & Core Traits)](styles_200_reorganized.md)**
 - 💻 *(For offline interactive search and enlargement, open `skills/handdraw-style-prompter/gallery/index.html` in your local browser)*
 
 ---
 
 ## Layout Compositions Showcase
 
-In addition to 277 illustration styles, this library includes **119 composition layout patterns**, covering social cards, data infographics, and multi-panel storyboards. Combine any style with any layout with a single command.
+In addition to 278 illustration styles, this library includes **120 composition layout patterns**, covering social cards, data infographics, and multi-panel storyboards. Combine any style with any layout with a single command.
 
-### 1. Social Cards (19 Layouts)
+### 1. Social Cards (20 Layouts)
 
 Ideal for Xiaohongshu, Instagram, quote cards, and social media carousels. Includes top-bottom split, text-driven cards, two-column contrasts, and sticky notes.
 
 ![Social Cards Category Preview](images/layouts/preview-social-cards.webp)
 
-👉 **[View All Social Card Layouts (19 Visuals & Prompts)](LAYOUTS_en.md#social-cards)**
+👉 **[View All Social Card Layouts (20 Visuals & Prompts)](LAYOUTS_en.md#social-cards)**
 
 ---
 
@@ -175,7 +184,7 @@ Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic 
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 119 Layouts & Prompts ↗](LAYOUTS_en.md)**
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 120 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---

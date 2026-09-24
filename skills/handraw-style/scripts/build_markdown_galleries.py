@@ -118,6 +118,22 @@ def build_layouts_md() -> None:
         "comic-storyboard": "comic-storyboards",
     }
     cols = 3
+    counts = {
+        "social-card": sum(l["category"] == "social-card" for l in layouts),
+        "infographic": sum(l["category"] == "infographic" for l in layouts),
+        "comic-storyboard": sum(l["category"] == "comic-storyboard" for l in layouts),
+    }
+    categories = [
+        ("social-card", f"1. 社媒卡（{counts['social-card']} 种）", f"1. Social Cards ({counts['social-card']} Layouts)",
+         "适合小红书、朋友圈、公众号配图及观点金句卡片。结构包含上下图文、文案主导、双格对照等。",
+         "Ideal for Xiaohongshu, Instagram, newsletter hero images, and quote cards. Includes top-bottom split, text-driven cards, two-column contrasts, and sticky notes."),
+        ("infographic", f"2. 信息图（{counts['infographic']} 种）", f"2. Infographics ({counts['infographic']} Layouts)",
+         "适合知识科普、对比清单、流程步骤及数据架构展示。结构包含金字塔层级、中心主图标注、多行多列对比等。",
+         "Ideal for knowledge sharing, comparison charts, process workflows, and structured data visuals. Includes hierarchy pyramids, central icons, matrices, and multi-column comparison tables."),
+        ("comic-storyboard", f"3. 漫画分镜（{counts['comic-storyboard']} 种）", f"3. Comic Storyboards ({counts['comic-storyboard']} Layouts)",
+         "适合多格叙事、剧情转折、条漫分镜及动态视觉表现。结构包含规则四格、起承转合、大格冲击、对角切割等专业分镜。",
+         "Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic pacing. Includes standard 4-panel grids, dramatic wide-angle focus, diagonal cuts, and manga storyboards."),
+    ]
 
     # 1. Chinese LAYOUTS.md
     zh_lines = [
@@ -129,17 +145,21 @@ def build_layouts_md() -> None:
         "",
         f"> 这里收录了本库全部 **{len(layouts)} 种排版图型**（社媒卡、信息图、漫画分镜）的图片预览与排版提示词。在 AI 生图时直接指定图型编号（如 `SC-001`、`IG-003`、`SB-002`），即可精确控制画面的构图版式与排版层次。",
         "",
+        "> 💡 **排版图型架构机制**：",
+        "> - **确定性静态排版（纯文本直接拼接型）**：包括 `SC-001`~`SC-020`、`IG` 系列与 `SB` 系列等绝大多数图型，拓扑单一固定，模板直接拼接画风与主题；",
+        "> - **高维动态解析型排版（Skill 级动态决策型）**：以 `SC-021`（自适应双拼照片转译）为代表，属于高维视觉语法系统，由 AI 助手充当设计总监先进行构图决策（越界破框/微缩浮岛/记忆图谱等）与背景净化编译，输出单义强约束提示词。",
+        "",
         "## 目录导航",
         "",
-        "- [1. 社媒卡（19 种）](#social-cards)",
-        "- [2. 信息图（31 种）](#infographics)",
-        "- [3. 漫画分镜（68 种）](#comic-storyboards)",
+        f"- [1. 社媒卡（{counts['social-card']} 种）](#social-cards)",
+        f"- [2. 信息图（{counts['infographic']} 种）](#infographics)",
+        f"- [3. 漫画分镜（{counts['comic-storyboard']} 种）](#comic-storyboards)",
         "",
         "---",
         "",
     ]
 
-    for cat_id, cat_title_zh, _, cat_desc_zh, _ in LAYOUT_CATEGORIES:
+    for cat_id, cat_title_zh, _, cat_desc_zh, _ in categories:
         cat_layouts = [l for l in layouts if l["category"] == cat_id]
         anchor = anchor_map.get(cat_id, cat_id)
         zh_lines.append(f'<a id="{anchor}"></a>')
@@ -188,17 +208,21 @@ def build_layouts_md() -> None:
         "",
         f"> Visual previews and layout prompts for all **{len(layouts)} layout compositions** (Social Cards, Infographics, Comic Storyboards). Specify layout IDs (e.g. `SC-001`, `IG-003`, `SB-002`) during AI image generation to control compositions, text placements, and visual hierarchy.",
         "",
+        "> 💡 **Layout Architecture Modes**:",
+        "> - **Deterministic Static Layouts (Direct Template Concatenation)**: Covers most layouts (`SC-001`~`SC-020`, `IG` series, `SB` series) with fixed topologies directly assembled with chosen styles;",
+        "> - **Dynamic Generative Frameworks (Skill-level Reasoning & Resolution)**: Exemplified by `SC-021` (Adaptive Split Photo-to-Art), functioning as an expressive visual syntax system where the AI assistant acts as Art Director to resolve specific composition mechanics (e.g. Boundary Break, Miniature Diorama, Memory Knolling) and enforce background purging before outputting singular, high-contrast prompts.",
+        "",
         "## Table of Contents",
         "",
-        "- [1. Social Cards (19 Layouts)](#social-cards)",
-        "- [2. Infographics (31 Layouts)](#infographics)",
-        "- [3. Comic Storyboards (68 Layouts)](#comic-storyboards)",
+        f"- [1. Social Cards ({counts['social-card']} Layouts)](#social-cards)",
+        f"- [2. Infographics ({counts['infographic']} Layouts)](#infographics)",
+        f"- [3. Comic Storyboards ({counts['comic-storyboard']} Layouts)](#comic-storyboards)",
         "",
         "---",
         "",
     ]
 
-    for cat_id, _, cat_title_en, _, cat_desc_en in LAYOUT_CATEGORIES:
+    for cat_id, _, cat_title_en, _, cat_desc_en in categories:
         cat_layouts = [l for l in layouts if l["category"] == cat_id]
         anchor = anchor_map.get(cat_id, cat_id)
         en_lines.append(f'<a id="{anchor}"></a>')

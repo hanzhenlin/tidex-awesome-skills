@@ -1,6 +1,0 @@
-interface:
-  display_name: "手绘风格提示词"
-  short_description: "按 001–277 风格编号输出双语生图提示词，支持 119 种排版图型与 30 种主题色"
-  default_prompt: "先打开风格画廊，再使用 $handraw-style 为 18号风格、主题：秋天的第一杯奶茶生成提示词。"
-policy:
-  allow_implicit_invocation: true

@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 from contact_sheet_registry import append_style
 from style_asset_paths import ROOT, asset_dir, bucket_name, grid_path, single_path
@@ -45,7 +45,7 @@ def create_4grid_image(image_paths: list[Path], output_path: Path) -> None:
 def create_numbered_tile(source_path: Path, number: str, output_path: Path, badge_label: str | None) -> None:
     """Write a 512px gallery tile with an optional top-left badge."""
     with Image.open(source_path) as source:
-        image = source.convert("RGB").resize((512, 512), Image.Resampling.LANCZOS)
+        image = ImageOps.fit(source.convert("RGB"), (512, 512), Image.Resampling.LANCZOS, centering=(0.5, 0.5))
     if badge_label:
         draw = ImageDraw.Draw(image)
         font = None

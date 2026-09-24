@@ -23,6 +23,8 @@ REFERENCE_ISOLATION_EN = (
     "The user's written theme is the sole source for the image content."
 )
 GRAPHIC_TEXT_SUFFIX = "【如果主题直白包含画面元素那就按主题出图，文案由你来升华，但是不要直接描述画面。 如果主题比较概念化，那么文案和主题尽量保持一致，如果文案较长由你提炼，由你先设计画面隐喻（人类和非人类都行）再出图   。    文字参与构图，图文一体】"
+REDRAW_INSTRUCTION_ZH = "【请只提取人物的五官特征和姿态，场景轮廓，在画风上严格按 选择的风格重新画，不要在原照片上加质感。】"
+REDRAW_INSTRUCTION_EN = "[Extract only the character's facial features and posture, and the scene contours. Strictly redraw from scratch according to the selected style; do not add texture or filters onto the original photo.]"
 
 
 def resolve_single_color(query_str: str, colors_list: list[dict]) -> dict[str, str]:
@@ -78,7 +80,7 @@ def resolve_color(query_str: str) -> dict[str, str]:
 
 def recommend_combination(theme: str, user_style: str | None, user_color: str | None) -> tuple[str, str, str]:
     """
-    Dynamic whole-library recommendation engine across all 277 styles and 30 theme colors.
+    Dynamic whole-library recommendation engine across all 278 styles and 30 theme colors.
     Note: In AI agent workflows (Codex, Antigravity, Claude Code), the LLM dynamically reasons
     and evaluates styles and colors at runtime. This function provides a robust, non-hardcoded
     heuristic scoring fallback for offline and CLI usage.
@@ -93,7 +95,7 @@ def recommend_combination(theme: str, user_style: str | None, user_color: str | 
     ngrams = [t[i:i+n] for n in (2, 3, 4) for i in range(len(t)-n+1)]
     words = re.findall(r'[a-zA-Z0-9]+|[\u4e00-\u9fa5]', t)
 
-    # 1. Dynamically resolve style from full 277 styles library
+    # 1. Dynamically resolve style from full 278 styles library
     if user_style:
         s_obj = next((s for s in styles if s["number"] == f"{int(user_style):03}"), None)
         if not s_obj:
@@ -192,14 +194,18 @@ def main() -> None:
     parser.add_argument("--layout", help="Optional layout ID")
     parser.add_argument("--color", help="Optional color ID  or color name.")
     parser.add_argument("--auto", "--recommend", action="store_true", help="Automatically recommend an optimal style and theme color combination based on theme semantics.")
-    parser.add_argument("--theme", required=True)
+    parser.add_argument("--theme", default="", help="Optional theme description; defaults to placeholder if omitted.")
     parser.add_argument("--ratio")
     parser.add_argument("--subject")
     parser.add_argument("--text")
     parser.add_argument("--model", default="gpt-image-2", help="Model capability profile; defaults to gpt-image-2.")
     parser.add_argument("--mode", choices=("pure-image", "graphic-text"), default="pure-image")
+    parser.add_argument("--redraw", action="store_true", help="Append photo-to-art redraw instruction to prevent photo filters.")
     parser.add_argument("--language", choices=("auto", "zh", "en"), default="auto")
     args = parser.parse_args()
+
+    if not args.theme:
+        args.theme = "【请在此输入画面主题，或在生图模型中垫入你的照片】" if args.language != "en" else "[Enter theme here, or attach your photo in the image AI]"
 
     recommendation_banner = None
     if args.auto:
@@ -242,13 +248,14 @@ def main() -> None:
         layout_prompt = layout["prompts"][language]
         if language == "zh":
             parts = [
-                f"图型：{layout['id']} · {layout['name']}。",
+                f"图型：{layout['name']}。",
                 f"主题：{args.theme}。",
                 f"排版要求：{layout_prompt}",
             ]
         else:
+            layout_name = layout.get("name_en") or layout["name"]
             parts = [
-                f"Layout: {layout['id']} · {layout['name']}.",
+                f"Layout: {layout_name}.",
                 f"Theme: {args.theme}.",
                 f"Layout instructions: {layout_prompt}",
             ]
@@ -259,17 +266,18 @@ def main() -> None:
             decision = resolve(args.model, number)
             traits = decision["prompt_traits"]
             if language == "zh":
-                parts.append(f"风格名称：#{number} · {selected['generation_name']}。参考作者/风格名称：{selected['reference']}。")
+                parts.append(f"风格名称：{selected['generation_name']}。参考作者/风格名称：{selected['reference']}。")
                 if traits:
                     parts.append(f"核心风格特征：{traits}。")
-                if decision["use_reference_image"]:
-                    parts.append(f"参考图：请上传本地参考图 {decision['reference_path']}。{REFERENCE_ISOLATION_ZH}")
             else:
-                parts.append(f"Style name: #{number} · {selected['generation_name']}. Reference author/style name: {selected['reference']}.")
+                parts.append(f"Style name: {selected['generation_name']}. Reference author/style name: {selected['reference']}.")
                 if traits:
                     parts.append(f"Core style traits: {traits}.")
-                if decision["use_reference_image"]:
-                    parts.append(f"Reference image: upload local reference image {decision['reference_path']}. {REFERENCE_ISOLATION_EN}")
+        if args.redraw:
+            if language == "zh":
+                parts.append(REDRAW_INSTRUCTION_ZH)
+            else:
+                parts.append(REDRAW_INSTRUCTION_EN)
         if language == "zh":
             if extra_zh:
                 parts.append(f"；{extra_zh}")
@@ -294,14 +302,16 @@ def main() -> None:
     graphic_text_suffix = GRAPHIC_TEXT_SUFFIX if args.mode == "graphic-text" else ""
     zh_extra = f"；{extra_zh}" if extra_zh else ""
     en_extra = f" {extra_en}." if extra_en else ""
+    redraw_zh = REDRAW_INSTRUCTION_ZH if args.redraw else ""
+    redraw_en = f" {REDRAW_INSTRUCTION_EN}" if args.redraw else ""
 
     if not selected and color_info:
         c_label = f"{color_info['id']} · " if color_info.get("id") else ""
         print(f"Selected color: {c_label}{color_info['name_zh']} ({color_info['name_en']})")
         print("\n中文提示词：")
-        print(f"{color_info['prompt_zh']}主题：{args.theme}。{zh_extra}{graphic_text_suffix}")
+        print(f"{color_info['prompt_zh']}主题：{args.theme}。{zh_extra}{redraw_zh}{graphic_text_suffix}")
         print("\nEnglish prompt:")
-        print(f"{color_info['prompt_en']} Theme: {args.theme}.{en_extra}{graphic_text_suffix}")
+        print(f"{color_info['prompt_en']} Theme: {args.theme}.{en_extra}{redraw_en}{graphic_text_suffix}")
         print("\nPaste either prompt into an image AI; this skill does not generate an image.")
         if args.mode == "pure-image":
             print("当前处于纯图模式，可切换为图文模式。")
@@ -328,9 +338,9 @@ def main() -> None:
         reference_image_en = f" Reference image: upload local reference image {decision['reference_path']}. {REFERENCE_ISOLATION_EN}"
     color_zh = f"{color_info['prompt_zh']}" if color_info else ""
     color_en = f" {color_info['prompt_en']}" if color_info else ""
-    print(f"风格名称：#{number} · {selected['generation_name']}。{color_zh}主题：{args.theme}。{reference_zh}{traits_zh}{reference_image_zh}{zh_extra}{graphic_text_suffix}")
+    print(f"风格名称：{selected['generation_name']}。{color_zh}主题：{args.theme}。{reference_zh}{traits_zh}{reference_image_zh}{zh_extra}{redraw_zh}{graphic_text_suffix}")
     print("\nEnglish prompt:")
-    print(f"Style name: #{number} · {selected['generation_name']}.{color_en} Theme: {args.theme}.{reference_en}{traits_en}{reference_image_en}{en_extra}{graphic_text_suffix}")
+    print(f"Style name: {selected['generation_name']}.{color_en} Theme: {args.theme}.{reference_en}{traits_en}{reference_image_en}{en_extra}{redraw_en}{graphic_text_suffix}")
     print("\nPaste either prompt into an image AI; this skill does not generate an image.")
     if args.mode == "pure-image":
         print("当前处于纯图模式，可切换为图文模式。")

@@ -26,6 +26,7 @@ def main() -> None:
     subprocess.run(python + [str(SKILL / "scripts" / "build_library.py")], check=True)
     subprocess.run(python + [str(SKILL / "scripts" / "build_layout_gallery.py")], check=True)
     subprocess.run(python + [str(SKILL / "scripts" / "build_color_gallery.py")], check=True)
+    subprocess.run(python + [str(SKILL / "scripts" / "build_tutorial_gallery.py")], check=True)
     styles = json.loads((SKILL / "references" / "styles.json").read_text(encoding="utf-8"))
     attribution = json.loads((SKILL / "references" / "attribution.json").read_text(encoding="utf-8"))
     model_capabilities = json.loads((SKILL / "references" / "model_capabilities.json").read_text(encoding="utf-8"))
@@ -188,8 +189,10 @@ def main() -> None:
         'class="prompt-examples"',
         "1 · 出图",
         "2 · 切换图文模式",
+        "3 · 海报提示词",
         "风格：001，主题：吃冰淇淋的小姑娘",
         "切换为图文模式",
+        "请帮我出海报提示词， 主题：秋分",
         "ui-monospace",
     ]
     if any(token not in gallery for token in prompt_example_tokens):
@@ -234,9 +237,11 @@ def main() -> None:
         if token not in gallery:
             fail(f"gallery preview interaction is missing {token}")
     result = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "18", "--theme", "秋天的第一杯奶茶"], capture_output=True, text=True, encoding="utf-8", check=True)
-    for term in ["风格名称：#018 · Minimal Deadpan Dialogue Cartoon", "Style name: #018 · Minimal Deadpan Dialogue Cartoon", "秋天的第一杯奶茶"]:
+    for term in ["风格名称：Minimal Deadpan Dialogue Cartoon", "Style name: Minimal Deadpan Dialogue Cartoon", "秋天的第一杯奶茶"]:
         if term not in result.stdout:
             fail(f"prompt output is missing {term}")
+    if "#018" in result.stdout.split("中文提示词：")[1]:
+        fail("copyable prompt must not contain style number or IDs")
     if "俏皮的手绘线条" in result.stdout or "playful hand-drawn linework" in result.stdout:
         fail("default prompt unexpectedly contains the fixed style anchor")
     if "参考作者/风格名称：Poorly Drawn Lines / Reza Farazmand。" not in result.stdout or "Reference author/style name: Poorly Drawn Lines / Reza Farazmand." not in result.stdout:
@@ -329,13 +334,13 @@ def main() -> None:
         python + [str(SKILL / "scripts" / "prompt_style.py"), "--layout", "IG-007", "--theme", "秋天的第一杯奶茶"],
         capture_output=True, text=True, encoding="utf-8", check=True,
     )
-    if "图型：IG-007 · 粗体标题标签小图卡。" not in layout_zh.stdout or "自动使用图文模式" not in layout_zh.stdout or GRAPHIC_TEXT_SUFFIX not in layout_zh.stdout:
+    if "图型：粗体标题标签小图卡。" not in layout_zh.stdout or "自动使用图文模式" not in layout_zh.stdout or GRAPHIC_TEXT_SUFFIX not in layout_zh.stdout:
         fail("Chinese layout-only prompt is missing its layout contract or stacked graphic-text suffix")
     layout_en = subprocess.run(
         python + [str(SKILL / "scripts" / "prompt_style.py"), "--layout", "IG-007", "--style", "18", "--theme", "Autumn's first milk tea"],
         capture_output=True, text=True, encoding="utf-8", check=True,
     )
-    for term in ["Layout: IG-007 · 粗体标题标签小图卡.", "Theme: Autumn's first milk tea.", "Style name: #018 · Minimal Deadpan Dialogue Cartoon.", GRAPHIC_TEXT_SUFFIX]:
+    for term in ["Layout: Bold Headline Tag Cards.", "Theme: Autumn's first milk tea.", "Style name: Minimal Deadpan Dialogue Cartoon.", GRAPHIC_TEXT_SUFFIX]:
         if term not in layout_en.stdout:
             fail(f"English layout-and-style prompt is missing {term}")
     invalid_layout = subprocess.run(
@@ -427,6 +432,45 @@ def main() -> None:
     if "💡 推荐理由" not in auto_res.stdout or "Selected style:" not in auto_res.stdout or "Selected color:" not in auto_res.stdout:
         fail("auto recommendation output is missing expected banner, style, or color")
 
+    tutorials_file = ROOT / "TUTORIALS.md"
+    tutorials_en_file = ROOT / "TUTORIALS_en.md"
+    if not tutorials_file.exists():
+        fail("TUTORIALS.md is missing")
+    if not tutorials_en_file.exists():
+        fail("TUTORIALS_en.md is missing")
+    tutorials_md = tutorials_file.read_text(encoding="utf-8")
+    tutorials_en_md = tutorials_en_file.read_text(encoding="utf-8")
+    if "TUTORIALS.md" not in readme:
+        fail("README.md must reference TUTORIALS.md")
+    if "TUTORIALS_en.md" not in readme_en:
+        fail("README_en.md must reference TUTORIALS_en.md")
+    for technique in ["技巧一：万能海报思维法", "技巧二：智能抽卡", "技巧三：精准组装法", "技巧四：图文模式"]:
+        if technique not in tutorials_md:
+            fail(f"TUTORIALS.md missing {technique}")
+    for technique_en in [
+        "Tip 1: The Universal Poster Mindset",
+        "Tip 2: Style Gacha",
+        "Tip 3: The Precise Assembly Method",
+        "Tip 4: Graphic-Text Mode",
+    ]:
+        if technique_en not in tutorials_en_md:
+            fail(f"TUTORIALS_en.md missing {technique_en}")
+
+    tutorials_gallery_file = SKILL / "gallery" / "tutorials.html"
+    if not tutorials_gallery_file.exists():
+        fail("tutorials.html is missing")
+    tutorial_gallery = tutorials_gallery_file.read_text(encoding="utf-8")
+    for token in ['href="index.html"', 'href="layouts.html"', 'href="colors.html"', 'href="tutorials.html" aria-current="page"', "copy-btn", "navigator.clipboard.writeText", "tutorial-card", "formula-box", "tutorials-list"]:
+        if token not in tutorial_gallery:
+            fail(f"tutorial gallery is missing {token}")
+
+    if 'href="tutorials.html"' not in gallery:
+        fail("style gallery is missing link to tutorials.html")
+    if 'href="tutorials.html"' not in layout_gallery:
+        fail("layout gallery is missing link to tutorials.html")
+    if 'href="tutorials.html"' not in color_gallery:
+        fail("color gallery is missing link to tutorials.html")
+
 
     import yaml
     for sf in [
@@ -460,7 +504,7 @@ def main() -> None:
                 if drive_leak_pattern.search(line):
                     fail(f"Local drive path leaked in tracked file {rel_path}:{line_no}: {line.strip()[:100]}")
 
-    print(f"PASS: {total_styles} styles, {len(layouts)} layouts, {len(colors)} colors, gallery coverage, prompt contract, YAML frontmatter, path leak guard, and invalid-ID guards.")
+    print(f"PASS: {total_styles} styles, {len(layouts)} layouts, {len(colors)} colors, tutorials section, gallery coverage, prompt contract, YAML frontmatter, path leak guard, and invalid-ID guards.")
 
 
 if __name__ == "__main__":
