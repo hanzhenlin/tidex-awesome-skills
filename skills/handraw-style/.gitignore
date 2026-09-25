@@ -21,3 +21,5 @@ Desktop.ini
 
 # Local workspace agent configuration
 .agents/
+.workbuddy/
+download.txt
