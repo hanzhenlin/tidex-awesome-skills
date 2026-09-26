@@ -146,15 +146,13 @@ def main() -> None:
             or last_path != sheet_path(last_start, last_end)):
         fail("Tweet contact-sheet state does not match the active sheet")
     gallery = (SKILL / "gallery" / "index.html").read_text(encoding="utf-8")
-    for _, _, path in tweet_sheets:
-        if path.name not in gallery:
-            fail(f"gallery is missing contact sheet {path.name}")
     if 'data-number="217" data-group="H"' not in gallery or 'data-number="262" data-group="H"' not in gallery:
         fail("gallery does not classify 217+ style cards as H")
-    if 'data-label="H · #217–#232"' not in gallery:
-        fail("gallery does not classify the first H contact sheet as H")
-    if "A_001-016.webp" not in gallery or "F_187-200.webp" not in gallery or "#018" not in gallery:
-        fail("gallery does not cover the expected sheets and style 018")
+    if '#018' not in gallery or 'data-number="001"' not in gallery or f'data-number="{max_num}"' not in gallery:
+        fail("gallery style cards do not cover 001 to latest")
+    for token in [".gallery{--columns:14;--gap:8px", "masonry-column", "heights.indexOf(Math.min(...heights))", "ResizeObserver", 'class="style-card"', 'id="gallery"']:
+        if token not in gallery:
+            fail(f"gallery waterfall layout is missing {token}")
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     if "images/A_001-016.webp" not in readme:
         fail("README does not reference representative style preview image")
@@ -233,7 +231,7 @@ def main() -> None:
             fail(f"session initialization contract in nested SKILL.md is missing {token}")
         if token not in root_skill_text:
             fail(f"session initialization contract in root SKILL.md is missing {token}")
-    for token in ['id="preview"', 'class="sheet"', 'dialog.showModal()', 'event.target===dialog']:
+    for token in ['id="preview"', 'class="style-card"', 'dialog.showModal()', 'event.target===dialog']:
         if token not in gallery:
             fail(f"gallery preview interaction is missing {token}")
     result = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "18", "--theme", "秋天的第一杯奶茶"], capture_output=True, text=True, encoding="utf-8", check=True)
@@ -317,7 +315,7 @@ def main() -> None:
     for layout in layouts:
         if layout_gallery.count(f'data-id="{layout["id"]}"') != 1:
             fail(f"layout gallery must contain exactly one card for {layout['id']}")
-    for token in ["图型编号画廊", 'href="index.html"', 'href="layouts.html" aria-current="page"', "SC-001", "SC-002", "SC-004", "SC-005", "SC-006", "SC-007", "SC-008", "SC-009", "SC-010", "SC-011", "SC-012", "SC-014", "SC-015", "SC-016", "SC-017", "SC-018", "SC-019", "SC-020", "IG-001", "IG-002", "IG-003", "IG-004", "IG-005", "IG-006", "IG-007", "IG-008", "IG-009", f"信息图 <span>{sum(item['category'] == 'infographic' for item in layouts)}</span>", "复制排版提示词", "navigator.clipboard.writeText", "setCategory('social-card')", ".site-nav a{border:1px solid", "main{max-width:1440px;margin:auto;padding:18px 30px 30px}", ".gallery{--columns:4;--gap:18px", "@media(max-width:1100px){.gallery{--columns:3}}", ".masonry-column{display:flex;flex-direction:column", "ResizeObserver", "requestAnimationFrame", "heights.indexOf(Math.min(...heights))", ".layout-card img{display:block;width:100%;height:auto}", 'class="layout-info"', ".layout-id{color:#b74227", ".layout-name{overflow:hidden", "@media(max-width:720px){main{padding:16px 20px 20px}", ".gallery{--columns:2;--gap:12px}", "@media(max-width:420px){.gallery{--columns:1}}"]:
+    for token in ["图型编号画廊", 'href="index.html"', 'href="layouts.html" aria-current="page"', "SC-001", "SC-002", "SC-004", "SC-005", "SC-006", "SC-007", "SC-008", "SC-009", "SC-010", "SC-011", "SC-012", "SC-014", "SC-015", "SC-016", "SC-017", "SC-018", "SC-019", "SC-020", "IG-001", "IG-002", "IG-003", "IG-004", "IG-005", "IG-006", "IG-007", "IG-008", "IG-009", f"信息图 <span>{sum(item['category'] == 'infographic' for item in layouts)}</span>", "复制排版提示词", "navigator.clipboard.writeText", "setCategory('social-card')", ".site-nav a{border:1px solid", "main{max-width:1440px;margin:auto;padding:18px 30px 30px}", ".gallery{--columns:4;--gap:18px", '[data-size="1x"] .gallery{--columns:8;--gap:10px}', "@media(max-width:1100px){.gallery{--columns:3}}", ".masonry-column{display:flex;flex-direction:column", "ResizeObserver", "requestAnimationFrame", "heights.indexOf(Math.min(...heights))", ".layout-card img{display:block;width:100%;height:auto}", 'class="layout-info"', ".layout-id{color:#b74227", ".layout-name{overflow:hidden", "@media(max-width:720px){main{padding:16px 20px 20px}", ".gallery{--columns:2;--gap:12px}", "@media(max-width:420px){.gallery{--columns:1}}"]:
         if token not in layout_gallery:
             fail(f"layout gallery is missing {token}")
     if "信息图 <span>0</span>" in layout_gallery or "id=\"empty\"" in layout_gallery:
@@ -360,11 +358,11 @@ def main() -> None:
     if not colors_file.exists():
         fail("colors.json is missing")
     colors = json.loads(colors_file.read_text(encoding="utf-8"))
-    if len(colors) != 30:
-        fail(f"colors.json must contain exactly 30 colors, got {len(colors)}")
-    expected_color_ids = [f"C-{i:02d}" for i in range(1, 31)]
+    if len(colors) != 36:
+        fail(f"colors.json must contain exactly 36 colors, got {len(colors)}")
+    expected_color_ids = [f"C-{i:02d}" for i in range(1, 37)]
     if [c["id"] for c in colors] != expected_color_ids:
-        fail("color IDs must be continuous C-01 to C-30")
+        fail("color IDs must be continuous C-01 to C-36")
     for c in colors:
         c_img = ROOT / str(c["image"]).replace("../../../", "")
         if not c_img.is_file():

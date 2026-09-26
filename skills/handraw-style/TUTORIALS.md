@@ -39,9 +39,13 @@
 <a id="技巧三精准组装法"></a>
 ## 📐 技巧三：精准组装法
 
+支持自由组合图型、风格与主题色。若未指定风格或主题色，直接加上“其他你帮我选择”：
+
 ```text
 图型：SC-001，风格：041，主题色：C-01，主题：秋天的第一杯奶茶。
 ```
+
+> 💡 **本地交互式提示词拼装器**：在浏览器打开 [`skills/handdraw-style-prompter/gallery/tutorials.html`](skills/handdraw-style-prompter/gallery/tutorials.html)，支持按图直选 120 种图型、278 种风格与 30 种色彩，并支持纯图/图文/海报模式切换与一键随机抽卡！
 
 ---
 

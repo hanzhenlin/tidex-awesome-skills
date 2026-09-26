@@ -37,7 +37,7 @@ def resolve_single_color(query_str: str, colors_list: list[dict]) -> dict[str, s
         if q == cid or (q_num and q_num == c_num) or q in c["name_zh"].lower() or q in c["name_en"].lower():
             return c
     if is_id_pattern:
-        raise ValueError(f"Unknown color ID: {query_str}. Use a listed C-01 to C-30 identifier or color name.")
+        raise ValueError(f"Unknown color ID: {query_str}. Use a listed C-01 to C-36 identifier or color name.")
     name = query_str.strip()
     return {
         "id": "",
@@ -132,7 +132,7 @@ def recommend_combination(theme: str, user_style: str | None, user_color: str | 
             s_obj = styles[idx] if styles else {"number": "001", "generation_name": "Style", "reference": "Artist", "traits": ""}
         final_style = s_obj["number"]
 
-    # 2. Dynamically resolve color from full 30 colors library
+    # 2. Dynamically resolve color from full 36 colors library
     if user_color:
         final_color = user_color
         color_desc = user_color

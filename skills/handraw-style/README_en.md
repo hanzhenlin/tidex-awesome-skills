@@ -6,7 +6,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **278 distinct hand-drawn illustration styles** (`001`–`278`), **120 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **30 curated classic monochrome colors** (`C-01`–`C-30`).
+This repository curates **278 distinct hand-drawn illustration styles** (`001`–`278`), **120 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -26,7 +26,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 | :--- | :--- |
 | **Vague style descriptions lead to style drift** | **Numbered Indexing**: 278 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
 | **Monotonous composition; hard to format complex graphics** | **120 Layout Compositions**: 20 Social Cards, 32 Infographics, 68 Comic Storyboards ready out-of-the-box. |
-| **Chaotic color palettes lack a cohesive tonal mood** | **30 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, etc., setting pure and sophisticated tones with one click. |
+| **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
 
@@ -197,14 +197,14 @@ Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic 
 
 ---
 
-## Classic Monochrome Colors Showcase (30 Colors)
+## Classic Monochrome Colors Showcase (36 Colors)
 
-This library curates **30 classic monochrome theme colors** (numbered `C-01` ~ `C-30`, covering Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, and Warm Sun & Earth).
+This library curates **36 classic monochrome theme colors** (numbered `C-01` ~ `C-36`, covering Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, Warm Sun & Earth, and Classic Neutral Tones).
 No matter what illustration style or layout composition you choose, specifying a theme color instantly establishes a cohesive visual tone. You can also copy individual color prompts with one click in the offline gallery.
 
 ![Classic Monochrome Library Preview](images/colors/sheet_01.webp)
 
-- 🎨 **[👉 Enter Classic Monochrome Colors Visual Sheet to Browse All 30 Colors & Prompts ↗](COLORS_en.md)**
+- 🎨 **[👉 Enter Classic Monochrome Colors Visual Sheet to Browse All 36 Colors & Prompts ↗](COLORS_en.md)**
 - 💻 *(For offline interactive search and one-click copy, open `skills/handdraw-style-prompter/gallery/colors.html` in your local browser)*
 
 ---

@@ -272,6 +272,7 @@ def build_colors_md() -> None:
         (3, "古典红绿（6 种）", "Classic Red & Vintage (6 Colors)", "历史沉淀、浓郁厚重的东方与古典艺术色，适合节庆、传统文化、复古与叙事题材。", "Historical and rich classical tones, ideal for festivals, heritage, vintage, and narrative themes."),
         (4, "浪漫粉紫（6 种）", "Romantic Pink & Purple (6 Colors)", "温柔优雅、热烈浪漫的情感色系，适合女性生活、诗意、美妆与自我表达题材。", "Gentle, elegant, and romantic palettes, ideal for feminine lifestyle, poetry, cosmetics, and self-expression."),
         (5, "暖阳大地（6 种）", "Warm Sun & Earth (6 Colors)", "温暖明媚、沉静质朴的大地色系，适合晨光、咖啡、穿搭、秋收与温馨日常题材。", "Warm, sunny, and grounded earth tones, ideal for morning light, coffee, autumn, and cozy daily life."),
+        (6, "中性色系（6 种）", "Classic Neutral Tones (6 Colors)", "克制沉静、现代高级的黑白灰与中性色调，适合极简生活、建筑空间、沉思书房与质朴日常题材。", "Restrained, tranquil, and modern neutral tones across grey, black, cream, and taupe, ideal for minimalist lifestyle, architectural spaces, reflective studies, and serene daily life."),
     ]
     cols = 3
 
@@ -283,7 +284,7 @@ def build_colors_md() -> None:
         '',
         f"# 经典单色主题色完整图鉴（{len(colors)} 种）",
         "",
-        f"> 这里收录了本库精选的 **{len(colors)} 种经典单色主题色**（涵盖经典蓝调、清新绿意、古典红绿、浪漫粉紫、暖阳大地）。在 AI 生图时直接指定色彩编号（如 `C-01`、`C-10`、`C-15`）或色彩名称（如“克莱因蓝”、“鼠尾草绿”），即可精确控制画面的主色调与情绪氛围。",
+        f"> 这里收录了本库精选的 **{len(colors)} 种经典单色主题色**（涵盖经典蓝系、清新绿系、古典红绿、浪漫粉紫、暖阳大地、中性色系）。在 AI 生图时直接指定色彩编号（如 `C-01`、`C-10`、`C-15`、`C-31`）或色彩名称（如“克莱因蓝”、“鼠尾草绿”、“佩恩灰”），即可精确控制画面的主色调与情绪氛围。",
         "",
         "## 目录导航",
         "",
@@ -328,7 +329,7 @@ def build_colors_md() -> None:
         '',
         f"# Classic Monochrome Colors Visual Sheet ({len(colors)} Colors)",
         "",
-        f"> Visual previews and color prompts for all **{len(colors)} curated monochrome theme colors** (Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, Warm Sun & Earth). Specify color IDs (e.g. `C-01`, `C-10`, `C-15`) or color names (e.g. 'Klein Blue', 'Sage Green') during AI image generation to precisely control color palettes and visual moods.",
+        f"> Visual previews and color prompts for all **{len(colors)} curated monochrome theme colors** (Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, Warm Sun & Earth, Classic Neutral Tones). Specify color IDs (e.g. `C-01`, `C-10`, `C-15`, `C-31`) or color names (e.g. 'Klein Blue', 'Sage Green', 'Payne\\'s Grey') during AI image generation to precisely control color palettes and visual moods.",
         "",
         "## Table of Contents",
         "",

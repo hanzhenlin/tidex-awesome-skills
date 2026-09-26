@@ -39,9 +39,13 @@ Too many styles and don't feel like choosing? Try pulling a gacha card:
 <a id="tip-3-the-precise-assembly-method"></a>
 ## 📐 Tip 3: The Precise Assembly Method
 
+Combine layout, style, and theme color freely. If style or color is omitted, append "pick the rest for me":
+
 ```text
-图型：SC-001，风格：041，主题色：C-01，主题：秋天的第一杯奶茶。
+Layout: SC-001, Style: 041, Theme color: C-01, Theme: First milk tea of autumn.
 ```
+
+> 💡 **Offline Interactive Prompt Assembler**: Open [`skills/handdraw-style-prompter/gallery/tutorials.html`](skills/handdraw-style-prompter/gallery/tutorials.html) in your browser to visually pick from 120 layouts, 278 styles, and 30 colors, toggle modes (Image Only / Graphic-Text / Poster), and pull random gachas!
 
 ---
 

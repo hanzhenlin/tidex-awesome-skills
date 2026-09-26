@@ -12,6 +12,7 @@ ENV/
 _preview-chrome/
 temp/
 downloads/
+output/
 *.tmp
 
 # OS files

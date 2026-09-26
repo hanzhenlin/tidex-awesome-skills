@@ -2,9 +2,9 @@
   <a href="COLORS.md">中文</a> | <strong>English</strong>
 </p>
 
-# Classic Monochrome Colors Visual Sheet (30 Colors)
+# Classic Monochrome Colors Visual Sheet (36 Colors)
 
-> Visual previews and color prompts for all **30 curated monochrome theme colors** (Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, Warm Sun & Earth). Specify color IDs (e.g. `C-01`, `C-10`, `C-15`) or color names (e.g. 'Klein Blue', 'Sage Green') during AI image generation to precisely control color palettes and visual moods.
+> Visual previews and color prompts for all **36 curated monochrome theme colors** (Classic Blue, Fresh Green, Vintage Red & Classical, Romantic Pink & Purple, Warm Sun & Earth, Classic Neutral Tones). Specify color IDs (e.g. `C-01`, `C-10`, `C-15`, `C-31`) or color names (e.g. 'Klein Blue', 'Sage Green', 'Payne\'s Grey') during AI image generation to precisely control color palettes and visual moods.
 
 ## Table of Contents
 
@@ -13,6 +13,7 @@
 - [3. Classic Red & Vintage (6 Colors)](#sheet-03)
 - [4. Romantic Pink & Purple (6 Colors)](#sheet-04)
 - [5. Warm Sun & Earth (6 Colors)](#sheet-05)
+- [6. Classic Neutral Tones (6 Colors)](#sheet-06)
 
 ---
 
@@ -83,5 +84,19 @@ Warm, sunny, and grounded earth tones, ideal for morning light, coffee, autumn, 
 | :---: | :---: | :---: |
 | <img src='images/colors/C-25.webp' width='220' alt='C-25 Hermès Orange'><br>**C-25** · Hermès Orange<br><small>A RICHER LIFE</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Hermès Orange.`</details> | <img src='images/colors/C-26.webp' width='220' alt='C-26 Persimmon Orange'><br>**C-26** · Persimmon Orange<br><small>A WARMER SEASON</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Persimmon Orange.`</details> | <img src='images/colors/C-27.webp' width='220' alt='C-27 Naples Yellow'><br>**C-27** · Naples Yellow<br><small>A KINDER MORNING</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Naples Yellow.`</details> |
 | <img src='images/colors/C-28.webp' width='220' alt='C-28 Mustard Yellow'><br>**C-28** · Mustard Yellow<br><small>A BRIGHTER YOU</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Mustard Yellow.`</details> | <img src='images/colors/C-29.webp' width='220' alt='C-29 Ochre'><br>**C-29** · Ochre<br><small>A DEEPER SELF</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Ochre.`</details> | <img src='images/colors/C-30.webp' width='220' alt='C-30 Ivory'><br>**C-30** · Ivory<br><small>A PURER BEAUTY</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Ivory.`</details> |
+
+---
+
+<a id="sheet-06"></a>
+## 6. Classic Neutral Tones (6 Colors)
+
+Restrained, tranquil, and modern neutral tones across grey, black, cream, and taupe, ideal for minimalist lifestyle, architectural spaces, reflective studies, and serene daily life.
+
+![Classic Monochrome Library 06](images/colors/sheet_06.webp)
+
+| Visual Preview | Visual Preview | Visual Preview |
+| :---: | :---: | :---: |
+| <img src='images/colors/C-31.webp' width='220' alt='C-31 Payne's Grey'><br>**C-31** · Payne's Grey<br><small>A CALMER MIND</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Payne's Grey.`</details> | <img src='images/colors/C-32.webp' width='220' alt='C-32 Charcoal Black'><br>**C-32** · Charcoal Black<br><small>A STRONGER SELF</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Charcoal Black.`</details> | <img src='images/colors/C-33.webp' width='220' alt='C-33 Warm Grey'><br>**C-33** · Warm Grey<br><small>A KINDER HOME</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Warm Grey.`</details> |
+| <img src='images/colors/C-34.webp' width='220' alt='C-34 Cream White'><br>**C-34** · Cream White<br><small>A PURER BEAUTY</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Cream White.`</details> | <img src='images/colors/C-35.webp' width='220' alt='C-35 Slate Gray'><br>**C-35** · Slate Gray<br><small>A CLEARER VISION</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Slate Gray.`</details> | <img src='images/colors/C-36.webp' width='220' alt='C-36 Taupe'><br>**C-36** · Taupe<br><small>A SOFTER LIFE</small><br><details><summary>View Color Prompt</summary><br>`Theme color: Taupe.`</details> |
 
 ---
