@@ -6,7 +6,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **278 distinct hand-drawn illustration styles** (`001`–`278`), **120 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **278 distinct hand-drawn illustration styles** (`001`–`278`), **122 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -14,7 +14,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 > ### 📚 Official Feishu Knowledge Base is Live
 > 🔗 **[👉 Click to Access Feishu Knowledge Base ↗](https://ecmn3m3i17.feishu.cn/wiki/space/7689222460876524523?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)**
 > 
-> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 279 illustration styles and 120 layouts
+> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 278 illustration styles and 122 layouts
 > 2. ❓ **Skill FAQ & Prompt Cheat Sheet**: Setup walkthroughs, troubleshooting tips, and ready-to-use prompt patterns
 > 3. 💡 **Entrepreneurship & Monetization**: Continuously updated real-world case studies and revenue strategies shared by the community
 
@@ -25,7 +25,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
 | **Vague style descriptions lead to style drift** | **Numbered Indexing**: 278 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **120 Layout Compositions**: 20 Social Cards, 32 Infographics, 68 Comic Storyboards ready out-of-the-box. |
+| **Monotonous composition; hard to format complex graphics** | **122 Layout Compositions**: 21 Social Cards, 33 Infographics, 68 Comic Storyboards ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
@@ -160,25 +160,25 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (001�
 
 ## Layout Compositions Showcase
 
-In addition to 278 illustration styles, this library includes **120 composition layout patterns**, covering social cards, data infographics, and multi-panel storyboards. Combine any style with any layout with a single command.
+In addition to 278 illustration styles, this library includes **122 composition layout patterns**, covering social cards, data infographics, and multi-panel storyboards. Combine any style with any layout with a single command.
 
-### 1. Social Cards (20 Layouts)
+### 1. Social Cards (21 Layouts)
 
-Ideal for Xiaohongshu, Instagram, quote cards, and social media carousels. Includes top-bottom split, text-driven cards, two-column contrasts, and sticky notes.
+Ideal for Xiaohongshu, Instagram, quote cards, signature showcases, and social media carousels. Includes top-bottom split, text-driven cards, two-column contrasts, signature showcase grids, and sticky notes.
 
 ![Social Cards Category Preview](images/layouts/preview-social-cards.webp)
 
-👉 **[View All Social Card Layouts (20 Visuals & Prompts)](LAYOUTS_en.md#social-cards)**
+👉 **[View All Social Card Layouts (21 Visuals & Prompts)](LAYOUTS_en.md#social-cards)**
 
 ---
 
-### 2. Infographics (32 Layouts)
+### 2. Infographics (33 Layouts)
 
 Ideal for knowledge breakdowns, comparison checklists, step-by-step processes, and structured data visuals. Includes hierarchy pyramids, central icons, matrices, and multi-column comparison tables.
 
 ![Infographics Category Preview](images/layouts/preview-infographics.webp)
 
-👉 **[View All Infographic Layouts (32 Visuals & Prompts)](LAYOUTS_en.md#infographics)**
+👉 **[View All Infographic Layouts (33 Visuals & Prompts)](LAYOUTS_en.md#infographics)**
 
 ---
 
@@ -192,7 +192,7 @@ Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic 
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 120 Layouts & Prompts ↗](LAYOUTS_en.md)**
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 122 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---

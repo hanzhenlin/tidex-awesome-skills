@@ -58,9 +58,10 @@ E_ROWS = [(95, 355), (368, 623), (632, 886), (894, 1179)]
 F187_COLS = [(10, 310), (320, 619), (633, 934), (945, 1243)]
 F187_ROWS = [(9, 310), (320, 621), (633, 934), (945, 1240)]
 
-# G_201-216 coordinates (header banner at y: 0..93)
-G_COLS = [(13, 337), (346, 651), (660, 970), (978, 1297)]
-G_ROWS = [(96, 364), (372, 625), (634, 887), (895, 1182)]
+# G_201-216 coordinates (header banner at y: 0..61)
+G_COLS = [(7, 255), (257, 510), (512, 764), (766, 1017)]
+G_ROWS = [(62, 278), (280, 500), (502, 742), (744, 1005)]
+
 
 
 def get_style_bounds(sheet_name: str, offset: int) -> tuple[int, int, int, int]:
@@ -117,6 +118,8 @@ def split_sheet(path: Path) -> int:
             target = single_path(start + offset)
             target.parent.mkdir(parents=True, exist_ok=True)
             cropped = image.crop((x0, y0, x1, y1))
+            if path.name.startswith("G_"):
+                cropped = cropped.resize((512, 512), Image.Resampling.LANCZOS)
             temp_target = target.with_suffix(".tmp.webp")
             cropped.save(temp_target, "WEBP", quality=92, method=6)
             temp_target.replace(target)
