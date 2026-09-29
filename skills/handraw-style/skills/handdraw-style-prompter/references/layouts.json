@@ -879,6 +879,38 @@
     "name_en": "High-Density Handout Analytical Infographic"
   },
   {
+    "id": "IG-034",
+    "category": "infographic",
+    "name": "编辑式等距轴测全景地图信息图",
+    "image": "../../../images/layouts/infographics/IG-034.webp",
+    "prompt_file": "layouts/IG-034.md",
+    "keywords": [
+      "编辑式轴测地图",
+      "等距轴测全景",
+      "微缩世界地图",
+      "纵向长幅构图",
+      "不规则节点错落",
+      "大留白呼吸感",
+      "空间叙事隐藏流程",
+      "极简线稿插画",
+      "趣味微缩互动"
+    ],
+    "name_en": "Editorial Isometric Illustrated Map Infographic"
+  },
+  {
+    "id": "IG-035",
+    "category": "infographic",
+    "name": "2.5D等距轴测微缩场景",
+    "image": "../../../images/layouts/infographics/IG-035.webp",
+    "prompt_file": "layouts/IG-035.md",
+    "keywords": [
+      "2.5D",
+      "等距轴测",
+      "微缩场景"
+    ],
+    "name_en": "2.5D Isometric Miniature Scene"
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",

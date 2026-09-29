@@ -134,11 +134,24 @@ def update_readme_and_skill(number: str) -> None:
         en_content = re.sub(r"In addition to \d+ illustration styles", f"In addition to {int(number)} illustration styles", en_content)
         readme_en_path.write_text(en_content.strip() + "\n", encoding="utf-8")
 
-    for path in (ROOT / "SKILL.md", SKILL_DIR / "SKILL.md"):
-        content = path.read_text(encoding="utf-8")
-        content = re.sub(r"001–\d+", f"001–{number}", content)
-        content = re.sub(r"`001`–`\d+`", f"`001`–`{number}`", content)
-        path.write_text(content, encoding="utf-8")
+    skill_paths = list(ROOT.glob("skills/*/SKILL.md")) + list(ROOT.glob(".agents/skills/*/SKILL.md")) + [ROOT / "SKILL.md"]
+    for path in set(skill_paths):
+        if path.exists():
+            content = path.read_text(encoding="utf-8")
+            content = re.sub(r"001–\d+", f"001–{number}", content)
+            content = re.sub(r"`001`–`\d+`", f"`001`–`{number}`", content)
+            content = re.sub(r"#001–#\d+", f"#001–#{number}", content)
+            content = re.sub(r"`#001`–`#\d+`", f"`#001`–`#{number}`", content)
+            content = re.sub(r"\b\d+ 种手绘风格", f"{int(number)} 种手绘风格", content)
+            content = re.sub(r"\b\d+种手绘风格", f"{int(number)}种手绘风格", content)
+            content = re.sub(r"全库\s*\d+\s*种手绘风格", f"全库 {int(number)} 种手绘风格", content)
+            path.write_text(content, encoding="utf-8")
+
+    prompt_style_path = SKILL_DIR / "scripts" / "prompt_style.py"
+    if prompt_style_path.exists():
+        content = prompt_style_path.read_text(encoding="utf-8")
+        content = re.sub(r"\b\d+ styles\b", f"{int(number)} styles", content)
+        prompt_style_path.write_text(content, encoding="utf-8")
 
 
 def update_manifest(number: str) -> None:
