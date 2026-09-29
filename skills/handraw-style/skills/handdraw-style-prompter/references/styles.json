@@ -1944,5 +1944,12 @@
     "reference": "VOX 折纸3D立体拼贴动画",
     "generation_name": "Vox 3D Origami Collage Animation",
     "traits": "vox 折纸3d立体拼贴动画+微缩摄影，场景有景深"
+  },
+  {
+    "number": "279",
+    "group": "H 其他",
+    "reference": "极简手绘",
+    "generation_name": "Minimalist 2D Hand-Drawn Doodle",
+    "traits": "极简2D手绘简笔画表现，强调概括造型、轻柔线条、低细节、天真趣味"
   }
 ]

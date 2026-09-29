@@ -1,17 +1,18 @@
 ---
 name: article-illustration-planner
-description: Analyze an article, choose the most valuable illustration positions, design what each illustration should communicate, and generate image prompts using a selected style from the hand-drawn style library. Supports both preserving the original article and selectively replacing or simplifying text with visual expression.
+description: 深度分析文章脉络，精准规划插图点位与视觉意象，生成协同 279 种手绘风格与 36 种色彩画廊的高质量生图提示词。出具方案后主动引导用户进行【方式 A · 自主生图回填】或【方式 B · 全自动生图插入】，并支持将生成的配图精准自动排版回文章 Markdown。
 ---
 
+# Article Illustration Planner (文章配图规划与插图回填)
 
-# Article Illustration Planner
-
-Turn an article into a coherent visual-illustration plan.
+Turn an article into a coherent visual-illustration plan and deliver the final illustrated article.
 
 The user provides:
 
-* an article or substantial article draft;
-* (optional) a hand-drawn style number (`001`–`278`) and/or theme color (`C-01`–`C-30`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination.
+* An article text or local file path (e.g. `d:\path\to\article.md`);
+* (Optional) A hand-drawn style number (`001`–`279`) and/or theme color (`C-01`–`C-36`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination;
+* (Optional) Whitespace preference (`留白`: `正常` / `适中` / `多`). Default is `正常`;
+* (Optional) Aspect ratio. Default is `4:3` (editorial reading standard). Note: Poster layout selection is strictly disabled for article illustrations.
 
 The Skill decides:
 
@@ -20,7 +21,8 @@ The Skill decides:
 * how many illustrations are appropriate;
 * what each image should communicate;
 * whether an image should supplement, explain, replace, or reorganize part of the text;
-* how to express each illustration in the selected or recommended visual style and theme color.
+* how to express each illustration in the selected or recommended visual style and theme color;
+* how to guide the user seamlessly through image generation and automatic insertion into the article.
 
 Do not mechanically illustrate every paragraph.
 
@@ -49,7 +51,7 @@ It must not determine **what the image is about**.
 Separate these two decisions:
 
 1. visual communication strategy;
-2. visual style.
+2. visual style and color palette.
 
 ---
 
@@ -66,35 +68,30 @@ In Preserve mode:
 
 Only modify, shorten, replace, or reorganize article text when the user explicitly requests or accepts **Visual Rewrite mode**.
 
-Do not generate images unless the user explicitly asks to generate, render, preview, or produce the images.
-
-The normal first response is an illustration plan plus generation prompts.
+The normal first response is an illustration plan, generation prompts, and the dual-track Call-to-Action (CTA).
 
 ---
 
-# Inputs
+# Inputs & Parameters
 
-Required:
+### 1. Article Content or File Path
+- Direct text pasted in chat, or a local file path (e.g., `d:\path\to\article.md`).
+- Always support absolute Windows paths cleanly.
 
-1. Article content.
-2. Style number.
+### 2. Style & Color
+- Style range: `#001`–`#279` from the local hand-drawn style library.
+- Color palette: `C-01`–`C-36` from the 36 classic theme color gallery.
+- Dynamic aesthetic reasoning: If user doesn't specify, analyze domain, mood, and tone to recommend the most expressive style and color palette.
 
-Resolve the style number from the current installed hand-drawn style index. Do not hard-code the maximum style number into this Skill.
+### 3. Aspect Ratio (画幅比例)
+- **Default: 4:3**. Editorial article illustrations naturally fit widescreen horizontal reading flow across Web, WeChat, Zhihu, and Markdown readers.
+- Other supported ratios if user requests: `16:9`, `1:1`, `3:4`.
+- **Layout Selection Disabled**: Poster layout selection (`SC-*`, `IG-*`, etc.) is disabled for article illustrations. Article illustrations are standalone editorial visuals integrated into prose.
 
-Optional user constraints may include:
-
-* publishing platform;
-* desired illustration density;
-* aspect ratio;
-* whether a cover image is needed;
-* whether text may be modified;
-* whether text may appear inside images;
-* target audience;
-* any subjects, symbols, visual elements, or content the user wants to avoid.
-
-Do not require optional parameters when the article itself provides enough information.
-
-Infer sensible decisions from the article whenever possible.
+### 4. Whitespace Control (留白控制)
+- **正常 (Normal, Default)**: Standard compositional density. No additional whitespace keywords are appended.
+- **适中 (Moderate)**: Appends `【大量留白】` / `[generous whitespace]` to the visual prompt.
+- **多 (High)**: Appends `【大量留白，场景只显示必要部分，不要显示全】` / `[generous whitespace, show only essential elements of the scene, do not display the full context]` to the visual prompt.
 
 ---
 
@@ -140,18 +137,7 @@ Do not rewrite the whole article simply because rewriting is allowed.
 
 Prefer the smallest textual intervention that creates a meaningful improvement.
 
-Never remove information whose precision is important and difficult to preserve visually.
-
-Examples include:
-
-* exact definitions;
-* numbers;
-* dates;
-* legal or technical wording;
-* important qualifications;
-* source attribution;
-* factual distinctions;
-* conclusions that could become ambiguous when converted into imagery.
+Never remove information whose precision is important and difficult to preserve visually (exact definitions, numbers, dates, legal or technical wording, important qualifications, source attribution, factual distinctions).
 
 ---
 
@@ -179,76 +165,27 @@ The visible output should focus on useful editorial decisions.
 
 # Article Types
 
-Do not require the user to classify the article.
-
-Infer its dominant visual needs.
-
-Possible tendencies include, but are not limited to:
+Infer dominant visual needs:
 
 ### Reflective / philosophical
-
-Usually benefits from:
-
-* metaphor;
-* symbolic scenes;
-* emotional transitions;
-* visual pauses;
-* restrained narrative moments;
-* visual echoes of the article's central idea.
-
-Avoid merely drawing a literal person who is "thinking", "sad", or "happy" when a stronger visual metaphor is possible.
+* Metaphor, symbolic scenes, emotional transitions, visual pauses, restrained narrative moments.
+* Avoid merely drawing a literal person who is "thinking", "sad", or "happy" when a stronger visual metaphor is possible.
 
 ### Narrative / personal essay
-
-Usually benefits from:
-
-* key moments;
-* environmental storytelling;
-* objects with narrative meaning;
-* changes in relationship, place, time, or emotional state.
+* Key moments, environmental storytelling, objects with narrative meaning, shifts in relationship, place, time, or emotional state.
 
 ### Explanatory / educational
-
-Usually benefits from:
-
-* concept visualization;
-* analogy;
-* causal relationships;
-* processes;
-* systems;
-* hierarchy;
-* comparison;
-* transformation over time.
-
-Do not reduce every educational illustration to a conventional infographic.
-
-A hand-drawn explanatory illustration may combine objects, characters, spatial relationships, labels, diagrams, and metaphor when that communicates the idea more clearly.
+* Concept visualization, analogy, causal relationships, processes, systems, hierarchy, comparison, transformation over time.
+* Hand-drawn explanatory illustration may combine objects, characters, spatial relationships, labels, and diagrams.
 
 ### Argumentative / analytical
-
-Usually benefits from:
-
-* contrasts;
-* competing forces;
-* cause and effect;
-* hidden relationships;
-* structural models;
-* before-and-after states;
-* visual synthesis of a key argument.
-
-### Mixed articles
-
-Use different illustration functions when appropriate.
-
-Do not force every image in an article to perform the same job.
+* Contrasts, competing forces, cause and effect, hidden relationships, structural models, before-and-after states.
 
 ---
 
 # Illustration Functions
 
-For every proposed image, decide its primary purpose.
-
-Possible functions include:
+For every proposed image, decide its primary purpose:
 
 * `opening-visual` — establishes the article's visual premise;
 * `metaphor` — translates an abstract idea into a visual situation;
@@ -262,17 +199,11 @@ Possible functions include:
 * `summary` — condenses a section or conclusion visually;
 * `text-replacement` — carries information that would otherwise require substantial prose.
 
-These are reasoning categories, not rigid templates.
-
-Do not force the final image into a conventional diagram solely because its function is explanatory.
-
 ---
 
 # Image Type
 
-For every proposed image, choose one concise image-type keyword. The type tells the image model what kind of picture to create; it does not replace the illustration function, visual idea, or selected drawing style.
-
-Use one of these fixed values:
+For every proposed image, choose one concise image-type keyword:
 
 * `editorial illustration` — a broad, article-led visual that establishes or reinforces an argument;
 * `conceptual diagram` — an explanatory relationship, system, or abstraction;
@@ -281,177 +212,28 @@ Use one of these fixed values:
 * `narrative scene` — a concrete, meaningful moment or situation;
 * `metaphorical illustration` — a symbolic visual situation for an abstract or emotional idea.
 
-Choose the type from the illustration's purpose and visual approach. Do not ask the user to select it unless they explicitly want to override it. If the user supplies an image type for a specific illustration, preserve that value when it is one of the fixed values.
-
-Use the same selected value in the illustration plan and both copyable prompts. Do not add multiple type labels to one image or invent near-synonyms.
+Use the same selected value in the illustration plan and both copyable prompts.
 
 ---
 
 # Selecting Illustration Positions
 
-Choose illustration positions according to editorial value.
+Choose illustration positions according to editorial value:
 
-Good candidates often occur where:
-
-* the article introduces its central idea;
-* an abstract idea becomes important;
-* the reader must understand a relationship;
-* explanation becomes text-heavy;
-* a major emotional or argumentative turn occurs;
-* the article shifts from one conceptual section to another;
-* a concrete scene could make an idea memorable;
-* the ending benefits from visual resonance.
+* where the article introduces its central idea;
+* where an abstract idea becomes important;
+* where the reader must understand a relationship;
+* where explanation becomes text-heavy;
+* where a major emotional or argumentative turn occurs;
+* where the article shifts from one conceptual section to another;
+* where a concrete scene makes an idea memorable;
+* where the ending benefits from visual resonance.
 
 Do not choose positions merely because a paragraph is long.
 
 Do not insert an image when it would interrupt a strong reading rhythm.
 
-It is acceptable to recommend very few illustrations.
-
-It is also acceptable to recommend no illustration for a section.
-
-The number of images should emerge from the article.
-
----
-
-# Visual Compression
-
-When Visual Rewrite mode is enabled, look for opportunities where visual expression can reduce textual load.
-
-A candidate is strong when the image can preserve the essential meaning while requiring substantially less prose.
-
-Good candidates include:
-
-* relationships;
-* processes;
-* categories;
-* cycles;
-* comparisons;
-* spatial structures;
-* recurring patterns;
-* concrete analogies;
-* emotional metaphors.
-
-Weak candidates include information whose value depends on exact wording or precise factual details.
-
-When proposing visual replacement, explicitly identify:
-
-1. what text can be shortened or removed;
-2. what information the image must preserve;
-3. what text, if any, must remain beside the image.
-
----
-
-# Designing Each Illustration
-
-For each selected position, determine the image from the article's meaning rather than from generic visual tropes.
-
-Prefer a clear visual idea over a long list of objects.
-
-A strong illustration should usually have:
-
-* one dominant visual proposition;
-* a clear relationship to the surrounding text;
-* enough specificity to communicate the intended idea;
-* enough openness for the image model to make aesthetic decisions.
-
-Do not over-specify:
-
-* exact object placement;
-* exact camera position;
-* exhaustive prop lists;
-* decorative details;
-* lighting;
-* composition;
-* rendering quality;
-
-unless they are necessary to communicate the article's idea or the user explicitly requests them.
-
-Allow the image model room to solve the visual problem.
-
----
-
-# Metaphor Design
-
-For reflective, philosophical, emotional, or abstract writing, avoid literal illustration when a stronger metaphor is available.
-
-A metaphor should:
-
-* express the underlying relationship or tension;
-* remain understandable without explaining every detail;
-* add meaning rather than merely decorate;
-* avoid clichés when a fresher visual situation is available.
-
-Do not automatically reuse common motifs such as:
-
-* crossroads;
-* ladders;
-* cages;
-* cliffs;
-* mirrors;
-* broken clocks;
-* lone figures staring into the distance.
-
-They may be used when genuinely appropriate, but they are not default solutions.
-
-Generate the metaphor from the specific article.
-
----
-
-# Knowledge Illustration
-
-For knowledge-oriented articles, optimize for understanding rather than decoration.
-
-Ask:
-
-> What does the reader need to see in order to understand this faster or more deeply?
-
-Possible visual structures include:
-
-* objects interacting;
-* spatial relationships;
-* visual analogy;
-* transformation;
-* layers;
-* sequences;
-* branching relationships;
-* opposing states;
-* nested systems;
-* annotated scenes;
-* illustrative diagrams.
-
-Do not invent factual relationships that are not supported by the article.
-
-If the source article is ambiguous, preserve that ambiguity rather than fabricating precision.
-
-Any numbers, labels, names, or factual claims placed inside an image must come from the article or other user-provided material unless the user explicitly asks for external research.
-
----
-
-# Style Integration
-
-After the visual concept has been decided, resolve the selected style number through the installed hand-drawn style library.
-
-Reuse the current style library's canonical:
-
-* style number;
-* generation style name;
-* reference author/style name;
-* model capability / reference-image policy when image generation is requested.
-
-Do not duplicate the full style library inside this Skill.
-
-Do not independently invent visual traits for an indexed style.
-
-When generation is requested, defer style-resolution behavior to the hand-drawn style package whenever possible.
-
-The article illustration Skill determines:
-
-> what to communicate.
-
-The hand-drawn style Skill determines:
-
-> how that selected style should be invoked.
+The number of images should emerge naturally from the article (typically 2 to 5 for standard articles, 1 to 2 for short essays).
 
 ---
 
@@ -459,191 +241,165 @@ The hand-drawn style Skill determines:
 
 Each image prompt should be concise enough to leave meaningful creative freedom to the image model.
 
-The prompt should primarily contain:
-
-1. selected style identity;
-2. image type;
-3. the visual idea;
-4. necessary subjects and relationships;
-5. essential factual content;
-6. user-specified constraints.
-
-Write image type as a standalone field near the beginning of every copyable prompt:
-
-* Chinese prompt: `图片类型：{image_type}。`
-* English prompt: `Image type: {image_type}.`
-
-Place this field before the theme or visual idea. In graphic-text mode, it must appear before `主题：` / `Theme:` and must not alter the fixed suffix required by the hand-drawn style package.
-
-Do not automatically add:
-
-* generic quality terms;
-* elaborate camera instructions;
-* excessive rendering adjectives;
-* long negative prompts;
-* unnecessary composition rules.
-
-For philosophical articles, emphasize the visual metaphor or situation.
-
-For knowledge articles, emphasize the relationship the image needs to explain.
-
-Do not simply paste the surrounding paragraph into the image prompt.
-
-Translate meaning into visual information.
+The prompt structure:
+1. **图片类型 / Image type**: `图片类型：{image_type}。` / `Image type: {image_type}.`
+2. **主题与核心视觉意象**: Dominant visual idea, key subjects, environmental storytelling.
+3. **留白修饰**: If `适中`, append `【大量留白】` / `[generous whitespace]`. If `多`, append `【大量留白，场景只显示必要部分，不要显示全】` / `[generous whitespace, show only essential elements of the scene, do not display the full context]`.
+4. **画风与色彩基调**: Hand-drawn style definition from `#001`–`#279` and theme color from `C-01`–`C-36`.
 
 ---
 
-# Text Inside Images
+# Output Format
 
-Use text inside an illustration only when it materially improves comprehension or when requested by the user.
+Start with a concise overall recommendation:
+* Inferred article type;
+* Visual strategy;
+* Recommended number of illustrations;
+* Recommended style number & name, theme color & name, aspect ratio (`4:3`), and whitespace setting.
 
-Prefer little or no text for:
+Then provide each illustration in reading order:
 
-* emotional illustration;
-* metaphorical illustration;
-* narrative scenes.
-
-Text can be useful for:
-
-* labels;
-* simple comparison;
-* process stages;
-* key relationships;
-* short conceptual annotations.
-
-Do not turn every illustration into a poster.
-
-Do not reproduce long article passages inside images.
-
----
-
-# Output
-
-Start with a concise overall recommendation.
-
-Include:
-
-* inferred article type;
-* visual strategy;
-* recommended number of illustrations;
-* whether any section would benefit from visual replacement.
-
-Then provide each illustration in reading order.
-
-For each image use:
-
+```markdown
 ### Illustration N
 
-**Insert after:**
-Identify the location using the nearest heading or a short recognizable excerpt from the article.
+**插入位置 / Insert after:**
+`[引用目标小标题或紧邻的上文段落前/后 10-20 个字]`
 
-**Purpose:**
-Explain what this image contributes to the reading experience.
+**配图定位 / Purpose:**
+解释该图在阅读流中的作用。
 
-**图片类型：**
-One selected value from the fixed image-type list.
+**图片类型 / Image Type:**
+editorial illustration / metaphorical illustration / conceptual diagram ...
 
-**Visual approach:**
-Describe the central visual idea in a few sentences.
+**视觉构思 / Visual Concept:**
+描述核心视觉隐喻、主体与画面情绪。
 
-**Relationship to text:**
-One of:
+**图文关系 / Relationship to Text:**
+supplements text / explains text / visually summarizes text / replaces part of text
 
-* supplements text;
-* explains text;
-* visually summarizes text;
-* replaces part of text.
+**画风与配色 / Style & Color:**
+`#{style_number} · {style_name}` + `{color_id} · {color_name}`
 
-If text modification is proposed, identify the exact passage and provide the proposed revised text.
-
-**Style:**
-Selected style number and resolved style name.
-
-**Image prompt:**
-Provide generation-ready Chinese and English prompts. Each prompt must include the same image-type field before its theme or visual idea.
-
-Do not include unnecessary implementation commentary between illustrations.
-
----
-
-# Modified Article
-
-In Preserve mode, do not reproduce the entire article unless the user requests it.
-
-In Visual Rewrite mode, after the illustration plan, provide a revised article only when useful or explicitly requested.
-
-When returning a revised article:
-
-* preserve the author's voice where possible;
-* mark illustration insertion positions clearly;
-* integrate the visual plan into the reading flow;
-* do not rewrite unaffected passages unnecessarily.
+**生图提示词 (Prompt):**
+- **中文提示词**:
+```text
+图片类型：{image_type}。{visual_concept}。{whitespace_clause}画风：{style_prompt}。色彩：{color_prompt}。画幅比例 4:3。
+```
+- **English Prompt**:
+```text
+Image type: {image_type}. {visual_concept_en}. {whitespace_clause_en} Style: {style_prompt_en}. Color palette: {color_prompt_en}. Aspect ratio: 4:3.
+```
+```
 
 ---
 
-# Cover Image
+# Post-Planning Call-to-Action (CTA)
 
-Do not assume every article needs a cover image.
+Immediately following the illustration plan, the Skill **MUST** output the standardized dual-track delivery CTA block:
 
-Recommend one when it adds value for the publishing context or gives the article a useful visual premise.
+```markdown
+---
 
-A cover image may communicate the article as a whole and does not need to literally summarize every section.
+💡 **插图方案已规划完成！接下来您可以选择以下两种交付方式：**
+
+1. **【方式 A · 自主生图回填】**：
+   复制上方提示词，前往您常用的生图工具出图。生成完成后，将图片文件直接拖入对话，或发送本地图片路径（如 `D:\path\to\illus1.png`），我会帮您将配图精准插入到文章对应位置中！
+
+2. **【方式 B · 全自动生图插入】**：
+   直接对我说 **“全自动生图”** 或 **“帮我生成所有配图并插入”**，我将全自动调用生图工具批量绘制配图，并自动排版回填到文章对应锚点中，输出完整的图文定稿！
+```
 
 ---
 
-# Interaction
+# Dual-Track Delivery Workflow (双轨交付流程)
 
-If the article and style number are sufficient, proceed directly.
+## Track A · 自主生图回填 (Manual Generation & Back-fill)
 
-Do not ask the user to choose:
-
-* article type;
-* number of images;
-* illustration categories;
-* metaphor style;
-* information-visualization type;
-
-when these can be inferred from the article.
-
-Ask a question only when missing information materially prevents a good result.
-
-Otherwise use editorial judgment.
+When the user chooses Track A and provides images:
+1. **Image Receipt**: User pastes images into chat, or supplies local image file paths / URLs.
+2. **Anchor Matching**: The Skill matches each received image to the corresponding Illustration N (`Illustration 1`, `Illustration 2`, etc.) based on visual content or user specification.
+3. **Local File Management**:
+   - If the user provided a local article path (e.g. `D:\path\to\my_article.md`):
+     - Create an assets folder: `D:\path\to\images\` (relative `images/`).
+     - Save/copy the received image into `D:\path\to\images\illus_01.webp` (or `.png`/`.jpg`).
+     - Use relative path `images/illus_01.webp` in Markdown.
+   - If the article was provided as chat text:
+     - Store images in the conversation artifact directory or working directory, using clean markdown syntax.
+4. **Markdown Insertion Standard**:
+   Insert the image block immediately after the designated anchor point:
+   ```markdown
+   ![插图N: 说明](images/illus_0N.webp)
+   *▲ 图N：说明*
+   ```
+5. **Output**:
+   - For local file: Write the illustrated article to `D:\path\to\my_article_illustrated.md` (or update original if requested by user).
+   - For chat text: Output the full illustrated article Markdown ready to copy.
 
 ---
 
-# Image Generation
+## Track B · 全自动生图插入 (Fully Automated Generation & Insertion)
 
-The default output is the plan and prompts.
+When the user triggers Track B (e.g. "全自动生图", "帮我生成并插入", "自动完成"):
+1. **Execution Verification**: Confirm the target article location (file path `d:\path\to\article.md` or in-memory draft).
+2. **Automated Image Generation**:
+   - For each planned Illustration N in sequential order:
+     - Call the image generation tool (`generate_image`) using the finalized prompt.
+     - Specify aspect ratio `4:3` (unless customized by user).
+     - Maintain strict style `#001`–`#279` and color consistency.
+3. **Asset Organization**:
+   - Save each generated image to `<article_dir>/images/illus_01.webp`, `illus_02.webp`, etc.
+4. **Automatic Insertion & Assembly**:
+   - Read the original article markdown.
+   - Accurately locate each anchor point (`Insert after:` heading or sentence excerpt).
+   - Insert the formatted image link and caption:
+     ```markdown
+     ![插图N: 说明](images/illus_0N.webp)
+     *▲ 图N：说明*
+     ```
+   - Save the finalized document as `[article_name]_illustrated.md` (or write in-place if requested).
+5. **Final Presentation**:
+   - Provide a brief summary table of generated illustrations.
+   - Present the path to the newly created illustrated article, or display the illustrated article directly.
 
-Only generate images after explicit user instruction.
+---
 
-The user may request:
+# Automation Helper Script
 
-* all images;
-* a specific illustration;
-* revisions to one visual concept;
-* an alternate concept;
-* different illustration density.
+The Skill provides a deterministic Python helper script located at:
+`skills/article-illustration-planner/scripts/insert_illustrations.py`
 
-When generating multiple article illustrations, maintain a coherent visual identity while allowing composition and subject matter to vary according to the role of each image.
+Usage:
+```bash
+python -X utf8 skills/article-illustration-planner/scripts/insert_illustrations.py \
+  --article "D:\path\to\article.md" \
+  --manifest "D:\path\to\illustrations_manifest.json" \
+  --output "D:\path\to\article_illustrated.md"
+```
 
-Do not make all illustrations visually repetitive merely for consistency.
+The manifest format:
+```json
+[
+  {
+    "index": 1,
+    "anchor": "### 1. 概念起源",
+    "position": "after",
+    "image_path": "images/illus_01.webp",
+    "caption": "图1：概念起源与核心意象"
+  }
+]
+```
+
+The script cleanly preserves indentation, headings, code blocks, and math formulas without touching unintended text.
 
 ---
 
 # Design Philosophy
 
-This Skill should remain intentionally lightweight.
+This Skill should remain intentionally lightweight and high-taste.
 
 Prefer:
-
-* judgment over rules;
-* meaning over templates;
-* article-specific visual thinking over generic motifs;
-* minimal input over configuration forms;
-* concise prompts over exhaustive specifications;
-* AI reasoning over manually encoded decision trees.
-
-Rules in this Skill exist mainly to prevent poor default behavior.
-
-They must not replace the model's ability to read, interpret, and visually rethink an article.
+* visual editorial judgment over rules;
+* meaning over generic templates;
+* article-specific visual thinking over clichés;
+* clean dual-track execution over tedious back-and-forth;
+* seamless integration from prompt planning to final illustrated Markdown delivery.

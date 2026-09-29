@@ -476,6 +476,8 @@ def main() -> None:
         SKILL / "SKILL.md",
         ROOT / "skills" / "article-illustration-planner" / "SKILL.md",
         ROOT / "skills" / "poster-prompt-generator" / "SKILL.md",
+        ROOT / "skills" / "article-cover-designer" / "SKILL.md",
+        ROOT / "skills" / "style-fusion-prompter" / "SKILL.md",
     ]:
         if sf.exists():
             content = sf.read_text(encoding="utf-8")
@@ -499,6 +501,8 @@ def main() -> None:
         if file_path.suffix in (".md", ".json", ".py", ".html", ".yaml", ".yml") and file_path.exists():
             text = file_path.read_text(encoding="utf-8", errors="ignore")
             for line_no, line in enumerate(text.splitlines(), 1):
+                if re.search(r'path[\\/]+to', line, re.I):
+                    continue
                 if drive_leak_pattern.search(line):
                     fail(f"Local drive path leaked in tracked file {rel_path}:{line_no}: {line.strip()[:100]}")
 

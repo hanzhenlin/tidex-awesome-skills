@@ -298,7 +298,7 @@ dialog img{{display:block;max-width:100%;max-height:60vh;margin:auto;object-fit:
 </div>
 </div>
 </div>
-<p class="lead" data-i18n="lead">浏览 278 种手绘风格，点击卡片放大查看并复制生图指令与特征词。</p>
+<p class="lead" data-i18n="lead">浏览 {total_count} 种手绘风格，点击卡片放大查看并复制生图指令与特征词。</p>
 <section class="prompt-examples" aria-labelledby="prompt-examples-title">
 <h2 id="prompt-examples-title" data-i18n="promptTitle">提示词案例</h2>
 <div class="prompt-example"><span class="prompt-label" data-i18n="ex1Label">1 · 出图</span><code class="prompt-value" data-i18n="ex1Code">风格：001，主题：吃冰淇淋的小姑娘</code></div>
@@ -335,7 +335,7 @@ const I18N = {{
   zh: {{
     pageTitle: "手绘风格编号画廊",
     title: "手绘风格编号画廊",
-    lead: "浏览 278 种手绘风格，点击卡片放大查看并复制生图指令与特征词。",
+    lead: "浏览 {total_count} 种手绘风格，点击卡片放大查看并复制生图指令与特征词。",
     sizeLabel: "尺寸",
     stylesNav: "风格画廊",
     layoutsNav: "图型画廊",
@@ -372,7 +372,7 @@ const I18N = {{
   en: {{
     pageTitle: "Hand-drawn Style Gallery",
     title: "Hand-drawn Style Gallery",
-    lead: "Browse 278 hand-drawn styles. Click cards to enlarge and copy style commands and traits.",
+    lead: "Browse {total_count} hand-drawn styles. Click cards to enlarge and copy style commands and traits.",
     sizeLabel: "Size",
     stylesNav: "Styles",
     layoutsNav: "Layouts",
