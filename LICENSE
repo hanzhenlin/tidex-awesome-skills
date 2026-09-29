@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Tidex AI & Respective Original Authors
+Copyright (c) 2026 Tidex AI (Zhenlin Han)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## 适用范围 / Scope of this License
+
+本 MIT 许可仅适用于本仓库自身的工程化脚手架与元数据，包括 `install.sh`、`sync.sh`、`uninstall.sh`、`scripts/`、`registry.txt`、`VERSION`、`README.md` 及仓库目录结构，版权归 Tidex AI (Zhenlin Han) 所有。
+
+`skills/` 目录下收录的各技能均为第三方开源作品，**不属于本许可的授权范围**：每个技能目录内均保留其原始 LICENSE 与版权署名，权利归属及授权条款以上游原作者为准，完整来源登记见 `registry.txt` 与 `README.md` 的「致谢与版权声明」章节。
+
+This MIT license applies only to this repository's own engineering scaffolding and metadata. Each curated skill under `skills/` remains governed by its original upstream license, and all rights therein belong to the respective original authors.

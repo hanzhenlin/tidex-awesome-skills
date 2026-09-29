@@ -116,6 +116,8 @@ bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤�
 本仓库收录的所有技能版权完全归原作者所有，各技能均严格保留其原始 LICENSE 与署名。衷心感谢开源社区杰出创作者的开拓性贡献：
 
 - 感谢 [**花叔 (@alchaincyf)**](https://github.com/alchaincyf) 创造的 `nuwa-skill`、`huashu-design`、`darwin-skill`、`huashu-md-html`、`huashu-excel`、`tramstop-skill`、`zhangxuefeng-skill` 及其开拓性的 Agent Skills 开源生态体系；
-- 感谢 [**姚金刚老师及 Yao 团队 (@yaojingang)**](https://github.com/yaojingang) 创造的 `yao-meta-skill`（Skill OS 2.0）全生命周期技能编译与治理架构。
+- 感谢 [**姚金刚老师及 Yao 团队 (@yaojingang)**](https://github.com/yaojingang) 创造的 `yao-meta-skill`（Skill OS 2.0）全生命周期技能编译与治理架构；
+- 感谢 [**yang0 (@yang0)**](https://github.com/yang0/handraw-style) 创造的 `handraw-style` 手绘风格与排版图型生图引擎；
+- 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语。
 
-本仓库工程化套件与脚本采用 [MIT License](./LICENSE)。
+**协议边界**：本仓库工程化套件与脚本采用 [MIT License](./LICENSE)；`skills/` 下收录的各技能版权完全归原作者所有，均保留其原始 LICENSE 与署名，授权条款以上游为准。
