@@ -13,6 +13,9 @@ GALLERY = SKILL / "gallery" / "tutorials.html"
 STYLES_JSON = SKILL / "references" / "styles.json"
 LAYOUTS_JSON = SKILL / "references" / "layouts.json"
 COLORS_JSON = SKILL / "references" / "colors.json"
+CHARACTERS_JSON = SKILL / "references" / "characters.json"
+PROPS_JSON = SKILL / "references" / "props.json"
+SCENES_JSON = SKILL / "references" / "scenes.json"
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
@@ -56,6 +59,50 @@ def build_html() -> str:
     styles_raw = json.loads(STYLES_JSON.read_text(encoding="utf-8")) if STYLES_JSON.exists() else []
     layouts_raw = json.loads(LAYOUTS_JSON.read_text(encoding="utf-8")) if LAYOUTS_JSON.exists() else []
     colors_raw = json.loads(COLORS_JSON.read_text(encoding="utf-8")) if COLORS_JSON.exists() else []
+    characters_raw = json.loads(CHARACTERS_JSON.read_text(encoding="utf-8")) if CHARACTERS_JSON.exists() else []
+    props_raw = json.loads(PROPS_JSON.read_text(encoding="utf-8")) if PROPS_JSON.exists() else []
+    scenes_raw = json.loads(SCENES_JSON.read_text(encoding="utf-8")) if SCENES_JSON.exists() else []
+
+    try:
+        import custom_library_manager
+        custom_chars, custom_props, custom_scenes = custom_library_manager.load_custom_assets()
+    except Exception:
+        custom_chars, custom_props, custom_scenes = [], [], []
+
+    def merge_assets(presets: list, customs: list, category: str):
+        seen = set()
+        res = []
+        for p in presets:
+            pid = str(p.get("id", ""))
+            seen.add(pid)
+            res.append({
+                "id": pid,
+                "name": str(p.get("name", "")),
+                "name_en": str(p.get("name_en", p.get("name", ""))),
+                "cat": category,
+                "img": str(p.get("image", "")),
+                "tags": p.get("tags", []),
+                "is_custom": False,
+            })
+        for c in customs:
+            cid = str(c.get("id", ""))
+            if cid not in seen:
+                seen.add(cid)
+                res.append({
+                    "id": cid,
+                    "name": str(c.get("name", "")),
+                    "name_en": str(c.get("name_en", c.get("name", ""))),
+                    "cat": category,
+                    "img": str(c.get("image", "")),
+                    "tags": c.get("tags", []),
+                    "is_custom": True,
+                })
+        return res
+
+    all_characters = merge_assets(characters_raw, custom_chars, "characters")
+    all_props = merge_assets(props_raw, custom_props, "props")
+    all_scenes = merge_assets(scenes_raw, custom_scenes, "scenes")
+    assets_data = all_characters + all_props + all_scenes
 
     styles_data = [
         {
@@ -92,9 +139,11 @@ def build_html() -> str:
         for c in colors_raw
     ]
 
+    assets_json_str = json.dumps(assets_data, ensure_ascii=False, separators=(",", ":"))
     styles_json_str = json.dumps(styles_data, ensure_ascii=False, separators=(",", ":"))
     layouts_json_str = json.dumps(layouts_data, ensure_ascii=False, separators=(",", ":"))
     colors_json_str = json.dumps(colors_data, ensure_ascii=False, separators=(",", ":"))
+    assets_count = len(assets_data)
     styles_count = len(styles_data)
     layouts_count = len(layouts_data)
     colors_count = len(colors_data)
@@ -121,6 +170,7 @@ def build_html() -> str:
 <title>手绘 Skill 提示词拼装器</title><style>
 :root{{color:#24211e;background:#f7f5f0;font:16px/1.5 system-ui,"Microsoft YaHei",sans-serif}}
 body{{margin:0}}
+img{{max-width:100%;box-sizing:border-box}}
 main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .sticky-header{{position:sticky;top:0;z-index:100}}
 .site-nav{{display:flex;align-items:center;gap:10px;margin:0;padding:12px 30px;border-bottom:1px solid #ded8cf;background:#fffdf9}}
@@ -198,10 +248,41 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .fusion-checkbox-wrap:hover{{background:#ede6dc;border-color:#b74227;color:#b74227}}
 .fusion-checkbox-wrap.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 4px rgba(183,66,39,0.25)}}
 .fusion-checkbox{{accent-color:#b74227;cursor:pointer;margin:0}}
+/* Assets Module (Multi-Asset Tray) */
+.assets-module{{margin-bottom:20px;padding-bottom:18px;border-bottom:1px dashed #ded8cf}}
+.assets-module-header{{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px}}
+.assets-header-left{{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}}
+.assets-module-title{{font-size:14.5px;font-weight:800;color:#24211e}}
+.assets-module-desc{{font-size:12px;color:#8a8075}}
+.assets-header-actions{{display:flex;align-items:center;gap:8px}}
+.btn-clear-assets{{border:1px solid #ded8cf;background:#fff;color:#786f65;font:inherit;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all .15s}}
+.btn-clear-assets:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+.btn-add-assets{{border:1px solid #b74227;background:#b74227;color:#fff;font:inherit;font-size:12.5px;font-weight:750;padding:5px 12px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s}}
+.btn-add-assets:hover{{background:#cf4f33;border-color:#cf4f33}}
+.assets-empty-trigger{{width:100%;min-height:76px;border:2px dashed #dcd5ca;border-radius:10px;background:#fffdfa;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;color:#786f65;font:inherit;font-size:13.5px;font-weight:700;padding:16px 20px;transition:all .15s}}
+.assets-empty-trigger:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+.assets-tray-cards{{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}}
+.asset-tray-card{{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #ded8cf;border-radius:10px;padding:8px 10px;box-shadow:0 1px 4px rgba(0,0,0,0.03);position:relative;transition:all .15s;max-width:280px;min-width:0;overflow:hidden;flex:0 0 auto}}
+.asset-tray-card:hover{{border-color:#b74227;box-shadow:0 2px 8px rgba(183,66,39,0.08)}}
+.asset-tray-thumb-wrap{{width:52px;height:52px;min-width:52px;max-width:52px;min-height:52px;max-height:52px;border-radius:6px;overflow:hidden;background:#eee;border:1px solid #ded8cf;flex-shrink:0;display:flex;align-items:center;justify-content:center}}
+.asset-tray-thumb,.asset-tray-img{{width:52px;height:52px;min-width:52px;max-width:52px;min-height:52px;max-height:52px;border-radius:6px;object-fit:cover;background:#eee;border:1px solid #ded8cf;flex-shrink:0;display:block}}
+.asset-tray-thumb-wrap .asset-tray-img{{border:none;border-radius:0;width:100%;height:100%}}
+.asset-tray-info{{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1;overflow:hidden}}
+.asset-tray-id-row{{display:flex;align-items:center;gap:6px}}
+.asset-badge{{font-size:11px;font-weight:800;padding:1px 5px;border-radius:4px;letter-spacing:0.3px;white-space:nowrap}}
+.asset-badge.is-char{{background:#fff0eb;color:#b74227;border:1px solid #fedcd3}}
+.asset-badge.is-prop{{background:#fef6e9;color:#b36b00;border:1px solid #fde7c2}}
+.asset-badge.is-scene{{background:#eef7ee;color:#2b772b;border:1px solid #d2ecd2}}
+.asset-tray-name{{font-size:13px;font-weight:750;color:#24211e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+.asset-remove-btn{{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:4px;background:transparent;color:#a0968a;cursor:pointer;font-size:16px;line-height:1;padding:0;transition:all .15s;flex-shrink:0}}
+.asset-remove-btn:hover{{background:#fee;color:#d32f2f;border-color:#fcc}}
+.asset-tray-more{{display:flex;align-items:center;justify-content:center;gap:6px;border:2px dashed #ded8cf;border-radius:10px;background:#faf8f5;color:#786f65;font:inherit;font-size:12.5px;font-weight:750;padding:0 16px;min-height:66px;cursor:pointer;transition:all .15s;white-space:nowrap}}
+.asset-tray-more:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+
 .slots-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:0}}
 .slots-grid.is-fusion{{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:1100px){{.slots-grid.is-fusion{{grid-template-columns:repeat(2,1fr)}}}}
-@media(max-width:640px){{.slots-grid.is-fusion{{grid-template-columns:1fr}}}}
+@media(max-width:860px){{.slots-grid,.slots-grid.is-fusion{{grid-template-columns:1fr}}}}
 .picker-card.is-realistic .picker-card-name{{font-weight:750}}
 .slot-card[hidden]{{display:none!important}}
 .slot-card{{border:1px solid #ded8cf;border-radius:12px;background:#fff;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s,box-shadow .15s,opacity .15s}}
@@ -252,13 +333,24 @@ dialog::backdrop{{background:#000a}}
 .modal-search-wrap{{margin-bottom:14px}}
 .modal-search{{width:100%;box-sizing:border-box;border:1px solid #c9c1b6;border-radius:7px;padding:8px 12px;font:inherit;font-size:13.5px}}
 .modal-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;max-height:54vh;overflow-y:auto;padding-right:4px}}
-.picker-card{{display:flex;flex-direction:column;box-sizing:border-box;padding:0;border:1px solid #ded8cf;border-radius:8px;background:#fff;cursor:pointer;overflow:hidden;text-align:left;transition:transform .15s,box-shadow .15s,border-color .15s}}
+.picker-card{{display:flex;flex-direction:column;box-sizing:border-box;padding:0;border:1px solid #ded8cf;border-radius:8px;background:#fff;cursor:pointer;overflow:hidden;text-align:left;position:relative;transition:transform .15s,box-shadow .15s,border-color .15s}}
 .picker-card:hover{{transform:translateY(-2px);border-color:#b74227;box-shadow:0 4px 12px rgba(0,0,0,0.1)}}
 .picker-card.is-selected{{border-color:#b74227;box-shadow:0 0 0 2px #b74227}}
+.picker-card.is-selected .picker-card-check{{display:flex}}
+.picker-card-check{{display:none;position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:#2a854a;color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:900;box-shadow:0 1px 4px rgba(0,0,0,0.25);z-index:2}}
 .picker-card-img{{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top;display:block;background:#eee}}
 .picker-card-info{{padding:5px 6px;background:#fffdfa;display:flex;flex-direction:column;gap:1px}}
 .picker-card-id{{font-size:10.5px;font-weight:800;color:#b74227}}
 .picker-card-name{{font-size:11px;font-weight:700;color:#24211e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.2}}
+
+.modal-footer{{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid #eee8df}}
+.modal-footer-info{{font-size:13px;font-weight:750;color:#514a43}}
+.modal-footer-actions{{display:flex;align-items:center;gap:8px}}
+.btn-modal-action{{border-radius:6px;padding:6px 14px;font:inherit;font-size:12.5px;font-weight:750;cursor:pointer;transition:all .15s}}
+.btn-modal-clear{{border:1px solid #dcd5ca;background:#fff;color:#786f65}}
+.btn-modal-clear:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+.btn-modal-confirm{{border:1px solid #b74227;background:#b74227;color:#fff}}
+.btn-modal-confirm:hover{{background:#cf4f33;border-color:#cf4f33}}
 
 /* Retained Guides */
 .guides-section{{margin-top:20px}}
@@ -294,7 +386,7 @@ dialog::backdrop{{background:#000a}}
 }}
 </style></head><body>
 <header class="sticky-header">
-<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="wechat-btn" type="button" data-i18n="wechatBtn">💬 创作变现交流群</button><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
+<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="assets.html" data-i18n="assetsNav">自建图库</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="wechat-btn" type="button" data-i18n="wechatBtn">💬 创作变现交流群</button><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
 </header>
 <main>
 <!-- Prompt Assembler Studio -->
@@ -430,7 +522,7 @@ dialog::backdrop{{background:#000a}}
         <div class="step-header">
           <div class="step-title-wrap">
             <span class="step-badge">4</span>
-            <h2 class="step-title" data-i18n="step4Title">图型 · 风格 · 色彩搭配</h2>
+            <h2 class="step-title" data-i18n="step4Title">视觉资产与风格搭配</h2>
             <label class="fusion-checkbox-wrap" id="fusion-checkbox-wrap">
               <input type="checkbox" id="checkbox-fusion" class="fusion-checkbox">
               <span class="fusion-checkbox-text" data-i18n="fusionCheckboxLabel">风格融合</span>
@@ -448,6 +540,32 @@ dialog::backdrop{{background:#000a}}
           </div>
         </div>
         <div class="step-body">
+          <!-- Visual Benchmark Assets Module (Multi-Asset Tray) -->
+          <div class="assets-module" id="assets-module">
+            <div class="assets-module-header">
+              <div class="assets-header-left">
+                <span class="assets-module-title">👤 <span data-i18n="assetsTrayTitle">自建图库</span></span>
+                <span class="assets-module-desc" data-i18n="assetsTrayDesc">可选 · 支持多选跨媒介参考图（垫图），出图时保持主体视觉绝对一致</span>
+              </div>
+              <div class="assets-header-actions">
+                <button type="button" id="btn-clear-assets" class="btn-clear-assets" hidden data-i18n="clearAssetsBtn">清空已选资产</button>
+                <button type="button" class="btn-add-assets" data-picker="asset">
+                  <span>＋</span>
+                  <span data-i18n="addAssetsBtn">添加自建资产</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Empty state: large dashed trigger -->
+            <button type="button" id="assets-empty-trigger" class="assets-empty-trigger" data-picker="asset">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>
+              <span data-i18n="assetsEmptyText">点击按图添加自建资产（支持同时多选角色 IP、道具 PR、场景 SCN 基准图）</span>
+            </button>
+
+            <!-- Filled tray: cards flow -->
+            <div id="assets-tray-cards" class="assets-tray-cards" hidden></div>
+          </div>
+
           <div class="slots-grid" id="slots-grid">
             <!-- Layout Slot -->
             <div class="slot-card" id="slot-layout">
@@ -607,12 +725,20 @@ dialog::backdrop{{background:#000a}}
     <input type="search" id="picker-search" class="modal-search" placeholder="输入编号或名称过滤...">
   </div>
   <div class="modal-grid" id="picker-grid"></div>
+  <div class="modal-footer" id="modal-asset-footer" hidden>
+    <div class="modal-footer-info" id="modal-asset-summary">已选择 0 项资产</div>
+    <div class="modal-footer-actions">
+      <button type="button" id="btn-modal-clear-assets" class="btn-modal-action btn-modal-clear" data-i18n="modalAssetClearBtn">清空全部</button>
+      <button type="button" id="btn-modal-confirm-assets" class="btn-modal-action btn-modal-confirm" data-i18n="modalAssetConfirmBtn">完成选择</button>
+    </div>
+  </div>
 </dialog>
 
 <!-- WeChat QR Modal -->
 <dialog id="wechat-modal" aria-labelledby="wechat-title" style="width:min(94vw,560px);padding:22px;border:0;border-radius:14px;background:#1e1b18;color:#fff;box-shadow:0 20px 70px #000a;text-align:center"><button class="close" type="button" aria-label="关闭" style="position:absolute;top:12px;right:12px;border:0;border-radius:7px;padding:5px 9px;background:#fff;color:#24211e;cursor:pointer;font:inherit">关闭 ×</button><h3 id="wechat-title" style="margin:4px 0 10px;font-size:17px;color:#fff" data-i18n="wechatTitle">💬 创作变现交流群</h3><p style="margin:0 0 4px;font-size:14px;color:#eee" data-i18n="wechatSub">请优先加群，满了的话也可以尝试加我个人微信</p><p style="margin:0 0 16px;font-size:13px;color:#d67d4d;font-weight:600" data-i18n="wechatNote">请备注：手绘</p><div style="display:flex;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatGroupLabel">① 优先加入群聊</div><img src="../../../images/wechat_group.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_group.png';" alt="手绘交流群二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatPersonalLabel">② 个人微信备用</div><img src="../../../images/wechat_personal.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_personal.png';" alt="旺德福个人微信二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid #332f2b;display:flex;justify-content:center;gap:16px;font-size:13px"><a href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">GitHub 仓库 ↗</a><a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">X @yang02010 ↗</a></div></dialog>
 
 <script>
+const ASSETS_DATA = {assets_json_str};
 const STYLES_DATA = {styles_json_str};
 const LAYOUTS_DATA = {layouts_json_str};
 const COLORS_DATA = {colors_json_str};
@@ -626,9 +752,13 @@ const assembledText=document.querySelector('#assembled-text'),btnCopyAssembled=d
 const pickerDialog=document.querySelector('#picker-dialog'),pickerTitle=document.querySelector('#picker-title'),pickerFilters=document.querySelector('#picker-filters'),pickerSearch=document.querySelector('#picker-search'),pickerGrid=document.querySelector('#picker-grid');
 const checkboxFusion=document.querySelector('#checkbox-fusion'),fusionWrap=document.querySelector('#fusion-checkbox-wrap');
 const slotsGrid=document.querySelector('#slots-grid'),slotStyle=document.querySelector('#slot-style'),slotCharStyle=document.querySelector('#slot-char-style'),slotSceneStyle=document.querySelector('#slot-scene-style');
+const modalAssetFooter=document.querySelector('#modal-asset-footer'),modalAssetSummary=document.querySelector('#modal-asset-summary');
+const btnModalClearAssets=document.querySelector('#btn-modal-clear-assets'),btnModalConfirmAssets=document.querySelector('#btn-modal-confirm-assets');
+const assetsTrayCards=document.querySelector('#assets-tray-cards'),assetsEmptyTrigger=document.querySelector('#assets-empty-trigger'),btnClearAssets=document.querySelector('#btn-clear-assets');
 
 let currentMode = 'pure'; // 'pure' | 'graphic-text' | 'poster' | 'article-illust'
 let currentWhitespace = 'normal'; // 'normal' | 'moderate' | 'high'
+let selectedAssets = [];
 let selectedLayout = null;
 let selectedStyle = null;
 let selectedCharStyle = null;
@@ -654,6 +784,7 @@ const I18N = {{
     stylesNav: "风格画廊",
     layoutsNav: "图型画廊",
     colorsNav: "色彩画廊",
+    assetsNav: "自建图库",
     tutorialsNav: "提示词",
     wechatBtn: "💬 创作变现交流群",
     assemblerTitle: "🛠️ 提示词拼装器",
@@ -662,8 +793,15 @@ const I18N = {{
     step1Title: "出图模式与留白",
     step2Title: "画面主题与内容",
     step3Title: "画幅比例与情绪",
-    step4Title: "图型 · 风格 · 色彩搭配",
+    step4Title: "视觉资产与风格搭配",
     step5Title: "拼装生成的出图指令",
+    assetsTrayTitle: "自建图库",
+    assetsTrayDesc: "可选 · 支持多选跨媒介参考图（垫图），出图时保持主体视觉绝对一致",
+    assetsEmptyText: "点击按图添加自建资产（支持同时多选角色 IP、道具 PR、场景 SCN 基准图）",
+    addAssetsBtn: "添加自建资产",
+    clearAssetsBtn: "清空已选资产",
+    modalAssetClearBtn: "清空全部",
+    modalAssetConfirmBtn: "完成选择",
     modeLabel: "出图模式：",
     modePure: "纯图",
     modeGraphicText: "图文",
@@ -712,18 +850,21 @@ const I18N = {{
     moodEerie: "恐怖",
     moodMysterious: "神秘",
     moodIntense: "激烈",
+    slotAsset: "自建资产",
     slotLayout: "图型",
     slotStyle: "风格",
     slotCharStyle: "角色风格",
     slotSceneStyle: "场景风格",
     slotColor: "主题色",
     optional: "可选",
+    optionalAsset: "可选 ({assets_count})",
     optionalLayout: "可选 (120)",
     optionalStyle: "可选 ({styles_count})",
     optionalCharStyle: "可选 (风格/写实)",
     optionalSceneStyle: "可选 (风格/写实)",
     optionalColor: "可选 (36)",
     layoutNotApplicable: "不适用",
+    pickAssetText: "按图选择自建资产",
     pickLayoutText: "按图选择图型 (120)",
     pickStyleText: "按图选择风格 ({styles_count})",
     pickCharStyleText: "按图选择角色风格",
@@ -738,6 +879,7 @@ const I18N = {{
     guidesTitle: "📖 实战思维与技巧说明",
     formulaLabel: "示例提示词：",
     searchPlaceholder: "输入编号或名称过滤...",
+    pickerTitleAsset: "选择视觉资产（角色 / 道具 / 场景）",
     pickerTitleLayout: "选择图型 (120)",
     pickerTitleStyle: "选择手绘风格 ({styles_count})",
     pickerTitleCharStyle: "选择角色风格",
@@ -745,9 +887,13 @@ const I18N = {{
     styleConflictAlert: "角色风格与场景风格必须不同，请选择不同的风格！",
     pickerTitleColor: "选择主题色 (36)",
     filterAll: "全部",
+    filterCharacters: "角色库",
+    filterProps: "道具库",
+    filterScenes: "场景库",
     filterSocialCard: "社媒卡 (SC)",
     filterInfographic: "信息图 (IG)",
     filterComicStoryboard: "漫画分镜 (SB)",
+    filterIpCharacter: "IP形象 (IP)",
     filterBlue: "经典蓝系",
     filterGreen: "清新绿系",
     filterRed: "古典红绿",
@@ -771,6 +917,7 @@ const I18N = {{
     stylesNav: "Styles",
     layoutsNav: "Layouts",
     colorsNav: "Colors",
+    assetsNav: "Custom Library",
     tutorialsNav: "Prompts",
     wechatBtn: "💬 Creator Community",
     assemblerTitle: "🛠️ Prompt Assembler",
@@ -779,8 +926,15 @@ const I18N = {{
     step1Title: "Mode & Negative Space",
     step2Title: "Theme & Content",
     step3Title: "Aspect Ratio & Mood",
-    step4Title: "Visual Assets: Layout, Style & Color",
+    step4Title: "Visual Assets & Style Composition",
     step5Title: "Generated Prompt Command",
+    assetsTrayTitle: "Custom Library",
+    assetsTrayDesc: "Optional · Multi-select reference images to maintain consistent character, prop, and scene appearance",
+    assetsEmptyText: "Click to select visual benchmark assets (Multi-select characters, props, scenes)",
+    addAssetsBtn: "Add Assets",
+    clearAssetsBtn: "Clear Assets",
+    modalAssetClearBtn: "Clear All",
+    modalAssetConfirmBtn: "Done",
     modeLabel: "Mode:",
     modePure: "Image Only",
     modeGraphicText: "Graphic-Text",
@@ -829,18 +983,21 @@ const I18N = {{
     moodEerie: "Eerie",
     moodMysterious: "Mysterious",
     moodIntense: "Intense",
+    slotAsset: "Asset",
     slotLayout: "Layout",
     slotStyle: "Style",
     slotCharStyle: "Character Style",
     slotSceneStyle: "Scene Style",
     slotColor: "Theme Color",
     optional: "Optional",
+    optionalAsset: "Optional ({assets_count})",
     optionalLayout: "Optional (120)",
     optionalStyle: "Optional ({styles_count})",
     optionalCharStyle: "Optional (Style/Realistic)",
     optionalSceneStyle: "Optional (Style/Realistic)",
     optionalColor: "Optional (36)",
     layoutNotApplicable: "N/A",
+    pickAssetText: "Pick Custom Asset",
     pickLayoutText: "Pick Layout (120)",
     pickStyleText: "Pick Style ({styles_count})",
     pickCharStyleText: "Pick Character Style",
@@ -855,6 +1012,7 @@ const I18N = {{
     guidesTitle: "📖 Practical Guides & Principles",
     formulaLabel: "Example Prompt:",
     searchPlaceholder: "Search ID or name...",
+    pickerTitleAsset: "Select Visual Asset (Character / Prop / Scene)",
     pickerTitleLayout: "Select Layout (120)",
     pickerTitleStyle: "Select Style ({styles_count})",
     pickerTitleCharStyle: "Select Character Style",
@@ -862,9 +1020,13 @@ const I18N = {{
     styleConflictAlert: "Character style and scene style must be different!",
     pickerTitleColor: "Select Theme Color (36)",
     filterAll: "All",
+    filterCharacters: "Characters",
+    filterProps: "Props",
+    filterScenes: "Scenes",
     filterSocialCard: "Social Cards (SC)",
     filterInfographic: "Infographics (IG)",
     filterComicStoryboard: "Comic Storyboards (SB)",
+    filterIpCharacter: "IP Characters (IP)",
     filterBlue: "Classic Blue",
     filterGreen: "Fresh Green",
     filterRed: "Classic Red & Vintage",
@@ -886,6 +1048,68 @@ const I18N = {{
 }};
 
 let currentLang = localStorage.getItem('handdraw_lang') || ((navigator.language && navigator.language.startsWith('zh')) ? 'zh' : 'en');
+
+function updateModalAssetCount() {{
+  if (!modalAssetSummary) return;
+  const count = selectedAssets.length;
+  modalAssetSummary.textContent = currentLang === 'zh'
+    ? `已选择 ${{count}} 项资产`
+    : `Selected ${{count}} asset${{count === 1 ? '' : 's'}}`;
+}}
+
+function renderAssetsTray() {{
+  if (!assetsTrayCards || !assetsEmptyTrigger) return;
+  const isZh = currentLang === 'zh';
+  if (selectedAssets.length === 0) {{
+    assetsEmptyTrigger.hidden = false;
+    assetsTrayCards.hidden = true;
+    if (btnClearAssets) btnClearAssets.hidden = true;
+    assetsTrayCards.innerHTML = '';
+    return;
+  }}
+
+  assetsEmptyTrigger.hidden = true;
+  assetsTrayCards.hidden = false;
+  if (btnClearAssets) {{
+    btnClearAssets.hidden = false;
+    btnClearAssets.textContent = isZh ? `清空已选资产 (${{selectedAssets.length}})` : `Clear Assets (${{selectedAssets.length}})`;
+  }}
+
+  const cardsHtml = selectedAssets.map(item => {{
+    let badgeCls = 'is-char';
+    let badgeLabel = isZh ? `${{item.id}} 角色` : `${{item.id}} Character`;
+    if (item.id.startsWith('PR-') || item.cat === 'props') {{
+      badgeCls = 'is-prop';
+      badgeLabel = isZh ? `${{item.id}} 道具` : `${{item.id}} Prop`;
+    }} else if (item.id.startsWith('SCN-') || item.cat === 'scenes') {{
+      badgeCls = 'is-scene';
+      badgeLabel = isZh ? `${{item.id}} 场景` : `${{item.id}} Scene`;
+    }}
+    const displayName = !isZh && item.name_en ? item.name_en : item.name;
+    const removeTitle = isZh ? '移除此资产' : 'Remove';
+    return `
+      <div class="asset-tray-card" data-asset-id="${{item.id}}">
+        <div class="asset-tray-thumb-wrap">
+          <img class="asset-tray-img" src="${{item.img}}" alt="${{displayName}}">
+        </div>
+        <div class="asset-tray-info">
+          <span class="asset-badge ${{badgeCls}}">${{badgeLabel}}</span>
+          <span class="asset-tray-name" title="${{displayName}}">${{displayName}}</span>
+        </div>
+        <button type="button" class="asset-remove-btn" data-remove-asset="${{item.id}}" title="${{removeTitle}}" aria-label="${{removeTitle}}">×</button>
+      </div>
+    `;
+  }}).join('');
+
+  const moreBtnHtml = `
+    <button type="button" class="asset-tray-more" data-picker="asset">
+      <span>＋</span>
+      <span>${{isZh ? '添加更多' : 'Add More'}}</span>
+    </button>
+  `;
+
+  assetsTrayCards.innerHTML = cardsHtml + moreBtnHtml;
+}}
 
 function updatePrompt() {{
   const isZh = currentLang === 'zh';
@@ -914,6 +1138,32 @@ function updatePrompt() {{
       parts.push(isZh ? '文章插图模式' : 'Article illustration mode');
     }} else if (currentMode === 'article-cover') {{
       parts.push(isZh ? '请设计文章封面' : 'Please design an article cover');
+    }}
+  }}
+
+  // Assets (Characters / Props / Scenes)
+  if (selectedAssets && selectedAssets.length > 0) {{
+    const charIds = [];
+    const propIds = [];
+    const sceneIds = [];
+    selectedAssets.forEach(a => {{
+      if (a.id.startsWith('PR-') || a.cat === 'props') {{
+        propIds.push(a.id);
+      }} else if (a.id.startsWith('SCN-') || a.cat === 'scenes') {{
+        sceneIds.push(a.id);
+      }} else {{
+        charIds.push(a.id);
+      }}
+    }});
+    const joinSep = isZh ? '、' : ', ';
+    if (charIds.length > 0) {{
+      parts.push(isZh ? `角色：${{charIds.join(joinSep)}}` : `Character: ${{charIds.join(joinSep)}}`);
+    }}
+    if (propIds.length > 0) {{
+      parts.push(isZh ? `道具：${{propIds.join(joinSep)}}` : `Prop: ${{propIds.join(joinSep)}}`);
+    }}
+    if (sceneIds.length > 0) {{
+      parts.push(isZh ? `场景：${{sceneIds.join(joinSep)}}` : `Scene: ${{sceneIds.join(joinSep)}}`);
     }}
   }}
 
@@ -1005,6 +1255,7 @@ function updatePrompt() {{
 }}
 
 function updateSlotUI(type) {{
+  if (type === 'asset') return;
   const slotEl = document.querySelector(`#slot-${{type}}`);
   if (!slotEl) return;
   const trigger = slotEl.querySelector('.slot-trigger');
@@ -1121,7 +1372,15 @@ function openPicker(type) {{
   pickerSearch.value = '';
   pickerSearch.placeholder = I18N[currentLang].searchPlaceholder;
 
-  if (type === 'layout') {{
+  if (modalAssetFooter) {{
+    modalAssetFooter.hidden = (type !== 'asset');
+  }}
+
+  if (type === 'asset') {{
+    pickerTitle.textContent = I18N[currentLang].pickerTitleAsset;
+    renderAssetFilters();
+    updateModalAssetCount();
+  }} else if (type === 'layout') {{
     pickerTitle.textContent = I18N[currentLang].pickerTitleLayout;
     renderLayoutFilters();
   }} else if (type === 'style' || type === 'char-style' || type === 'scene-style') {{
@@ -1135,16 +1394,32 @@ function openPicker(type) {{
   pickerDialog.showModal();
 }}
 
+function renderAssetFilters() {{
+  const t = I18N[currentLang];
+  const charCount = ASSETS_DATA.filter(x => x.cat === 'characters').length;
+  const propCount = ASSETS_DATA.filter(x => x.cat === 'props').length;
+  const sceneCount = ASSETS_DATA.filter(x => x.cat === 'scenes').length;
+  pickerFilters.innerHTML = `
+    <button type="button" class="modal-filter-btn is-active" data-filter="all">${{t.filterAll}} (${{ASSETS_DATA.length}})</button>
+    <button type="button" class="modal-filter-btn" data-filter="characters">${{t.filterCharacters}} (${{charCount}})</button>
+    <button type="button" class="modal-filter-btn" data-filter="props">${{t.filterProps}} (${{propCount}})</button>
+    <button type="button" class="modal-filter-btn" data-filter="scenes">${{t.filterScenes}} (${{sceneCount}})</button>
+  `;
+  attachFilterEvents();
+}}
+
 function renderLayoutFilters() {{
   const t = I18N[currentLang];
   const scCount = LAYOUTS_DATA.filter(x => x.cat === 'social-card').length;
   const igCount = LAYOUTS_DATA.filter(x => x.cat === 'infographic').length;
   const sbCount = LAYOUTS_DATA.filter(x => x.cat === 'comic-storyboard').length;
+  const ipCount = LAYOUTS_DATA.filter(x => x.cat === 'ip-character').length;
   pickerFilters.innerHTML = `
     <button type="button" class="modal-filter-btn is-active" data-filter="all">${{t.filterAll}} (${{LAYOUTS_DATA.length}})</button>
     <button type="button" class="modal-filter-btn" data-filter="social-card">${{t.filterSocialCard}} (${{scCount}})</button>
     <button type="button" class="modal-filter-btn" data-filter="infographic">${{t.filterInfographic}} (${{igCount}})</button>
     <button type="button" class="modal-filter-btn" data-filter="comic-storyboard">${{t.filterComicStoryboard}} (${{sbCount}})</button>
+    <button type="button" class="modal-filter-btn" data-filter="ip-character">${{t.filterIpCharacter}} (${{ipCount}})</button>
   `;
   attachFilterEvents();
 }}
@@ -1186,7 +1461,9 @@ function renderPickerItems() {{
   let list = [];
   let selectedId = null;
 
-  if (currentPickerType === 'layout') {{
+  if (currentPickerType === 'asset') {{
+    list = ASSETS_DATA;
+  }} else if (currentPickerType === 'layout') {{
     list = LAYOUTS_DATA;
     selectedId = selectedLayout ? selectedLayout.id : null;
   }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
@@ -1204,7 +1481,9 @@ function renderPickerItems() {{
   const filtered = list.filter(item => {{
     if (item.isRealistic) return true;
     // Category match
-    if (currentPickerType === 'layout') {{
+    if (currentPickerType === 'asset') {{
+      if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
+    }} else if (currentPickerType === 'layout') {{
       if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
     }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
       if (currentPickerFilter !== 'all' && item.group !== currentPickerFilter) return false;
@@ -1213,18 +1492,33 @@ function renderPickerItems() {{
     }}
     // Search match
     if (query) {{
-      const idMatch = item.id.toLowerCase().includes(query);
-      const nameMatch = item.name.toLowerCase().includes(query);
+      const idMatch = item.id && item.id.toLowerCase().includes(query);
+      const nameMatch = item.name && item.name.toLowerCase().includes(query);
       const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(query);
       const refMatch = item.ref && item.ref.toLowerCase().includes(query);
-      return idMatch || nameMatch || nameEnMatch || refMatch;
+      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(query));
+      return idMatch || nameMatch || nameEnMatch || refMatch || tagsMatch;
     }}
     return true;
   }});
 
   pickerGrid.innerHTML = filtered.map(item => {{
-    const isSel = selectedId === item.id;
     const displayName = currentLang === 'en' && item.name_en ? item.name_en : item.name;
+    if (currentPickerType === 'asset') {{
+      const isSel = selectedAssets.some(x => x.id === item.id);
+      return `
+        <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}" data-id="${{item.id}}">
+          <img class="picker-card-img" src="${{item.img}}" alt="${{displayName}}">
+          <span class="picker-card-check">✓</span>
+          <div class="picker-card-info">
+            <span class="picker-card-id">${{item.id}}</span>
+            <span class="picker-card-name" title="${{displayName}}">${{displayName}}</span>
+          </div>
+        </button>
+      `;
+    }}
+
+    const isSel = selectedId === item.id;
     const badge = item.isRealistic ? '' : ((currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') ? `#${{item.id}}` : item.id);
     const badgeHtml = badge ? `<span class="picker-card-id">${{badge}}</span>` : '';
     const extraCls = item.isRealistic ? ' is-realistic' : '';
@@ -1243,6 +1537,23 @@ function renderPickerItems() {{
     card.addEventListener('click', () => {{
       const id = card.dataset.id;
       const found = list.find(x => x.id === id);
+      if (!found) return;
+
+      if (currentPickerType === 'asset') {{
+        const existIdx = selectedAssets.findIndex(x => x.id === found.id);
+        if (existIdx >= 0) {{
+          selectedAssets.splice(existIdx, 1);
+          card.classList.remove('is-selected');
+        }} else {{
+          selectedAssets.push(found);
+          card.classList.add('is-selected');
+        }}
+        updateModalAssetCount();
+        renderAssetsTray();
+        updatePrompt();
+        return;
+      }}
+
       if (currentPickerType === 'layout') selectedLayout = found;
       if (currentPickerType === 'color') selectedColor = found;
       if (currentPickerType === 'style') selectedStyle = found;
@@ -1271,8 +1582,49 @@ pickerSearch.addEventListener('input', renderPickerItems);
 pickerDialog.querySelector('.close').addEventListener('click', () => pickerDialog.close());
 pickerDialog.addEventListener('click', e => {{ if (e.target === pickerDialog) pickerDialog.close(); }});
 
+if (btnModalClearAssets) {{
+  btnModalClearAssets.addEventListener('click', () => {{
+    selectedAssets = [];
+    updateModalAssetCount();
+    renderPickerItems();
+    renderAssetsTray();
+    updatePrompt();
+  }});
+}}
+
+if (btnModalConfirmAssets) {{
+  btnModalConfirmAssets.addEventListener('click', () => {{
+    pickerDialog.close();
+  }});
+}}
+
 // Triggers & Clears
 document.addEventListener('click', e => {{
+  const removeAssetBtn = e.target.closest('[data-remove-asset]');
+  if (removeAssetBtn) {{
+    const id = removeAssetBtn.dataset.removeAsset;
+    selectedAssets = selectedAssets.filter(x => x.id !== id);
+    renderAssetsTray();
+    updatePrompt();
+    if (pickerDialog.open && currentPickerType === 'asset') {{
+      updateModalAssetCount();
+      renderPickerItems();
+    }}
+    return;
+  }}
+
+  const clearAssetsBtn = e.target.closest('#btn-clear-assets');
+  if (clearAssetsBtn) {{
+    selectedAssets = [];
+    renderAssetsTray();
+    updatePrompt();
+    if (pickerDialog.open && currentPickerType === 'asset') {{
+      updateModalAssetCount();
+      renderPickerItems();
+    }}
+    return;
+  }}
+
   const trigger = e.target.closest('[data-picker]');
   if (trigger) {{
     if (trigger.dataset.picker === 'layout' && (currentMode === 'article-illust' || currentMode === 'article-cover')) return;
@@ -1473,6 +1825,7 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
 }});
 
 document.querySelector('#btn-reset').addEventListener('click', () => {{
+  selectedAssets = [];
   selectedLayout = null;
   selectedStyle = null;
   selectedCharStyle = null;
@@ -1492,6 +1845,7 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
     if (btnClearMood) btnClearMood.hidden = true;
     document.querySelectorAll('.mood-preset-btn').forEach(b => b.classList.remove('is-active'));
   }}
+  renderAssetsTray();
   updateSlotUI('layout');
   updateSlotUI('style');
   updateSlotUI('char-style');
@@ -1499,6 +1853,11 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
   updateSlotUI('color');
   setWhitespace('normal');
   setMode('pure');
+  try {{
+    if (window.history && window.history.replaceState && window.location.search) {{
+      window.history.replaceState({{}}, document.title, window.location.pathname);
+    }}
+  }} catch (e) {{}}
 }});
 
 // Copy Assembled Prompt
@@ -1580,6 +1939,8 @@ function applyLang(lang) {{
   }});
 
   if (langBtn) langBtn.textContent = t.langBtn;
+  renderAssetsTray();
+  updateModalAssetCount();
   updateSlotUI('layout');
   updateSlotUI('style');
   updateSlotUI('char-style');
@@ -1587,7 +1948,11 @@ function applyLang(lang) {{
   updateSlotUI('color');
   updatePrompt();
   if (pickerDialog.open) {{
-    if (currentPickerType === 'layout') {{
+    if (currentPickerType === 'asset') {{
+      pickerTitle.textContent = t.pickerTitleAsset;
+      renderAssetFilters();
+      updateModalAssetCount();
+    }} else if (currentPickerType === 'layout') {{
       pickerTitle.textContent = t.pickerTitleLayout;
       renderLayoutFilters();
     }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
@@ -1606,6 +1971,61 @@ if (langBtn) {{
 }}
 setMode(currentMode);
 applyLang(currentLang);
+
+// URL Query Parameter Integration
+const urlParams = new URLSearchParams(window.location.search);
+const assetParam = urlParams.get('asset');
+const styleParam = urlParams.get('style');
+const layoutParam = urlParams.get('layout');
+const colorParam = urlParams.get('color');
+
+if (assetParam) {{
+  const tokens = assetParam.split(/[,，\\s]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
+  tokens.forEach(tok => {{
+    const found = ASSETS_DATA.find(x => x.id.toUpperCase() === tok);
+    if (found && !selectedAssets.some(x => x.id === found.id)) {{
+      selectedAssets.push(found);
+    }}
+  }});
+  renderAssetsTray();
+}}
+if (styleParam) {{
+  const clean = styleParam.trim().replace(/^#/, '');
+  const norm = clean.padStart(3, '0');
+  const found = STYLES_DATA.find(x => x.id === norm || x.id === styleParam.trim());
+  if (found) {{
+    selectedStyle = found;
+  }}
+}}
+if (layoutParam) {{
+  const norm = layoutParam.trim().toUpperCase();
+  const found = LAYOUTS_DATA.find(x => x.id.toUpperCase() === norm);
+  if (found) {{
+    selectedLayout = found;
+  }}
+}}
+if (colorParam) {{
+  const norm = colorParam.trim().toUpperCase();
+  const found = COLORS_DATA.find(x => x.id.toUpperCase() === norm);
+  if (found) {{
+    selectedColor = found;
+  }}
+}}
+
+if (assetParam || styleParam || layoutParam || colorParam) {{
+  renderAssetsTray();
+  updateSlotUI('layout');
+  updateSlotUI('style');
+  updateSlotUI('char-style');
+  updateSlotUI('scene-style');
+  updateSlotUI('color');
+  updatePrompt();
+  try {{
+    if (window.history && window.history.replaceState && window.location.search) {{
+      window.history.replaceState({{}}, document.title, window.location.pathname);
+    }}
+  }} catch (e) {{}}
+}}
 
 // Copy for retained tutorial cards
 const COPY_ICON = '{COPY_ICON_SVG}';

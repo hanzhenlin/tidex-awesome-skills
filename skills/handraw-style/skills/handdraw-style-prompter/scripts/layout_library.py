@@ -9,7 +9,7 @@ from pathlib import Path
 SKILL = Path(__file__).resolve().parents[1]
 REFERENCES = SKILL / "references"
 INDEX = REFERENCES / "layouts.json"
-VALID_CATEGORIES = {"social-card", "infographic", "comic-storyboard"}
+VALID_CATEGORIES = {"social-card", "infographic", "comic-storyboard", "ip-character"}
 LANGUAGE_MARKER = re.compile(r"<!--\s*(zh|en)\s*-->")
 CJK = re.compile(r"[\u3400-\u9fff]")
 
@@ -45,9 +45,9 @@ def load_layouts() -> list[dict[str, object]]:
         image = item.get("image")
         prompt_file = item.get("prompt_file")
         keywords = item.get("keywords")
-        if not re.fullmatch(r"(?:SC|IG|SB)-\d{3}", identifier):
+        if not re.fullmatch(r"(?:SC|IG|SB|IP)-\d{3}", identifier):
             raise ValueError(f"Invalid layout ID: {identifier or item.get('id')!r}")
-        expected_prefix = "SC" if category == "social-card" else "IG" if category == "infographic" else "SB" if category == "comic-storyboard" else ""
+        expected_prefix = "SC" if category == "social-card" else "IG" if category == "infographic" else "SB" if category == "comic-storyboard" else "IP" if category == "ip-character" else ""
         if not expected_prefix or not identifier.startswith(f"{expected_prefix}-"):
             raise ValueError(f"Layout {identifier} has an invalid category.")
         if identifier in seen:
@@ -75,4 +75,4 @@ def resolve_layout(identifier: str) -> dict[str, object]:
     for layout in load_layouts():
         if layout["id"] == normalized:
             return layout
-    raise ValueError(f"Unknown layout ID: {identifier}. Use a listed SC- or IG- identifier.")
+    raise ValueError(f"Unknown layout ID: {identifier}. Use a listed SC-, IG-, SB-, or IP- identifier.")

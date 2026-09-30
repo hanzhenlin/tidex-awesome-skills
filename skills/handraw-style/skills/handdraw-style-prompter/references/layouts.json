@@ -911,6 +911,21 @@
     "name_en": "2.5D Isometric Miniature Scene"
   },
   {
+    "id": "IG-036",
+    "category": "infographic",
+    "name": "角色形象三视图基准图",
+    "image": "../../../images/layouts/infographics/IG-036.webp",
+    "prompt_file": "layouts/IG-036.md",
+    "keywords": [
+      "三视图",
+      "角色三视图",
+      "形象基准图",
+      "正视图侧视图背视图",
+      "头像特写"
+    ],
+    "name_en": "Character Model Sheet & Turnaround"
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",
@@ -1929,5 +1944,23 @@
       "视觉律动"
     ],
     "name_en": "Non-Rectangular Geometric Mosaic"
+  },
+  {
+    "id": "IP-001",
+    "category": "ip-character",
+    "name": "IP定位卡",
+    "image": "../../../images/layouts/ip-characters/IP-001.webp",
+    "prompt_file": "layouts/IP-001.md",
+    "keywords": [
+      "IP定位卡",
+      "品牌封面感",
+      "纯色背景",
+      "大字排版",
+      "非人吉祥物",
+      "视觉隐喻",
+      "受众画像",
+      "调性标签"
+    ],
+    "name_en": "IP Positioning Card"
   }
 ]

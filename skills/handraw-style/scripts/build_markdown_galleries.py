@@ -40,6 +40,9 @@ LAYOUT_CATEGORIES = [
     ("comic-storyboard", "3. 漫画分镜（68 种）", "3. Comic Storyboards (68 Layouts)",
      "适合多格叙事、剧情转折、条漫分镜及动态视觉表现。结构包含规则四格、起承转合、大格冲击、对角切割等专业分镜。",
      "Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic pacing. Includes standard 4-panel grids, dramatic wide-angle focus, diagonal cuts, and manga storyboards."),
+    ("ip-character", "4. IP形象（1 种）", "4. IP Characters (1 Layouts)",
+     "适合 IP 形象设计、吉祥物定位卡、角色档案及形象规范展示。结构包含主形象大图、定位金句、受众画像与多视角展示。",
+     "Ideal for IP character design, mascot positioning cards, character profiles, and specification guides. Includes hero character showcase, positioning slogans, audience profiles, and multi-angle views."),
 ]
 
 
@@ -116,12 +119,14 @@ def build_layouts_md() -> None:
         "social-card": "social-cards",
         "infographic": "infographics",
         "comic-storyboard": "comic-storyboards",
+        "ip-character": "ip-characters",
     }
     cols = 3
     counts = {
         "social-card": sum(l["category"] == "social-card" for l in layouts),
         "infographic": sum(l["category"] == "infographic" for l in layouts),
         "comic-storyboard": sum(l["category"] == "comic-storyboard" for l in layouts),
+        "ip-character": sum(l["category"] == "ip-character" for l in layouts),
     }
     categories = [
         ("social-card", f"1. 社媒卡（{counts['social-card']} 种）", f"1. Social Cards ({counts['social-card']} Layouts)",
@@ -133,6 +138,9 @@ def build_layouts_md() -> None:
         ("comic-storyboard", f"3. 漫画分镜（{counts['comic-storyboard']} 种）", f"3. Comic Storyboards ({counts['comic-storyboard']} Layouts)",
          "适合多格叙事、剧情转折、条漫分镜及动态视觉表现。结构包含规则四格、起承转合、大格冲击、对角切割等专业分镜。",
          "Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic pacing. Includes standard 4-panel grids, dramatic wide-angle focus, diagonal cuts, and manga storyboards."),
+        ("ip-character", f"4. IP形象（{counts['ip-character']} 种）", f"4. IP Characters ({counts['ip-character']} Layouts)",
+         "适合 IP 形象设计、吉祥物定位卡、角色档案及形象规范展示。结构包含主形象大图、定位金句、受众画像与多视角展示。",
+         "Ideal for IP character design, mascot positioning cards, character profiles, and specification guides. Includes hero character showcase, positioning slogans, audience profiles, and multi-angle views."),
     ]
 
     # 1. Chinese LAYOUTS.md
@@ -143,7 +151,7 @@ def build_layouts_md() -> None:
         '',
         f"# 排版图型完整图鉴（{len(layouts)} 种）",
         "",
-        f"> 这里收录了本库全部 **{len(layouts)} 种排版图型**（社媒卡、信息图、漫画分镜）的图片预览与排版提示词。在 AI 生图时直接指定图型编号（如 `SC-001`、`IG-003`、`SB-002`），即可精确控制画面的构图版式与排版层次。",
+        f"> 这里收录了本库全部 **{len(layouts)} 种排版图型**（社媒卡、信息图、漫画分镜、IP形象）的图片预览与排版提示词。在 AI 生图时直接指定图型编号（如 `SC-001`、`IG-003`、`SB-002`、`IP-001`），即可精确控制画面的构图版式与排版层次。",
         "",
         "> 💡 **排版图型架构机制**：",
         "> - **确定性静态排版（纯文本直接拼接型）**：包括 `SC-001`~`SC-020`、`IG` 系列与 `SB` 系列等绝大多数图型，拓扑单一固定，模板直接拼接画风与主题；",
@@ -154,6 +162,7 @@ def build_layouts_md() -> None:
         f"- [1. 社媒卡（{counts['social-card']} 种）](#social-cards)",
         f"- [2. 信息图（{counts['infographic']} 种）](#infographics)",
         f"- [3. 漫画分镜（{counts['comic-storyboard']} 种）](#comic-storyboards)",
+        f"- [4. IP形象（{counts['ip-character']} 种）](#ip-characters)",
         "",
         "---",
         "",
@@ -217,6 +226,7 @@ def build_layouts_md() -> None:
         f"- [1. Social Cards ({counts['social-card']} Layouts)](#social-cards)",
         f"- [2. Infographics ({counts['infographic']} Layouts)](#infographics)",
         f"- [3. Comic Storyboards ({counts['comic-storyboard']} Layouts)](#comic-storyboards)",
+        f"- [4. IP Characters ({counts['ip-character']} Layouts)](#ip-characters)",
         "",
         "---",
         "",

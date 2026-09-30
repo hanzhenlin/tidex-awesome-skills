@@ -24,3 +24,7 @@ Desktop.ini
 .agents/
 .workbuddy/
 download.txt
+
+# Custom library local directory configuration & cache
+*custom_library_config.json
+images/custom/

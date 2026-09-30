@@ -26,6 +26,7 @@ def main() -> None:
     subprocess.run(python + [str(SKILL / "scripts" / "build_library.py")], check=True)
     subprocess.run(python + [str(SKILL / "scripts" / "build_layout_gallery.py")], check=True)
     subprocess.run(python + [str(SKILL / "scripts" / "build_color_gallery.py")], check=True)
+    subprocess.run(python + [str(SKILL / "scripts" / "build_assets_gallery.py")], check=True)
     subprocess.run(python + [str(SKILL / "scripts" / "build_tutorial_gallery.py")], check=True)
     styles = json.loads((SKILL / "references" / "styles.json").read_text(encoding="utf-8"))
     attribution = json.loads((SKILL / "references" / "attribution.json").read_text(encoding="utf-8"))
@@ -469,6 +470,49 @@ def main() -> None:
     if 'href="tutorials.html"' not in color_gallery:
         fail("color gallery is missing link to tutorials.html")
 
+    characters_file = SKILL / "references" / "characters.json"
+    if not characters_file.exists():
+        fail("characters.json is missing")
+    characters = json.loads(characters_file.read_text(encoding="utf-8"))
+    if not any(c["id"] == "IP-001" for c in characters):
+        fail("IP-001 preset character is missing in characters.json")
+    for c in characters:
+        c_img = ROOT / str(c["image"]).replace("../../../", "")
+        if not c_img.is_file():
+            fail(f"character image is missing for {c['id']}: {c_img}")
+
+    props_file = SKILL / "references" / "props.json"
+    if not props_file.exists():
+        fail("props.json is missing")
+    scenes_file = SKILL / "references" / "scenes.json"
+    if not scenes_file.exists():
+        fail("scenes.json is missing")
+
+    assets_gallery_file = SKILL / "gallery" / "assets.html"
+    if not assets_gallery_file.exists():
+        fail("assets.html is missing")
+    assets_gallery = assets_gallery_file.read_text(encoding="utf-8")
+    for token in ['href="index.html"', 'href="layouts.html"', 'href="colors.html"', 'href="assets.html" aria-current="page"', 'href="tutorials.html"', "IP-001", "IG-036", "init-notice-banner", "guide-steps-list", 'data-tab="characters"', 'data-tab="props"', 'data-tab="scenes"', "preview-dialog"]:
+        if token not in assets_gallery:
+            fail(f"assets gallery is missing {token}")
+    if "select-dir-btn" in assets_gallery or "add-char-btn" in assets_gallery:
+        fail("assets gallery should not contain directory selection or web import form")
+
+    characters_redirect_file = SKILL / "gallery" / "characters.html"
+    if not characters_redirect_file.exists():
+        fail("characters.html redirect is missing")
+    if 'url=assets.html' not in characters_redirect_file.read_text(encoding="utf-8"):
+        fail("characters.html must redirect to assets.html")
+
+    if 'href="assets.html"' not in gallery:
+        fail("style gallery is missing link to assets.html")
+    if 'href="assets.html"' not in layout_gallery:
+        fail("layout gallery is missing link to assets.html")
+    if 'href="assets.html"' not in color_gallery:
+        fail("color gallery is missing link to assets.html")
+    if 'href="assets.html"' not in tutorial_gallery:
+        fail("tutorial gallery is missing link to assets.html")
+
 
     import yaml
     for sf in [
@@ -478,6 +522,8 @@ def main() -> None:
         ROOT / "skills" / "poster-prompt-generator" / "SKILL.md",
         ROOT / "skills" / "article-cover-designer" / "SKILL.md",
         ROOT / "skills" / "style-fusion-prompter" / "SKILL.md",
+        ROOT / "skills" / "custom-asset-manager" / "SKILL.md",
+        ROOT / "skills" / "ip-designer" / "SKILL.md",
     ]:
         if sf.exists():
             content = sf.read_text(encoding="utf-8")
@@ -506,7 +552,7 @@ def main() -> None:
                 if drive_leak_pattern.search(line):
                     fail(f"Local drive path leaked in tracked file {rel_path}:{line_no}: {line.strip()[:100]}")
 
-    print(f"PASS: {total_styles} styles, {len(layouts)} layouts, {len(colors)} colors, tutorials section, gallery coverage, prompt contract, YAML frontmatter, path leak guard, and invalid-ID guards.")
+    print(f"PASS: {total_styles} styles, {len(layouts)} layouts, {len(colors)} colors, {len(characters)} preset characters, custom assets library (characters/props/scenes), tutorials section, gallery coverage, prompt contract, YAML frontmatter, path leak guard, and invalid-ID guards.")
 
 
 if __name__ == "__main__":

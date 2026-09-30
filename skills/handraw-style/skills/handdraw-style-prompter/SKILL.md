@@ -69,9 +69,9 @@ Users can browse `gallery/index.html` for numbered style contact sheets, `galler
 
 - A layout ID selects composition and text structure, not illustration style. Use its prompt file verbatim in the selected output language, then append the user's theme as the only source of subject matter and copy.
 - **排版图型的两大架构分类 (Dual Architecture of Layout Patterns)**：
-  本库全部 124 种排版图型在底层设计与执行机制上明确划分为两大类：
+  本库全部 125 种排版图型在底层设计与执行机制上明确划分为两大类：
   1. **确定性静态排版（纯文本直接拼接型 · Static Templates）**：
-     - 包括绝大多数常规图型（如 `SC-001`~`SC-020` 等上文下图/双格/签名卡、`IG-001`~`IG-035` 信息图、`SB-001`~`SB-068` 漫画分镜）。
+     - 包括绝大多数常规图型（如 `SC-001`~`SC-020` 等上文下图/双格/签名卡、`IG-001`~`IG-036` 信息图、`SB-001`~`SB-068` 漫画分镜）。
      - 构图拓扑关系单一固定，生图模型能直白无误地理解。处理方式为拿来即用，直接提取其 prompt 模板并拼接指定画风与主题输出。
   2. **高维动态解析型排版（Skill 级动态解析决策型 · Generative Frameworks）**：
      - 代表图型为 `SC-021`（自适应双拼照片转译社媒卡）。
@@ -120,11 +120,59 @@ Do not invent visual traits, extra style descriptions, generic quality/compositi
 
 In `pure-image` mode, describe only concrete visible content implied by the theme—subjects, actions, objects, environment, and mood when needed. In `graphic-text` mode, use the user's theme verbatim and leave all semantic expansion to the fixed suffix. In both modes, leave composition, layout, visual richness, quality, and rendering decisions to the image AI unless a layout ID was explicitly selected. Respect a user-specified text requirement but do not invent copy.
 
+## 自建图库工作流 (Custom Asset Library Workflow)
+
+自建图库（包含**角色库**、**道具库**、**场景库**三大子库）是用户沉淀专属视觉资产的核心机制。
+**核心原则**：自建图库中的所有图片均以**纯参考图（垫图）**形式参与后续出图，库内无需维护冗长的特征描述字段，确保跨媒介调用时形象与视觉特征零漂移。
+
+### 1. 初始化与挂载自建图库目录 (Zero-Conflict Architecture)
+为了确保用户即使在更新 skill（如 `git pull`、重新克隆或重新安装）时自建资产永不丢失、且绝对不与官方预置产生 git 冲突，自建图库采用多级持久化与解耦存储架构：
+- **全局配置层**：保存在用户系统根目录 `~/.handraw-style/config.json`，独立于代码仓库，更新代码或重新安装绝不覆盖；
+- **工作区容灾层**：在工作区生成 `.custom_library_config.json`（已加入 `.gitignore`，绝不随 Git 泄漏与提交）；
+- **自包含资产清单**：在用户指定的外部图库目录生成自包含的 `library.json`，方便跨设备迁移；
+- **官方预置隔离保护**：官方预置清单（`references/characters.json`）保持纯净只读，用户资产完全动态聚合，`git pull` 永远无冲突、平滑快进。
+
+当用户输入 `请帮我初始化图库目录：d:\path\to\tuku` 或类似指令时：
+1. 调用 `custom_library_manager.py` 的 `init_or_attach_library(target_path)`：
+   - 自动在目标目录下创建 `characters/`、`props/`、`scenes/` 及 `library.json`；
+   - 写入全局配置文件与工作区配置文件；
+   - 支持幂等执行：若指定的是已有图库目录，自动检索现有资产并完成挂载。
+2. 运行 `build_assets_gallery.py` 动态聚合官方预置与自建资产，实时刷新 `assets.html` 画廊。
+
+### 2. 角色库创建与归档方式
+- **创建三视图**：
+  用户添加一张角色参考图到 Codex，然后输入提示词：
+  `图型：IG-036，其他你帮我设计`
+  AI 结合参考图及 IG-036（角色形象三视图基准图模板），输出包含脖子以上近照 + 全身正视、侧视、背视的基准图。
+- **保存到自建图库**：
+  生成图片后，或直接上传已有图片到 Codex，输入提示词：
+  `保存图片到角色库，名称：xxx`
+  AI 自动调用 `custom_library_manager.save_asset("characters", name, image_path)`：
+  1. 计算下一个顺序 ID（如 `IP-002`，与官方预置不冲突）；
+  2. 将图片转存至用户外部图库的 `characters/IP-xxx.webp`；
+  3. 同步镜像至离线预览缓存 `images/custom/characters/IP-xxx.webp`（已被 `.gitignore` 忽略）；
+  4. 写入外部图库的 `library.json`；
+  5. 自动重构画廊，刷新 `assets.html`。
+
+### 3. 道具库与场景库保存流程
+- **保存道具**：用户输入 `保存图片到道具库，名称：xxx`。
+  调用 `save_asset("props", name, image_path)`，生成 `PR-xxx` 编号，归档至外部图库并刷新画廊。
+- **保存场景**：用户输入 `保存图片到场景库，名称：xxx`。
+  调用 `save_asset("scenes", name, image_path)`，生成 `SCN-xxx` 编号，归档至外部图库并刷新画廊。
+
+### 4. 出图时的垫图注入机制
+当用户在出图提示词中指定角色编号（如 `IP-001`、`IP-002`）、道具编号（如 `PR-001`）或场景编号（如 `SCN-001`）时：
+- **基准图路径解析**：
+  直接调用 `custom_library_manager.get_asset(asset_id)`，即可自动解析其基准图文件物理路径（自建资产位于外部图库 `<tuku_dir>/<category>/<ID>.webp` 及 `images/custom/<category>/<ID>.webp`，官方预置位于 `images/<category>/<ID>.webp`）。
+- **零冗余外貌描述**：无需在提示词中追加冗余的自然语言外貌特征，防止外貌漂移与多余文字污染；
+- **垫图输入**：直接将解析得到的本地基准图文件作为生图工具（如 GPT Image、Midjourney、Flux 等）的**参考图（Image Reference / 垫图）**输入，实现纯视觉维度的精准一致性约束。
+
 ## Utilities
 
 - From the installed package root, rebuild the derived index and gallery: `python skills/handdraw-style-prompter/scripts/build_library.py`
 - Rebuild the layout gallery: `python skills/handdraw-style-prompter/scripts/build_layout_gallery.py`
 - Rebuild the color gallery: `python skills/handdraw-style-prompter/scripts/build_color_gallery.py`
+- Rebuild the custom assets gallery: `python skills/handdraw-style-prompter/scripts/build_assets_gallery.py`
 - Split contact sheets into numbered single images: `python skills/handdraw-style-prompter/scripts/split_contact_sheets.py`
 - Validate all source/index/gallery invariants: `python skills/handdraw-style-prompter/scripts/validate_library.py`
 - Produce a deterministic CLI prompt draft: `python skills/handdraw-style-prompter/scripts/prompt_style.py --style 18 --theme "秋天的第一杯奶茶"`
