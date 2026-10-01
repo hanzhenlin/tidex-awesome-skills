@@ -69,9 +69,9 @@ Users can browse `gallery/index.html` for numbered style contact sheets, `galler
 
 - A layout ID selects composition and text structure, not illustration style. Use its prompt file verbatim in the selected output language, then append the user's theme as the only source of subject matter and copy.
 - **排版图型的两大架构分类 (Dual Architecture of Layout Patterns)**：
-  本库全部 125 种排版图型在底层设计与执行机制上明确划分为两大类：
+  本库全部 136 种排版图型在底层设计与执行机制上明确划分为两大类：
   1. **确定性静态排版（纯文本直接拼接型 · Static Templates）**：
-     - 包括绝大多数常规图型（如 `SC-001`~`SC-020` 等上文下图/双格/签名卡、`IG-001`~`IG-036` 信息图、`SB-001`~`SB-068` 漫画分镜）。
+     - 包括绝大多数常规图型（如 `SC-001`~`SC-022` 社媒卡、`IG-001`~`IG-035` 信息图、`SB-001`~`SB-068` 漫画分镜、`IP-001`~`IP-012` IP设计）。
      - 构图拓扑关系单一固定，生图模型能直白无误地理解。处理方式为拿来即用，直接提取其 prompt 模板并拼接指定画风与主题输出。
   2. **高维动态解析型排版（Skill 级动态解析决策型 · Generative Frameworks）**：
      - 代表图型为 `SC-021`（自适应双拼照片转译社媒卡）。
@@ -142,8 +142,8 @@ In `pure-image` mode, describe only concrete visible content implied by the them
 ### 2. 角色库创建与归档方式
 - **创建三视图**：
   用户添加一张角色参考图到 Codex，然后输入提示词：
-  `图型：IG-036，其他你帮我设计`
-  AI 结合参考图及 IG-036（角色形象三视图基准图模板），输出包含脖子以上近照 + 全身正视、侧视、背视的基准图。
+  `图型：IP-002，其他你帮我设计`
+  AI 结合参考图及 IP-002（角色形象三视图基准图模板），输出包含脖子以上近照 + 全身正视、侧视、背视的基准图。
 - **保存到自建图库**：
   生成图片后，或直接上传已有图片到 Codex，输入提示词：
   `保存图片到角色库，名称：xxx`

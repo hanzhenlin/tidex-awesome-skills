@@ -122,7 +122,7 @@ def init_or_attach_library(target_dir: str | Path) -> dict[str, object]:
             cat_folder = target_path / cat
             for img in sorted(cat_folder.glob("*.webp")):
                 base_name = img.stem
-                if cat == "characters" and base_name == "IP-001":
+                if cat == "characters" and base_name in ("IP-001", "CH-001"):
                     continue
                 manifest_data[cat].append({
                     "id": base_name,
@@ -235,7 +235,7 @@ def load_custom_assets() -> tuple[list[dict[str, object]], list[dict[str, object
 def get_next_id(category: str) -> str:
     """Compute next sequential ID for category, accounting for presets and custom items."""
     prefixes = {
-        "characters": "IP",
+        "characters": "CH",
         "props": "PR",
         "scenes": "SCN"
     }

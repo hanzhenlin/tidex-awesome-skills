@@ -474,8 +474,8 @@ def main() -> None:
     if not characters_file.exists():
         fail("characters.json is missing")
     characters = json.loads(characters_file.read_text(encoding="utf-8"))
-    if not any(c["id"] == "IP-001" for c in characters):
-        fail("IP-001 preset character is missing in characters.json")
+    if not any(c["id"] == "CH-001" for c in characters):
+        fail("CH-001 preset character is missing in characters.json")
     for c in characters:
         c_img = ROOT / str(c["image"]).replace("../../../", "")
         if not c_img.is_file():
@@ -492,7 +492,7 @@ def main() -> None:
     if not assets_gallery_file.exists():
         fail("assets.html is missing")
     assets_gallery = assets_gallery_file.read_text(encoding="utf-8")
-    for token in ['href="index.html"', 'href="layouts.html"', 'href="colors.html"', 'href="assets.html" aria-current="page"', 'href="tutorials.html"', "IP-001", "IG-036", "init-notice-banner", "guide-steps-list", 'data-tab="characters"', 'data-tab="props"', 'data-tab="scenes"', "preview-dialog"]:
+    for token in ['href="index.html"', 'href="layouts.html"', 'href="colors.html"', 'href="assets.html" aria-current="page"', 'href="tutorials.html"', "CH-001", "IP-002", "init-notice-banner", "guide-steps-list", 'data-tab="characters"', 'data-tab="props"', 'data-tab="scenes"', "preview-dialog"]:
         if token not in assets_gallery:
             fail(f"assets gallery is missing {token}")
     if "select-dir-btn" in assets_gallery or "add-char-btn" in assets_gallery:

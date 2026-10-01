@@ -70,8 +70,15 @@ def load_layouts() -> list[dict[str, object]]:
     return resolved
 
 
+LAYOUT_ALIASES: dict[str, str] = {
+    "IG-036": "IP-002",
+    "SC-023": "IP-001",
+}
+
+
 def resolve_layout(identifier: str) -> dict[str, object]:
     normalized = identifier.strip().upper()
+    normalized = LAYOUT_ALIASES.get(normalized, normalized)
     for layout in load_layouts():
         if layout["id"] == normalized:
             return layout

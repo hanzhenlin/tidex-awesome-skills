@@ -911,21 +911,6 @@
     "name_en": "2.5D Isometric Miniature Scene"
   },
   {
-    "id": "IG-036",
-    "category": "infographic",
-    "name": "角色形象三视图基准图",
-    "image": "../../../images/layouts/infographics/IG-036.webp",
-    "prompt_file": "layouts/IG-036.md",
-    "keywords": [
-      "三视图",
-      "角色三视图",
-      "形象基准图",
-      "正视图侧视图背视图",
-      "头像特写"
-    ],
-    "name_en": "Character Model Sheet & Turnaround"
-  },
-  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",
@@ -1962,5 +1947,214 @@
       "调性标签"
     ],
     "name_en": "IP Positioning Card"
+  },
+  {
+    "id": "IP-002",
+    "category": "ip-character",
+    "name": "角色形象三视图基准图",
+    "image": "../../../images/layouts/ip-characters/IP-002.webp",
+    "prompt_file": "layouts/IP-002.md",
+    "keywords": [
+      "三视图",
+      "角色三视图",
+      "形象基准图",
+      "正视图侧视图背视图",
+      "头像特写"
+    ],
+    "name_en": "Character Model Sheet & Turnaround"
+  },
+  {
+    "id": "IP-003",
+    "category": "ip-character",
+    "name": "16宫格角色微信表情包",
+    "image": "../../../images/layouts/ip-characters/IP-003.webp",
+    "prompt_file": "layouts/IP-003.md",
+    "keywords": [
+      "16宫格",
+      "微信表情包",
+      "表情包",
+      "角色表情",
+      "4x4宫格",
+      "日常互动",
+      "贴纸设计"
+    ],
+    "name_en": "16-Grid Character WeChat Sticker Sheet"
+  },
+  {
+    "id": "IP-004",
+    "category": "ip-character",
+    "name": "IP服装与道具卡",
+    "image": "../../../images/layouts/ip-characters/IP-004.webp",
+    "prompt_file": "layouts/IP-004.md",
+    "keywords": [
+      "服装与道具卡",
+      "常服搭配",
+      "随身道具",
+      "IP设计手册",
+      "角色服装",
+      "道具展示",
+      "Character Bible"
+    ],
+    "name_en": "IP Outfit & Props Card"
+  },
+  {
+    "id": "IP-005",
+    "category": "ip-character",
+    "name": "IP内容传播示范卡",
+    "image": "../../../images/layouts/ip-characters/IP-005.webp",
+    "prompt_file": "layouts/IP-005.md",
+    "keywords": [
+      "内容传播卡",
+      "社交平台单图宣传",
+      "封面传播",
+      "6宫格矩阵",
+      "社媒封面",
+      "IP传播手册",
+      "Character Bible"
+    ],
+    "name_en": "IP Content Communication Showcase Card"
+  },
+  {
+    "id": "IP-006",
+    "category": "ip-character",
+    "name": "IP角色家族卡",
+    "image": "../../../images/layouts/ip-characters/IP-006.webp",
+    "prompt_file": "layouts/IP-006.md",
+    "keywords": [
+      "角色家族卡",
+      "家族卡",
+      "系列化延展",
+      "群像展示",
+      "全家福",
+      "日常小剧场",
+      "IP设计手册",
+      "Character Bible"
+    ],
+    "name_en": "IP Character Family Lineup Card"
+  },
+  {
+    "id": "IP-007",
+    "category": "ip-character",
+    "name": "IP商业应用卡",
+    "image": "../../../images/layouts/ip-characters/IP-007.webp",
+    "prompt_file": "layouts/IP-007.md",
+    "keywords": [
+      "商业应用卡",
+      "周边衍生",
+      "产品落地",
+      "Mockup",
+      "实体周边",
+      "周边开发",
+      "IP设计手册",
+      "Character Bible"
+    ],
+    "name_en": "IP Commercial Mockup Card"
+  },
+  {
+    "id": "IP-008",
+    "category": "ip-character",
+    "name": "IP角色关系卡",
+    "image": "../../../images/layouts/ip-characters/IP-008.webp",
+    "prompt_file": "layouts/IP-008.md",
+    "keywords": [
+      "角色关系卡",
+      "相处机制",
+      "主角与搭档",
+      "互动模式",
+      "微缩剧场",
+      "IP设计手册",
+      "Character Bible"
+    ],
+    "name_en": "IP Character Relationship Card"
+  },
+  {
+    "id": "IP-009",
+    "category": "ip-character",
+    "name": "IP角色一日生活相册",
+    "image": "../../../images/layouts/ip-characters/IP-009.webp",
+    "prompt_file": "layouts/IP-009.md",
+    "keywords": [
+      "一日生活相册",
+      "iPhone相册",
+      "生活记录",
+      "18宫格照片流",
+      "手机截屏",
+      "角色日常",
+      "时间线记录",
+      "IP设计手册"
+    ],
+    "name_en": "IP Character A Day in the Life Photo Album"
+  },
+  {
+    "id": "IP-010",
+    "category": "ip-character",
+    "name": "IP角色社交圈动态卡",
+    "image": "../../../images/layouts/ip-characters/IP-010.webp",
+    "prompt_file": "layouts/IP-010.md",
+    "keywords": [
+      "朋友圈动态卡",
+      "微信朋友圈",
+      "社交圈动态",
+      "朋友视角",
+      "手机截屏",
+      "日常抓拍",
+      "第三方侧写",
+      "IP设计手册"
+    ],
+    "name_en": "IP Character Social Feed Moments Card"
+  },
+  {
+    "id": "IP-011",
+    "category": "ip-character",
+    "name": "IP角色微信群聊界面卡",
+    "image": "../../../images/layouts/ip-characters/IP-011.webp",
+    "prompt_file": "layouts/IP-011.md",
+    "keywords": [
+      "微信群聊",
+      "群聊截屏",
+      "聊天界面",
+      "好友互动",
+      "角色日常",
+      "表情包互动",
+      "社交对话",
+      "IP设计手册"
+    ],
+    "name_en": "IP Character WeChat Group Chat Interface Card"
+  },
+  {
+    "id": "IP-012",
+    "category": "ip-character",
+    "name": "IP角色小红书主页卡",
+    "image": "../../../images/layouts/ip-characters/IP-012.webp",
+    "prompt_file": "layouts/IP-012.md",
+    "keywords": [
+      "小红书主页",
+      "个人主页",
+      "社媒账号",
+      "应用截屏",
+      "爆款笔记",
+      "内容流",
+      "粉丝运营",
+      "IP设计手册"
+    ],
+    "name_en": "IP Character Xiaohongshu Profile Interface Card"
+  },
+  {
+    "id": "IP-013",
+    "category": "ip-character",
+    "name": "IP招牌体态与动态力线卡",
+    "image": "../../../images/layouts/ip-characters/IP-013.webp",
+    "prompt_file": "layouts/IP-013.md",
+    "keywords": [
+      "招牌体态",
+      "动态力线",
+      "体态展示",
+      "动作力线",
+      "角色动作",
+      "视觉延展",
+      "IP设计手册",
+      "Character Bible"
+    ],
+    "name_en": "IP Signature Poses & Action Lines Card"
   }
 ]

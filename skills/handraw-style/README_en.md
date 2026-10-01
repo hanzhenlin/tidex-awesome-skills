@@ -6,7 +6,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **280 distinct hand-drawn illustration styles** (`001`–`280`), **126 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Characters), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **280 distinct hand-drawn illustration styles** (`001`–`280`), **134 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -19,7 +19,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 > ### 📚 Official Feishu Knowledge Base is Live
 > 🔗 **[👉 Click to Access Feishu Knowledge Base ↗](https://ecmn3m3i17.feishu.cn/wiki/space/7689222460876524523?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)**
 > 
-> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 280 illustration styles and 125 layouts
+> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 280 illustration styles and 136 layouts
 > 2. ❓ **Skill FAQ & Prompt Cheat Sheet**: Setup walkthroughs, troubleshooting tips, and ready-to-use prompt patterns
 > 3. 💡 **Entrepreneurship & Monetization**: Continuously updated real-world case studies and revenue strategies shared by the community
 
@@ -30,16 +30,19 @@ Whether you are crafting social media post covers, educational infographics, arc
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
 | **Vague style descriptions lead to style drift** | **Numbered Indexing**: 280 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **125 Layout Compositions**: 21 Social Cards, 36 Infographics, 68 Comic Storyboards ready out-of-the-box. |
+| **Monotonous composition; hard to format complex graphics** | **136 Layout Compositions**: 21 Social Cards, 35 Infographics, 68 Comic Storyboards, 12 IP Design ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
+| **Boring article covers with disconnected visuals** | **Article Cover Designer**: Automatically extracts ~200-word core summary & audience persona, matches styles & colors, prioritizes visual metaphor, and delivers bold titles with clean editorial layout. |
+| **Inconsistent article illustrations & tedious formatting** | **Article Illustration Planner & Backfill**: Visual editorial judgment for 2–5 high-value inflection points, unified single style & color across the piece, automated batch image generation, and precision Markdown insertion. |
 
 ---
 
 ## 🎯 Target Audiences & Use Cases
 
 - **Content Creators & Influencers**: Social media covers (Xiaohongshu, Instagram, X/Twitter), newsletter hero images, viral quote cards.
+- **Newsletter & In-Depth Article Writers**: Automatic ~200-word argument extraction, high-converting cover design, cohesive multi-illustration planning, and automated Markdown insertion.
 - **Knowledge & Tech Bloggers**: Comparison lists, architecture pyramids, step-by-step processes, and high-engagement infographics.
 - **Comic & Story Creators**: 4-panel strips, emotional webtoons, storyboard drafts, children's storybook illustrations.
 - **Visual & Brand Designers**: Rapid concept sketching, creative campaign posters, character design prototypes.
@@ -110,6 +113,30 @@ The essence of an infographic is an information-dense visual poster. Simply tell
 
 💡 **[👉 Click to read the full Tutorials & Pro Tips Guide (TUTORIALS_en.md)](TUTORIALS_en.md)** (Covers the Universal Poster Mindset, Dynamic Recommendation, Triad Assembly, Dual-Mode Switching, and Multi-Model Tiering with complete copyable prompts).
 
+### 5. Article Cover Design Mode (Summary Extraction, Audience Persona, Visual Metaphor Cover)
+Finished an article and need a high-CTR, tasteful cover? Simply send your draft to the Skill!
+- **Target Scenarios**: WeChat Official Account covers (recommended `2.35:1` or `21:9`), X/Twitter article covers (`5:2`), Xiaohongshu covers (`3:4`), etc.
+- **Prompt Command**: `Please design a cover for this article: [paste article text or provide local file path d:\path\to\article.md]` (optionally specify platform or preferred style/color).
+- **Automated Workflow**:
+  1. **Core Summary Extraction**: Distills a ~200-word essence of key arguments, causal logic, and takeaways;
+  2. **Audience Persona Inference**: Evaluates knowledge depth and motivation to construct target reader profile;
+  3. **Style & Color Pairing**: Recommends the optimal match from 280 hand-drawn styles and 36 classic monochrome palettes (e.g., `#018 Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
+  4. **Native Metaphor Directive**: Injects the proven editorial instruction—*"Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."* allowing the image model to compose clean, high-impact visuals natively;
+  5. **Dual-Track Delivery Guidance**:
+     - **Track A (Manual Generation)**: Copy the generated bilingual prompts into your favorite image tool;
+     - **Track B (Fully Automated)**: Simply reply **"Auto generate cover"**, and the Skill will call the image generation tool to produce the cover visual directly.
+
+### 6. Article Illustration Planner & Auto-Backfill Mode (Visual Planning, Cohesive Art, Markdown Assembly)
+Walls of text cause reader fatigue and drop-offs; yet hunting for stock photos leads to disjointed art styles and frustrating formatting. This mode offers an end-to-end editorial pipeline: **"Editorial Point Selection → Unified Style & Color → Batch Generation → Automated Markdown Insertion"**:
+- **Prompt Command**: `Please plan and generate illustrations for this article: [paste article text or provide local file path d:\path\to\article.md]`
+- **Automated Workflow**:
+  1. **Visual Editorial Judgment**: Rejects robotic paragraph-by-paragraph illustration. Understands narrative tension and conceptual complexity to pinpoint 2–5 high-value inflection points (thesis statement, abstract metaphor, structural diagram, climax, or concluding takeaway);
+  2. **Unified Single-Style & Single-Color Harmony**: Locks the entire article to a single hand-drawn style (e.g., `#276 Contemporary Literati Ink`) and color palette (e.g., `C-01 Klein Blue`), formatted in an editorial standard `4:3` aspect ratio (with customizable whitespace: normal / moderate / generous);
+  3. **Structured Plan & Prompts**: Specifies exact insertion anchor points, illustration purpose, image type (`editorial illustration`, `conceptual diagram`, `metaphorical illustration`, etc.), visual concept, and ready-to-use bilingual prompts;
+  4. **Dual-Track Delivery Closed Loop**:
+     - **Track A (Manual Generation & Backfill)**: Generate images with your preferred tool, then paste them or provide local paths; the Skill automatically inserts them after the correct anchor paragraphs in Markdown;
+     - **Track B (Fully Automated Generation & Insertion)**: Simply say **"Auto generate and insert"**; the Skill sequentially generates all illustrations and triggers its built-in Python insertion engine to produce the completed, formatted Markdown document (e.g., `article_illustrated.md`).
+
 ---
 
 ## Two Prompt Modes, Instant Switching
@@ -165,7 +192,7 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (001�
 
 ## Layout Compositions Showcase
 
-In addition to 280 illustration styles, this library includes **125 composition layout patterns**, covering social cards, data infographics, and multi-panel storyboards. Combine any style with any layout with a single command.
+In addition to 280 illustration styles, this library includes **134 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, and IP design. Combine any style with any layout with a single command.
 
 ### 1. Social Cards (21 Layouts)
 
@@ -177,13 +204,13 @@ Ideal for Xiaohongshu, Instagram, quote cards, signature showcases, and social m
 
 ---
 
-### 2. Infographics (36 Layouts)
+### 2. Infographics (35 Layouts)
 
 Ideal for knowledge breakdowns, comparison checklists, step-by-step processes, and structured data visuals. Includes hierarchy pyramids, central icons, matrices, and multi-column comparison tables.
 
 ![Infographics Category Preview](images/layouts/preview-infographics.webp)
 
-👉 **[View All Infographic Layouts (36 Visuals & Prompts)](LAYOUTS_en.md#infographics)**
+👉 **[View All Infographic Layouts (35 Visuals & Prompts)](LAYOUTS_en.md#infographics)**
 
 ---
 
@@ -197,7 +224,15 @@ Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic 
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 125 Layouts & Prompts ↗](LAYOUTS_en.md)**
+### 4. IP Design (12 Layouts)
+
+Ideal for brand mascot planning, character design manual, emotional positioning, and commercial derivatives.
+
+👉 **[View IP Design Layouts (12 Visuals & Prompts)](LAYOUTS_en.md#ip-characters)**
+
+---
+
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 136 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---

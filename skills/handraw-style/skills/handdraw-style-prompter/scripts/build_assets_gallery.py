@@ -757,7 +757,7 @@ dialog#wechat-modal p {{ margin: 0 0 16px; font-size: 13.5px; color: #665f57; }}
           <strong class="guide-step-lead" data-i18n="step1Title">创建三视图：</strong>
           <span data-i18n="step1Desc">添加一张角色参考图到 Codex，然后输入提示词：</span>
           <div class="formula-inline-box">
-            <code class="formula-code">图型：IG-036，其他你帮我设计</code>
+            <code class="formula-code">图型：IP-002，其他你帮我设计</code>
             <button type="button" class="btn-mini-copy" id="copy-formula-btn" data-i18n="copyFormula">复制指令</button>
           </div>
         </li>
@@ -1086,7 +1086,7 @@ async function copyToClipboard(text, btn, successTextKey, defaultTextKey) {{
 const copyFormulaBtn = document.getElementById('copy-formula-btn');
 if (copyFormulaBtn) {{
   copyFormulaBtn.addEventListener('click', () => {{
-    copyToClipboard("图型：IG-036，其他你帮我设计", copyFormulaBtn, "copiedFormula", "copyFormula");
+    copyToClipboard("图型：IP-002，其他你帮我设计", copyFormulaBtn, "copiedFormula", "copyFormula");
   }});
 }}
 

@@ -14,7 +14,7 @@ CATEGORIES = (
     ("social-card", "社媒卡", "Social Cards"),
     ("infographic", "信息图", "Infographics"),
     ("comic-storyboard", "漫画分镜", "Comic Storyboards"),
-    ("ip-character", "IP形象", "IP Characters"),
+    ("ip-character", "IP设计", "IP Design"),
 )
 
 
@@ -96,7 +96,7 @@ dialog{{width:min(94vw,1100px);padding:14px;border:0;border-radius:14px;backgrou
 </div>
 </div>
 </div>
-<p class="lead" data-i18n="lead">浏览排版图型，点击缩略图放大查看并复制对应排版提示词。</p>
+<p class="lead" data-i18n="lead">IP设计流程建议：先设计IP-001，出图后，输入提示词：[把图片加入角色库]， 后面就可以不停的引用这张图来生成其他的图片了</p>
 <section id="gallery" class="gallery">{cards}</section>
 </main>
 <dialog id="preview" aria-labelledby="dialog-label"><img id="preview-image" alt=""><div class="dialog-actions"><p class="dialog-label" id="dialog-label"></p><button class="copy" id="copy" type="button" data-i18n="copyBtn">复制排版提示词</button><button class="close" type="button" data-i18n="closeBtn">关闭 ×</button></div><p class="dialog-tip" data-i18n="dialogTip">图片出于展示目的做了压缩，AI出的图字迹是很清晰的</p></dialog>
@@ -115,7 +115,7 @@ const I18N = {{
     wechatBtn: "💬 创作变现交流群",
     title: "图型编号画廊",
     sizeLabel: "尺寸",
-    lead: "浏览排版图型，点击缩略图放大查看并复制对应排版提示词。",
+    lead: "IP设计流程建议：先设计IP-001，出图后，输入提示词：[把图片加入角色库]， 后面就可以不停的引用这张图来生成其他的图片了",
     copyBtn: "复制排版提示词",
     copied: "已复制",
     copyFailed: "复制失败",
@@ -138,7 +138,7 @@ const I18N = {{
     wechatBtn: "💬 Creator Community",
     title: "Layout Numbered Gallery",
     sizeLabel: "Size",
-    lead: "Browse layout compositions. Click thumbnails to enlarge and copy layout prompts.",
+    lead: "IP design workflow recommendation: Design IP-001 first. After generating the image, enter the prompt: [Add image to character library], then you can continuously reference this image to generate other visuals.",
     copyBtn: "Copy Layout Prompt",
     copied: "Copied!",
     copyFailed: "Copy failed",
