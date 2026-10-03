@@ -49,10 +49,8 @@ COPY_ICON_SVG = (
 
 
 def individual_image_path(number: str) -> str:
-    value = int(number)
-    start = ((value - 1) // 200) * 200 + 1
-    end = start + 199
-    return f"../../../images/individual/{start:03}-{end:03}/{number}.webp"
+    cat = number.split("-")[0]
+    return f"../../../images/individual/{cat}/{number}.webp"
 
 
 def build_html() -> str:
@@ -104,12 +102,17 @@ def build_html() -> str:
     all_scenes = merge_assets(scenes_raw, custom_scenes, "scenes")
     assets_data = all_characters + all_props + all_scenes
 
+    alias_file = SKILL / "references" / "style_alias_map.json"
+    alias_map = json.loads(alias_file.read_text(encoding="utf-8")) if alias_file.exists() else {}
+    new_to_legacy = alias_map.get("new_to_legacy", {})
+
     styles_data = [
         {
             "id": s["number"],
+            "legacy_id": new_to_legacy.get(s["number"], ""),
             "name": s["generation_name"],
             "ref": s["reference"],
-            "group": s["group"][:1],
+            "group": s["number"].split("-")[0],
             "img": individual_image_path(s["number"]),
         }
         for s in styles_raw
@@ -1425,11 +1428,23 @@ function renderLayoutFilters() {{
 }}
 
 function renderStyleFilters() {{
-  const t = I18N[currentLang];
-  const groups = ['all','A','B','C','D','E','F','G','H'];
+  const isZh = currentLang === 'zh';
+  const groups = [
+    {{ id: 'all', zh: '全部', en: 'All' }},
+    {{ id: 'FA', zh: 'FA 国际社论', en: 'FA Editorial' }},
+    {{ id: 'FB', zh: 'FB 经典绘本', en: 'FB Picture Books' }},
+    {{ id: 'FC', zh: 'FC 现代平面', en: 'FC Modern Graphic' }},
+    {{ id: 'FD', zh: 'FD 日本当代', en: 'FD Japanese' }},
+    {{ id: 'FE', zh: 'FE 新国风非遗', en: 'FE Traditional' }},
+    {{ id: 'FF', zh: 'FF 3D黏土纸雕', en: 'FF 3D & Paper' }},
+    {{ id: 'FG', zh: 'FG 动漫和赛璐璐', en: 'FG Anime & Cel' }},
+    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }}
+  ];
   pickerFilters.innerHTML = groups.map(g => {{
-    const label = g === 'all' ? `${{t.filterAll}} (${{STYLES_DATA.length}})` : g;
-    return `<button type="button" class="modal-filter-btn${{g==='all'?' is-active':''}}" data-filter="${{g}}">${{label}}</button>`;
+    const count = g.id === 'all' ? STYLES_DATA.length : STYLES_DATA.filter(x => x.group === g.id).length;
+    const label = isZh ? g.zh : g.en;
+    const isActive = currentPickerFilter === g.id ? ' is-active' : '';
+    return `<button type="button" class="modal-filter-btn${{isActive}}" data-filter="${{g.id}}">${{label}} (${{count}})</button>`;
   }}).join('');
   attachFilterEvents();
 }}
@@ -1493,11 +1508,12 @@ function renderPickerItems() {{
     // Search match
     if (query) {{
       const idMatch = item.id && item.id.toLowerCase().includes(query);
+      const legacyMatch = item.legacy_id && item.legacy_id.includes(query);
       const nameMatch = item.name && item.name.toLowerCase().includes(query);
       const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(query);
       const refMatch = item.ref && item.ref.toLowerCase().includes(query);
       const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(query));
-      return idMatch || nameMatch || nameEnMatch || refMatch || tagsMatch;
+      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch;
     }}
     return true;
   }});

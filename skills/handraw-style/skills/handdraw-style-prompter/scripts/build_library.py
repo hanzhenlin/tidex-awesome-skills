@@ -12,34 +12,35 @@ SKILL = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "styles_200_reorganized.md"
 STYLE_JSON = SKILL / "references" / "styles.json"
 GALLERY = SKILL / "gallery" / "index.html"
-ROW = re.compile(r"^\|\s*(\d{3})\s*·\s*([^|]+)\|\s*([^|]+)\|\s*(.*)\|\s*$")
-HEADING = re.compile(r"^##\s+([A-H])\s+(.+)$")
-IMAGE = re.compile(r"^([A-H])_(\d{3})(?:-(\d{3}))?\.webp$")
+ROW = re.compile(r"^\|\s*([A-Za-z]{2}-\d{3})\s*·\s*([^|]+)\|\s*([^|]+)\|\s*(.*)\|\s*$")
+HEADING = re.compile(r"^##\s+([A-Za-z]{2})\s+(.+)$")
+IMAGE = re.compile(r"^([A-Za-z]{2})_(\d{3})(?:-(\d{3}))?\.webp$")
 REMOTE_VERSION_URL = "https://raw.githubusercontent.com/yang0/handraw-style/master/skills/handdraw-style-prompter/references/version.json"
 VERSION_FILE = SKILL / "references" / "version.json"
+ALIAS_MAP_FILE = SKILL / "references" / "style_alias_map.json"
 UPDATE_COMMAND = "请更新skill https://github.com/yang0/handraw-style"
 
 GROUPS = (
     ("all", "全部", "All"),
-    ("A", "国际社论", "Editorial Humor"),
-    ("B", "国际绘本", "Picture Books"),
-    ("C", "现代平面", "Modern Graphic"),
-    ("D", "日本当代", "Japanese Contemporary"),
-    ("E", "中国当代", "Chinese Contemporary"),
-    ("F", "通用网感", "Media & Regional"),
-    ("G", "补充画风", "Contemporary Supplement"),
-    ("H", "附件其他", "Other Styles"),
+    ("FA", "国际社论", "Editorial Humor"),
+    ("FB", "经典绘本", "Picture Books"),
+    ("FC", "现代平面", "Modern Graphic"),
+    ("FD", "日本当代", "Japanese Contemporary"),
+    ("FE", "新国风非遗", "Chinese Traditional"),
+    ("FF", "3D黏土纸雕", "3D Clay & Paper"),
+    ("FG", "动漫和赛璐璐", "Anime & Cel"),
+    ("FH", "先锋综合", "Mixed Media"),
 )
 
 GROUP_LABELS = {
-    "A": ("国际社论漫画 / 幽默手绘", "Editorial & Humorous Comics"),
-    "B": ("国际绘本 / 叙事型手绘", "Picture Books & Narrative"),
-    "C": ("现代平面 / 艺术化人物体系", "Modern Graphic & Stylized Figures"),
-    "D": ("日本作者 / 当代插画体系", "Japanese Contemporary Illustration"),
-    "E": ("中国作者 / 当代插画体系", "Chinese Contemporary Illustration"),
-    "F": ("通用网感 / 媒介 / 地域手绘", "Internet Culture, Medium & Regional"),
-    "G": ("中国当代插画补充", "Contemporary Chinese Illustration Supplement"),
-    "H": ("其他精选手绘风格", "Other Curated Styles"),
+    "FA": ("国际社论幽默", "Editorial & Humor Doodle"),
+    "FB": ("经典绘本叙事", "Picture Book & Watercolor"),
+    "FC": ("现代平面艺术", "Modern Graphic & Pop"),
+    "FD": ("日本当代插画", "Japanese Contemporary & Manga"),
+    "FE": ("新国风与传统工艺", "Chinese Traditional & Folk Craft"),
+    "FF": ("3D黏土毛毡与纸雕", "3D Clay, Felt & Papercraft"),
+    "FG": ("动漫和赛璐璐", "Anime, Cel Animation & Retro Game"),
+    "FH": ("先锋实验与综合媒介", "Mixed Media & Impasto Arts"),
 }
 
 
@@ -70,15 +71,16 @@ def parse_styles() -> list[dict[str, str]]:
 
 
 def individual_image_path(number: str) -> str:
-    value = int(number)
-    start = ((value - 1) // 200) * 200 + 1
-    end = start + 199
-    return f"../../../images/individual/{start:03}-{end:03}/{number}.webp"
+    cat = number.split("-")[0]
+    return f"../../../images/individual/{cat}/{number}.webp"
 
 
 def gallery_html(styles: list[dict[str, str]], sheets: list[dict[str, str]] | None = None) -> str:
     total_count = len(styles)
     version = load_version()
+
+    alias_map = json.loads(ALIAS_MAP_FILE.read_text(encoding="utf-8")) if ALIAS_MAP_FILE.exists() else {}
+    new_to_legacy = alias_map.get("new_to_legacy", {})
 
     counts = {"all": total_count}
     for g, _, _ in GROUPS[1:]:
@@ -103,9 +105,11 @@ def gallery_html(styles: list[dict[str, str]], sheets: list[dict[str, str]] | No
             ref = s["reference"]
             traits = s["traits"]
             img_src = individual_image_path(num)
+            legacy_num = new_to_legacy.get(num, "")
+            legacy_attr = f' data-legacy="{legacy_num}"' if legacy_num else ''
 
             g_cards.append(
-                f'<button class="style-card" type="button" data-number="{num}" data-group="{g}" '
+                f'<button class="style-card" type="button" data-number="{num}" data-group="{g}"{legacy_attr} '
                 f'data-image="{img_src}" '
                 f'data-name="{html.escape(gen_name, quote=True)}" '
                 f'data-reference="{html.escape(ref, quote=True)}" '
@@ -346,7 +350,7 @@ const I18N = {{
     promptTitle: "提示词案例",
     promptNotice: '💡 强烈推荐大家关注我的<a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer">x账号</a>，或者<button type="button" class="open-wechat-modal">加入交流群</button>获取skill更新的最新信息。因为这不是一个发布就完事的skill，这段时间几乎每天都会有新的风格或者功能发布。',
     ex1Label: "1 · 出图",
-    ex1Code: "风格：001，主题：吃冰淇淋的小姑娘",
+    ex1Code: "风格：FA-001，主题：吃冰淇淋的小姑娘",
     ex2Label: "2 · 切换图文模式",
     ex2Code: "切换为图文模式",
     ex3Label: "3 · 海报提示词",
@@ -384,7 +388,7 @@ const I18N = {{
     promptTitle: "Prompt Examples",
     promptNotice: '💡 Highly recommend following my <a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer">X account</a> or <button type="button" class="open-wechat-modal">joining the community</button> to get the latest skill updates. This is not a one-and-done skill—new styles and features are released almost every day.',
     ex1Label: "1 · Generate",
-    ex1Code: "Style: 001, Theme: Little girl eating ice cream",
+    ex1Code: "Style: FA-001, Theme: Little girl eating ice cream",
     ex2Label: "2 · Graphic-Text Mode",
     ex2Code: "Switch to graphic-text mode",
     ex3Label: "3 · Poster Prompt",
@@ -606,10 +610,18 @@ checkRepositoryUpdate();
 
 def main() -> None:
     styles = parse_styles()
-    numbers = [item["number"] for item in styles]
-    expected = [f"{number:03}" for number in range(1, len(styles) + 1)]
-    if numbers != expected:
-        raise SystemExit(f"Style source must contain exactly continuous 001–{len(styles):03} entries.")
+    if len(styles) != 287:
+        raise SystemExit(f"Expected exactly 287 styles, parsed {len(styles)}")
+    cat_counts: dict[str, int] = {}
+    for item in styles:
+        m = re.match(r"^([A-Za-z]{2})-(\d{3})$", item["number"])
+        if not m:
+            raise SystemExit(f"Invalid style number format: {item['number']}")
+        cat, idx = m.group(1), int(m.group(2))
+        expected_idx = cat_counts.get(cat, 0) + 1
+        if idx != expected_idx:
+            raise SystemExit(f"Non-continuous style number in category {cat}: expected {cat}-{expected_idx:03}, got {item['number']}")
+        cat_counts[cat] = idx
     STYLE_JSON.parent.mkdir(parents=True, exist_ok=True)
     GALLERY.parent.mkdir(parents=True, exist_ok=True)
     STYLE_JSON.write_text(json.dumps(styles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

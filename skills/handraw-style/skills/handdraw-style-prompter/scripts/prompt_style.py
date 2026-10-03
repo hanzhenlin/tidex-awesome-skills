@@ -78,9 +78,36 @@ def resolve_color(query_str: str) -> dict[str, str]:
     }
 
 
+def resolve_style_entry(style_input: str, styles: list[dict]) -> tuple[dict, str]:
+    import re
+    alias_file = SKILL / "references" / "style_alias_map.json"
+    alias_map = json.loads(alias_file.read_text(encoding="utf-8")) if alias_file.exists() else {}
+    legacy_to_new = alias_map.get("legacy_to_new", {})
+
+    style_clean = str(style_input).strip()
+    if style_clean.isdigit():
+        num_str = f"{int(style_clean):03}"
+        canonical = legacy_to_new.get(num_str, num_str)
+    else:
+        m = re.match(r"^([A-Za-z]{2})[-_]?(\d+)$", style_clean)
+        if m:
+            canonical = f"{m.group(1).upper()}-{int(m.group(2)):03}"
+        else:
+            canonical = style_clean.upper()
+
+    s_obj = next((s for s in styles if s["number"] == canonical), None)
+    if not s_obj and canonical in legacy_to_new:
+        canonical = legacy_to_new[canonical]
+        s_obj = next((s for s in styles if s["number"] == canonical), None)
+
+    if not s_obj:
+        raise ValueError(f"Style '{style_input}' not found. Use a valid ID like FA-001 or legacy number 001-287.")
+    return s_obj, canonical
+
+
 def recommend_combination(theme: str, user_style: str | None, user_color: str | None) -> tuple[str, str, str]:
     """
-    Dynamic whole-library recommendation engine across all 280 styles and 36 theme colors.
+    Dynamic whole-library recommendation engine across all 287 styles and 36 theme colors.
     Note: In AI agent workflows (Codex, Antigravity, Claude Code), the LLM dynamically reasons
     and evaluates styles and colors at runtime. This function provides a robust, non-hardcoded
     heuristic scoring fallback for offline and CLI usage.
@@ -95,12 +122,13 @@ def recommend_combination(theme: str, user_style: str | None, user_color: str | 
     ngrams = [t[i:i+n] for n in (2, 3, 4) for i in range(len(t)-n+1)]
     words = re.findall(r'[a-zA-Z0-9]+|[\u4e00-\u9fa5]', t)
 
-    # 1. Dynamically resolve style from full 280 styles library
+    # 1. Dynamically resolve style from full 287 styles library
     if user_style:
-        s_obj = next((s for s in styles if s["number"] == f"{int(user_style):03}"), None)
-        if not s_obj:
+        try:
+            s_obj, final_style = resolve_style_entry(user_style, styles)
+        except ValueError:
             s_obj = styles[0]
-        final_style = s_obj["number"]
+            final_style = s_obj["number"]
     else:
         scored_styles = []
         for s in styles:
@@ -228,15 +256,9 @@ def main() -> None:
     number = None
     if args.style:
         try:
-            val = int(args.style)
-            if not 1 <= val <= max_num:
-                raise ValueError()
-            number = f"{val:03}"
-        except (ValueError, TypeError) as exc:
-            raise SystemExit(f"Style must be a number from 001 to {max_num:03}.") from exc
-        selected = next((item for item in styles if item["number"] == number), None)
-        if selected is None:
-            raise SystemExit(f"Style must be a number from 001 to {max_num:03}.")
+            selected, number = resolve_style_entry(args.style, styles)
+        except ValueError as exc:
+            raise SystemExit(str(exc)) from exc
     extra_zh = "；".join(filter(None, [f"画幅：{args.ratio}" if args.ratio else "", f"主体限制：{args.subject}" if args.subject else "", f"文字要求：{args.text}" if args.text else ""]))
     extra_en = "; ".join(filter(None, [f"aspect ratio: {args.ratio}" if args.ratio else "", f"subject constraints: {args.subject}" if args.subject else "", f"text requirement: {args.text}" if args.text else ""]))
     if args.layout:

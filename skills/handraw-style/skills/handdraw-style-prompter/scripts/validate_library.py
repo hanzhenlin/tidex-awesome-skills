@@ -31,94 +31,124 @@ def main() -> None:
     styles = json.loads((SKILL / "references" / "styles.json").read_text(encoding="utf-8"))
     attribution = json.loads((SKILL / "references" / "attribution.json").read_text(encoding="utf-8"))
     model_capabilities = json.loads((SKILL / "references" / "model_capabilities.json").read_text(encoding="utf-8"))
+    alias_file = SKILL / "references" / "style_alias_map.json"
+    if not alias_file.exists():
+        fail("style_alias_map.json is missing")
+    alias_data = json.loads(alias_file.read_text(encoding="utf-8"))
+    legacy_to_new = alias_data.get("legacy_to_new", {})
+    new_to_legacy = alias_data.get("new_to_legacy", {})
+    if len(legacy_to_new) != 287 or len(new_to_legacy) != 287:
+        fail("style_alias_map.json must contain 287 bidirectional mappings")
+
     total_styles = len(styles)
-    max_num = f"{total_styles:03}"
-    expected = [f"{n:03}" for n in range(1, total_styles + 1)]
-    if [item["number"] for item in styles] != expected:
-        fail(f"style numbering is not continuous 001–{max_num}")
-    eighteen = styles[17]
+    if total_styles != 287:
+        fail(f"expected 287 styles, got {total_styles}")
+
+    CATEGORIES = ["FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH"]
+    cat_counts = {}
+    import re
+    for item in styles:
+        num = item["number"]
+        m = re.match(r"^([A-Za-z]{2})-(\d{3})$", num)
+        if not m:
+            fail(f"Invalid style ID format: {num}")
+        cat, idx = m.group(1), int(m.group(2))
+        if cat not in CATEGORIES:
+            fail(f"Unknown category in style ID: {num}")
+        expected_idx = cat_counts.get(cat, 0) + 1
+        if idx != expected_idx:
+            fail(f"Non-continuous style number in category {cat}: expected {cat}-{expected_idx:03}, got {num}")
+        cat_counts[cat] = idx
+
+    eighteen = next(item for item in styles if item["number"] == "FA-018")
     if eighteen["generation_name"] != "Minimal Deadpan Dialogue Cartoon":
-        fail("018 maps to the wrong generation name")
+        fail("FA-018 maps to the wrong generation name")
     if any(record.get("status") == "deceased" and not record.get("source") for record in attribution.values()):
         fail("a deceased attribution record has no verification source")
     if model_capabilities.get("default", {}).get("name_activation") != "unknown":
         fail("the model capability default must be unknown")
     if model_capabilities.get("default", {}).get("use_reference_image") is not True:
         fail("unknown model capability must use the image fallback")
+
+    all_style_ids = set(item["number"] for item in styles)
     for model, profile in model_capabilities.get("models", {}).items():
         if profile.get("name_activation") not in {None, "strong", "weak", "none", "unknown"}:
             fail(f"invalid model capability for {model}")
         if profile.get("traits_activation") not in {None, "strong", "weak", "none", "unknown"}:
             fail(f"invalid traits capability for {model}")
         for number, entry in profile.get("styles", {}).items():
-            if number not in expected:
+            if number not in all_style_ids and number not in legacy_to_new:
                 fail(f"model capability references invalid style {number}")
             if entry.get("name_activation") not in {"strong", "weak", "none", "unknown"}:
                 fail(f"invalid style capability for {model}/{number}")
             if entry.get("traits_activation") not in {None, "strong", "weak", "none", "unknown"}:
                 fail(f"invalid traits style capability for {model}/{number}")
-    unknown = resolve("unregistered-model", "001")
+
+    unknown = resolve("unregistered-model", "FA-001")
     if unknown["name_activation"] != "unknown" or not unknown["use_reference_image"]:
         fail("unknown model must use reference image")
+    if resolve("gpt-image-2", "FA-001")["use_reference_image"] is not False:
+        fail("gpt-image-2 style FA-001 should use name activation")
     if resolve("gpt-image-2", "001")["use_reference_image"] is not False:
-        fail("gpt-image-2 style 001 should use name activation")
-    style_011_res = resolve("gpt-image-2", "011")
+        fail("gpt-image-2 legacy style 001 resolution should match FA-001")
+
+    style_011_res = resolve("gpt-image-2", "FA-011")
     if style_011_res["activation_source"] != "name+style" or style_011_res["use_reference_image"] is not False or style_011_res["prompt_traits"]:
-        fail("style 011 must use author name activation only without reference image or traits")
-    manual_name = resolve("gpt-image-2", "262")
+        fail("style FA-011 must use author name activation only without reference image or traits")
+    manual_name = resolve("gpt-image-2", "FG-009")
     if manual_name["activation_source"] != "name+style" or manual_name["use_reference_image"] or manual_name["prompt_traits"]:
         fail("text-defined name-only style must use name activation without an image or traits")
-    if resolve("gpt-image-2", "155")["activation_source"] != "name+style+traits" or resolve("gpt-image-2", "155")["use_reference_image"] is not False:
+    if resolve("gpt-image-2", "FH-001")["activation_source"] != "name+style+traits" or resolve("gpt-image-2", "FH-001")["use_reference_image"] is not False:
         fail("gpt-image-2 style with positive traits should use name+traits activation")
+
     synthetic = {"default": model_capabilities["default"], "models": {
         "test-model": {"name_activation": "unknown", "traits_activation": "strong", "styles": {
-            "201": {"name_activation": "none", "traits_activation": "none"},
-            "002": {"name_activation": "strong"},
-            "022": {"name_activation": "none", "traits_activation": "none"},
+            "FE-016": {"name_activation": "none", "traits_activation": "none"},
+            "FA-002": {"name_activation": "strong"},
+            "FA-022": {"name_activation": "none", "traits_activation": "none"},
         }},
     }}
-    if resolve("test-model", "201", synthetic)["use_reference_image"] is not True:
+    if resolve("test-model", "FE-016", synthetic)["use_reference_image"] is not True:
         fail("empty traits or insufficient capability must use reference image")
-    if resolve("test-model", "002", synthetic)["use_reference_image"] is not False:
+    if resolve("test-model", "FA-002", synthetic)["use_reference_image"] is not False:
         fail("strong capability must not use reference image")
-    reference_with_traits = resolve("test-model", "022", synthetic)
+    reference_with_traits = resolve("test-model", "FA-022", synthetic)
     if (reference_with_traits["activation_source"] != "name+style+traits+reference-image"
             or not reference_with_traits["use_reference_image"]
             or not reference_with_traits["prompt_traits"]):
         fail("reference fallback with traits must preserve traits and require the image")
-    traits_case = resolve("gpt-image-2", "022")
+    traits_case = resolve("gpt-image-2", "FA-022")
     if traits_case["activation_source"] != "name+style+traits" or not traits_case["prompt_traits"] or "避免" in traits_case["prompt_traits"]:
         fail("gpt-image-2 traits activation did not produce filtered positive traits")
-    if resolve("gpt-image-2", "201")["activation_source"] != "name+style+traits" or resolve("gpt-image-2", "201")["use_reference_image"] is not False:
-        fail("style 201 should use name+style+traits activation")
-    if bucket_name(1) != "001-200" or bucket_name(217) != "201-400" or bucket_name(401) != "401-600":
+    if resolve("gpt-image-2", "FE-016")["activation_source"] != "name+style+traits" or resolve("gpt-image-2", "FE-016")["use_reference_image"] is not False:
+        fail("style FE-016 should use name+style+traits activation")
+    if bucket_name("FA-001") != "FA" or bucket_name("FE-048") != "FE" or bucket_name("FF-001") != "FF":
         fail("style asset bucket calculation is incorrect")
-    reference_217 = resolve("gpt-image-2", "217")
+    reference_217 = resolve("gpt-image-2", "FF-001")
     if (reference_217["activation_source"] != "name+style+traits+reference-image"
             or not reference_217["prompt_traits"]
-            or reference_217["reference_path"] != str(grid_path(217))):
-        fail("style 217 must preserve traits and use its four-panel grid reference")
-    if not grid_path(217).exists():
-        fail("style 217 four-panel grid is missing")
-    for number in range(262, 269):
-        reference = resolve("unregistered-model", f"{number:03}")
-        if grid_path(number).exists() or reference["reference_path"] != str(single_path(number)):
-            fail(f"single-image style {number:03} must not retain a redundant grid reference")
-    if any(not item["traits"] for item in styles[200:216]):
-        fail("201–216 core visual traits must be populated")
-    style_205 = next(item for item in styles if item["number"] == "205")
+            or reference_217["reference_path"] != str(grid_path("FF-001"))):
+        fail("style FF-001 (217) must preserve traits and use its four-panel grid reference")
+    if not grid_path("FF-001").exists():
+        fail("style FF-001 four-panel grid is missing")
+    for s_id in ["FG-007", "FG-008", "FG-009", "FG-010", "FB-033", "FE-060", "FE-061", "FE-062"]:
+        reference = resolve("unregistered-model", s_id)
+        if grid_path(s_id).exists() or reference["reference_path"] != str(single_path(s_id)):
+            fail(f"single-image style {s_id} must not retain a redundant grid reference")
+    fe_supplement = [s for s in styles if s["number"].startswith("FE-") and 32 <= int(s["number"].split("-")[1]) <= 47]
+    if any(not item["traits"] for item in fe_supplement):
+        fail("FE-032–FE-047 core visual traits must be populated")
+    style_205 = next(item for item in styles if item["number"] == "FE-036")
     if not style_205["traits"] or "猫狗性格" not in style_205["traits"]:
-        fail("style 205 core visual traits are missing")
-    if any(item["group"] != "G 附件新增 / 中国当代插画补充" for item in styles[200:216]):
-        fail("201–216 must remain in group G")
-    if any(item["group"] != "H 其他" for item in styles[216:]):
-        fail("217+ styles must belong to group H")
+        fail("style FE-036 (old 205) core visual traits are missing")
+    if any(item["number"].split("-")[0] not in CATEGORIES for item in styles):
+        fail("all styles must belong to one of 8 categories")
     individual = ROOT / "images" / "individual"
-    expected_individual = [single_path(number) for number in range(1, total_styles + 1)]
+    expected_individual = [single_path(s["number"]) for s in styles]
     if not all(path.exists() for path in expected_individual):
-        fail(f"numbered asset buckets must cover exactly 001.webp–{max_num}.webp")
+        fail(f"category asset folders must cover all {total_styles} single webp images")
     if list(individual.glob("[0-9][0-9][0-9].webp")) or list(individual.glob("[0-9][0-9][0-9]_grid.webp")):
-        fail("flat individual assets must be migrated into numbered buckets")
+        fail("flat individual assets must be migrated into categorized folders")
     tweet_sheets = []
     for path in (ROOT / "images").glob("[GH]_*.webp"):
         parsed = parse_sheet(path)
@@ -147,10 +177,14 @@ def main() -> None:
             or last_path != sheet_path(last_start, last_end)):
         fail("Tweet contact-sheet state does not match the active sheet")
     gallery = (SKILL / "gallery" / "index.html").read_text(encoding="utf-8")
-    if 'data-number="217" data-group="H"' not in gallery or 'data-number="262" data-group="H"' not in gallery:
-        fail("gallery does not classify 217+ style cards as H")
-    if '#018' not in gallery or 'data-number="001"' not in gallery or f'data-number="{max_num}"' not in gallery:
-        fail("gallery style cards do not cover 001 to latest")
+    for cat in CATEGORIES:
+        if f'data-group="{cat}"' not in gallery:
+            fail(f"gallery does not classify style cards as {cat}")
+    for sample_id in ["FA-001", "FB-001", "FC-001", "FD-001", "FE-001", "FF-001", "FG-001", "FH-001", "FC-029", "FG-009"]:
+        if f'data-number="{sample_id}"' not in gallery:
+            fail(f"gallery style cards missing {sample_id}")
+    if '#FA-018' not in gallery:
+        fail("gallery style card #FA-018 is missing")
     for token in [".gallery{--columns:14;--gap:8px", "masonry-column", "heights.indexOf(Math.min(...heights))", "ResizeObserver", 'class="style-card"', 'id="gallery"']:
         if token not in gallery:
             fail(f"gallery waterfall layout is missing {token}")
@@ -189,7 +223,7 @@ def main() -> None:
         "1 · 出图",
         "2 · 切换图文模式",
         "3 · 海报提示词",
-        "风格：001，主题：吃冰淇淋的小姑娘",
+        "风格：FA-001，主题：吃冰淇淋的小姑娘",
         "切换为图文模式",
         "请帮我出海报提示词， 主题：秋分",
         "ui-monospace",
@@ -220,7 +254,7 @@ def main() -> None:
         if token in gallery:
             fail(f"gallery must not show non-update status or search UI: {token}")
     skill_text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-    for token in ["Style activation policy", "name_activation=strong", "model_capabilities.json", "referenced_image_paths", "Use the attached image only as a style reference", "The user's written theme is the sole source for the image content", "images/individual/{bucket}/{number}.webp", "217_grid.webp"]:
+    for token in ["Style activation policy", "name_activation=strong", "model_capabilities.json", "referenced_image_paths", "Use the attached image only as a style reference", "The user's written theme is the sole source for the image content", "images/individual/{category}/{number}.webp", "FF-001_grid.webp"]:
         if token not in skill_text:
             fail(f"image-reference contract is missing {token}")
     for token in ["preserve the user's theme exactly", "Do not expand, paraphrase, interpret", "show the resolved reference image to the user outside the prompts", "Do not inject it into a `graphic-text` copyable prompt"]:
@@ -239,7 +273,7 @@ def main() -> None:
     for term in ["风格名称：Minimal Deadpan Dialogue Cartoon", "Style name: Minimal Deadpan Dialogue Cartoon", "秋天的第一杯奶茶"]:
         if term not in result.stdout:
             fail(f"prompt output is missing {term}")
-    if "#018" in result.stdout.split("中文提示词：")[1]:
+    if "#FA-018" in result.stdout.split("中文提示词：")[1]:
         fail("copyable prompt must not contain style number or IDs")
     if "俏皮的手绘线条" in result.stdout or "playful hand-drawn linework" in result.stdout:
         fail("default prompt unexpectedly contains the fixed style anchor")
@@ -249,7 +283,7 @@ def main() -> None:
         fail("default prompt must identify pure-image mode and offer the graphic-text switch")
     graphic_theme = "世界就是个草台班子"
     graphic_text = subprocess.run(
-        python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "267", "--theme", graphic_theme, "--mode", "graphic-text"],
+        python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "FE-060", "--theme", graphic_theme, "--mode", "graphic-text"],
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -266,28 +300,28 @@ def main() -> None:
     if "临时拼装、摇摇欲坠" in graphic_text.stdout:
         fail("graphic-text prompt must not expand the theme into a scene description")
     graphic_reference = subprocess.run(
-        python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "217", "--theme", "动画人物", "--mode", "graphic-text"],
+        python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "FF-001", "--theme", "动画人物", "--mode", "graphic-text"],
         capture_output=True,
         text=True,
         encoding="utf-8",
         check=True,
     )
-    if str(grid_path(217)) in graphic_reference.stdout or "参考图：请上传本地参考图" in graphic_reference.stdout or "所附图片仅用于参考画风" in graphic_reference.stdout:
+    if str(grid_path("FF-001")) in graphic_reference.stdout or "参考图：请上传本地参考图" in graphic_reference.stdout or "所附图片仅用于参考画风" in graphic_reference.stdout:
         fail("graphic-text prompt must not expose reference paths or isolation guidance")
     if "核心风格特征：奇想风格化3D卡通美学" not in graphic_reference.stdout:
         fail("graphic-text prompt must retain required positive style traits")
-    style_267 = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "267", "--theme", "很小的难过"], capture_output=True, text=True, encoding="utf-8", check=True)
+    style_267 = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "FE-060", "--theme", "很小的难过"], capture_output=True, text=True, encoding="utf-8", check=True)
     if "核心风格特征：白底中国式极简手绘漫画" not in style_267.stdout or "Core style traits: 白底中国式极简手绘漫画" not in style_267.stdout:
-        fail("style 267 prompt must include its positive core traits")
+        fail("style FE-060 prompt must include its positive core traits")
     if "参考图：请上传本地参考图" in style_267.stdout or "Reference image: upload local reference image" in style_267.stdout:
-        fail("style 267 must not require a reference image when traits activation is strong")
-    style_217 = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "217", "--theme", "动画人物"], capture_output=True, text=True, encoding="utf-8", check=True)
+        fail("style FE-060 must not require a reference image when traits activation is strong")
+    style_217 = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "FF-001", "--theme", "动画人物"], capture_output=True, text=True, encoding="utf-8", check=True)
     if ("核心风格特征：奇想风格化3D卡通美学" not in style_217.stdout
             or "参考图：请上传本地参考图" not in style_217.stdout
             or "所附图片仅用于参考画风" not in style_217.stdout):
         fail("reference-required prompt must include traits, local reference path, and isolation guidance")
-    invalid = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", f"{total_styles + 1}", "--theme", "x"], capture_output=True, text=True, encoding="utf-8")
-    if invalid.returncode == 0 or f"001 to {max_num}" not in (invalid.stderr + invalid.stdout):
+    invalid = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "ZZ-999", "--theme", "x"], capture_output=True, text=True, encoding="utf-8")
+    if invalid.returncode == 0 or "not found" not in (invalid.stderr + invalid.stdout):
         fail("out-of-range style does not fail clearly")
     blank_traits = subprocess.run(python + [str(SKILL / "scripts" / "prompt_style.py"), "--style", "269", "--theme", "海底世界", "--model", "unregistered-model"], capture_output=True, text=True, encoding="utf-8", check=True)
     if "参考作者/风格名称：社会主义现实主义宣传画。" not in blank_traits.stdout or "Reference author/style name: 社会主义现实主义宣传画." not in blank_traits.stdout:

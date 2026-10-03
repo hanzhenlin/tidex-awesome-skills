@@ -78,7 +78,7 @@ def main() -> None:
     if not args.image.is_file():
         raise SystemExit(f"Representative image does not exist: {args.image}")
 
-    assets = create_style_assets(number, [args.image], number)
+    assets = create_style_assets(number, [args.image])
     update_markdown_source(number, str(record["source_name"]), str(record["generation_name"]), str(record["traits"]))
     update_model_capabilities(number, name_activation=str(record["name_activation"]),
                               traits_activation=str(record["traits_activation"]))

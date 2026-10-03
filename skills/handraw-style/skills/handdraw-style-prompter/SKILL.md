@@ -1,6 +1,6 @@
 ---
 name: handdraw-style-prompter
-description: Turn a 001–280 hand-drawn style number and image theme into bilingual prompts, using model capability data to decide when core traits and a numbered reference image are required.
+description: Turn a 001–287 hand-drawn style number and image theme into bilingual prompts, using model capability data to decide when core traits and a numbered reference image are required.
 ---
 
 # Hand-drawn Style Prompter
@@ -14,13 +14,13 @@ Default to creating prompts only. Do not call an image-generation tool unless th
 > [!IMPORTANT]
 > **【核心准则：每次由 AI 实时动态判断，严禁写死/机械套用】**
 > - **实时动态研判**：严禁在记忆、规则或提示词中维护任何“主题关键词 -> 固定风格编号/颜色编号”的静态死板映射（例如严禁一见节气/传统就推 268、一见自然就推 266、一见科技就推 011/054、一见生活就推 018）。
-> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 280 种手绘风格（#001–#280）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
-> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 279 种画风与 36 种色彩的丰富生命力。
+> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 287 种手绘风格（#001–#287）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
+> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 287 种画风与 36 种色彩的丰富生命力。
 > - **美学理由具象化**：AI 给出的美学推荐理由必须紧扣当前主题的视觉隐喻和画面构图，说明为什么该画风的笔触/质感与该色彩的情绪能完美传达这一主题，杜绝套话。
 
-1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 280 种手绘风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#280) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
+1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 287 种手绘风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#287) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
 2. **仅指定风格，未指定主题色**：严格保留用户指定的风格，根据该风格与画面主题，由 AI 实时动态推荐最协调的【主题色 (C-01–C-36)】搭配（可为单色或多色组合）。
-3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【手绘风格 (#001–#280)】搭配。
+3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【手绘风格 (#001–#287)】搭配。
 4. **两者皆指定**：完全遵照用户指定的内容输出。
 
 ## Style activation policy
@@ -29,13 +29,13 @@ Use the same capability decision for prompt-only and explicit image-generation r
 
 - `name_activation=strong`: use only the indexed author name, generated style name, and theme. (Specifically for styles like #042 Beatrix Potter, #011 David Shrigley, #269 Socialist Realist Propaganda Poster, and other strong-activation styles: the model understands the aesthetic natively; output only the reference author and style name, and STRICTLY DO NOT output core traits, local image file paths, or reference-isolation blocks.)
 - Otherwise, include every available positive core trait with the author/style name and theme.
-- If name plus traits is not strongly activated, also require the configured reference asset. For explicit generation, pass it through `referenced_image_paths`. In `pure-image` prompt-only output, write the local asset path and reference-isolation instruction inside both prompts for the user to upload manually. In `graphic-text` prompt-only output, do not place a path, upload instruction, or isolation block inside either copyable prompt; show the resolved reference image to the user outside the prompts instead. Assets live under the installed package root in numbered 200-style buckets: for example, #217 uses `images/individual/201-400/217_grid.webp`.
+- If name plus traits is not strongly activated, also require the configured reference asset. For explicit generation, pass it through `referenced_image_paths`. In `pure-image` prompt-only output, write the local asset path and reference-isolation instruction inside both prompts for the user to upload manually. In `graphic-text` prompt-only output, do not place a path, upload instruction, or isolation block inside either copyable prompt; show the resolved reference image to the user outside the prompts instead. Assets live under the installed package root in categorized folders: for example, FF-001 uses `images/individual/FF/FF-001_grid.webp`.
 - If no positive core trait exists and name is not strongly activated, use the author/style name, theme, and reference image.
 - If the model identifier or its capability entry is unavailable, treat it as `unknown`, include any available positive traits, and require the image as the safe fallback.
 - Use `python scripts/resolve_reference.py --model <model> --style <number>` when a deterministic decision check is useful. The script prints JSON and never guesses an unknown model's capability.
 - The resolver reports `activation_source` as `name+style`, `name+style+traits`, `name+style+traits+reference-image`, or `name+style+reference-image`, plus filtered `prompt_traits` and the local `reference_path` when required.
 
-- Resolve the style number to its configured reference asset relative to the installed package root. The normal fallback is `images/individual/{bucket}/{number}.webp` (for example, `048` maps to `images/individual/001-200/048.webp`); a matching `{number}_grid.webp` in the same bucket takes priority.
+- Resolve the style number to its configured reference asset relative to the installed package root. The normal fallback is `images/individual/{category}/{number}.webp` (for example, `FA-001` maps to `images/individual/FA/FA-001.webp`); a matching `{number}_grid.webp` in the same category takes priority.
 - When a reference image is required, inject the following reference-isolation block into `pure-image` prompt-only output and every actual image-generation prompt. Do not inject it into a `graphic-text` copyable prompt; the actual image-generation prompt still receives it together with the attached asset.
 
   Chinese: `所附图片仅用于参考画风。只提取参考图的风格特征，例如线条、笔触、媒介、材质、色彩倾向和整体视觉语言；不要使用、复制或延续参考图中的任何主体、人物、动物、服装、道具、动作、姿态、场景、背景、构图、布局、文字或故事。最终画面内容完全以用户提供的主题为准。`
@@ -61,7 +61,7 @@ This initialization applies only when this Skill is invoked for the first time i
 
 ## Inputs
 
-For style-only work, if the style number (`001`–`280`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
+For style-only work, if the style number (`001`–`287`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
 
 Users can browse `gallery/index.html` for numbered style contact sheets, `gallery/layouts.html` for layout thumbnails, and `gallery/colors.html` for classic monochrome theme colors. The authoritative style content is `../../styles_200_reorganized.md`; `references/styles.json` is a generated index and must be refreshed with `python scripts/build_library.py` after Markdown changes. Layout metadata is `references/layouts.json`; each entry's bilingual prompt file under `references/layouts/` is the authoritative layout content and the layout gallery is refreshed with `python scripts/build_layout_gallery.py`. Monochrome color metadata is `references/colors.json` and refreshed with `python scripts/build_color_gallery.py`.
 

@@ -4,8 +4,8 @@ Automated End-to-End Tweet Style Importer:
 1. Fetch tweet metadata & full-resolution images from X/Twitter URL.
 2. Auto-increment next sequential style number (e.g. 217, 218, ...).
 3. Generate 1024x1024 4-grid composite image for AI image generation reference.
-4. Generate 512x512 single photo with top-left number badge.
-5. Append the numbered tile to the active 1254x1254 16-grid contact sheet.
+4. Generate 512x512 clean single photo without number badge.
+5. Append the clean tile to the active 1254x1254 16-grid contact sheet.
 6. Auto-update styles_200_reorganized.md, README.md, and SKILL.md.
 7. Configure mandatory reference-image passing in model_capabilities.json.
 8. Rebuild gallery (build_library.py) and validate library (validate_library.py).
@@ -193,12 +193,12 @@ def main():
         traits = f"奇想风格化3D卡通美学、夸张头身比例、富有表现力的大眼、独特剪影轮廓与精细触感材质纹理；具有现代动画长片质感。"
 
     print("=== [3/6] Generating Reference & Contact Sheet Assets ===")
-    assets = create_style_assets(number, raw_images, f"{number} @{author_handle.lstrip('@')}")
+    assets = create_style_assets(number, raw_images)
     if assets["grid"]:
         print(f"Created 4-grid generation reference: {assets['grid'].name}")
     else:
-        print("One source image supplied; using the numbered single image as the generation reference.")
-    print(f"Created numbered single tile: {assets['tile'].name}")
+        print("One source image supplied; using the clean single image as the generation reference.")
+    print(f"Created clean single tile: {assets['tile'].name}")
     print(f"Updated 16-grid contact sheet: {assets['sheet'].name}")
 
     print("=== [4/6] Updating Style Library & Model Capabilities ===")

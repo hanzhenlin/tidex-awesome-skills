@@ -1,6 +1,6 @@
 ---
 name: article-illustration-planner
-description: 深度分析文章脉络，精准规划插图点位与视觉意象，生成协同 280 种手绘风格与 36 种色彩画廊的高质量生图提示词。出具方案后主动引导用户进行【方式 A · 自主生图回填】或【方式 B · 全自动生图插入】，并支持将生成的配图精准自动排版回文章 Markdown。
+description: 深度分析文章脉络，精准规划插图点位与视觉意象，生成协同 287 种手绘风格与 36 种色彩画廊的高质量生图提示词。出具方案后主动引导用户进行【方式 A · 自主生图回填】或【方式 B · 全自动生图插入】，并支持将生成的配图精准自动排版回文章 Markdown。
 ---
 
 # Article Illustration Planner (文章配图规划与插图回填)
@@ -10,7 +10,7 @@ Turn an article into a coherent visual-illustration plan and deliver the final i
 The user provides:
 
 * An article text or local file path (e.g. `d:\path\to\article.md`);
-* (Optional) A hand-drawn style number (`001`–`280`) and/or theme color (`C-01`–`C-36`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination;
+* (Optional) A hand-drawn style number (`001`–`287`) and/or theme color (`C-01`–`C-36`). If omitted, the Skill automatically analyzes the article's mood, domain, and audience to recommend an optimal cohesive style and theme color combination;
 * (Optional) Whitespace preference (`留白`: `正常` / `适中` / `多`). Default is `正常`;
 * (Optional) Aspect ratio. Default is `4:3` (editorial reading standard). Note: Poster layout selection is strictly disabled for article illustrations.
 
