@@ -2156,5 +2156,351 @@
       "Character Bible"
     ],
     "name_en": "IP Signature Poses & Action Lines Card"
+  },
+  {
+    "id": "EC-001",
+    "category": "ecommerce",
+    "name": "单品主图",
+    "name_en": "Single Product Hero Image",
+    "image": "../../../images/layouts/ecommerce/EC-001.webp",
+    "prompt_file": "layouts/EC-001.md",
+    "keywords": [
+      "单品主图",
+      "商品主图",
+      "主体清晰",
+      "第一眼看懂商品"
+    ]
+  },
+  {
+    "id": "EC-002",
+    "category": "ecommerce",
+    "name": "多角度展示图",
+    "name_en": "Multi-Angle Display Image",
+    "image": "../../../images/layouts/ecommerce/EC-002.webp",
+    "prompt_file": "layouts/EC-002.md",
+    "keywords": [
+      "多角度展示图",
+      "不同视角",
+      "整体结构",
+      "形态展示"
+    ]
+  },
+  {
+    "id": "EC-003",
+    "category": "ecommerce",
+    "name": "细节特写图",
+    "name_en": "Detail Closeup Image",
+    "image": "../../../images/layouts/ecommerce/EC-003.webp",
+    "prompt_file": "layouts/EC-003.md",
+    "keywords": [
+      "细节特写图",
+      "局部细节",
+      "做工",
+      "材质质感"
+    ]
+  },
+  {
+    "id": "EC-004",
+    "category": "ecommerce",
+    "name": "包装 / 套装 / 内容物展示图",
+    "name_en": "Packaging / Set / Contents Display Image",
+    "image": "../../../images/layouts/ecommerce/EC-004.webp",
+    "prompt_file": "layouts/EC-004.md",
+    "keywords": [
+      "包装展示图",
+      "套装展示",
+      "内容物展示",
+      "配件清单",
+      "陈列"
+    ]
+  },
+  {
+    "id": "EC-005",
+    "category": "ecommerce",
+    "name": "卖点标注图",
+    "name_en": "Feature Callout Image",
+    "image": "../../../images/layouts/ecommerce/EC-005.webp",
+    "prompt_file": "layouts/EC-005.md",
+    "keywords": [
+      "卖点标注图",
+      "核心卖点",
+      "购买理由",
+      "视觉层级"
+    ]
+  },
+  {
+    "id": "EC-006",
+    "category": "ecommerce",
+    "name": "功能演示图",
+    "name_en": "Function Demonstration Image",
+    "image": "../../../images/layouts/ecommerce/EC-006.webp",
+    "prompt_file": "layouts/EC-006.md",
+    "keywords": [
+      "功能演示图",
+      "核心功能",
+      "动作设计",
+      "功能可视化"
+    ]
+  },
+  {
+    "id": "EC-007",
+    "category": "ecommerce",
+    "name": "参数尺寸图",
+    "name_en": "Specification & Dimension Image",
+    "image": "../../../images/layouts/ecommerce/EC-007.webp",
+    "prompt_file": "layouts/EC-007.md",
+    "keywords": [
+      "参数尺寸图",
+      "规格尺寸",
+      "测量关系",
+      "参数说明"
+    ]
+  },
+  {
+    "id": "EC-008",
+    "category": "ecommerce",
+    "name": "材质 / 结构解析图",
+    "name_en": "Material / Structure Exploded Image",
+    "image": "../../../images/layouts/ecommerce/EC-008.webp",
+    "prompt_file": "layouts/EC-008.md",
+    "keywords": [
+      "材质解析图",
+      "结构解析图",
+      "剖面",
+      "分层",
+      "爆炸展开"
+    ]
+  },
+  {
+    "id": "EC-009",
+    "category": "ecommerce",
+    "name": "生活方式场景图",
+    "name_en": "Lifestyle Scenario Image",
+    "image": "../../../images/layouts/ecommerce/EC-009.webp",
+    "prompt_file": "layouts/EC-009.md",
+    "keywords": [
+      "生活方式场景图",
+      "生活情境",
+      "场景氛围",
+      "品牌调性"
+    ]
+  },
+  {
+    "id": "EC-010",
+    "category": "ecommerce",
+    "name": "人物使用图",
+    "name_en": "In-Use Demonstration Image",
+    "image": "../../../images/layouts/ecommerce/EC-010.webp",
+    "prompt_file": "layouts/EC-010.md",
+    "keywords": [
+      "人物使用图",
+      "真实使用",
+      "使用者",
+      "交互表现"
+    ]
+  },
+  {
+    "id": "EC-011",
+    "category": "ecommerce",
+    "name": "多场景适用图",
+    "name_en": "Multi-Scenario Application Image",
+    "image": "../../../images/layouts/ecommerce/EC-011.webp",
+    "prompt_file": "layouts/EC-011.md",
+    "keywords": [
+      "多场景适用图",
+      "典型场景",
+      "适用性",
+      "场景对比"
+    ]
+  },
+  {
+    "id": "EC-012",
+    "category": "ecommerce",
+    "name": "使用步骤 / 教程图",
+    "name_en": "Usage Steps / Tutorial Image",
+    "image": "../../../images/layouts/ecommerce/EC-012.webp",
+    "prompt_file": "layouts/EC-012.md",
+    "keywords": [
+      "使用步骤图",
+      "教程图",
+      "使用指南",
+      "流程组织"
+    ]
+  },
+  {
+    "id": "EC-013",
+    "category": "ecommerce",
+    "name": "对比优势图",
+    "name_en": "Comparative Advantage Image",
+    "image": "../../../images/layouts/ecommerce/EC-013.webp",
+    "prompt_file": "layouts/EC-013.md",
+    "keywords": [
+      "对比优势图",
+      "关键差异",
+      "比较维度",
+      "选购对比"
+    ]
+  },
+  {
+    "id": "EC-014",
+    "category": "ecommerce",
+    "name": "型号 / SKU 差异图",
+    "name_en": "Model / SKU Comparison Image",
+    "image": "../../../images/layouts/ecommerce/EC-014.webp",
+    "prompt_file": "layouts/EC-014.md",
+    "keywords": [
+      "型号差异图",
+      "SKU差异图",
+      "多版本陈列",
+      "颜色尺寸区分"
+    ]
+  },
+  {
+    "id": "EC-015",
+    "category": "ecommerce",
+    "name": "适配 / 选择指南图",
+    "name_en": "Fit / Selection Guide Image",
+    "image": "../../../images/layouts/ecommerce/EC-015.webp",
+    "prompt_file": "layouts/EC-015.md",
+    "keywords": [
+      "适配指南图",
+      "选择指南",
+      "版本推荐",
+      "需求匹配"
+    ]
+  },
+  {
+    "id": "EC-016",
+    "category": "ecommerce",
+    "name": "FAQ / 注意事项图",
+    "name_en": "FAQ / Precautions Image",
+    "image": "../../../images/layouts/ecommerce/EC-016.webp",
+    "prompt_file": "layouts/EC-016.md",
+    "keywords": [
+      "FAQ图",
+      "注意事项图",
+      "常见问答",
+      "购买须知"
+    ]
+  },
+  {
+    "id": "EC-017",
+    "category": "ecommerce",
+    "name": "品质 / 工艺说明图",
+    "name_en": "Quality & Craftsmanship Explanatory Image",
+    "image": "../../../images/layouts/ecommerce/EC-017.webp",
+    "prompt_file": "layouts/EC-017.md",
+    "keywords": [
+      "品质说明图",
+      "工艺说明图",
+      "制造过程",
+      "做工细节",
+      "品质感"
+    ]
+  },
+  {
+    "id": "EC-018",
+    "category": "ecommerce",
+    "name": "认证 / 数据证明图",
+    "name_en": "Certification & Data Proof Image",
+    "image": "../../../images/layouts/ecommerce/EC-018.webp",
+    "prompt_file": "layouts/EC-018.md",
+    "keywords": [
+      "认证图",
+      "数据证明图",
+      "检测结果",
+      "权威认证",
+      "数据可视化"
+    ]
+  },
+  {
+    "id": "EC-019",
+    "category": "ecommerce",
+    "name": "评价 / 口碑图",
+    "name_en": "Review & Word-of-Mouth Image",
+    "image": "../../../images/layouts/ecommerce/EC-019.webp",
+    "prompt_file": "layouts/EC-019.md",
+    "keywords": [
+      "评价图",
+      "口碑图",
+      "用户反馈",
+      "好评如潮",
+      "真实口碑"
+    ]
+  },
+  {
+    "id": "EC-020",
+    "category": "ecommerce",
+    "name": "品牌 / 来源故事图",
+    "name_en": "Brand & Origin Story Image",
+    "image": "../../../images/layouts/ecommerce/EC-020.webp",
+    "prompt_file": "layouts/EC-020.md",
+    "keywords": [
+      "品牌故事图",
+      "来源故事",
+      "产区溯源",
+      "设计理念",
+      "品牌背景"
+    ]
+  },
+  {
+    "id": "EC-021",
+    "category": "ecommerce",
+    "name": "新品上市图",
+    "name_en": "New Arrival Launch Image",
+    "image": "../../../images/layouts/ecommerce/EC-021.webp",
+    "prompt_file": "layouts/EC-021.md",
+    "keywords": [
+      "新品上市图",
+      "全新升级",
+      "首发上市",
+      "新品亮点",
+      "视觉冲击"
+    ]
+  },
+  {
+    "id": "EC-022",
+    "category": "ecommerce",
+    "name": "促销活动图",
+    "name_en": "Promotion & Sales Event Image",
+    "image": "../../../images/layouts/ecommerce/EC-022.webp",
+    "prompt_file": "layouts/EC-022.md",
+    "keywords": [
+      "促销活动图",
+      "限时抢购",
+      "满减折扣",
+      "爆款直降",
+      "大促海报"
+    ]
+  },
+  {
+    "id": "EC-023",
+    "category": "ecommerce",
+    "name": "内容种草 / UGC 图",
+    "name_en": "Content Seeding & UGC Image",
+    "image": "../../../images/layouts/ecommerce/EC-023.webp",
+    "prompt_file": "layouts/EC-023.md",
+    "keywords": [
+      "内容种草图",
+      "UGC分享",
+      "真实分享",
+      "随拍感",
+      "好物推荐"
+    ]
+  },
+  {
+    "id": "EC-024",
+    "category": "ecommerce",
+    "name": "广告主视觉 / Hero / KV",
+    "name_en": "Key Visual & Hero Art (KV)",
+    "image": "../../../images/layouts/ecommerce/EC-024.webp",
+    "prompt_file": "layouts/EC-024.md",
+    "keywords": [
+      "广告主视觉",
+      "Hero图",
+      "主KV",
+      "核心视觉概念",
+      "传播大图"
+    ]
   }
 ]

@@ -120,6 +120,7 @@ def build_layouts_md() -> None:
         "infographic": "infographics",
         "comic-storyboard": "comic-storyboards",
         "ip-character": "ip-characters",
+        "ecommerce": "ecommerce",
     }
     cols = 3
     counts = {
@@ -127,6 +128,7 @@ def build_layouts_md() -> None:
         "infographic": sum(l["category"] == "infographic" for l in layouts),
         "comic-storyboard": sum(l["category"] == "comic-storyboard" for l in layouts),
         "ip-character": sum(l["category"] == "ip-character" for l in layouts),
+        "ecommerce": sum(l["category"] == "ecommerce" for l in layouts),
     }
     categories = [
         ("social-card", f"1. 社媒卡（{counts['social-card']} 种）", f"1. Social Cards ({counts['social-card']} Layouts)",
@@ -141,6 +143,9 @@ def build_layouts_md() -> None:
         ("ip-character", f"4. IP设计（{counts['ip-character']} 种）", f"4. IP Design ({counts['ip-character']} Layouts)",
          "适合 IP 形象设计、吉祥物定位卡、角色档案及形象规范展示。结构包含主形象大图、定位金句、受众画像与多视角展示。",
          "Ideal for IP character design, mascot positioning cards, character profiles, and specification guides. Includes hero character showcase, positioning slogans, audience profiles, and multi-angle views."),
+        ("ecommerce", f"5. 电商（{counts['ecommerce']} 种）", f"5. E-commerce ({counts['ecommerce']} Layouts)",
+         "适合电商商品展示、主图详情页、卖点拆解、使用场景及选购决策。结构包含单品主图、多视角、参数尺寸、材质解析与对比优势等。",
+         "Ideal for e-commerce product showcases, PDP hero images, feature callouts, lifestyle scenarios, and buying guides. Includes single product hero, multi-angle views, specs, material breakdown, and comparative advantage."),
     ]
 
     # 1. Chinese LAYOUTS.md
@@ -151,7 +156,7 @@ def build_layouts_md() -> None:
         '',
         f"# 排版图型完整图鉴（{len(layouts)} 种）",
         "",
-        f"> 这里收录了本库全部 **{len(layouts)} 种排版图型**（社媒卡、信息图、漫画分镜、IP设计）的图片预览与排版提示词。在 AI 生图时直接指定图型编号（如 `SC-001`、`IG-003`、`SB-002`、`IP-001`），即可精确控制画面的构图版式与排版层次。",
+        f"> 这里收录了本库全部 **{len(layouts)} 种排版图型**（社媒卡、信息图、漫画分镜、IP设计、电商）的图片预览与排版提示词。在 AI 生图时直接指定图型编号（如 `SC-001`、`IG-003`、`SB-002`、`IP-001`、`EC-001`），即可精确控制画面的构图版式与排版层次。",
         "",
         "> 💡 **排版图型架构机制**：",
         "> - **确定性静态排版（纯文本直接拼接型）**：包括 `SC-001`~`SC-020`、`IG` 系列与 `SB` 系列等绝大多数图型，拓扑单一固定，模板直接拼接画风与主题；",
@@ -163,6 +168,7 @@ def build_layouts_md() -> None:
         f"- [2. 信息图（{counts['infographic']} 种）](#infographics)",
         f"- [3. 漫画分镜（{counts['comic-storyboard']} 种）](#comic-storyboards)",
         f"- [4. IP设计（{counts['ip-character']} 种）](#ip-characters)",
+        f"- [5. 电商（{counts['ecommerce']} 种）](#ecommerce)",
         "",
         "---",
         "",
@@ -215,7 +221,7 @@ def build_layouts_md() -> None:
         '',
         f"# Layout Composition Visual Sheet ({len(layouts)} Layouts)",
         "",
-        f"> Visual previews and layout prompts for all **{len(layouts)} layout compositions** (Social Cards, Infographics, Comic Storyboards, IP Design). Specify layout IDs (e.g. `SC-001`, `IG-003`, `SB-002`) during AI image generation to control compositions, text placements, and visual hierarchy.",
+        f"> Visual previews and layout prompts for all **{len(layouts)} layout compositions** (Social Cards, Infographics, Comic Storyboards, IP Design, E-commerce). Specify layout IDs (e.g. `SC-001`, `IG-003`, `SB-002`, `IP-001`, `EC-001`) during AI image generation to control compositions, text placements, and visual hierarchy.",
         "",
         "> 💡 **Layout Architecture Modes**:",
         "> - **Deterministic Static Layouts (Direct Template Concatenation)**: Covers most layouts (`SC-001`~`SC-020`, `IG` series, `SB` series) with fixed topologies directly assembled with chosen styles;",
@@ -227,6 +233,7 @@ def build_layouts_md() -> None:
         f"- [2. Infographics ({counts['infographic']} Layouts)](#infographics)",
         f"- [3. Comic Storyboards ({counts['comic-storyboard']} Layouts)](#comic-storyboards)",
         f"- [4. IP Design ({counts['ip-character']} Layouts)](#ip-characters)",
+        f"- [5. E-commerce ({counts['ecommerce']} Layouts)](#ecommerce)",
         "",
         "---",
         "",

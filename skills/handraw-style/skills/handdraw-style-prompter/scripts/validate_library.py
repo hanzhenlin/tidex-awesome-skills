@@ -37,12 +37,12 @@ def main() -> None:
     alias_data = json.loads(alias_file.read_text(encoding="utf-8"))
     legacy_to_new = alias_data.get("legacy_to_new", {})
     new_to_legacy = alias_data.get("new_to_legacy", {})
-    if len(legacy_to_new) != 287 or len(new_to_legacy) != 287:
-        fail("style_alias_map.json must contain 287 bidirectional mappings")
+    if len(legacy_to_new) != 305 or len(new_to_legacy) != 305:
+        fail("style_alias_map.json must contain 305 bidirectional mappings")
 
     total_styles = len(styles)
-    if total_styles != 287:
-        fail(f"expected 287 styles, got {total_styles}")
+    if total_styles != 305:
+        fail(f"expected 305 styles, got {total_styles}")
 
     CATEGORIES = ["FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH"]
     cat_counts = {}
@@ -558,6 +558,7 @@ def main() -> None:
         ROOT / "skills" / "style-fusion-prompter" / "SKILL.md",
         ROOT / "skills" / "custom-asset-manager" / "SKILL.md",
         ROOT / "skills" / "ip-designer" / "SKILL.md",
+        ROOT / "skills" / "couple-photo-orchestrator" / "SKILL.md",
     ]:
         if sf.exists():
             content = sf.read_text(encoding="utf-8")

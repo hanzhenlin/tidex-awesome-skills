@@ -36,3 +36,9 @@ business/
 
 # Image backups
 images/individual_backup/
+
+# couple-photo-orchestrator local project data & caches
+skills/couple-photo-orchestrator/projects/
+skills/couple-photo-orchestrator/references/
+skills/couple-photo-orchestrator/images/
+.pytest_cache/

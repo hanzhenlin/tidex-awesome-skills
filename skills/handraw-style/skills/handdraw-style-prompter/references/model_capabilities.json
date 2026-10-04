@@ -532,6 +532,78 @@
         "FC-030": {
           "name_activation": "weak",
           "traits_activation": "strong"
+        },
+        "FC-031": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FE-066": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FE-067": {
+          "name_activation": "strong",
+          "traits_activation": "none"
+        },
+        "FB-035": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-036": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-037": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-038": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-039": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-040": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-041": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-042": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-043": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-044": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-045": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-046": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-047": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-048": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
+        },
+        "FB-049": {
+          "name_activation": "weak",
+          "traits_activation": "strong"
         }
       }
     }

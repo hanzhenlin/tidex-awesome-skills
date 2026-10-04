@@ -15,6 +15,7 @@ CATEGORIES = (
     ("infographic", "信息图", "Infographics"),
     ("comic-storyboard", "漫画分镜", "Comic Storyboards"),
     ("ip-character", "IP设计", "IP Design"),
+    ("ecommerce", "电商", "E-commerce"),
 )
 
 
@@ -96,7 +97,7 @@ dialog{{width:min(94vw,1100px);padding:14px;border:0;border-radius:14px;backgrou
 </div>
 </div>
 </div>
-<p class="lead" data-i18n="lead">IP设计流程建议：先设计IP-001，出图后，输入提示词：[把图片加入角色库]， 后面就可以不停的引用这张图来生成其他的图片了</p>
+<p class="lead" id="gallery-lead" data-i18n="lead">社媒卡：画面有呼吸感，认知负担低，适合小红书和公众号贴图</p>
 <section id="gallery" class="gallery">{cards}</section>
 </main>
 <dialog id="preview" aria-labelledby="dialog-label"><img id="preview-image" alt=""><div class="dialog-actions"><p class="dialog-label" id="dialog-label"></p><button class="copy" id="copy" type="button" data-i18n="copyBtn">复制排版提示词</button><button class="close" type="button" data-i18n="closeBtn">关闭 ×</button></div><p class="dialog-tip" data-i18n="dialogTip">图片出于展示目的做了压缩，AI出的图字迹是很清晰的</p></dialog>
@@ -115,7 +116,13 @@ const I18N = {{
     wechatBtn: "💬 创作变现交流群",
     title: "图型编号画廊",
     sizeLabel: "尺寸",
-    lead: "IP设计流程建议：先设计IP-001，出图后，输入提示词：[把图片加入角色库]， 后面就可以不停的引用这张图来生成其他的图片了",
+    leads: {{
+      "social-card": "社媒卡：画面有呼吸感，认知负担低，适合小红书和公众号贴图",
+      "infographic": "信息图：层级逻辑清晰、数据结构一目了然，适合知识科普与深度干货表达",
+      "comic-storyboard": "漫画分镜：多格连续叙事、镜头节奏分明，适合故事阐述与趣味条漫表达",
+      "ip-character": "IP设计流程建议：先设计IP-001，出图后输入提示词：[把图片加入角色库]，后面即可持续引用基准图生成系列物料",
+      "ecommerce": "电商：图片只做业务场景演示，不做排版演示，根据商品不同，出的图可能完全不同"
+    }},
     copyBtn: "复制排版提示词",
     copied: "已复制",
     copyFailed: "复制失败",
@@ -138,7 +145,13 @@ const I18N = {{
     wechatBtn: "💬 Creator Community",
     title: "Layout Numbered Gallery",
     sizeLabel: "Size",
-    lead: "IP design workflow recommendation: Design IP-001 first. After generating the image, enter the prompt: [Add image to character library], then you can continuously reference this image to generate other visuals.",
+    leads: {{
+      "social-card": "Social Cards: Airy visual breathing room with low cognitive load, ideal for Xiaohongshu and WeChat posts.",
+      "infographic": "Infographics: Clear hierarchical logic and intuitive data structures, ideal for knowledge explainers and in-depth educational posts.",
+      "comic-storyboard": "Comic Storyboards: Multi-panel continuous sequential narrative with cinematic pacing, ideal for storytelling and entertaining comics.",
+      "ip-character": "IP Design Workflow: Design IP-001 first. After generation, enter prompt: [Add image to character library], then reference this base image for subsequent visuals.",
+      "ecommerce": "E-commerce: Images are for business scenario demonstration only, not layout templates; actual visuals will vary based on product inputs."
+    }},
     copyBtn: "Copy Layout Prompt",
     copied: "Copied!",
     copyFailed: "Copy failed",
@@ -153,6 +166,13 @@ const I18N = {{
   }}
 }};
 let currentLang = localStorage.getItem('handdraw_lang') || ((navigator.language && navigator.language.startsWith('zh')) ? 'zh' : 'en');
+let activeCategory = 'social-card';
+function updateLead() {{
+  const leadEl = document.querySelector('#gallery-lead');
+  if (leadEl && I18N[currentLang] && I18N[currentLang].leads) {{
+    leadEl.textContent = I18N[currentLang].leads[activeCategory] || I18N[currentLang].leads['social-card'];
+  }}
+}}
 function applyLang(lang) {{
   currentLang = lang;
   localStorage.setItem('handdraw_lang', lang);
@@ -160,10 +180,11 @@ function applyLang(lang) {{
   document.title = I18N[lang].pageTitle;
   document.querySelectorAll('[data-i18n]').forEach(el => {{
     const key = el.dataset.i18n;
-    if (I18N[lang] && I18N[lang][key]) {{
+    if (key !== 'lead' && I18N[lang] && I18N[lang][key]) {{
       el.textContent = I18N[lang][key];
     }}
   }});
+  updateLead();
   document.querySelectorAll('.filter').forEach(btn => {{
     const label = lang === 'en' ? btn.dataset.labelEn : btn.dataset.labelZh;
     if (btn.firstChild && btn.firstChild.nodeType === Node.TEXT_NODE) {{
@@ -203,7 +224,13 @@ function arrangeCards(){{
     }});
     if(cards.includes(focused)&&!focused.hidden)focused.focus({{preventScroll:true}});
 }}
-function setCategory(category){{filters.forEach(button=>button.classList.toggle('is-active',button.dataset.category===category));cards.forEach(card=>{{card.hidden=card.dataset.category!==category;}});scheduleLayout();}}
+function setCategory(category){{
+  activeCategory = category;
+  filters.forEach(button=>button.classList.toggle('is-active',button.dataset.category===category));
+  cards.forEach(card=>{{card.hidden=card.dataset.category!==category;}});
+  updateLead();
+  scheduleLayout();
+}}
 cards.forEach(card=>{{const img=card.querySelector('img');img.addEventListener('load',scheduleLayout);img.addEventListener('error',scheduleLayout);}});
 let lastWidth=-1;
 new ResizeObserver(entries=>{{const width=entries[0].contentRect.width;if(width!==lastWidth){{lastWidth=width;scheduleLayout();}}}}).observe(gallery);

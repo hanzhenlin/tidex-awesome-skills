@@ -1,4 +1,4 @@
-# 287 种人物 IP 手绘风格库（全新品类独立编号版）
+# 299 种人物 IP 手绘风格库（全新品类独立编号版）
 
 规则：采用 FA~FH 8 大品类独立编号（FA-001 ~ FH-043）；保留原参考名称用于索引；生图时优先使用“生图名称”。通用/历史风格保持短描述；当代个人创作者型条目使用稍详细的视觉描述，以减少只靠作者名造成的生成不稳定。
 
@@ -158,6 +158,36 @@
 
 | FB-034 · 简笔与半写实融合风 | Minimalist Doodle & Semi-Realistic Hybrid Illustration | 写实与简笔融合的混合插画风。画面中同时存在两种清晰区分的视觉语言：一部分内容采用细腻写实或半写实表现，强调自然质感、真实纹理、柔和层次、细节刻画与轻盈光感；另一部分内容采用极简2D手绘简笔画表现，强调概括造型、轻柔线条、低细节、适度留白与天真趣味。两种画法并置共存，形成明确可辨的风格反差，同时保持统一、和谐、克制的审美协调。 主体角色或主要视觉对象优先采用2D插画化表现，保持平面感、手绘感与概括感，不要做成照片感、3D感或厚重写实感；其余环境、植物、材质、局部场景元素可适度引入细腻半写实表现，另有部分装饰性元素可继续使用极简手绘简笔语言。整体应保留“主体偏2D、局部写实、局部简笔”的清晰层次关系。 整体气质轻盈、温柔、治愈、清新、诗意，带有文艺感与绘本感。色彩以低饱和、高明度、柔和通透的浅色系为主，避免浓烈对比、厚重综合色块和高饱和炫目视觉。背景倾向干净、简洁、留白充足，不过度堆叠信息，画面重视呼吸感、秩序感与视觉节奏。 写实部分不要过度摄影化，不要强烈商业修图感，不要走照片级写实路线；简笔部分不要复杂化，不追求真实结构与繁复刻画，应保留手绘的松弛感、稚拙感与亲和力。线条细而柔和，造型圆润、概括、克制，整体呈现“精致与天真并存”“真实与童趣并存”的视觉效果。 风格重点不是把所有内容统一成单一画法，而是保留“精细写实”与“简洁手绘”之间清晰可辨的差异，并让这种差异成为画面的核心风格特征。整体不做厚涂，不做3D，不做强戏剧光影，不做复杂纹样堆砌，不做过强体积塑造，不做商业海报式锐利修饰。 |
 
+| FB-035 · Charlie Mackesy | Charlie Mackesy Expressive Ink & Watercolor Storybook | 参考绘本作者Charlie Mackesy |
+
+| FB-036 · Liz Climo | Liz Climo Minimal Animal Cartoon Storybook | 参考绘本作者Liz Climo |
+
+| FB-037 · Naoko Takagi | Naoko Takagi Warm Daily Life Storybook | 参考绘本作者Naoko Takagi |
+
+| FB-038 · Yoko Sano | Yoko Sano Whimsical Crayon & Watercolor Storybook | 参考绘本作者Yoko Sano |
+
+| FB-039 · Emily Hughes | Emily Hughes Wild Lush Botanical Storybook | 参考绘本作者Emily Hughes |
+
+| FB-040 · Felicita Sala | Felicita Sala Cozy Kitchen & Nature Storybook | 参考绘本作者Felicita Sala |
+
+| FB-041 · Michael Grejniec | Michael Grejniec Textured Paper Watercolor Storybook | 参考绘本作者Michael Grejniec |
+
+| FB-042 · Jackie Morris | Jackie Morris Luminous Wildlife Watercolor Storybook | 参考绘本作者Jackie Morris |
+
+| FB-043 · Manuel Marsol | Manuel Marsol Bold Acrylic Cinematic Storybook | 参考绘本作者Manuel Marsol |
+
+| FB-044 · Suzy Lee | Suzy Lee Expressive Border Charcoal & Watercolor Storybook | 参考绘本作者Suzy Lee |
+
+| FB-045 · Komako Sakai | Komako Sakai Textured Acrylic & Charcoal Storybook | 参考绘本作者Komako Sakai |
+
+| FB-046 · Sydney Smith | Sydney Smith Luminous Atmospheric Watercolor Storybook | 参考绘本作者Sydney Smith |
+
+| FB-047 · Isabelle Arsenault | Isabelle Arsenault Poetic Pencil & Gouache Storybook | 参考绘本作者Isabelle Arsenault |
+
+| FB-048 · Júlia Sardà | Júlia Sardà Ornate Gothic Whimsical Storybook | 参考绘本作者Júlia Sardà |
+
+| FB-049 · Sophie Blackall | Sophie Blackall Vintage Chinese Ink & Watercolor Storybook | 参考绘本作者Sophie Blackall |
+
 ## FC 现代平面艺术 / Modern Graphic & Pop
 
 | 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |
@@ -221,6 +251,8 @@
 | FC-029 · 清透扁平插画 | Clean Airy Flat Vector Illustration | 轮廓清晰的大面积平涂色块塑造形体；造型适度概括与圆润几何化，保留关键识别特征；每个区域最多两级平面明暗与清晰硬边阴影，通过色块明度、冷暖和面积对比表现空间层次；色彩明亮清爽、柔和通透，纯净平滑的画面质感；极简主义、简洁现代，具有轻盈的现代商业插画与编辑插画感 |
 
 | FC-030 · 扁平几何气刷颗粒插画 | Flat Geometric Airbrush Grain Illustration | 扁平几何插图、夸张的不对称比例、柔和的气刷阴影、精细的印刷颗粒感。角色由几个超大尺寸、不对称的形状构建而成。大型物体是姿势的一部分，并改变轮廓。黑色剪纸面部特征。情感从全身姿态中传达出来。扁平颜色块带有清晰边缘；形状重叠处采用柔和的深色到颜色的喷雾渐变。精细的点刻颗粒主要位于墨水区域内部，在纸张上几乎不可见。 |
+
+| FC-031 · 美式现代复古橡皮管卡通插画 | Modern Retro Rubber-Hose Cartoon Illustration | 灵感来自美式现代复古 Rubber-Hose 插画风格。但整体更加现代、明亮、干净、可爱。角色采用圆润、简洁、夸张的卡通造型，四肢像柔软的橡皮管一样自然弯曲和延伸，弱化真实关节与人体结构，让动作更自由、更有节奏感。整体以粗而流畅的黑色轮廓线搭配干净的平涂色块，减少复杂光影和厚重做旧效果。造型简洁时尚，比例可爱，表情有个性。整体清爽、协调、有设计感。画面具有轻松幽默、俏皮可爱和一点点怪趣感，动作夸张流畅，像带有爵士节奏的动态瞬间。整体视觉偏现代潮流插画、复古海报和独立品牌插画质感，干净、可爱、有辨识度，减少老旧胶片颗粒与过度怀旧感。 |
 
 ## FD 日本当代插画 / Japanese Contemporary & Manga
 
@@ -443,6 +475,10 @@
 | FE-064 · 八九十年代中国课本插图风 | 1980s-1990s Chinese Textbook Illustration |  |
 
 | FE-065 · 中国老式手工木偶定格动画风 | Vintage Chinese Handmade Puppet Stop-Motion Animation | 中国老式手工木偶定格动画风；东方传统手工人偶；细长且略显笨拙的人体比例；狭长脸型、细眉凤眼、极简手绘五官与淡淡胭脂；苍白哑光的纸偶、木偶与泥偶面部；粗糙毛发纤维；朴素粗布古装，剪裁质朴，保留明显布料纤维与手工针线缝制痕迹；实体微缩手工布景，微缩道具，背景疏朗开阔与大面积空处；低技术微缩定格动画摄影棚质感，轻微胶片颗粒与浅景深；古典中式民间传说与志怪故事气息 |
+
+| FE-066 · 尘世梦影·彩绘红楼梦 | Dreams of the Mortal World: Red Chamber Color Illustration | 参考风格：尘世梦影：彩绘红楼梦， 孙温，但是整体略微明亮鲜润，亮度提升约15%，饱和度适度提升，画面适当留白有呼吸感，更符合现代年轻人审美 |
+
+| FE-067 · 天书奇谭 | The Legend of Sealed Book Animation Style |  |
 
 ## FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft
 

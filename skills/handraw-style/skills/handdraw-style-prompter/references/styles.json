@@ -518,6 +518,111 @@
     "traits": "写实与简笔融合的混合插画风。画面中同时存在两种清晰区分的视觉语言：一部分内容采用细腻写实或半写实表现，强调自然质感、真实纹理、柔和层次、细节刻画与轻盈光感；另一部分内容采用极简2D手绘简笔画表现，强调概括造型、轻柔线条、低细节、适度留白与天真趣味。两种画法并置共存，形成明确可辨的风格反差，同时保持统一、和谐、克制的审美协调。 主体角色或主要视觉对象优先采用2D插画化表现，保持平面感、手绘感与概括感，不要做成照片感、3D感或厚重写实感；其余环境、植物、材质、局部场景元素可适度引入细腻半写实表现，另有部分装饰性元素可继续使用极简手绘简笔语言。整体应保留“主体偏2D、局部写实、局部简笔”的清晰层次关系。 整体气质轻盈、温柔、治愈、清新、诗意，带有文艺感与绘本感。色彩以低饱和、高明度、柔和通透的浅色系为主，避免浓烈对比、厚重综合色块和高饱和炫目视觉。背景倾向干净、简洁、留白充足，不过度堆叠信息，画面重视呼吸感、秩序感与视觉节奏。 写实部分不要过度摄影化，不要强烈商业修图感，不要走照片级写实路线；简笔部分不要复杂化，不追求真实结构与繁复刻画，应保留手绘的松弛感、稚拙感与亲和力。线条细而柔和，造型圆润、概括、克制，整体呈现“精致与天真并存”“真实与童趣并存”的视觉效果。 风格重点不是把所有内容统一成单一画法，而是保留“精细写实”与“简洁手绘”之间清晰可辨的差异，并让这种差异成为画面的核心风格特征。整体不做厚涂，不做3D，不做强戏剧光影，不做复杂纹样堆砌，不做过强体积塑造，不做商业海报式锐利修饰。"
   },
   {
+    "number": "FB-035",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Charlie Mackesy",
+    "generation_name": "Charlie Mackesy Expressive Ink & Watercolor Storybook",
+    "traits": "参考绘本作者Charlie Mackesy"
+  },
+  {
+    "number": "FB-036",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Liz Climo",
+    "generation_name": "Liz Climo Minimal Animal Cartoon Storybook",
+    "traits": "参考绘本作者Liz Climo"
+  },
+  {
+    "number": "FB-037",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Naoko Takagi",
+    "generation_name": "Naoko Takagi Warm Daily Life Storybook",
+    "traits": "参考绘本作者Naoko Takagi"
+  },
+  {
+    "number": "FB-038",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Yoko Sano",
+    "generation_name": "Yoko Sano Whimsical Crayon & Watercolor Storybook",
+    "traits": "参考绘本作者Yoko Sano"
+  },
+  {
+    "number": "FB-039",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Emily Hughes",
+    "generation_name": "Emily Hughes Wild Lush Botanical Storybook",
+    "traits": "参考绘本作者Emily Hughes"
+  },
+  {
+    "number": "FB-040",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Felicita Sala",
+    "generation_name": "Felicita Sala Cozy Kitchen & Nature Storybook",
+    "traits": "参考绘本作者Felicita Sala"
+  },
+  {
+    "number": "FB-041",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Michael Grejniec",
+    "generation_name": "Michael Grejniec Textured Paper Watercolor Storybook",
+    "traits": "参考绘本作者Michael Grejniec"
+  },
+  {
+    "number": "FB-042",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Jackie Morris",
+    "generation_name": "Jackie Morris Luminous Wildlife Watercolor Storybook",
+    "traits": "参考绘本作者Jackie Morris"
+  },
+  {
+    "number": "FB-043",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Manuel Marsol",
+    "generation_name": "Manuel Marsol Bold Acrylic Cinematic Storybook",
+    "traits": "参考绘本作者Manuel Marsol"
+  },
+  {
+    "number": "FB-044",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Suzy Lee",
+    "generation_name": "Suzy Lee Expressive Border Charcoal & Watercolor Storybook",
+    "traits": "参考绘本作者Suzy Lee"
+  },
+  {
+    "number": "FB-045",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Komako Sakai",
+    "generation_name": "Komako Sakai Textured Acrylic & Charcoal Storybook",
+    "traits": "参考绘本作者Komako Sakai"
+  },
+  {
+    "number": "FB-046",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Sydney Smith",
+    "generation_name": "Sydney Smith Luminous Atmospheric Watercolor Storybook",
+    "traits": "参考绘本作者Sydney Smith"
+  },
+  {
+    "number": "FB-047",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Isabelle Arsenault",
+    "generation_name": "Isabelle Arsenault Poetic Pencil & Gouache Storybook",
+    "traits": "参考绘本作者Isabelle Arsenault"
+  },
+  {
+    "number": "FB-048",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Júlia Sardà",
+    "generation_name": "Júlia Sardà Ornate Gothic Whimsical Storybook",
+    "traits": "参考绘本作者Júlia Sardà"
+  },
+  {
+    "number": "FB-049",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Sophie Blackall",
+    "generation_name": "Sophie Blackall Vintage Chinese Ink & Watercolor Storybook",
+    "traits": "参考绘本作者Sophie Blackall"
+  },
+  {
     "number": "FC-001",
     "group": "FC 现代平面艺术 / Modern Graphic & Pop",
     "reference": "Jon Burgerman",
@@ -726,6 +831,13 @@
     "reference": "扁平几何气刷颗粒插画",
     "generation_name": "Flat Geometric Airbrush Grain Illustration",
     "traits": "扁平几何插图、夸张的不对称比例、柔和的气刷阴影、精细的印刷颗粒感。角色由几个超大尺寸、不对称的形状构建而成。大型物体是姿势的一部分，并改变轮廓。黑色剪纸面部特征。情感从全身姿态中传达出来。扁平颜色块带有清晰边缘；形状重叠处采用柔和的深色到颜色的喷雾渐变。精细的点刻颗粒主要位于墨水区域内部，在纸张上几乎不可见。"
+  },
+  {
+    "number": "FC-031",
+    "group": "FC 现代平面艺术 / Modern Graphic & Pop",
+    "reference": "美式现代复古橡皮管卡通插画",
+    "generation_name": "Modern Retro Rubber-Hose Cartoon Illustration",
+    "traits": "灵感来自美式现代复古 Rubber-Hose 插画风格。但整体更加现代、明亮、干净、可爱。角色采用圆润、简洁、夸张的卡通造型，四肢像柔软的橡皮管一样自然弯曲和延伸，弱化真实关节与人体结构，让动作更自由、更有节奏感。整体以粗而流畅的黑色轮廓线搭配干净的平涂色块，减少复杂光影和厚重做旧效果。造型简洁时尚，比例可爱，表情有个性。整体清爽、协调、有设计感。画面具有轻松幽默、俏皮可爱和一点点怪趣感，动作夸张流畅，像带有爵士节奏的动态瞬间。整体视觉偏现代潮流插画、复古海报和独立品牌插画质感，干净、可爱、有辨识度，减少老旧胶片颗粒与过度怀旧感。"
   },
   {
     "number": "FD-001",
@@ -1475,6 +1587,20 @@
     "reference": "中国老式手工木偶定格动画风",
     "generation_name": "Vintage Chinese Handmade Puppet Stop-Motion Animation",
     "traits": "中国老式手工木偶定格动画风；东方传统手工人偶；细长且略显笨拙的人体比例；狭长脸型、细眉凤眼、极简手绘五官与淡淡胭脂；苍白哑光的纸偶、木偶与泥偶面部；粗糙毛发纤维；朴素粗布古装，剪裁质朴，保留明显布料纤维与手工针线缝制痕迹；实体微缩手工布景，微缩道具，背景疏朗开阔与大面积空处；低技术微缩定格动画摄影棚质感，轻微胶片颗粒与浅景深；古典中式民间传说与志怪故事气息"
+  },
+  {
+    "number": "FE-066",
+    "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
+    "reference": "尘世梦影·彩绘红楼梦",
+    "generation_name": "Dreams of the Mortal World: Red Chamber Color Illustration",
+    "traits": "参考风格：尘世梦影：彩绘红楼梦， 孙温，但是整体略微明亮鲜润，亮度提升约15%，饱和度适度提升，画面适当留白有呼吸感，更符合现代年轻人审美"
+  },
+  {
+    "number": "FE-067",
+    "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
+    "reference": "天书奇谭",
+    "generation_name": "The Legend of Sealed Book Animation Style",
+    "traits": ""
   },
   {
     "number": "FF-001",

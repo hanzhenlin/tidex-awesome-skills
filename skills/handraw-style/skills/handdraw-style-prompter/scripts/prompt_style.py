@@ -101,13 +101,13 @@ def resolve_style_entry(style_input: str, styles: list[dict]) -> tuple[dict, str
         s_obj = next((s for s in styles if s["number"] == canonical), None)
 
     if not s_obj:
-        raise ValueError(f"Style '{style_input}' not found. Use a valid ID like FA-001 or legacy number 001-287.")
+        raise ValueError(f"Style '{style_input}' not found. Use a valid ID like FA-001 or legacy number 001-305.")
     return s_obj, canonical
 
 
 def recommend_combination(theme: str, user_style: str | None, user_color: str | None) -> tuple[str, str, str]:
     """
-    Dynamic whole-library recommendation engine across all 287 styles and 36 theme colors.
+    Dynamic whole-library recommendation engine across all 305 styles and 36 theme colors.
     Note: In AI agent workflows (Codex, Antigravity, Claude Code), the LLM dynamically reasons
     and evaluates styles and colors at runtime. This function provides a robust, non-hardcoded
     heuristic scoring fallback for offline and CLI usage.
@@ -122,7 +122,7 @@ def recommend_combination(theme: str, user_style: str | None, user_color: str | 
     ngrams = [t[i:i+n] for n in (2, 3, 4) for i in range(len(t)-n+1)]
     words = re.findall(r'[a-zA-Z0-9]+|[\u4e00-\u9fa5]', t)
 
-    # 1. Dynamically resolve style from full 287 styles library
+    # 1. Dynamically resolve style from full 305 styles library
     if user_style:
         try:
             s_obj, final_style = resolve_style_entry(user_style, styles)
@@ -281,10 +281,12 @@ def main() -> None:
                 f"Theme: {args.theme}.",
                 f"Layout instructions: {layout_prompt}",
             ]
+        is_ecommerce = layout.get("category") == "ecommerce" or layout["id"].startswith("EC-")
         if color_info:
             color_prompt = color_info["prompt_zh"] if language == "zh" else color_info["prompt_en"]
             parts.insert(1, color_prompt)
-        if selected and number:
+        # For e-commerce layouts, do not stitch style by default; only include if user explicitly passed --style
+        if selected and number and (not is_ecommerce or args.style):
             decision = resolve(args.model, number)
             traits = decision["prompt_traits"]
             if language == "zh":
@@ -303,22 +305,25 @@ def main() -> None:
         if language == "zh":
             if extra_zh:
                 parts.append(f"；{extra_zh}")
-            parts.append(GRAPHIC_TEXT_SUFFIX)
+            if not is_ecommerce:
+                parts.append(GRAPHIC_TEXT_SUFFIX)
         else:
             if extra_en:
                 parts.append(f"{extra_en}.")
-            parts.append(GRAPHIC_TEXT_SUFFIX)
+            if not is_ecommerce:
+                parts.append(GRAPHIC_TEXT_SUFFIX)
         if recommendation_banner:
             print(f"💡 推荐理由：{recommendation_banner}")
         print(f"Selected layout: {layout['id']} · {layout['name']}")
         if color_info:
             c_label = f"{color_info['id']} · " if color_info.get("id") else ""
             print(f"Selected color: {c_label}{color_info['name_zh']} ({color_info['name_en']})")
-        if selected and number:
+        if selected and number and (not is_ecommerce or args.style):
             print(f"Selected style: #{number} · {selected['generation_name']}")
         print("\nPrompt:")
         print("".join(parts) if language == "zh" else " ".join(parts))
-        print("\n已自动使用图文模式。" if language == "zh" else "\nThe selected layout automatically uses graphic-text mode.")
+        if not is_ecommerce:
+            print("\n已自动使用图文模式。" if language == "zh" else "\nThe selected layout automatically uses graphic-text mode.")
         return
 
     graphic_text_suffix = GRAPHIC_TEXT_SUFFIX if args.mode == "graphic-text" else ""

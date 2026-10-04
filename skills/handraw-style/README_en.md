@@ -6,7 +6,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **287 distinct hand-drawn illustration styles** (`001`–`287`), **134 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **305 distinct hand-drawn illustration styles** (`001`–`305`), **161 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -19,7 +19,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 > ### 📚 Official Feishu Knowledge Base is Live
 > 🔗 **[👉 Click to Access Feishu Knowledge Base ↗](https://ecmn3m3i17.feishu.cn/wiki/space/7689222460876524523?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)**
 > 
-> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 287 illustration styles and 136 layouts
+> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 288 illustration styles and 161 layouts
 > 2. ❓ **Skill FAQ & Prompt Cheat Sheet**: Setup walkthroughs, troubleshooting tips, and ready-to-use prompt patterns
 > 3. 💡 **Entrepreneurship & Monetization**: Continuously updated real-world case studies and revenue strategies shared by the community
 
@@ -29,13 +29,14 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
-| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 287 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **136 Layout Compositions**: 21 Social Cards, 35 Infographics, 68 Comic Storyboards, 12 IP Design ready out-of-the-box. |
+| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 305 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
+| **Monotonous composition; hard to format complex graphics** | **161 Layout Compositions**: 21 Social Cards, 35 Infographics, 68 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
 | **Boring article covers with disconnected visuals** | **Article Cover Designer**: Automatically extracts ~200-word core summary & audience persona, matches styles & colors, prioritizes visual metaphor, and delivers bold titles with clean editorial layout. |
 | **Inconsistent article illustrations & tedious formatting** | **Article Illustration Planner & Backfill**: Visual editorial judgment for 2–5 high-value inflection points, unified single style & color across the piece, automated batch image generation, and precision Markdown insertion. |
+| **Chaotic photo shoot planning & generic AI portraits** | **Editorial Photography & Spacetime Orchestration**: Supports 10+ genres (couples, weddings, portraits, families, etc.), proposing 3 high-contrast spacetime plans in copyable code blocks with 8-grid keywords for one-click generation. |
 
 ---
 
@@ -43,6 +44,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 - **Content Creators & Influencers**: Social media covers (Xiaohongshu, Instagram, X/Twitter), newsletter hero images, viral quote cards.
 - **Newsletter & In-Depth Article Writers**: Automatic ~200-word argument extraction, high-converting cover design, cohesive multi-illustration planning, and automated Markdown insertion.
+- **Photographers & Portrait Creators**: Editorial studio planning for 10+ genres (couples, weddings, family portraits, Hanfu, etc.) with instant 8-grid sample generation.
 - **Knowledge & Tech Bloggers**: Comparison lists, architecture pyramids, step-by-step processes, and high-engagement infographics.
 - **Comic & Story Creators**: 4-panel strips, emotional webtoons, storyboard drafts, children's storybook illustrations.
 - **Visual & Brand Designers**: Rapid concept sketching, creative campaign posters, character design prototypes.
@@ -137,6 +139,20 @@ Walls of text cause reader fatigue and drop-offs; yet hunting for stock photos l
      - **Track A (Manual Generation & Backfill)**: Generate images with your preferred tool, then paste them or provide local paths; the Skill automatically inserts them after the correct anchor paragraphs in Markdown;
      - **Track B (Fully Automated Generation & Insertion)**: Simply say **"Auto generate and insert"**; the Skill sequentially generates all illustrations and triggers its built-in Python insertion engine to produce the completed, formatted Markdown document (e.g., `article_illustrated.md`).
 
+### 7. Professional Photography Planning Mode (Couples/Weddings/Portraits/Families, 3 Candidate Plans & Instant 8-Grid Generation)
+Say goodbye to cheap snapshot looks and generic AI portraiture! Whether planning couple sessions, wedding shoots, solo portraits, family portraits, ancient Hanfu, or travel snapshots, the system plans spacetime coordinates, styling, and cinematography to editorial studio standards:
+- **Applicable Genres**: Couple photography, wedding shoots, solo portraits, family portraits, ancient Hanfu, New Chinese, vintage HK style, cosplay, travel snapshots, executive portraits, etc.
+- **Prompt Command**:
+  `Photography mode, please first propose 3 candidate directions for me to choose from, shoot type: couple`
+  *(Or toggle to "Photography" mode in the web prompt assembler [tutorials.html](skills/handdraw-style-prompter/gallery/tutorials.html); theme is optional, AI will curate 3 diverse spacetimes if unstated)*
+- **Automated Workflow & Core Highlights**:
+  1. **Strict 3-Option Proposal First**: Proposes 3 candidate directions with dramatic geographical and worldview contrast (2 modern real-world landmarks + 1 time-travel / historical / future / fictional universe); never automatically decides for the user;
+  2. **Per-Participant Styling & Makeup Decisions**: Details participant relationships, individual distinct wardrobes, and finalized Editorial hair & makeup (female subjects default to soft-focus studio retouch, preserving authentic skin texture and natural lighting);
+  3. **Self-Contained Code Blocks with 8-Grid Keywords**: All 3 plans are fully encapsulated inside independent text code blocks (` ```text `) ending with the generation keyword `出8宫格图片。`;
+  4. **Flexible Dual-Track Generation**:
+     - **【One-Click Copy & Generate】**: Click the copy button on any code block to grab the full prompt, then paste into Midjourney, Flux, or any image generator;
+     - **【Reply A / B / C for Instant Generation】**: Reply `A`, `B`, or `C` in chat, and the AI immediately generates the 8-grid sample image for that direction without waiting through tedious planning documents!
+
 ---
 
 ## Two Prompt Modes, Instant Switching
@@ -162,7 +178,7 @@ The illustration below shows text integrated harmoniously with the visual compos
 
 By default, the Skill crafts copyable prompts. When you explicitly request image generation, it optimizes the output based on verified model capabilities:
 
-- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 287 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
+- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 305 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
 - **Third-Party & General Models (Midjourney, Flux, Stable Diffusion, Imagen, Gemini, etc.)**: Employs the rock-solid **Reference Image Fallback** strategy. The Skill provides a 1024x1024 4-grid standard reference image or file path, ensuring 100% faithful reproduction of linework, texture, and color palette without prompt drift.
 - **Open for Community Benchmarks**: Capability definitions reside in `skills/handdraw-style-prompter/references/model_capabilities.json`. Pull requests for other model evaluations are warmly welcomed!
 
@@ -184,15 +200,15 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (001�
 
 ![Featured Styles Preview (001–016)](images/A_001-016.webp)
 
-- 🖼️ **[👉 Browse All Style Sheets (001–287 Full Visual Contact Sheets)](STYLES_en.md)**
-- 📄 **[View Detailed Style Metadata (287 Styles Table & Core Traits)](styles_200_reorganized.md)**
+- 🖼️ **[👉 Browse All Style Sheets (001–305 Full Visual Contact Sheets)](STYLES_en.md)**
+- 📄 **[View Detailed Style Metadata (305 Styles Table & Core Traits)](styles_200_reorganized.md)**
 - 💻 *(For offline interactive search and enlargement, open `skills/handdraw-style-prompter/gallery/index.html` in your local browser)*
 
 ---
 
 ## Layout Compositions Showcase
 
-In addition to 287 illustration styles, this library includes **134 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, and IP design. Combine any style with any layout with a single command.
+In addition to 305 illustration styles, this library includes **161 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
 
 ### 1. Social Cards (21 Layouts)
 
@@ -224,15 +240,23 @@ Ideal for multi-panel narratives, webtoons, emotional storylines, and cinematic 
 
 ---
 
-### 4. IP Design (12 Layouts)
+### 4. IP Design (13 Layouts)
 
 Ideal for brand mascot planning, character design manual, emotional positioning, and commercial derivatives.
 
-👉 **[View IP Design Layouts (12 Visuals & Prompts)](LAYOUTS_en.md#ip-characters)**
+👉 **[View IP Design Layouts (13 Visuals & Prompts)](LAYOUTS_en.md#ip-characters)**
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 136 Layouts & Prompts ↗](LAYOUTS_en.md)**
+### 5. E-commerce (24 Layouts)
+
+Ideal for e-commerce single product hero shots, multi-angle views, detail closeups, packaging/sets, feature callouts, dimensions, material breakdowns, craftsmanship, certification & data, customer reviews, brand stories, new arrivals, promotional sales, UGC seeding, and advertising key visuals (KV).
+
+👉 **[View E-commerce Layouts (24 Visuals & Prompts)](LAYOUTS_en.md#ecommerce)**
+
+---
+
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 161 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---

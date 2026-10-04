@@ -224,6 +224,7 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .text-input:focus{{outline:none;border-color:#b74227;box-shadow:0 0 0 3px rgba(183,66,39,0.15)}}
 .text-area{{min-height:58px;line-height:1.5;resize:vertical;font-family:inherit;overflow-y:auto}}
 .extra-fields-grid{{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+.extra-fields-grid.single-col{{grid-template-columns:1fr}}
 .extra-fields-grid[hidden]{{display:none!important}}
 
 /* Aspect Ratio Selector */
@@ -242,9 +243,9 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 /* Mood Selector */
 .mood-form-group{{display:flex;flex-direction:column;gap:8px}}
 .mood-presets-row{{display:flex;flex-wrap:wrap;gap:7px;align-items:center}}
-.mood-preset-btn{{border:1px solid #dcd5ca;background:#faf8f5;color:#4a423a;padding:4px 11px;border-radius:16px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;line-height:1.3;transition:all .15s}}
-.mood-preset-btn:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
-.mood-preset-btn.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 3px rgba(183,66,39,0.25)}}
+.mood-preset-btn,.shoot-type-preset-btn{{border:1px solid #dcd5ca;background:#faf8f5;color:#4a423a;padding:4px 11px;border-radius:16px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;line-height:1.3;transition:all .15s}}
+.mood-preset-btn:hover,.shoot-type-preset-btn:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+.mood-preset-btn.is-active,.shoot-type-preset-btn.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 3px rgba(183,66,39,0.25)}}
 
 /* Slots Grid */
 .fusion-checkbox-wrap{{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:3px 10px;border-radius:16px;background:#eee8df;border:1px solid #dcd5ca;cursor:pointer;font-size:12.5px;font-weight:750;color:#514a43;user-select:none;transition:all .15s}}
@@ -421,6 +422,7 @@ dialog::backdrop{{background:#000a}}
                 <button type="button" class="mode-btn" data-mode="poster" data-i18n="modePoster">海报</button>
                 <button type="button" class="mode-btn" data-mode="article-illust" data-i18n="modeArticleIllust">文章插图</button>
                 <button type="button" class="mode-btn" data-mode="article-cover" data-i18n="modeArticleCover">文章封面</button>
+                <button type="button" class="mode-btn" data-mode="photo" data-i18n="modePhoto">摄影</button>
               </div>
             </div>
             <div class="mode-item">
@@ -457,6 +459,31 @@ dialog::backdrop{{background:#000a}}
             <div class="form-group">
               <label for="input-channel" class="form-label" data-i18n="channelLabel">海报投放渠道：</label>
               <input type="text" id="input-channel" class="text-input" placeholder="例如：小红书 / 微信公众号封面 / 线下门店立牌...">
+            </div>
+          </div>
+
+          <!-- Extra fields for photo mode only -->
+          <div class="extra-fields-grid single-col" id="photo-extra-fields" hidden>
+            <div class="form-group mood-form-group">
+              <div class="selector-options-row">
+                <label for="input-shoot-type" class="form-label" data-i18n="shootTypeLabel">拍摄类型：</label>
+                <div class="mood-presets-row" role="group" aria-label="拍摄类型快捷预设">
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="情侣" data-type-en="Couple" data-i18n="shootTypeCouple">情侣</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="婚纱" data-type-en="Wedding" data-i18n="shootTypeWedding">婚纱</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="个人写真" data-type-en="Solo Portrait" data-i18n="shootTypeSolo">个人写真</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="亲子全家福" data-type-en="Family" data-i18n="shootTypeFamily">亲子全家福</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="古风汉服" data-type-en="Ancient Hanfu" data-i18n="shootTypeHanfu">古风汉服</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="新中式" data-type-en="New Chinese" data-i18n="shootTypeNewChinese">新中式</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="复古港风" data-type-en="Vintage HK" data-i18n="shootTypeVintageHK">复古港风</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="Cosplay" data-type-en="Cosplay" data-i18n="shootTypeCosplay">Cosplay</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="旅行抓拍" data-type-en="Travel Snapshot" data-i18n="shootTypeTravel">旅行抓拍</button>
+                  <button type="button" class="shoot-type-preset-btn" data-type-zh="职场肖像" data-type-en="Professional Portrait" data-i18n="shootTypeCareer">职场肖像</button>
+                </div>
+              </div>
+              <div class="ratio-input-wrap" style="max-width:100%">
+                <input type="text" id="input-shoot-type" class="text-input ratio-input" placeholder="点选上方标签，或手动输入/修改拍摄类型...">
+                <button type="button" id="btn-clear-shoot-type" class="ratio-clear-btn" title="清空拍摄类型" aria-label="清空拍摄类型" hidden>×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -574,11 +601,11 @@ dialog::backdrop{{background:#000a}}
             <div class="slot-card" id="slot-layout">
               <div class="slot-header">
                 <span class="slot-title">📐 <span data-i18n="slotLayout">图型</span></span>
-                <span class="slot-optional" id="slot-layout-optional" data-i18n="optionalLayout">可选 (120)</span>
+                <span class="slot-optional" id="slot-layout-optional" data-i18n="optionalLayout">可选 ({layouts_count})</span>
               </div>
               <button type="button" class="slot-trigger" data-picker="layout">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                <span data-i18n="pickLayoutText">按图选择图型</span>
+                <span data-i18n="pickLayoutText">按图选择图型 ({layouts_count})</span>
               </button>
               <div class="slot-filled" hidden>
                 <div class="slot-img-wrap"><img src="" alt=""></div>
@@ -749,6 +776,7 @@ const COLOR_CATEGORIES = {color_categories_json_str};
 
 const wechatBtn=document.querySelector('#wechat-btn'),wechatModal=document.querySelector('#wechat-modal'),langBtn=document.querySelector('#lang-btn');
 const inputTheme=document.querySelector('#input-theme'),themeLabelText=document.querySelector('#theme-label-text'),inputAudience=document.querySelector('#input-audience'),inputChannel=document.querySelector('#input-channel'),posterExtraFields=document.querySelector('#poster-extra-fields');
+const inputShootType=document.querySelector('#input-shoot-type'),photoExtraFields=document.querySelector('#photo-extra-fields'),btnClearShootType=document.querySelector('#btn-clear-shoot-type');
 const inputRatio=document.querySelector('#input-ratio'),btnClearRatio=document.querySelector('#btn-clear-ratio');
 const inputMood=document.querySelector('#input-mood'),btnClearMood=document.querySelector('#btn-clear-mood');
 const assembledText=document.querySelector('#assembled-text'),btnCopyAssembled=document.querySelector('#btn-copy-assembled'),copyBtnText=document.querySelector('#copy-btn-text');
@@ -811,6 +839,7 @@ const I18N = {{
     modePoster: "海报",
     modeArticleIllust: "文章插图",
     modeArticleCover: "文章封面",
+    modePhoto: "摄影",
     whitespaceLabel: "留白：",
     whitespaceNormal: "正常",
     whitespaceModerate: "适中",
@@ -820,12 +849,25 @@ const I18N = {{
     themeLabel: "主题：",
     articlePathLabel: "文章文件地址：",
     articleCoverPathLabel: "文章文件地址或内容：",
+    shootTypeLabel: "拍摄类型：",
     audienceLabel: "受众：",
     channelLabel: "海报投放渠道：",
     themePlaceholder: "输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪...",
+    themePhotoPlaceholder: "选填：输入特定主题或场景（如：海边夕阳 / 90年代港风），不填由AI推荐...",
     articlePathPlaceholder: "请输入文章的本地绝对路径，例如：D:\\\\path\\\\to\\\\article.md...",
     articleCoverPathPlaceholder: "请输入文章的本地绝对路径（例如：D:\\\\path\\\\to\\\\article.md）或直接粘贴文章内容...",
     articleCoverFixedPrompt: "先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。",
+    shootTypePlaceholder: "点选上方标签，或手动输入/修改拍摄类型...",
+    shootTypeCouple: "情侣",
+    shootTypeWedding: "婚纱",
+    shootTypeSolo: "个人写真",
+    shootTypeFamily: "亲子全家福",
+    shootTypeHanfu: "古风汉服",
+    shootTypeNewChinese: "新中式",
+    shootTypeVintageHK: "复古港风",
+    shootTypeCosplay: "Cosplay",
+    shootTypeTravel: "旅行抓拍",
+    shootTypeCareer: "职场肖像",
     audiencePlaceholder: "例如：年轻都市白领 / 露营爱好者 / 亲子家庭...",
     channelPlaceholder: "例如：小红书 / 微信公众号封面 / 线下门店立牌...",
     ratioLabel: "画幅比例：",
@@ -861,14 +903,14 @@ const I18N = {{
     slotColor: "主题色",
     optional: "可选",
     optionalAsset: "可选 ({assets_count})",
-    optionalLayout: "可选 (120)",
+    optionalLayout: "可选 ({layouts_count})",
     optionalStyle: "可选 ({styles_count})",
     optionalCharStyle: "可选 (风格/写实)",
     optionalSceneStyle: "可选 (风格/写实)",
     optionalColor: "可选 (36)",
     layoutNotApplicable: "不适用",
     pickAssetText: "按图选择自建资产",
-    pickLayoutText: "按图选择图型 (120)",
+    pickLayoutText: "按图选择图型 ({layouts_count})",
     pickStyleText: "按图选择风格 ({styles_count})",
     pickCharStyleText: "按图选择角色风格",
     pickSceneStyleText: "按图选择场景风格",
@@ -883,7 +925,7 @@ const I18N = {{
     formulaLabel: "示例提示词：",
     searchPlaceholder: "输入编号或名称过滤...",
     pickerTitleAsset: "选择视觉资产（角色 / 道具 / 场景）",
-    pickerTitleLayout: "选择图型 (120)",
+    pickerTitleLayout: "选择图型 ({layouts_count})",
     pickerTitleStyle: "选择手绘风格 ({styles_count})",
     pickerTitleCharStyle: "选择角色风格",
     pickerTitleSceneStyle: "选择场景风格",
@@ -897,6 +939,7 @@ const I18N = {{
     filterInfographic: "信息图 (IG)",
     filterComicStoryboard: "漫画分镜 (SB)",
     filterIpCharacter: "IP设计 (IP)",
+    filterEcommerce: "电商 (EC)",
     filterBlue: "经典蓝系",
     filterGreen: "清新绿系",
     filterRed: "古典红绿",
@@ -944,6 +987,7 @@ const I18N = {{
     modePoster: "Poster",
     modeArticleIllust: "Article Illustration",
     modeArticleCover: "Article Cover",
+    modePhoto: "Photography",
     whitespaceLabel: "Negative Space:",
     whitespaceNormal: "Normal",
     whitespaceModerate: "Moderate",
@@ -953,12 +997,25 @@ const I18N = {{
     themeLabel: "Theme:",
     articlePathLabel: "Article File Path:",
     articleCoverPathLabel: "Article File Path or Text:",
+    shootTypeLabel: "Shoot Type:",
     audienceLabel: "Audience:",
     channelLabel: "Distribution Channel:",
     themePlaceholder: "Enter theme, e.g. Autumn milk tea / Cat sunbathing on windowsill...",
+    themePhotoPlaceholder: "Optional: Enter specific theme or setting (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
     articlePathPlaceholder: "Enter absolute local file path, e.g. D:\\\\path\\\\to\\\\article.md...",
     articleCoverPathPlaceholder: "Enter absolute local file path (e.g. D:\\\\path\\\\to\\\\article.md) or paste article text...",
     articleCoverFixedPrompt: "Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me.",
+    shootTypePlaceholder: "Click tags above, or type/edit shoot type...",
+    shootTypeCouple: "Couple",
+    shootTypeWedding: "Wedding",
+    shootTypeSolo: "Solo Portrait",
+    shootTypeFamily: "Family",
+    shootTypeHanfu: "Ancient Hanfu",
+    shootTypeNewChinese: "New Chinese",
+    shootTypeVintageHK: "Vintage HK",
+    shootTypeCosplay: "Cosplay",
+    shootTypeTravel: "Travel Snapshot",
+    shootTypeCareer: "Professional Portrait",
     audiencePlaceholder: "e.g. Young urban professionals / Campers / Families...",
     channelPlaceholder: "e.g. Instagram / RED / Store poster stand...",
     ratioLabel: "Aspect Ratio:",
@@ -994,14 +1051,14 @@ const I18N = {{
     slotColor: "Theme Color",
     optional: "Optional",
     optionalAsset: "Optional ({assets_count})",
-    optionalLayout: "Optional (120)",
+    optionalLayout: "Optional ({layouts_count})",
     optionalStyle: "Optional ({styles_count})",
     optionalCharStyle: "Optional (Style/Realistic)",
     optionalSceneStyle: "Optional (Style/Realistic)",
     optionalColor: "Optional (36)",
     layoutNotApplicable: "N/A",
     pickAssetText: "Pick Custom Asset",
-    pickLayoutText: "Pick Layout (120)",
+    pickLayoutText: "Pick Layout ({layouts_count})",
     pickStyleText: "Pick Style ({styles_count})",
     pickCharStyleText: "Pick Character Style",
     pickSceneStyleText: "Pick Scene Style",
@@ -1016,7 +1073,7 @@ const I18N = {{
     formulaLabel: "Example Prompt:",
     searchPlaceholder: "Search ID or name...",
     pickerTitleAsset: "Select Visual Asset (Character / Prop / Scene)",
-    pickerTitleLayout: "Select Layout (120)",
+    pickerTitleLayout: "Select Layout ({layouts_count})",
     pickerTitleStyle: "Select Style ({styles_count})",
     pickerTitleCharStyle: "Select Character Style",
     pickerTitleSceneStyle: "Select Scene Style",
@@ -1030,6 +1087,7 @@ const I18N = {{
     filterInfographic: "Infographics (IG)",
     filterComicStoryboard: "Comic Storyboards (SB)",
     filterIpCharacter: "IP Design (IP)",
+    filterEcommerce: "E-commerce (EC)",
     filterBlue: "Classic Blue",
     filterGreen: "Fresh Green",
     filterRed: "Classic Red & Vintage",
@@ -1131,6 +1189,8 @@ function updatePrompt() {{
       parts.push(isZh ? '文章插图模式' : 'Article illustration mode');
     }} else if (currentMode === 'article-cover') {{
       parts.push(isZh ? '文章封面模式' : 'Article cover mode');
+    }} else if (currentMode === 'photo') {{
+      parts.push(isZh ? '摄影写真模式，请先出3个方案供我挑选' : 'Photo portrait mode, please first propose 3 candidate directions for me to choose from');
     }}
   }} else {{
     if (currentMode === 'poster') {{
@@ -1141,6 +1201,8 @@ function updatePrompt() {{
       parts.push(isZh ? '文章插图模式' : 'Article illustration mode');
     }} else if (currentMode === 'article-cover') {{
       parts.push(isZh ? '请设计文章封面' : 'Please design an article cover');
+    }} else if (currentMode === 'photo') {{
+      parts.push(isZh ? '摄影写真模式，请先出3个方案供我挑选' : 'Photo portrait mode, please first propose 3 candidate directions for me to choose from');
     }}
   }}
 
@@ -1236,7 +1298,14 @@ function updatePrompt() {{
     else if (ratioVal === '3:4') scenario = isZh ? '小红书封面' : 'Xiaohongshu Cover';
     else if (ratioVal === '2.35:1' || ratioVal === '21:9') scenario = isZh ? '公众号文章封面' : 'WeChat Official Account Cover';
     parts.push(isZh ? `业务场景：${{scenario}}` : `Scenario: ${{scenario}}`);
-    parts.push(t.articleCoverFixedPrompt);
+  }} else if (currentMode === 'photo') {{
+    const shootTypeVal = inputShootType ? inputShootType.value.trim() : '';
+    if (shootTypeVal) {{
+      parts.push(isZh ? `拍摄类型：${{shootTypeVal}}` : `Shoot type: ${{shootTypeVal}}`);
+    }}
+    if (themeVal) {{
+      parts.push(isZh ? `主题：${{themeVal}}` : `Theme: ${{themeVal}}`);
+    }}
   }} else {{
     const themeDisplay = themeVal || t.themeEmptyText;
     parts.push(isZh ? `主题：${{themeDisplay}}` : `Theme: ${{themeDisplay}}`);
@@ -1307,6 +1376,9 @@ function setMode(mode) {{
   }} else {{
     posterExtraFields.hidden = true;
   }}
+  if (photoExtraFields) {{
+    photoExtraFields.hidden = (mode !== 'photo');
+  }}
 
   const slotLayout = document.querySelector('#slot-layout');
   const optTag = document.querySelector('#slot-layout-optional');
@@ -1336,6 +1408,7 @@ function setMode(mode) {{
     'poster': '9:16',
     'article-illust': '4:3',
     'article-cover': '2.35:1',
+    'photo': '3:4',
   }};
   const targetRatio = defaultRatios[mode];
   if (targetRatio && inputRatio) {{
@@ -1352,10 +1425,14 @@ function setMode(mode) {{
   }} else if (mode === 'article-cover') {{
     if (themeLabelText) themeLabelText.textContent = I18N[currentLang].articleCoverPathLabel;
     if (inputTheme) inputTheme.placeholder = I18N[currentLang].articleCoverPathPlaceholder;
+  }} else if (mode === 'photo') {{
+    if (themeLabelText) themeLabelText.textContent = I18N[currentLang].themeLabel;
+    if (inputTheme) inputTheme.placeholder = I18N[currentLang].themePhotoPlaceholder;
   }} else {{
     if (themeLabelText) themeLabelText.textContent = I18N[currentLang].themeLabel;
     if (inputTheme) inputTheme.placeholder = I18N[currentLang].themePlaceholder;
   }}
+  if (inputShootType) inputShootType.placeholder = I18N[currentLang].shootTypePlaceholder;
   updatePrompt();
 }}
 
@@ -1417,12 +1494,14 @@ function renderLayoutFilters() {{
   const igCount = LAYOUTS_DATA.filter(x => x.cat === 'infographic').length;
   const sbCount = LAYOUTS_DATA.filter(x => x.cat === 'comic-storyboard').length;
   const ipCount = LAYOUTS_DATA.filter(x => x.cat === 'ip-character').length;
+  const ecCount = LAYOUTS_DATA.filter(x => x.cat === 'ecommerce').length;
   pickerFilters.innerHTML = `
     <button type="button" class="modal-filter-btn is-active" data-filter="all">${{t.filterAll}} (${{LAYOUTS_DATA.length}})</button>
     <button type="button" class="modal-filter-btn" data-filter="social-card">${{t.filterSocialCard}} (${{scCount}})</button>
     <button type="button" class="modal-filter-btn" data-filter="infographic">${{t.filterInfographic}} (${{igCount}})</button>
     <button type="button" class="modal-filter-btn" data-filter="comic-storyboard">${{t.filterComicStoryboard}} (${{sbCount}})</button>
     <button type="button" class="modal-filter-btn" data-filter="ip-character">${{t.filterIpCharacter}} (${{ipCount}})</button>
+    <button type="button" class="modal-filter-btn" data-filter="ecommerce">${{t.filterEcommerce}} (${{ecCount}})</button>
   `;
   attachFilterEvents();
 }}
@@ -1787,6 +1866,63 @@ if (btnClearMood) {{
   }});
 }}
 
+// Shoot Type Presets and Input handlers (tag selection + manual input)
+document.querySelectorAll('.shoot-type-preset-btn').forEach(btn => {{
+  btn.addEventListener('click', () => {{
+    const tag = currentLang === 'zh' ? btn.dataset.typeZh : btn.dataset.typeEn;
+    const isZh = currentLang === 'zh';
+    const sep = isZh ? '、' : ', ';
+    const rawVal = inputShootType ? inputShootType.value.trim() : '';
+    let currentTags = rawVal ? rawVal.split(/[、,，/]+|\\s+/).map(s => s.trim()).filter(Boolean) : [];
+
+    const idx = currentTags.findIndex(t =>
+      t.toLowerCase() === tag.toLowerCase() ||
+      (btn.dataset.typeZh && t === btn.dataset.typeZh) ||
+      (btn.dataset.typeEn && t.toLowerCase() === btn.dataset.typeEn.toLowerCase())
+    );
+
+    if (idx >= 0) {{
+      currentTags.splice(idx, 1);
+      btn.classList.remove('is-active');
+    }} else {{
+      currentTags.push(tag);
+      btn.classList.add('is-active');
+    }}
+
+    if (inputShootType) {{
+      inputShootType.value = currentTags.join(sep);
+      if (btnClearShootType) btnClearShootType.hidden = currentTags.length === 0;
+    }}
+    updatePrompt();
+  }});
+}});
+
+if (inputShootType) {{
+  inputShootType.addEventListener('input', () => {{
+    const rawVal = inputShootType.value.trim();
+    if (btnClearShootType) btnClearShootType.hidden = !rawVal;
+    const tokens = rawVal ? rawVal.split(/[、,，/]+|\\s+/).map(s => s.trim().toLowerCase()).filter(Boolean) : [];
+    const tokenSet = new Set(tokens);
+    document.querySelectorAll('.shoot-type-preset-btn').forEach(b => {{
+      const isMatch = tokenSet.has(b.dataset.typeZh.toLowerCase()) || tokenSet.has(b.dataset.typeEn.toLowerCase());
+      b.classList.toggle('is-active', isMatch);
+    }});
+    updatePrompt();
+  }});
+}}
+
+if (btnClearShootType) {{
+  btnClearShootType.addEventListener('click', () => {{
+    if (inputShootType) {{
+      inputShootType.value = '';
+      inputShootType.focus();
+    }}
+    btnClearShootType.hidden = true;
+    document.querySelectorAll('.shoot-type-preset-btn').forEach(b => b.classList.remove('is-active'));
+    updatePrompt();
+  }});
+}}
+
 // Fusion Checkbox Listener
 if (checkboxFusion) {{
   checkboxFusion.addEventListener('change', () => {{
@@ -1851,6 +1987,9 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
   inputTheme.style.height = '';
   inputAudience.value = '';
   inputChannel.value = '';
+  if (inputShootType) inputShootType.value = '';
+  if (btnClearShootType) btnClearShootType.hidden = true;
+  document.querySelectorAll('.shoot-type-preset-btn').forEach(b => b.classList.remove('is-active'));
   if (inputRatio) {{
     inputRatio.value = '';
     if (btnClearRatio) btnClearRatio.hidden = true;
@@ -1937,10 +2076,14 @@ function applyLang(lang) {{
   }} else if (currentMode === 'article-cover') {{
     if (themeLabelText) themeLabelText.textContent = t.articleCoverPathLabel;
     if (inputTheme) inputTheme.placeholder = t.articleCoverPathPlaceholder;
+  }} else if (currentMode === 'photo') {{
+    if (themeLabelText) themeLabelText.textContent = t.themeLabel;
+    if (inputTheme) inputTheme.placeholder = t.themePhotoPlaceholder;
   }} else {{
     if (themeLabelText) themeLabelText.textContent = t.themeLabel;
     if (inputTheme) inputTheme.placeholder = t.themePlaceholder;
   }}
+  if (inputShootType) inputShootType.placeholder = t.shootTypePlaceholder;
   inputAudience.placeholder = t.audiencePlaceholder;
   inputChannel.placeholder = t.channelPlaceholder;
   if (inputRatio) inputRatio.placeholder = t.ratioPlaceholder;
