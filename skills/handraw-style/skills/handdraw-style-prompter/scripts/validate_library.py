@@ -37,12 +37,12 @@ def main() -> None:
     alias_data = json.loads(alias_file.read_text(encoding="utf-8"))
     legacy_to_new = alias_data.get("legacy_to_new", {})
     new_to_legacy = alias_data.get("new_to_legacy", {})
-    if len(legacy_to_new) != 305 or len(new_to_legacy) != 305:
-        fail("style_alias_map.json must contain 305 bidirectional mappings")
+    if len(legacy_to_new) != 324 or len(new_to_legacy) != 324:
+        fail("style_alias_map.json must contain 324 bidirectional mappings")
 
     total_styles = len(styles)
-    if total_styles != 305:
-        fail(f"expected 305 styles, got {total_styles}")
+    if total_styles != 324:
+        fail(f"expected 324 styles, got {total_styles}")
 
     CATEGORIES = ["FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH"]
     cat_counts = {}
@@ -531,6 +531,19 @@ def main() -> None:
             fail(f"assets gallery is missing {token}")
     if "select-dir-btn" in assets_gallery or "add-char-btn" in assets_gallery:
         fail("assets gallery should not contain directory selection or web import form")
+    if 'src="../../../images/custom/custom_assets.js"' not in assets_gallery:
+        fail("assets.html must load isolated custom_assets.js loader")
+    if 'src="../../../images/custom/custom_assets.js"' not in tutorial_gallery:
+        fail("tutorials.html must load isolated custom_assets.js loader")
+
+    # Assert that no private local custom assets ever leak into git-tracked HTML files
+    import re
+    custom_leak_pattern = re.compile(r'\b(CH-00[2-9]|CH-0[1-9][0-9]|PR-\d{3}|SCN-\d{3})\b|images/custom/(characters|props|scenes)/')
+    for html_file in [assets_gallery_file, tutorials_gallery_file]:
+        html_text = html_file.read_text(encoding="utf-8")
+        leaks = custom_leak_pattern.findall(html_text)
+        if leaks:
+            fail(f"Local custom asset leaked into git-tracked {html_file.name}: {leaks}")
 
     characters_redirect_file = SKILL / "gallery" / "characters.html"
     if not characters_redirect_file.exists():

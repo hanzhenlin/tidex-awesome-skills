@@ -99,3 +99,6 @@ description: 管理自建图库（角色库、道具库、场景库）全生命�
    严禁将用户的外部物理路径硬编码至 Git 追踪的代码或文档中。所有配置均经由 `~/.handraw-style/config.json` 自动寻址。
 3. **操作后必定刷新画廊**：
    任何增、删、改、换操作执行后，必须确保触发画廊重构，保证前端 `assets.html` 与本地磁盘数据 100% 强一致。
+4. **自建资产索引与 Git 严格隔离**：
+   自建资产编号与元数据统一导出至本地 gitignored 索引文件（`images/custom/custom_assets.js`），由浏览器端动态渲染加载，绝不可烘焙进 Git 追踪的静态 HTML 文件（`assets.html` 与 `tutorials.html`）中，确保用户私有资产 100% 零泄露。
+

@@ -188,6 +188,40 @@
 
 | FB-049 · Sophie Blackall | Sophie Blackall Vintage Chinese Ink & Watercolor Storybook | 参考绘本作者Sophie Blackall |
 
+| FB-050 · Katsumi Komagata | Katsumi Komagata Minimal Geometric Cut-Paper Storybook | 参考绘本作者Katsumi Komagata |
+
+| FB-051 · Kazuo Iwamura | Kazuo Iwamura Warm Forest Animals Watercolor Storybook | 参考绘本作者Kazuo Iwamura |
+
+| FB-052 · Keiko Sena | Keiko Sena Whimsical Collage Paper-Cut Storybook | 参考绘本作者Keiko Sena |
+
+| FB-053 · Rotraut Susanne Berner | Rotraut Susanne Berner Bustling Wimmelbuch Line & Wash Storybook | 参考绘本作者Rotraut Susanne Berner |
+
+| FB-054 · Wolf Erlbruch | Wolf Erlbruch Philosophical Collage & Chalk Storybook | 参考绘本作者Wolf Erlbruch |
+
+| FB-055 · Peter Sís | Peter Sis Intricate Stippled Map & Fantasy Storybook | 参考绘本作者Peter Sis |
+
+| FB-056 · Carll Cneut | Carll Cneut Ornate Flemish Baroque Gouache Storybook | 参考绘本作者Carll Cneut |
+
+| FB-057 · Benjamin Lacombe | Benjamin Lacombe Gothic Romantic Gouache Storybook | 参考绘本作者Benjamin Lacombe |
+
+| FB-058 · Rébecca Green | Rebecca Green Cozy Gouache & Colored Pencil Storybook | 参考绘本作者Rebecca Green |
+
+| FB-059 · Marianne Dubuc | Marianne Dubuc Gentle Forest Animal Watercolor Storybook | 参考绘本作者Marianne Dubuc |
+
+| FB-060 · Marla Frazee | Marla Frazee Playful Childlike Pencil & Watercolor Storybook | 参考绘本作者Marla Frazee |
+
+| FB-061 · Catarina Sobral | Catarina Sobral Bold Geometric Midcentury Graphic Storybook | 参考绘本作者Catarina Sobral |
+
+| FB-062 · Violeta Lópiz | Violeta Lopiz Poetic Minimal Ink & Botanical Storybook | 参考绘本作者Violeta Lopiz |
+
+| FB-063 · Mariachiara Di Giorgio | Mariachiara Di Giorgio Luminous Atmospheric Water & Nature Storybook | 参考绘本作者Mariachiara Di Giorgio |
+
+| FB-064 · JiHyun Kim | JiHyun Kim Deep Ocean Sunlit Watercolor Storybook | 参考绘本作者JiHyun Kim |
+
+| FB-065 · 蔡皋 | Cai Gao Traditional Chinese Folk Warm Storybook | 参考绘本作者蔡皋 |
+
+| FB-066 · Aiko Fukawa / 布川爱子 | Aiko Fukawa Cozy Domestic Life & Floral Gouache Storybook | 参考绘本作者Aiko Fukawa |
+
 ## FC 现代平面艺术 / Modern Graphic & Pop
 
 | 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |
@@ -553,6 +587,10 @@
 | FG-015 · 岸本齐史《火影忍者》 | Masashi Kishimoto Naruto Manga Style | |
 
 | FG-016 · 尾田荣一郎《海贼王》 | Eiichiro Oda One Piece Manga Style | |
+
+| FG-017 · 吉卜力 / Studio Ghibli | Studio Ghibli Nostalgic Hand-Drawn Cel Anime & Painterly Landscape | 参考吉卜力动画风格 |
+
+| FG-018 · 小疯映画《刺客伍六七》 / Scissor Seven (Sharefun Studio) | Scissor Seven Season 1 Anime Style, Simple Composition, Highly Generalized Character Design | 参考风格：小疯映画的刺客伍六七第一季，构图简单，角色高度概括 |
 
 ## FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts
 

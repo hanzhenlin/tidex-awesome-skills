@@ -63,44 +63,27 @@ def build_html() -> str:
 
     try:
         import custom_library_manager
-        custom_chars, custom_props, custom_scenes = custom_library_manager.load_custom_assets()
+        custom_library_manager.export_custom_assets_js()
     except Exception:
-        custom_chars, custom_props, custom_scenes = [], [], []
+        pass
 
-    def merge_assets(presets: list, customs: list, category: str):
-        seen = set()
-        res = []
-        for p in presets:
-            pid = str(p.get("id", ""))
-            seen.add(pid)
-            res.append({
-                "id": pid,
-                "name": str(p.get("name", "")),
-                "name_en": str(p.get("name_en", p.get("name", ""))),
-                "cat": category,
-                "img": str(p.get("image", "")),
-                "tags": p.get("tags", []),
-                "is_custom": False,
-            })
-        for c in customs:
-            cid = str(c.get("id", ""))
-            if cid not in seen:
-                seen.add(cid)
-                res.append({
-                    "id": cid,
-                    "name": str(c.get("name", "")),
-                    "name_en": str(c.get("name_en", c.get("name", ""))),
-                    "cat": category,
-                    "img": str(c.get("image", "")),
-                    "tags": c.get("tags", []),
-                    "is_custom": True,
-                })
-        return res
+    def to_preset_asset(p: dict, category: str) -> dict:
+        return {
+            "id": str(p.get("id", "")),
+            "name": str(p.get("name", "")),
+            "name_en": str(p.get("name_en", p.get("name", ""))),
+            "cat": category,
+            "img": str(p.get("image", "")),
+            "tags": p.get("tags", []),
+            "is_custom": False,
+        }
 
-    all_characters = merge_assets(characters_raw, custom_chars, "characters")
-    all_props = merge_assets(props_raw, custom_props, "props")
-    all_scenes = merge_assets(scenes_raw, custom_scenes, "scenes")
-    assets_data = all_characters + all_props + all_scenes
+    # Static HTML strictly contains official presets only (never bake local custom assets into Git)
+    assets_data = (
+        [to_preset_asset(x, "characters") for x in characters_raw] +
+        [to_preset_asset(x, "props") for x in props_raw] +
+        [to_preset_asset(x, "scenes") for x in scenes_raw]
+    )
 
     alias_file = SKILL / "references" / "style_alias_map.json"
     alias_map = json.loads(alias_file.read_text(encoding="utf-8")) if alias_file.exists() else {}
@@ -767,8 +750,30 @@ dialog::backdrop{{background:#000a}}
 <!-- WeChat QR Modal -->
 <dialog id="wechat-modal" aria-labelledby="wechat-title" style="width:min(94vw,560px);padding:22px;border:0;border-radius:14px;background:#1e1b18;color:#fff;box-shadow:0 20px 70px #000a;text-align:center"><button class="close" type="button" aria-label="关闭" style="position:absolute;top:12px;right:12px;border:0;border-radius:7px;padding:5px 9px;background:#fff;color:#24211e;cursor:pointer;font:inherit">关闭 ×</button><h3 id="wechat-title" style="margin:4px 0 10px;font-size:17px;color:#fff" data-i18n="wechatTitle">💬 创作变现交流群</h3><p style="margin:0 0 4px;font-size:14px;color:#eee" data-i18n="wechatSub">请优先加群，满了的话也可以尝试加我个人微信</p><p style="margin:0 0 16px;font-size:13px;color:#d67d4d;font-weight:600" data-i18n="wechatNote">请备注：手绘</p><div style="display:flex;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatGroupLabel">① 优先加入群聊</div><img src="../../../images/wechat_group.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_group.png';" alt="手绘交流群二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatPersonalLabel">② 个人微信备用</div><img src="../../../images/wechat_personal.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_personal.png';" alt="旺德福个人微信二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid #332f2b;display:flex;justify-content:center;gap:16px;font-size:13px"><a href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">GitHub 仓库 ↗</a><a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">X @yang02010 ↗</a></div></dialog>
 
+<script src="../../../images/custom/custom_assets.js" onerror="window.CUSTOM_ASSETS_DATA=null;"></script>
 <script>
-const ASSETS_DATA = {assets_json_str};
+const OFFICIAL_ASSETS_DATA = {assets_json_str};
+let ASSETS_DATA = [...OFFICIAL_ASSETS_DATA];
+if (window.CUSTOM_ASSETS_DATA && typeof window.CUSTOM_ASSETS_DATA === 'object') {{
+  ['characters', 'props', 'scenes'].forEach(cat => {{
+    const list = window.CUSTOM_ASSETS_DATA[cat] || [];
+    if (Array.isArray(list)) {{
+      list.forEach(item => {{
+        if (item && item.id && !ASSETS_DATA.some(x => x.id === item.id)) {{
+          ASSETS_DATA.push({{
+            id: item.id,
+            name: item.name || item.id,
+            name_en: item.name_en || item.name || item.id,
+            cat: cat,
+            img: item.image || '',
+            tags: item.tags || ["自建资产"],
+            is_custom: true
+          }});
+        }}
+      }});
+    }}
+  }});
+}}
 const STYLES_DATA = {styles_json_str};
 const LAYOUTS_DATA = {layouts_json_str};
 const COLORS_DATA = {colors_json_str};

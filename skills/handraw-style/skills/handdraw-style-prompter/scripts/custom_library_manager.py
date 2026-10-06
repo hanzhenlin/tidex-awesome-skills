@@ -22,6 +22,7 @@ LOCAL_CONFIG_FILE = ROOT / ".custom_library_config.json"
 REFERENCES_CONFIG_FILE = SKILL / "references" / "custom_library_config.json"
 
 CUSTOM_IMAGES_DIR = ROOT / "images" / "custom"
+CUSTOM_ASSETS_JS_FILE = CUSTOM_IMAGES_DIR / "custom_assets.js"
 PRESET_CHARACTERS_JSON = SKILL / "references" / "characters.json"
 PRESET_PROPS_JSON = SKILL / "references" / "props.json"
 PRESET_SCENES_JSON = SKILL / "references" / "scenes.json"
@@ -68,6 +69,7 @@ def get_custom_library_dir() -> Path | None:
 def _trigger_rebuild() -> None:
     """Safely trigger gallery rebuild regardless of how the script was invoked."""
     try:
+        export_custom_assets_js()
         import sys
         scripts_dir = str(Path(__file__).resolve().parent)
         if scripts_dir not in sys.path:
@@ -230,6 +232,23 @@ def load_custom_assets() -> tuple[list[dict[str, object]], list[dict[str, object
         )
     except Exception:
         return [], [], []
+
+
+def export_custom_assets_js() -> Path:
+    """Export local custom assets index as an isolated JavaScript file for client-side hydration (gitignored)."""
+    custom_chars, custom_props, custom_scenes = load_custom_assets()
+    CUSTOM_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "characters": custom_chars,
+        "props": custom_props,
+        "scenes": custom_scenes,
+    }
+    js_content = (
+        "// Auto-generated local custom assets index (gitignored - do not commit)\n"
+        f"window.CUSTOM_ASSETS_DATA = {json.dumps(payload, ensure_ascii=False, indent=2)};\n"
+    )
+    CUSTOM_ASSETS_JS_FILE.write_text(js_content, encoding="utf-8")
+    return CUSTOM_ASSETS_JS_FILE
 
 
 def get_next_id(category: str) -> str:

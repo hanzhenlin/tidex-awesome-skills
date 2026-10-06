@@ -623,6 +623,125 @@
     "traits": "参考绘本作者Sophie Blackall"
   },
   {
+    "number": "FB-050",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Katsumi Komagata",
+    "generation_name": "Katsumi Komagata Minimal Geometric Cut-Paper Storybook",
+    "traits": "参考绘本作者Katsumi Komagata"
+  },
+  {
+    "number": "FB-051",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Kazuo Iwamura",
+    "generation_name": "Kazuo Iwamura Warm Forest Animals Watercolor Storybook",
+    "traits": "参考绘本作者Kazuo Iwamura"
+  },
+  {
+    "number": "FB-052",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Keiko Sena",
+    "generation_name": "Keiko Sena Whimsical Collage Paper-Cut Storybook",
+    "traits": "参考绘本作者Keiko Sena"
+  },
+  {
+    "number": "FB-053",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Rotraut Susanne Berner",
+    "generation_name": "Rotraut Susanne Berner Bustling Wimmelbuch Line & Wash Storybook",
+    "traits": "参考绘本作者Rotraut Susanne Berner"
+  },
+  {
+    "number": "FB-054",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Wolf Erlbruch",
+    "generation_name": "Wolf Erlbruch Philosophical Collage & Chalk Storybook",
+    "traits": "参考绘本作者Wolf Erlbruch"
+  },
+  {
+    "number": "FB-055",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Peter Sís",
+    "generation_name": "Peter Sis Intricate Stippled Map & Fantasy Storybook",
+    "traits": "参考绘本作者Peter Sis"
+  },
+  {
+    "number": "FB-056",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Carll Cneut",
+    "generation_name": "Carll Cneut Ornate Flemish Baroque Gouache Storybook",
+    "traits": "参考绘本作者Carll Cneut"
+  },
+  {
+    "number": "FB-057",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Benjamin Lacombe",
+    "generation_name": "Benjamin Lacombe Gothic Romantic Gouache Storybook",
+    "traits": "参考绘本作者Benjamin Lacombe"
+  },
+  {
+    "number": "FB-058",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Rébecca Green",
+    "generation_name": "Rebecca Green Cozy Gouache & Colored Pencil Storybook",
+    "traits": "参考绘本作者Rebecca Green"
+  },
+  {
+    "number": "FB-059",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Marianne Dubuc",
+    "generation_name": "Marianne Dubuc Gentle Forest Animal Watercolor Storybook",
+    "traits": "参考绘本作者Marianne Dubuc"
+  },
+  {
+    "number": "FB-060",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Marla Frazee",
+    "generation_name": "Marla Frazee Playful Childlike Pencil & Watercolor Storybook",
+    "traits": "参考绘本作者Marla Frazee"
+  },
+  {
+    "number": "FB-061",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Catarina Sobral",
+    "generation_name": "Catarina Sobral Bold Geometric Midcentury Graphic Storybook",
+    "traits": "参考绘本作者Catarina Sobral"
+  },
+  {
+    "number": "FB-062",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Violeta Lópiz",
+    "generation_name": "Violeta Lopiz Poetic Minimal Ink & Botanical Storybook",
+    "traits": "参考绘本作者Violeta Lopiz"
+  },
+  {
+    "number": "FB-063",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Mariachiara Di Giorgio",
+    "generation_name": "Mariachiara Di Giorgio Luminous Atmospheric Water & Nature Storybook",
+    "traits": "参考绘本作者Mariachiara Di Giorgio"
+  },
+  {
+    "number": "FB-064",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "JiHyun Kim",
+    "generation_name": "JiHyun Kim Deep Ocean Sunlit Watercolor Storybook",
+    "traits": "参考绘本作者JiHyun Kim"
+  },
+  {
+    "number": "FB-065",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "蔡皋",
+    "generation_name": "Cai Gao Traditional Chinese Folk Warm Storybook",
+    "traits": "参考绘本作者蔡皋"
+  },
+  {
+    "number": "FB-066",
+    "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
+    "reference": "Aiko Fukawa / 布川爱子",
+    "generation_name": "Aiko Fukawa Cozy Domestic Life & Floral Gouache Storybook",
+    "traits": "参考绘本作者Aiko Fukawa"
+  },
+  {
     "number": "FC-001",
     "group": "FC 现代平面艺术 / Modern Graphic & Pop",
     "reference": "Jon Burgerman",
@@ -1832,6 +1951,20 @@
     "reference": "尾田荣一郎《海贼王》",
     "generation_name": "Eiichiro Oda One Piece Manga Style",
     "traits": ""
+  },
+  {
+    "number": "FG-017",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "吉卜力 / Studio Ghibli",
+    "generation_name": "Studio Ghibli Nostalgic Hand-Drawn Cel Anime & Painterly Landscape",
+    "traits": "参考吉卜力动画风格"
+  },
+  {
+    "number": "FG-018",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "小疯映画《刺客伍六七》 / Scissor Seven (Sharefun Studio)",
+    "generation_name": "Scissor Seven Season 1 Anime Style, Simple Composition, Highly Generalized Character Design",
+    "traits": "参考风格：小疯映画的刺客伍六七第一季，构图简单，角色高度概括"
   },
   {
     "number": "FH-001",

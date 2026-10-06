@@ -29,6 +29,8 @@ download.txt
 # Custom library local directory configuration & cache
 *custom_library_config.json
 images/custom/
+*custom_assets.js
+*custom_assets.json
 
 # Video and tutorial production files
 videos/

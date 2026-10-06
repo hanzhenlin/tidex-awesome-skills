@@ -89,13 +89,14 @@ def build_assets_gallery() -> None:
         if scripts_dir not in sys.path:
             sys.path.insert(0, scripts_dir)
         import custom_library_manager
-        custom_chars, custom_props, custom_scenes = custom_library_manager.load_custom_assets()
+        custom_library_manager.export_custom_assets_js()
     except Exception:
-        custom_chars, custom_props, custom_scenes = [], [], []
+        pass
 
-    all_characters = merge_items(characters, custom_chars)
-    all_props = merge_items(props, custom_props)
-    all_scenes = merge_items(scenes, custom_scenes)
+    # Static HTML strictly contains official presets only (never bake local custom assets into Git)
+    all_characters = characters
+    all_props = props
+    all_scenes = scenes
 
     char_cards_str = render_cards(all_characters, "角色基准图")
     prop_cards_str = render_cards(all_props, "道具基准图")
@@ -844,6 +845,7 @@ dialog#wechat-modal p {{ margin: 0 0 16px; font-size: 13.5px; color: #665f57; }}
   <button type="button" class="close-btn" id="close-wechat-btn" data-i18n="closeBtn">关闭</button>
 </dialog>
 
+<script src="../../../images/custom/custom_assets.js" onerror="window.CUSTOM_ASSETS_DATA=null;"></script>
 <script>
 const I18N = {{
   zh: {{
@@ -1165,6 +1167,117 @@ if (wechatBtn && wechatModal) {{
     if (e.target === wechatModal) wechatModal.close();
   }});
 }}
+
+function escapeHtml(str) {{
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}}
+
+function hydrateCustomAssets() {{
+  if (!window.CUSTOM_ASSETS_DATA) return;
+  const data = window.CUSTOM_ASSETS_DATA;
+  const categories = [
+    {{ key: 'characters', panelId: 'panel-characters', label: '角色基准图' }},
+    {{ key: 'props', panelId: 'panel-props', label: '道具基准图' }},
+    {{ key: 'scenes', panelId: 'panel-scenes', label: '场景基准图' }}
+  ];
+
+  categories.forEach(cat => {{
+    const items = data[cat.key];
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const panel = document.getElementById(cat.panelId);
+    if (!panel) return;
+
+    let grid = panel.querySelector('.char-grid');
+    const emptyCard = panel.querySelector('.empty-state-card');
+    if (!grid) {{
+      grid = document.createElement('div');
+      grid.className = 'char-grid';
+      if (emptyCard) {{
+        emptyCard.style.display = 'none';
+        panel.appendChild(grid);
+      }} else {{
+        panel.appendChild(grid);
+      }}
+    }} else if (emptyCard) {{
+      emptyCard.style.display = 'none';
+    }}
+
+    items.forEach(item => {{
+      const itemId = item.id || '';
+      if (!itemId || panel.querySelector(`.char-card[data-id="${{itemId}}"]`)) return;
+
+      const nameZh = item.name || itemId;
+      const nameEn = item.name_en || nameZh;
+      const imgSrc = item.image || '';
+      const tags = Array.isArray(item.tags) ? item.tags : ['自建资产'];
+      const tagsHtml = tags.map(t => `<span class="char-tag">${{escapeHtml(t)}}</span>`).join('');
+
+      const card = document.createElement('article');
+      card.className = 'char-card';
+      card.dataset.id = itemId;
+      card.dataset.nameZh = nameZh;
+      card.dataset.nameEn = nameEn;
+      card.dataset.image = imgSrc;
+
+      card.innerHTML = `
+  <div class="char-thumb-wrap" tabindex="0" role="button" aria-label="查看 ${{escapeHtml(nameZh)}} 基准图详情">
+    <img src="${{escapeHtml(imgSrc)}}" alt="${{escapeHtml(nameZh)}}" loading="lazy">
+    <span class="view-badge">${{cat.label}}</span>
+  </div>
+  <div class="char-card-body">
+    <div class="char-card-header">
+      <span class="char-id">${{escapeHtml(itemId)}}</span>
+      <span class="char-status-badge custom-badge" data-i18n="customBadge">自建资产</span>
+    </div>
+    <h3 class="char-name" data-zh="${{escapeHtml(nameZh)}}" data-en="${{escapeHtml(nameEn)}}">${{escapeHtml(nameZh)}}</h3>
+    <div class="char-tags">${{tagsHtml}}</div>
+    <div class="char-card-actions">
+      <button type="button" class="btn-action preview-btn" data-i18n="previewDetail">查看大图</button>
+      <a class="btn-action use-char-btn" href="tutorials.html?asset=${{encodeURIComponent(itemId)}}" data-i18n="useInWorkshop">以此出图</a>
+    </div>
+  </div>
+`;
+      grid.appendChild(card);
+
+      const thumbWrap = card.querySelector('.char-thumb-wrap');
+      if (thumbWrap) {{
+        thumbWrap.addEventListener('click', () => openPreview(card));
+        thumbWrap.addEventListener('keydown', (e) => {{
+          if (e.key === 'Enter' || e.key === ' ') {{
+            e.preventDefault();
+            openPreview(card);
+          }}
+        }});
+      }}
+      const previewBtn = card.querySelector('.preview-btn');
+      if (previewBtn) {{
+        previewBtn.addEventListener('click', () => openPreview(card));
+      }}
+    }});
+
+    // Update counts
+    const totalCount = panel.querySelectorAll('.char-card').length;
+    const tabCount = document.querySelector(`.sub-library-nav .tab-btn[data-tab="${{cat.key}}"] .tab-count`);
+    if (tabCount) tabCount.textContent = totalCount;
+
+    const titleEl = panel.querySelector('.char-grid-title');
+    if (titleEl) {{
+      const spanEl = titleEl.querySelector('span');
+      const spanHtml = spanEl ? spanEl.outerHTML : '';
+      titleEl.innerHTML = `${{spanHtml}} (${{totalCount}})`;
+    }}
+  }});
+}}
+
+// Hydrate local custom assets (isolated from Git repository)
+hydrateCustomAssets();
 
 // Initialize language
 applyLang(currentLang);

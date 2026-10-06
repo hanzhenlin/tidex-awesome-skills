@@ -12,7 +12,7 @@ def audit_all():
     files = sorted([f for f in os.listdir(BUSINESS_DIR) if f.endswith(".md")])
     print(f"Found {len(files)} markdown files.")
 
-    expected_count = 305
+    expected_count = 324
     if len(files) != expected_count:
         print(f"ERROR: Expected {expected_count} files, found {len(files)}")
 
