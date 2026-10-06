@@ -26,8 +26,8 @@ resolution and prompt construction.
 When the user asks to design a poster, generate poster prompts, or create structured poster prompts, read and invoke
 [poster-prompt-generator](skills/poster-prompt-generator/SKILL.md), actively recommending cohesive style and theme color pairings from the hand-drawn style library (#001–#324) and theme color library (C-01–C-36).
 
-When the user asks to design an article cover, generate cover prompts, create a WeChat official account cover, or design an X/social cover for an article (例如“给文章做封面”、“文章封面设计”、“公众号封面”、“X文章头图”), read and invoke
-[article-cover-designer](skills/article-cover-designer/SKILL.md) before handling the request. It extracts a ~200-word summary, infers target audience, sets the business scenario, injects style (#001–#324) and theme color (C-01–C-36), and applies the fixed prompt instruction ("先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。").
+When the user asks to design an article cover, video cover, generate cover prompts, create a WeChat official account cover, design an X/social cover for an article, or design a video cover from subtitle files/transcripts (例如“给文章做封面”、“文章封面设计”、“视频封面设计”、“视频封面”、“字幕做封面”、“公众号封面”、“X文章头图”), read and invoke
+[article-cover-designer](skills/article-cover-designer/SKILL.md) before handling the request. It extracts a ~200-word summary, infers target audience, sets the business scenario (article or video cover), injects style (#001–#324) and theme color (C-01–C-36), and applies the fixed prompt instruction ("先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。"；若是视频封面或输入字幕文件，自动注入“视频封面设计，网感强，吸引人眼球”)。
 
 When the user asks to blend, merge, or fuse two styles, generate a cross-media fusion prompt, or create a "character visual language × scene visual language" artwork (例如“【风格融合设计】”、“风格融合设计”、“风格融合”、“融合两种风格”、“角色与场景风格融合”、“双风格融合”、“跨媒介风格融合”), read and invoke
 [style-fusion-prompter](skills/style-fusion-prompter/SKILL.md) before handling the request. It supports fusing two hand-drawn style numbers (#001–#324), or a style number with a realistic style, optionally injects layouts (SC-*/IG-*) and theme colors (C-01–C-36), and applies the strict dual visual language coexistence template.

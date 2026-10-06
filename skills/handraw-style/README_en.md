@@ -40,7 +40,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
-| **Boring article covers with disconnected visuals** | **Article Cover Designer**: Automatically extracts ~200-word core summary & audience persona, matches styles & colors, prioritizes visual metaphor, and delivers bold titles with clean editorial layout. |
+| **Boring article covers with disconnected visuals** | **Article & Video Cover Designer**: Automatically extracts ~200-word core summary & audience persona from articles or video subtitles, matches styles & colors, prioritizes visual metaphor, and injects viral click-worthy directives for video covers. |
 | **Inconsistent article illustrations & tedious formatting** | **Article Illustration Planner & Backfill**: Visual editorial judgment for 2–5 high-value inflection points, unified single style & color across the piece, automated batch image generation, and precision Markdown insertion. |
 | **Chaotic photo shoot planning & generic AI portraits** | **Editorial Photography & Spacetime Orchestration**: Supports 10+ genres (couples, weddings, portraits, families, etc.), proposing 3 high-contrast spacetime plans in copyable code blocks with 8-grid keywords for one-click generation. |
 
@@ -121,15 +121,19 @@ The essence of an infographic is an information-dense visual poster. Simply tell
 
 💡 **[👉 Click to read the full Tutorials & Pro Tips Guide (TUTORIALS_en.md)](TUTORIALS_en.md)** (Covers the Universal Poster Mindset, Dynamic Recommendation, Triad Assembly, Dual-Mode Switching, and Multi-Model Tiering with complete copyable prompts).
 
-### 5. Article Cover Design Mode (Summary Extraction, Audience Persona, Visual Metaphor Cover)
-Finished an article and need a high-CTR, tasteful cover? Simply send your draft to the Skill!
-- **Target Scenarios**: WeChat Official Account covers (recommended `2.35:1` or `21:9`), X/Twitter article covers (`5:2`), Xiaohongshu covers (`3:4`), etc.
-- **Prompt Command**: `Please design a cover for this article: [paste article text or provide local file path d:\path\to\article.md]` (optionally specify platform or preferred style/color).
+### 5. Article & Video Cover Design Mode (Summary Extraction, Audience Persona, Visual Metaphor & Viral Eye-Catching Covers)
+Finished writing an article or editing a video and need a high-CTR, tasteful cover? Simply send your text or subtitle file to the Skill!
+- **Target Scenarios**: WeChat Official Account covers (recommended `2.35:1` or `21:9`), X/Twitter article covers (`5:2`), Xiaohongshu covers (`3:4`), Video covers / Bilibili / YouTube / Short video covers (landscape `16:9`, portrait `9:16` or `3:4`).
+- **Prompt Commands**:
+  - Article: `Please design a cover for this article: [paste article text or provide local file path d:\path\to\article.md]`
+  - Video/Subtitles: `Please design a video cover: [paste subtitle text or provide .srt/.vtt file path]`
 - **Automated Workflow**:
-  1. **Core Summary Extraction**: Distills a ~200-word essence of key arguments, causal logic, and takeaways;
-  2. **Audience Persona Inference**: Evaluates knowledge depth and motivation to construct target reader profile;
-  3. **Style & Color Pairing**: Recommends the optimal match from 280 hand-drawn styles and 36 classic monochrome palettes (e.g., `#018 Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
-  4. **Native Metaphor Directive**: Injects the proven editorial instruction—*"Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."* allowing the image model to compose clean, high-impact visuals natively;
+  1. **Core Summary Extraction**: Distills a ~200-word essence of key arguments, narrative hooks, and takeaways;
+  2. **Audience Persona Inference**: Evaluates knowledge depth and motivation to construct target audience profile;
+  3. **Style & Color Pairing**: Recommends the optimal match from 324 hand-drawn styles and 36 classic monochrome palettes (e.g., `#018 Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
+  4. **Native Metaphor & Viral Directives**:
+     - Article Covers: Injects the proven editorial instruction—*"Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
+     - Video Covers / Subtitle Input: Mandatorily injects—*"Video cover design, high clickability and viral internet appeal, visually captivating and eye-catching. Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
   5. **Dual-Track Delivery Guidance**:
      - **Track A (Manual Generation)**: Copy the generated bilingual prompts into your favorite image tool;
      - **Track B (Fully Automated)**: Simply reply **"Auto generate cover"**, and the Skill will call the image generation tool to produce the cover visual directly.
