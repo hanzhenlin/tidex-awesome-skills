@@ -12,7 +12,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **324 distinct hand-drawn illustration styles** (`001`–`324`), **161 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **327 distinct hand-drawn illustration styles** (`001`–`327`), **161 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -35,7 +35,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
-| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 324 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
+| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 327 systematically categorized illustration styles, eliminating guess-and-pray prompting. |
 | **Monotonous composition; hard to format complex graphics** | **161 Layout Compositions**: 21 Social Cards, 35 Infographics, 68 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
@@ -130,7 +130,7 @@ Finished writing an article or editing a video and need a high-CTR, tasteful cov
 - **Automated Workflow**:
   1. **Core Summary Extraction**: Distills a ~200-word essence of key arguments, narrative hooks, and takeaways;
   2. **Audience Persona Inference**: Evaluates knowledge depth and motivation to construct target audience profile;
-  3. **Style & Color Pairing**: Recommends the optimal match from 324 hand-drawn styles and 36 classic monochrome palettes (e.g., `#018 Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
+  3. **Style & Color Pairing**: Recommends the optimal match from 327 hand-drawn styles and 36 classic monochrome palettes (e.g., `#018 Minimal Deadpan Dialogue Cartoon` + `C-01 Klein Blue`);
   4. **Native Metaphor & Viral Directives**:
      - Article Covers: Injects the proven editorial instruction—*"Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
      - Video Covers / Subtitle Input: Mandatorily injects—*"Video cover design, high clickability and viral internet appeal, visually captivating and eye-catching. Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me."*;
@@ -188,7 +188,7 @@ The illustration below shows text integrated harmoniously with the visual compos
 
 By default, the Skill crafts copyable prompts. When you explicitly request image generation, it optimizes the output based on verified model capabilities:
 
-- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 324 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
+- **Explicitly Calibrated Models (e.g., `gpt-image-2`)**: Full activation hierarchy for all 327 styles: Style/Author Name → Positive Core Traits → Reference Image only when traits alone cannot reliably trigger the style, avoiding unnecessary image passing that might over-constrain the composition.
 - **Third-Party & General Models (Midjourney, Flux, Stable Diffusion, Imagen, Gemini, etc.)**: Employs the rock-solid **Reference Image Fallback** strategy. The Skill provides a 1024x1024 4-grid standard reference image or file path, ensuring 100% faithful reproduction of linework, texture, and color palette without prompt drift.
 - **Open for Community Benchmarks**: Capability definitions reside in `skills/handdraw-style-prompter/references/model_capabilities.json`. Pull requests for other model evaluations are warmly welcomed!
 
@@ -210,15 +210,15 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (001�
 
 ![Featured Styles Preview (001–016)](images/A_001-016.webp)
 
-- 🖼️ **[👉 Browse All Style Sheets (001–324 Full Visual Contact Sheets)](STYLES_en.md)**
-- 📄 **[View Detailed Style Metadata (324 Styles Table & Core Traits)](styles_200_reorganized.md)**
+- 🖼️ **[👉 Browse All Style Sheets (001–327 Full Visual Contact Sheets)](STYLES_en.md)**
+- 📄 **[View Detailed Style Metadata (327 Styles Table & Core Traits)](styles_200_reorganized.md)**
 - 💻 *(For offline interactive search and enlargement, open `skills/handdraw-style-prompter/gallery/index.html` in your local browser)*
 
 ---
 
 ## Layout Compositions Showcase
 
-In addition to 324 illustration styles, this library includes **161 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
+In addition to 327 illustration styles, this library includes **161 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
 
 ### 1. Social Cards (21 Layouts)
 

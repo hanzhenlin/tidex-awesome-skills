@@ -592,6 +592,12 @@
 
 | FG-018 · 小疯映画《刺客伍六七》 / Scissor Seven (Sharefun Studio) | Scissor Seven Season 1 Anime Style, Simple Composition, Highly Generalized Character Design | 参考风格：小疯映画的刺客伍六七第一季，构图简单，角色高度概括 |
 
+| FG-019 · 高饱和电影感美漫插画 / Cinematic American Comic Illustration | Cinematic American Comic Illustration, Expressive Anime Emotion, Digital Impasto | 风格：高饱和电影感美漫插画（Cinematic American Comic Illustration），也可以称作 美漫线稿 × 日漫表情 × 数字厚涂风格。线条：黑色粗描边、密集排线、手绘刮擦纹理。上色：高饱和撞色、厚涂与赛璐璐结合。人物：日漫式夸张表情，美漫式面部结构。构图：广角透视、电影分镜、强烈的视觉冲突。质感：复古印刷漫画、数字厚涂、AI 插画的混合质感。角色：中国普通老百姓的形象 |
+
+| FG-020 · 复古青年漫画与美式叙事插画 / Retro Seinen Manga & American Narrative Illustration | Retro Seinen Manga Line Art, American Narrative Illustration, Digital Cel Shading | 复古漫画、半写实人物、日式青年漫画线稿、美式叙事插画、暖色低饱和、手绘墨线、复古纸张纹理、夸张表情、动态速度线、数字赛璐璐上色。 |
+
+| FG-021 · 韩漫webtoon / Korean Webtoon | Korean Webtoon |  |
+
 ## FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts
 
 | 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |

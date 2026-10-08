@@ -341,6 +341,28 @@
     "name_en": "Name-to-Four-Signature Showcase Card"
   },
   {
+    "id": "SC-023",
+    "category": "social-card",
+    "name": "代表性情景概括知识封面卡",
+    "image": "../../../images/layouts/social-cards/SC-023.webp",
+    "prompt_file": "layouts/SC-023.md",
+    "keywords": [
+      "竖版4:5",
+      "知识封面构图",
+      "大标题突出",
+      "人物紧凑环绕",
+      "情景自然穿插",
+      "手绘色块冲击",
+      "4到6个核心情景",
+      "角色群像构图",
+      "中央偏下核心角色",
+      "前后遮挡呼应",
+      "自然留白衔接",
+      "无分镜框融合"
+    ],
+    "name_en": "Representative Scenario Knowledge Cover Card"
+  },
+  {
     "id": "IG-001",
     "category": "infographic",
     "name": "标题金字塔图标信息图",
@@ -1929,6 +1951,66 @@
       "视觉律动"
     ],
     "name_en": "Non-Rectangular Geometric Mosaic"
+  },
+  {
+    "id": "SB-069",
+    "category": "comic-storyboard",
+    "name": "上下两格生活漫画分镜",
+    "image": "../../../images/layouts/comic-storyboards/SB-069.webp",
+    "prompt_file": "layouts/SB-069.md",
+    "keywords": [
+      "竖版上下两格",
+      "等大纵向排列",
+      "上图下文结构",
+      "80%场景插画",
+      "20%横向文字栏",
+      "序号简短说明",
+      "细横线分隔",
+      "统一边距与比例",
+      "独立生活场景",
+      "规整简洁无装饰"
+    ],
+    "name_en": "Two-Panel Vertical Lifestyle Comic Storyboard"
+  },
+  {
+    "id": "SB-070",
+    "category": "comic-storyboard",
+    "name": "上下四格生活漫画分镜",
+    "image": "../../../images/layouts/comic-storyboards/SB-070.webp",
+    "prompt_file": "layouts/SB-070.md",
+    "keywords": [
+      "竖版上下四格",
+      "等大纵向排列",
+      "上图下文结构",
+      "80%场景插画",
+      "20%横向文字栏",
+      "序号简短说明",
+      "细横线分隔",
+      "统一边距与比例",
+      "独立生活场景",
+      "规整简洁无装饰"
+    ],
+    "name_en": "Four-Panel Vertical Lifestyle Comic Storyboard"
+  },
+  {
+    "id": "SB-071",
+    "category": "comic-storyboard",
+    "name": "上下三格生活漫画分镜",
+    "image": "../../../images/layouts/comic-storyboards/SB-071.webp",
+    "prompt_file": "layouts/SB-071.md",
+    "keywords": [
+      "竖版上下三格",
+      "等大纵向排列",
+      "上图下文结构",
+      "80%场景插画",
+      "20%横向文字栏",
+      "序号简短说明",
+      "细横线分隔",
+      "统一边距与比例",
+      "独立生活场景",
+      "规整简洁无装饰"
+    ],
+    "name_en": "Three-Panel Vertical Lifestyle Comic Storyboard"
   },
   {
     "id": "IP-001",

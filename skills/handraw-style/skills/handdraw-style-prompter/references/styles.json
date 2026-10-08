@@ -1967,6 +1967,27 @@
     "traits": "参考风格：小疯映画的刺客伍六七第一季，构图简单，角色高度概括"
   },
   {
+    "number": "FG-019",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "高饱和电影感美漫插画 / Cinematic American Comic Illustration",
+    "generation_name": "Cinematic American Comic Illustration, Expressive Anime Emotion, Digital Impasto",
+    "traits": "风格：高饱和电影感美漫插画（Cinematic American Comic Illustration），也可以称作 美漫线稿 × 日漫表情 × 数字厚涂风格。线条：黑色粗描边、密集排线、手绘刮擦纹理。上色：高饱和撞色、厚涂与赛璐璐结合。人物：日漫式夸张表情，美漫式面部结构。构图：广角透视、电影分镜、强烈的视觉冲突。质感：复古印刷漫画、数字厚涂、AI 插画的混合质感。角色：中国普通老百姓的形象"
+  },
+  {
+    "number": "FG-020",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "复古青年漫画与美式叙事插画 / Retro Seinen Manga & American Narrative Illustration",
+    "generation_name": "Retro Seinen Manga Line Art, American Narrative Illustration, Digital Cel Shading",
+    "traits": "复古漫画、半写实人物、日式青年漫画线稿、美式叙事插画、暖色低饱和、手绘墨线、复古纸张纹理、夸张表情、动态速度线、数字赛璐璐上色。"
+  },
+  {
+    "number": "FG-021",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "韩漫webtoon / Korean Webtoon",
+    "generation_name": "Korean Webtoon",
+    "traits": ""
+  },
+  {
     "number": "FH-001",
     "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
     "reference": "Editorial Doodle / 社论涂鸦",
