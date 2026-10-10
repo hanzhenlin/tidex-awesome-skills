@@ -10,7 +10,7 @@
 刚拿到一台新电脑、装好 Claude Code / Codex / ZCode / Workbuddy 等 Agent 工具后，逐个寻找、鉴别、适配、安装优质技能非常繁琐。本仓库提供：
 
 1. **一份高质量精选清单**：所有收录技能登记在 `registry.txt`，含原作者、上游地址、开源协议与能力契约；
-2. **一键全端跨平台安装**：脚本自动探测本机所有 Agent 环境（`~/.agents`、`~/.claude`、`~/.codex`、`~/.zcode`、`~/.workbuddy`）并无损软链挂载；
+2. **一键全端跨平台安装**：脚本自动探测本机所有 Agent 环境（`~/.agents`、`~/.claude`、`~/.codex`、`~/.gemini/config`、`~/.zcode`、`~/.workbuddy`）并无损软链挂载；
 3. **双源保障与跨平台契约**：
    - **默认实时**：安装时优先 `git clone` 原作者仓库最新源码（保证第一时间获取上游更新）；
    - **快照兜底**：断网或上游访问受限时，自动降级使用仓库内置标准化快照 `skills/`；
@@ -20,7 +20,7 @@
 
 ---
 
-## 🧭 精选明星技能大盘（已收录 10 款顶级神作）
+## 🧭 精选明星技能大盘（已收录 11 款顶级神作）
 
 ### 🧬 1. 元技能与认知进化操作系统 (Meta & Evolution)
 
@@ -42,6 +42,7 @@
 | **`huashu-md-html`**<br>(出版级文档流水线) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-md-html) | MIT | • 落地「Markdown 生产，多端消费」多向出版级流水线<br>• 任意文件（PDF/DOCX/PPTX/音频/网页）提取转为干净 Markdown<br>• Markdown 加工为出版级 HTML、DOCX、PDF（A4/A5/大32开）、EPUB3 | `md转html`、`出版级排版`、`排版`、`万物转md`、`格式转换` |
 | **`huashu-excel`**<br>(数据分析大师) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-excel) | MIT | • 严肃数据分析全流程：体检脏表→数据清洗→定口径→算指标→对账→报告<br>• 极简轻量（依赖仅 `openpyxl`），让每个算出来的数字经得起追问 | `数据分析`、`分析表格`、`清洗Excel`、`对账`、`算指标` |
 | **`tramstop-skill`**<br>(电车站去AI味) | [花叔 @alchaincyf](https://github.com/alchaincyf/tramstop-skill) | MIT | • 实证驱动的「去 AI 腔」方法论（来自四版本真实盲测对照实验）<br>• 四层 AI 味诊断：词汇层、句式层、结构层、经验层<br>• 结构外科手术 + 真实经验素材注入，拒绝假大空套话 | `去AI味`、`AI味太重`、`像AI写的`、`没人味`、`降AI感`、`humanize` |
+| **`archify`**<br>(交互式架构可视化) | [tt-a1i @tt-a1i](https://github.com/tt-a1i/archify) | MIT | • **GitHub 81k+ Stars 登顶周榜神作，全量纯原生 JS 渲染校验**<br>• 将需求、设计方案或真实代码库转化为高保真自包含可交互单文件 HTML<br>• 涵盖 Architecture、Workflow、Sequence、Dataflow、Lifecycle 5 大图表<br>• 支持深浅色切换、上下游影响链路追踪 (Reach Trace)、代码行号精准锚定 (`SRC`) | `archify`、`系统架构图`、`交互式架构`、`时序图`、`数据流图`、`状态机`、`流程图` |
 
 ---
 
@@ -64,7 +65,7 @@ cd tidex-awesome-skills
 bash install.sh
 ```
 
-脚本会自动探测本机的 **Claude Code**（`~/.claude`、`~/.agents`）、**Codex**（`~/.codex`）、**ZCode**（`~/.zcode`）、**Workbuddy**（`~/.workbuddy`）等所有 Agent 宿主目录，以软链接方式无损挂载。
+脚本会自动探测本机的 **Google Antigravity**（`~/.gemini/config`）、**Claude Code**（`~/.claude`、`~/.agents`）、**Codex**（`~/.codex`）、**ZCode**（`~/.zcode`）、**Workbuddy**（`~/.workbuddy`）等所有 Agent 宿主目录，以软链接方式无损挂载。
 
 ### 更多安装方式
 
@@ -118,6 +119,7 @@ bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤�
 - 感谢 [**花叔 (@alchaincyf)**](https://github.com/alchaincyf) 创造的 `nuwa-skill`、`huashu-design`、`darwin-skill`、`huashu-md-html`、`huashu-excel`、`tramstop-skill`、`zhangxuefeng-skill` 及其开拓性的 Agent Skills 开源生态体系；
 - 感谢 [**姚金刚老师及 Yao 团队 (@yaojingang)**](https://github.com/yaojingang) 创造的 `yao-meta-skill`（Skill OS 2.0）全生命周期技能编译与治理架构；
 - 感谢 [**yang0 (@yang0)**](https://github.com/yang0/handraw-style) 创造的 `handraw-style` 手绘风格与排版图型生图引擎；
-- 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语。
+- 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语；
+- 感谢 [**tt-a1i (@tt-a1i)**](https://github.com/tt-a1i/archify) 及 Cocoon AI 创造的 `archify` 交互式架构与流程可视化引擎。
 
 **协议边界**：本仓库工程化套件与脚本采用 [MIT License](./LICENSE)；`skills/` 下收录的各技能版权完全归原作者所有，均保留其原始 LICENSE 与署名，授权条款以上游为准。完整声明见 [NOTICE.md](./NOTICE.md)。

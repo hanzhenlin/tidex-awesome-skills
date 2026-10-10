@@ -75,8 +75,18 @@ sync_one() {
     sha="$(git -C "${tmp}" rev-parse HEAD)"
     rm -rf "${tmp}/.git"
 
+    # 智能识别技能根目录：若仓库根目录无 SKILL.md，自动定位包含 SKILL.md 的核心子目录
+    local source_content="${tmp}"
+    if [ ! -f "${tmp}/SKILL.md" ]; then
+        if [ -f "${tmp}/${name}/SKILL.md" ]; then
+            source_content="${tmp}/${name}"
+        elif [ -f "${tmp}/skills/${name}/SKILL.md" ]; then
+            source_content="${tmp}/skills/${name}"
+        fi
+    fi
+
     if [ -d "${snapshot}" ]; then
-        if diff -qr "${snapshot}" "${tmp}" >/dev/null 2>&1; then
+        if diff -qr "${snapshot}" "${source_content}" >/dev/null 2>&1; then
             echo -e "  ${CYAN}• 与上游一致，无需更新${RESET}"
             UNCHANGED+=("${name}")
             # 内容一致也补写锚点，修复历史快照缺锚点的情况
@@ -86,7 +96,7 @@ sync_one() {
         rm -rf "${snapshot}"
     fi
     mkdir -p "${SNAPSHOT_DIR}"
-    cp -R "${tmp}" "${snapshot}"
+    cp -R "${source_content}" "${snapshot}"
     update_lock "${name}" "${sha}" "$(date +%F)"
     echo -e "  ${GREEN}✓ 快照已刷新为上游最新版 (${sha:0:7} @ $(date +%F))${RESET}"
     UPDATED+=("${name}")

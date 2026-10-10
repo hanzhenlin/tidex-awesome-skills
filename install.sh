@@ -194,15 +194,26 @@ resolve_skill_source() {
 
     # 1) 上游实时拉取（缓存已存在则 ff 更新，更新失败重新克隆）
     if command -v git >/dev/null 2>&1; then
+        local got_upstream=false
         if [ -d "${cache_dir}/.git" ]; then
             if git -C "${cache_dir}" pull --ff-only >/dev/null 2>&1; then
-                RESOLVED_PATH="${cache_dir}"
-                RESOLVED_TAG="上游最新"
-                return 0
+                got_upstream=true
             fi
         fi
-        if try_clone_latest "${upstream}" "${cache_dir}"; then
-            RESOLVED_PATH="${cache_dir}"
+        if ! $got_upstream && try_clone_latest "${upstream}" "${cache_dir}"; then
+            got_upstream=true
+        fi
+
+        if $got_upstream; then
+            local effective="${cache_dir}"
+            if [ ! -f "${effective}/SKILL.md" ]; then
+                if [ -f "${effective}/${name}/SKILL.md" ]; then
+                    effective="${effective}/${name}"
+                elif [ -f "${effective}/skills/${name}/SKILL.md" ]; then
+                    effective="${effective}/skills/${name}"
+                fi
+            fi
+            RESOLVED_PATH="${effective}"
             RESOLVED_TAG="上游最新"
             return 0
         fi
