@@ -362,6 +362,9 @@ detect_agent_paths() {
     local workbuddy_path="${HOME}/.workbuddy/skills"
     { [ -d "${HOME}/.workbuddy" ] || [ -d "${workbuddy_path}" ]; } && detected+=("${workbuddy_path}")
 
+    local antigravity_path="${HOME}/.gemini/config/skills"
+    { [ -d "${HOME}/.gemini" ] || [ -d "${antigravity_path}" ]; } && detected+=("${antigravity_path}")
+
     local current_pwd="$(pwd)"
     if [ "${current_pwd}" != "${SCRIPT_DIR}" ] && [ "${current_pwd}" != "${HOME}" ]; then
         if [ -d "${current_pwd}/.git" ] || [ -d "${current_pwd}/.svn" ] || [ -f "${current_pwd}/pom.xml" ] || [ -f "${current_pwd}/package.json" ]; then

@@ -1,0 +1,1 @@
+skills/typesafe-ai/SKILL.md
