@@ -1,0 +1,11 @@
+{
+  "skill": "handraw-jianying-producer",
+  "files": {
+    "SKILL.md": "a7bd04a25efb57664154f009b3661362d661750103fe202d947c9e13d0c232e5"
+  },
+  "removed": [
+    "release_manifest.json"
+  ],
+  "excluded_videos": [],
+  "installed_hashes": "all_match"
+}

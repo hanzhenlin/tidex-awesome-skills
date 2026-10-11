@@ -1,6 +1,6 @@
 ---
 name: handdraw-style-prompter
-description: Turn a 001–327 hand-drawn style number and image theme into bilingual prompts, using model capability data to decide when core traits and a numbered reference image are required.
+description: Turn a 001–328 hand-drawn style number and image theme into bilingual prompts, using model capability data to decide when core traits and a numbered reference image are required.
 ---
 
 # Hand-drawn Style Prompter
@@ -14,7 +14,20 @@ gallery and reference-image path from this installed package root. Install this
 repository at path `.` so the `images/` directory and the nested Skill are
 kept together.
 
+The shot gallery ships seven PNG screenshots only. Skill installation must not
+download demo videos or private episode media referenced by local validation
+records. Video binaries are excluded from the Skill sync manifest. Video inputs
+for a new production are collected after that episode's plan is confirmed.
+
+Read [package dependencies](DEPENDENCIES.md) before claiming that an installed
+Skill can generate or render media. Bundled source/resources and separately
+installed tools/services are distinct; never rely on the author's workstation.
+
 ## Request routing index
+
+For video shot selection and output choices, invoke [handraw-video-producer](skills/handraw-video-producer/SKILL.md). Browse the [shot gallery](skills/handdraw-style-prompter/gallery/video-shots.html): ST-001 through ST-007 are the only shared shot types. Audience, goal, script and visual direction are designed for the episode. Shot selection is preference input, not user approval. Keep confirmed-plan and reviewed-input gates; unsupported native Jianying configurations need explicit per-shot prerendering.
+
+For Volcano/Doubao voice synthesis, real speech timestamps, or persistent user account setup, invoke [handraw-volc-tts](skills/handraw-volc-tts/SKILL.md). Its client is bundled; secrets stay in encrypted per-user configuration outside the repository and Skill installation. Video voice calls keep the confirmed-plan and reviewed-visual gates.
 
 When the user asks to illustrate an article, plan article illustrations, choose
 insertion points, or write prompts for article images, read and invoke
@@ -24,13 +37,13 @@ before handling the request. Use the hand-drawn style rules in
 resolution and prompt construction.
 
 When the user asks to design a poster, generate poster prompts, or create structured poster prompts, read and invoke
-[poster-prompt-generator](skills/poster-prompt-generator/SKILL.md), actively recommending cohesive style and theme color pairings from the hand-drawn style library (#001–#327) and theme color library (C-01–C-36).
+[poster-prompt-generator](skills/poster-prompt-generator/SKILL.md), actively recommending cohesive style and theme color pairings from the hand-drawn style library (#001–#328) and theme color library (C-01–C-36).
 
 When the user asks to design an article cover, video cover, generate cover prompts, create a WeChat official account cover, design an X/social cover for an article, or design a video cover from subtitle files/transcripts (例如“给文章做封面”、“文章封面设计”、“视频封面设计”、“视频封面”、“字幕做封面”、“公众号封面”、“X文章头图”), read and invoke
-[article-cover-designer](skills/article-cover-designer/SKILL.md) before handling the request. It extracts a ~200-word summary, infers target audience, sets the business scenario (article or video cover), injects style (#001–#327) and theme color (C-01–C-36), and applies the fixed prompt instruction ("先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。"；若是视频封面或输入字幕文件，自动注入“视频封面设计，网感强，吸引人眼球”)。
+[article-cover-designer](skills/article-cover-designer/SKILL.md) before handling the request. It extracts a ~200-word summary, infers target audience, sets the business scenario (article or video cover), injects style (#001–#328) and theme color (C-01–C-36), and applies the fixed prompt instruction ("先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。"；若是视频封面或输入字幕文件，自动注入“视频封面设计，网感强，吸引人眼球”)。
 
 When the user asks to blend, merge, or fuse two styles, generate a cross-media fusion prompt, or create a "character visual language × scene visual language" artwork (例如“【风格融合设计】”、“风格融合设计”、“风格融合”、“融合两种风格”、“角色与场景风格融合”、“双风格融合”、“跨媒介风格融合”), read and invoke
-[style-fusion-prompter](skills/style-fusion-prompter/SKILL.md) before handling the request. It supports fusing two hand-drawn style numbers (#001–#327), or a style number with a realistic style, optionally injects layouts (SC-*/IG-*) and theme colors (C-01–C-36), and applies the strict dual visual language coexistence template.
+[style-fusion-prompter](skills/style-fusion-prompter/SKILL.md) before handling the request. It supports fusing two hand-drawn style numbers (#001–#328), or a style number with a realistic style, optionally injects layouts (SC-*/IG-*) and theme colors (C-01–C-36), and applies the strict dual visual language coexistence template.
 
 When the user asks to design an IP character, build a Character Bible or IP Design Manual, generate standard IP cards (例如“IP形象设计”、“角色设计手册”、“设计三视图与周边”、“IP-01至IP-18卡片”), read and invoke
 [ip-designer](skills/ip-designer/SKILL.md) before handling the request. It supports 5 layers (Strategy, Character, Visual, System, Commercial) across 18 standard cards (6-card basic, 10-card standard, or 18-card full edition).
@@ -38,11 +51,18 @@ When the user asks to design an IP character, build a Character Bible or IP Desi
 When the user asks to manage, add, query, replace, or delete assets in the custom library (例如“添加到角色库”、“保存到道具库/场景库”、“替换角色基准图”、“修改资产名称/标签”、“初始化/挂载图库目录”、“查看图库清单”), read and invoke
 [custom-asset-manager](skills/custom-asset-manager/SKILL.md) before handling the request. It manages the full lifecycle of custom character (CH-*), prop (PR-*), and scene (SCN-*) assets with zero Git conflicts.
 
+For art animation, knowledge animation and narration-driven visuals, read [handraw-video-producer](skills/handraw-video-producer/SKILL.md) and [shot guide](skills/handraw-video-producer/references/shot_video_guide.md). Select one primary shot type per shot and compose its optional layers; bind actual handdraw styles, layouts and palette values.
+
+Before designing a video plan, establish the user's output route: browser MP4 or Jianying draft. The shared video controller routes execution to [browser producer](skills/handraw-browser-producer/SKILL.md) or [Jianying producer](skills/handraw-jianying-producer/SKILL.md). Jianying defaults to native ST-001 through ST-004 configurations; never silently prerender unsupported shots. Named prerender exceptions require the user's real approval of the current plan.
+
 When the user asks to plan, script, or direct a knowledge or tutorial AI video, generate A/B-roll visual shot lists, or structure video production (例如“做教学视频”、“视频分镜表”、“知识类视频剪辑”、“A/B-roll编排”、“视频导演”), read and invoke
-[knowledge-video-director](skills/knowledge-video-director/SKILL.md) before handling the request. It orchestrates voiceover scripts, acoustic alignment, and 7-column visual shot lists alternating between white-background IP theater (A-roll) and dark-background motion graphics/demos (B-roll).
+[knowledge-video-director](skills/knowledge-video-director/SKILL.md) before handling the request. It plans learning goals, sources, scripts and visual explanations using the shared shot types. Submit the complete episode plan for user confirmation, then collect and review all visual inputs; voiceover, animation code and rendering begin only after those inputs are ready.
 
 When the user asks to plan a photo shoot, create a photography project, generate shot lists, design couple/wedding/family/portrait/cosplay photography plans, or draw card for a themed shoot (例如“拍摄企划”、“情侣照”、“婚纱照”、“写真”、“全家福”、“Cosplay拍摄”、“抽卡”、“8宫格”、“摄影分镜”), read and invoke
 [couple-photo-orchestrator](skills/couple-photo-orchestrator/SKILL.md) before handling the request. It orchestrates the full pipeline from direction selection through Look design, scene micro-zones, pose-emotion planning, Share Card compilation, and 8-shot adaptive grid generation.
+
+When the user asks to create, produce, or render hand-drawn animated videos, motion comics, picture book animations, whiteboard videos, or art scrolls (例如“做手绘视频”、“制作手绘动画”、“动态漫画”、“漫动画”、“有声绘本”、“边画边讲视频”、“手绘视频制作”、“白板视频出片”), read and invoke
+[handraw-video-producer](skills/handraw-video-producer/SKILL.md) before video requests. Design the episode brief and visual/motion direction, then choose ST-001 through ST-007 or a documented episode-local type. Respect frame and narration settings. Submit the complete plan for user confirmation; collect and review every required visual input before voiceover, animation code, previews or synthesis.
 
 
 ## Default mode
@@ -56,13 +76,13 @@ Default to creating prompts only. Do not call an image-generation tool unless th
 > [!IMPORTANT]
 > **【核心准则：每次由 AI 实时动态判断，严禁写死/机械套用】**
 > - **实时动态研判**：严禁在记忆、规则或提示词中维护任何“主题关键词 -> 固定风格编号/颜色编号”的静态死板映射（例如严禁一见节气/传统就推 268、一见自然就推 266、一见科技就推 011/054、一见生活就推 018）。
-> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 327 种手绘风格（#001–#327）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
+> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 328 种手绘风格（#001–#328）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
 > - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 327 种画风与 36 种色彩的丰富生命力。
 > - **美学理由具象化**：AI 给出的美学推荐理由必须紧扣当前主题的视觉隐喻和画面构图，说明为什么该画风的笔触/质感与该色彩的情绪能完美传达这一主题，杜绝套话。
 
-1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 327 种手绘风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#327) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
+1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 328 种手绘风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#328) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
 2. **仅指定风格，未指定主题色**：严格保留用户指定的风格，根据该风格与画面主题，由 AI 实时动态推荐最协调的【主题色 (C-01–C-36)】搭配（可为单色或多色组合）。
-3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【手绘风格 (#001–#327)】搭配。
+3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【手绘风格 (#001–#328)】搭配。
 4. **两者皆指定**：完全遵照用户指定的内容输出。
 
 ## Style activation policy
@@ -103,7 +123,7 @@ This initialization applies only when this Skill is invoked for the first time i
 
 ## Inputs
 
-For style-only work, if the style number (`001`–`327`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
+For style-only work, if the style number (`001`–`328`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
 
 Users can browse `skills/handdraw-style-prompter/gallery/index.html` for numbered style contact sheets, `skills/handdraw-style-prompter/gallery/layouts.html` for layout thumbnails, and `skills/handdraw-style-prompter/gallery/colors.html` for classic monochrome theme colors. The authoritative style content is `styles_200_reorganized.md`; `skills/handdraw-style-prompter/references/styles.json` is a generated index and must be refreshed with `python skills/handdraw-style-prompter/scripts/build_library.py` after Markdown changes. Layout metadata is `skills/handdraw-style-prompter/references/layouts.json`; each entry's bilingual prompt file under `skills/handdraw-style-prompter/references/layouts/` is the authoritative layout content and the layout gallery is refreshed with `python skills/handdraw-style-prompter/scripts/build_layout_gallery.py`. Monochrome color metadata is `skills/handdraw-style-prompter/references/colors.json` and refreshed with `python skills/handdraw-style-prompter/scripts/build_color_gallery.py`.
 
@@ -117,13 +137,19 @@ Users can browse `skills/handdraw-style-prompter/gallery/index.html` for numbere
      - 构图拓扑关系单一固定，生图模型能直白无误地理解。处理方式为拿来即用，直接提取其 prompt 模板并拼接指定画风与主题输出。
   2. **高维动态解析型排版（Skill 级动态解析决策型 · Generative Frameworks）**：
      - 代表图型为 `SC-021`（自适应双拼照片转译社媒卡）。
-     - 该类图型不是单一路线的固定线框，而是高度抽象的“视觉构图与空间语法系统”。生图模型不具备自主解析多选菜单的能力，若直接平铺备选清单，模型会因语义冲突退化为机械照搬原片全景背景。
+     - 该类图型不是单一路线的固定线框，而是高度抽象的“跨媒介视觉构图与空间语法系统”。生图模型不具备自主解析多选菜单的能力，若直接平铺备选清单，模型会因语义冲突退化为机械照搬原片全景背景。
      - **执行机制**：必须由 AI 助手充当设计总监（Art Director）进行前置解析与动态决策：
-       - 分析用户上传照片或主题的视觉特征与情绪基调；
-       - 构图语法严格轮替（Round-Robin 机制）：若用户未显式指定构图，必须在【越界破框型】、【微缩浮岛型】、【记忆图谱平铺型】、【经典悬浮落地型】、【正负形咬合型】之间严格进行顺序轮替抽卡，严禁连续输出相同玩法，确保画面多样性与高阶审美；
-       - 针对当前画面动态生成强力背景净化指令（坚决剔除原片石墙、马路、树木等环境杂质，确保 40%–80% 纯净负空间）；
-       - 严格画幅比例守恒与双拼尺寸规则：拼接时严禁修改或拉伸原图比例；加上艺术区后，整图尺寸严格为原图宽度的两倍（左右并排）或原图高度的两倍（上下堆叠），两区各占 50%，中线无缝平齐拼接；
-       - 最终编译输出**单义、排他、强约束**的执行提示词，确保生图模型精准呈现出丰富多变的艺术构图。
+       - **比例驱动切分原则（严禁死板切分，完全由目标画幅比例决定）**：竖版画幅（如 3:4、9:16、1:2 等）默认采用上下 1:1 纵向堆叠双拼（上方摄影/下方手绘），顺应手机端自上而下的视觉动势与故事自然向下延展；横版画幅（如 16:9、4:3、5:2、21:9 等）默认采用左右 1:1 横向并排双拼（左侧摄影/右侧手绘），呈现独立艺术杂志跨页质感；方版画幅（1:1）自适应切分或服从用户显式指定；
+       - **七大核心转译类型体系（Type 01 ~ Type 07）**：若用户未显式指定构图类型，由 AI 结合画面主题推荐最契合的 1 种类型（或按顺序轮替抽卡），并为选定的唯一类型生成单义、排他的执行提示词：
+         * `【类型 01 · 视线锚点跨界续绘型 (Visual Anchor Continuation)】`：单一核心动态锚点（水/路/光/手势）跨越中缝边界流淌进入暖象牙纸手绘区域，在下方衍生绘本互动故事与极简黑线小人；
+         * `【类型 02 · 撕纸裂变第二世界型 (Torn-Paper Second World)】`：不规则手工物理撕纸毛边接缝，现实穿透撕纸后物理规则超现实突变（水变布匹/光可手捧/影子成阶梯），暖象牙纸与克制拼贴；
+         * `【类型 03 · 越界破框型 (Boundary Break / Out-of-Bounds)】`：几何色块/容器承托，主体关键部位（头/手/枝叶）突破色块边缘伸出，形成空间穿透感；
+         * `【类型 04 · 微缩浮岛型 (Miniature Diorama / Floating Island)】`：主体微缩为 10%–25% 纸面小景，单抹色带或微基座承托，四周大片静谧空旷留白；
+         * `【类型 05 · 记忆图谱平铺型 (Memory Knolling / Fragment Collage)】`：居中放置手绘主体，留白中错落平铺 3–6 枚带 NO. 编号的原图记忆特征贴纸；
+         * `【类型 06 · 经典悬浮落地型 (Suspended / Grounded Hero)】`：主体尺度适中（占 40%–55%），底部仅用一条极简手绘地面摩擦线提示空间支撑；
+         * `【类型 07 · 正负形咬合型 (Gestalt Positive-Negative Interlock)】`：主体高度提炼为几何剪影，与背景正负形相互转换咬合；
+       - **背景强力净化指令**：坚决剔除原片石墙、马路、树木等环境杂质，确保艺术转译侧四周 40%–80% 纯净负空间与呼吸边距；
+       - **强制交互点选输出规范**：每当使用或输出 SC-021 提示词时，在提示词文本末尾，**必须固定附带 7 大可选类型索引清单**（标明当前已采用类型，并提示用户回复编号如“换成 02”即可一键换装），赋予用户随时点选调整的机会。
 - **传图与改图规则（无需强制传图，完全支持用户传图与改图）**：无论使用 `SC-021`（自适应双拼照片转译社媒卡）还是其他任何风格/图型，用户传图均属**可选行为**：
   - **用户未传图时**：完全支持纯文本直出。AI 助手直接将排版规则与指定风格特征拼接为完整提示词（若未提供主题则提供直观占位符），绝不阻断对话或强制要求用户必须传图，由生图模型原生自主生成写实画面与风格转译。
   - **用户传图 / 改图时（写实改手绘 / 垫图转风格）**：完全支持！当用户上传照片或参考图要求“改图”、“改风格”、“转手绘”时，为了防止生图模型在写实照片表面机械叠加滤镜，提示词中**必须使用以下固定转绘重绘指令**：

@@ -1,0 +1,26 @@
+{
+  "source": "https://github.com/geeklee/srt-whiteboard-animation",
+  "commit": "696a7243c0e6ffb6827676e539c2ca5ebae2bf6b",
+  "license": "MIT",
+  "adaptations": [
+    "parameterized frame/size, no upstream voice/branding workflow",
+    "episode gate and cache integration",
+    "slim procedural pencil with transparent edges",
+    "bounded stroke mask preserves continuous ink while avoiding full-canvas scans",
+    "portable dependency discovery and public source metadata; no author workstation paths"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "53b0a28ecd9f55a4b1f944fcae87d015bc3ef64f007edfce411d88b3face342f"
+    },
+    {
+      "path": "scripts/render_stream_whiteboard.py",
+      "sha256": "0cb5cd4dc24837030fece5fa89f62479c713d1f25d8bf66c1c4b67268d887429"
+    },
+    {
+      "path": "scripts/stream_render.py",
+      "sha256": "fd407221497ba860ff18e761c53c51b2307bd95d0ba7b0ddbe8e55694adc78d8"
+    }
+  ]
+}

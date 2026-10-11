@@ -89,7 +89,7 @@ python scripts/import_tweet_style.py "https://x.com/username/status/..." --name 
 
 执行完成后，输出以下标准化成果卡片：
 1. **入库信息**：编号、作者、风格名、所属分组。
-2. **画廊链接**：[`skills/handdraw-style-prompter/gallery/index.html`](skills/handdraw-style-prompter/gallery/index.html)。
+2. **画廊链接**：[`skills/handdraw-style-prompter/gallery/index.html`](../handdraw-style-prompter/gallery/index.html)。
 3. **双语提示词模板**：
    - 中文：`风格名称：#{编号} · {generation_name}。主题：[主题]。参考作者/风格名称：{author}。`
    - 英文：`Style name: #{number} · {generation_name}. Theme: [Theme]. Reference author/style name: {author}.`

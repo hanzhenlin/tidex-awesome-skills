@@ -1,0 +1,54 @@
+{
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "elements": [
+    {
+      "id": "a",
+      "sequence": 1,
+      "label": "起点",
+      "region": {
+        "x": 150,
+        "y": 220,
+        "width": 650,
+        "height": 550
+      },
+      "reveal": {
+        "startMs": 0,
+        "durationMs": 1000
+      }
+    },
+    {
+      "id": "b",
+      "sequence": 2,
+      "label": "连接",
+      "region": {
+        "x": 800,
+        "y": 430,
+        "width": 290,
+        "height": 140
+      },
+      "reveal": {
+        "startMs": 1000,
+        "durationMs": 500
+      }
+    },
+    {
+      "id": "c",
+      "sequence": 3,
+      "label": "结果",
+      "region": {
+        "x": 1090,
+        "y": 220,
+        "width": 690,
+        "height": 550
+      },
+      "reveal": {
+        "startMs": 1500,
+        "durationMs": 2000,
+        "protectedRegions": []
+      }
+    }
+  ]
+}

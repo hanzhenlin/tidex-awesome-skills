@@ -1,0 +1,12 @@
+{
+  "name": "whiteboard-video-skill",
+  "version": "1.0.0",
+  "description": "Pinned rough.js rendering dependency for shot whiteboard",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "lz-string": "^1.5.0",
+    "playwright": "1.58",
+    "roughjs": "^4.6.6"
+  }
+}

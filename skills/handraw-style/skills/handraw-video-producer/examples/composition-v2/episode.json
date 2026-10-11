@@ -1,0 +1,23 @@
+{
+  "title": "七种分镜工程示例",
+  "workflow": "composition-v2",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "aspect_ratio": "16:9",
+  "subtitle_mode": "burn-in",
+  "media_policy": "auto",
+  "output_target": "web",
+  "brief": {
+    "audience": "工程审片",
+    "goal": "验证七种分镜及统一合成"
+  },
+  "visual": {
+    "paper": "#fcf7ea"
+  },
+  "narration": {
+    "enabled": false
+  },
+  "production_policy": "confirmed-plan-visual-assets-v1",
+  "status": "awaiting_plan_confirmation"
+}

@@ -1,0 +1,46 @@
+{
+  "source": "https://github.com/luoluoluo22/jianying-editor-skill",
+  "commit": "32c56928ded4f9e2c2b80e099dc7abb793d2c30b",
+  "license": "MIT (upstream LICENSE also includes third-party notices)",
+  "copyright": "2026 luoluoluo22",
+  "integration": "Methods adapted into local modules; no external checkout, JyWrapper, cloud API, recording or UI automation dependency",
+  "references": [
+    "scripts/draft_inspector.py",
+    "scripts/utils/formatters.py",
+    "scripts/asset_search.py",
+    "rules/effects.md"
+  ],
+  "adapted_methods": [
+    "Recognize draft_info.json and draft_content.json",
+    "Report tracks, segments and material counts",
+    "Search real pinned resource metadata rather than invent IDs"
+  ],
+  "local_implementations": [
+    "lib/jianying_package.py",
+    "lib/jianying_resources.py",
+    "lib/jianying_install.py",
+    "lib/jianying_native.py",
+    "lib/user_settings.py"
+  ],
+  "excluded": [
+    "overwrite auto-healing",
+    "cloud music and TTS",
+    "old-version UI export",
+    "automatic Web VFX recording",
+    "user draft mutation"
+  ],
+  "validation_scope": "Offline draft/package structure, relocation, integrity, resource lookup and authored native transition/effect/filter bindings. App resources/opening/export separately unverified.",
+  "reviewed_source_hashes": {
+    "scripts/draft_inspector.py": "3278ba3a3e4afa4e8ccaac511a5c0098280daa242767b97a6218a0e133fd1145",
+    "scripts/utils/formatters.py": "0e56269a16732484668ddd668f17b56d4d0a9c4d90ab26735117fc2f1eacfc91",
+    "scripts/asset_search.py": "c5aaf5ffd45665af1cf506e949f9b51ec114d82a6a9e434ef91a9b17e3ea3532",
+    "rules/effects.md": "9363ead7c67fa0944bb5adf8a06f9824b80bbbb26621ba89ecca20f6d40e3e62"
+  },
+  "local_file_hashes": {
+    "lib/jianying_package.py": "d613a6fa5c707855fba0cb08e01e7ec5e054c53f393eb322f79ec6c6dd9f7274",
+    "lib/jianying_resources.py": "30158730995d569a8b42ef58262c31fa619d6e80e034e02f1f8bff6c96453e78",
+    "lib/jianying_install.py": "1d15db8f890d8b15a87c5017224408b6b25954a0b6ae003be0470c4d70e0dabe",
+    "lib/jianying_native.py": "fe1389b2251e554b854f88d0e8b2bac0dc2d47c549149943d7486b558bd01f88",
+    "lib/user_settings.py": "7d117d7fbf3072de34106c765a73439f41b77fad6a794d360214c3993686152e"
+  }
+}

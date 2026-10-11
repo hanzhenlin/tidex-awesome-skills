@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "plan": {
+    "path": "plan.md",
+    "revision": 1,
+    "complete": true
+  },
+  "approval": null,
+  "inventory_complete": true,
+  "visual_assets": [
+    {
+      "id": "A0",
+      "path": "assets/neutral.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "904e3f559e014e8ad2947f28f122a0d4a9ee5fa609fdc86fa888676ab27d1eaa",
+        "technical": {
+          "type": "image",
+          "size": [
+            431,
+            666
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A1",
+      "path": "assets/wave-a.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "c4eea1c34616755cd51b653fde7e5468f6c4047a0850694364c1098007becdf0",
+        "technical": {
+          "type": "image",
+          "size": [
+            431,
+            666
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A2",
+      "path": "assets/wave-b.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "f1cc855fedcb3f5307ab12c64591eed731345c3074cb3351e1096229cddd442f",
+        "technical": {
+          "type": "image",
+          "size": [
+            431,
+            666
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A3",
+      "path": "assets/coffee.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "56d8af4b8082660f3c4afb05167804714bd7785e0990e517d797f86b46165517",
+        "technical": {
+          "type": "image",
+          "size": [
+            371,
+            344
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A4",
+      "path": "assets/laptop.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "61f6efe55167dbddfba841267b528918fcaf5d3161f871f6fa96c08b52007633",
+        "technical": {
+          "type": "image",
+          "size": [
+            411,
+            363
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A5",
+      "path": "assets/full-scene-pose-0.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "4d65d7fc357e89cd3ef43959d253930bd15f120e346f3be45d566438793f2c04",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A6",
+      "path": "assets/full-scene-pose-1.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "eac0d37363f9108b2beca451c13779fa38ca9191c3cc6ce0af6680b448a8ad1f",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A7",
+      "path": "assets/full-scene-pose-2.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "ccd8e0e11d470c2f7bc03cb2e951d57c5e2ed5b9ab9594eff8de04eb32f8a43f",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A8",
+      "path": "assets/full-scene-pose-3.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "671eaa33fda700a0eb9b86a51a292845edeceeba3cb8a9cc5664c77d6012f8ce",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A9",
+      "path": "assets/background.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "e4dc87a7b5eb99a165ea5793fc119d5443891de8265b6a12912e648d4af64ed8",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A10",
+      "path": "assets/line-art.png",
+      "kind": "image",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "4aee93da343628155b4ccf138a6517a280fddffa38f290c556d6e48c12505199",
+        "technical": {
+          "type": "image",
+          "size": [
+            1920,
+            1080
+          ],
+          "decode": "pass"
+        }
+      }
+    },
+    {
+      "id": "A11",
+      "path": "assets/annotation.json",
+      "kind": "data",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "0f09a0711654228d56cfbd79e0b673345cdfd8c3a482f97e33f83d51c5bd9553",
+        "technical": {
+          "type": "data",
+          "parse": "pass"
+        }
+      }
+    },
+    {
+      "id": "A12",
+      "path": "assets/video.mp4",
+      "kind": "video",
+      "required": true,
+      "review": {
+        "status": "pass",
+        "notes": "本地技术夹具：已检查原始橘猫画面与透明素材，线稿、分区与合成测试视频由确定性本地脚本创建；不代表成片审美通过。",
+        "sha256": "16c7cf55ddfb9a31ad1712d5bdc80ce15c9d3602287865935631f640c3cc8a60",
+        "technical": {
+          "type": "video",
+          "duration": 5.0,
+          "width": 1920,
+          "height": 1080,
+          "fps": "30/1",
+          "codec": "h264",
+          "has_audio": false,
+          "full_decode": true
+        }
+      }
+    }
+  ]
+}

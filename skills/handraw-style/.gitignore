@@ -22,6 +22,16 @@ Desktop.ini
 
 # Local workspace agent configuration
 .agents/
+.codex/
+.env
+.env.*
+!.env.example
+credentials.json
+volc-tts.json
+cookies.json
+id_rsa
+id_ed25519
+*.pem
 .workbuddy/
 .obsidian/
 download.txt
@@ -35,6 +45,17 @@ images/custom/
 # Video and tutorial production files
 videos/
 business/
+*.mp4
+*.mov
+*.webm
+*.m4v
+*.mkv
+*.avi
+*.wmv
+*.mpg
+*.mpeg
+*.mts
+*.m2ts
 
 # Image backups
 images/individual_backup/
@@ -44,3 +65,5 @@ skills/couple-photo-orchestrator/projects/
 skills/couple-photo-orchestrator/references/
 skills/couple-photo-orchestrator/images/
 .pytest_cache/
+node_modules/
+tmp/

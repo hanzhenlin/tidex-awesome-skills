@@ -1,0 +1,11 @@
+{
+  "skill": "knowledge-video-director",
+  "files": {
+    "SKILL.md": "1d6595a331d947fbbf2baea942351b912569c1072427fe15920325cba8e324d3"
+  },
+  "removed": [
+    "release_manifest.json"
+  ],
+  "excluded_videos": [],
+  "installed_hashes": "all_match"
+}

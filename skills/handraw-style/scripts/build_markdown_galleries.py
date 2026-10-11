@@ -12,23 +12,35 @@ SOURCE_MD = ROOT / "styles_200_reorganized.md"
 LAYOUTS_JSON = SKILL / "references" / "layouts.json"
 COLORS_JSON = SKILL / "references" / "colors.json"
 
-def get_sheet_groups():
-    h_sheets = sorted([p.name for p in (ROOT / "images").glob("H_*.webp")])
-    max_num = 274
-    for sheet_name in h_sheets:
-        m = re.search(r"H_\d{3}-(\d{3})\.webp", sheet_name)
-        if m:
-            max_num = max(max_num, int(m.group(1)))
-    return [
-        ("A", "国际社论漫画与幽默手绘（001–035）", "Editorial & Humorous (001–035)", ["A_001-016.webp", "A_017-032.webp", "A_033-035.webp"]),
-        ("B", "国际绘本与叙事型手绘（036–054）", "Picture Book & Narrative (036–054)", ["B_036-048.webp", "B_049-054.webp"]),
-        ("C", "现代平面与艺术化人物体系（055–082）", "Graphic & Stylized Figure (055–082)", ["C_055-070.webp", "C_071-082.webp"]),
-        ("D", "日本作者与当代插画体系（083–123）", "Japanese Contemporary Illustration (083–123)", ["D_083-098.webp", "D_099-114.webp", "D_115-123.webp"]),
-        ("E", "中国作者与当代插画体系（124–154）", "Chinese Contemporary Illustration (124–154)", ["E_124-139.webp", "E_140-154.webp"]),
-        ("F", "通用网感、媒介与地域手绘（155–200）", "Internet Culture, Medium & Regional (155–200)", ["F_155-170.webp", "F_171-186.webp", "F_187-200.webp"]),
-        ("G", "中国当代插画补充（201–216）", "Contemporary Chinese Illustration Supplement (201–216)", ["G_201-216.webp"]),
-        ("H", f"其他精选风格（217–{max_num:03}）", f"Other Curated Styles (217–{max_num:03})", h_sheets),
-    ], max_num
+STYLES_JSON = SKILL / "references" / "styles.json"
+ALIAS_MAP_FILE = SKILL / "references" / "style_alias_map.json"
+
+STYLE_CATEGORIES = [
+    ("FA", "国际社论幽默", "Editorial & Humor Doodle",
+     "适合日常幽默、讽刺随笔、都市观察与生活吐槽。以松散线条、冷面幽默与鲜明人物轮廓为主要特征。",
+     "Ideal for everyday humor, editorial satire, urban commentary, and deadpan comics. Features loose lines, deadpan humor, and distinctive character silhouettes."),
+    ("FB", "经典绘本叙事", "Picture Book & Watercolor",
+     "适合温情叙事、儿童插画、治愈绘本与水彩手账。以经典手绘质感、细腻笔触与叙事氛围为主要特征。",
+     "Ideal for heartwarming narratives, children's picture books, healing watercolors, and illustrated journals. Features rich hand-drawn textures and storytelling atmosphere."),
+    ("FC", "现代平面艺术", "Modern Graphic & Pop",
+     "适合现代平面广告、波普艺术、时尚杂志与高饱和海报。以醒目色块、现代构成与矢量平面为主要特征。",
+     "Ideal for modern graphic design, pop art, editorial fashion, and bold posters. Features clean vectors, dynamic color blocking, and contemporary graphic shapes."),
+    ("FD", "日本当代插画", "Japanese Contemporary & Manga",
+     "适合日系当代插画、轻小说插画、城市散策与唯美空气感。以日系干净线条、空气透视与独特人物形体为主要特征。",
+     "Ideal for Japanese contemporary illustration, light novel art, city strolls, and atmospheric scenes. Features delicate line art, airy perspective, and stylized character silhouettes."),
+    ("FE", "新国风与传统工艺", "Chinese Traditional & Folk Craft",
+     "适合国潮国风、非遗工艺、传统节日与典雅东方题材。以工笔白描、重彩壁画、剪纸皮影与水墨丹青为主要特征。",
+     "Ideal for Chinese aesthetics, intangible cultural heritage, traditional festivals, and oriental art. Features fine-brush gongbi, Dunhuang murals, folk papercuts, and ink wash painting."),
+    ("FF", "3D黏土毛毡与纸雕", "3D Clay, Felt & Papercraft",
+     "适合萌系手工、定格动画感、童趣立体与材质艺术。以手工黏土捏塑、针织毛毡、立体纸雕与真实微缩质感为主要特征。",
+     "Ideal for handmade craft visuals, stop-motion animation textures, playful dimensional art, and papercraft. Features handcrafted clay sculptures, needle felt, and 3D paper reliefs."),
+    ("FG", "动漫和赛璐璐", "Anime, Cel Animation & Retro Game",
+     "适合热血动漫、复古赛璐璐、像素街机与漫改场景。以经典赛璐璐光影、清晰分镜线稿与黄金时代动漫质感为主要特征。",
+     "Ideal for action anime, classic cel animation, retro pixel art, and manga adaptations. Features vintage cel shading, crisp dynamic lines, and golden-age anime nostalgia."),
+    ("FH", "先锋实验与综合媒介", "Mixed Media & Impasto Arts",
+     "适合实验艺术、先锋插画、综合材料拼贴与厚涂重彩。以肌理笔触、混合媒介、粗粝质感与强烈个性化表达为主要特征。",
+     "Ideal for experimental visuals, avant-garde illustration, mixed-media collage, and heavy impasto. Features expressive brushwork, tactile mixed media, and bold creative statements."),
+]
 
 LAYOUT_CATEGORIES = [
     ("social-card", "1. 社媒卡（19 种）", "1. Social Cards (19 Layouts)",
@@ -47,8 +59,14 @@ LAYOUT_CATEGORIES = [
 
 
 def build_styles_md() -> None:
-    sheet_groups, max_num = get_sheet_groups()
-    total_styles_str = f"{max_num:03}"
+    styles = json.loads(STYLES_JSON.read_text(encoding="utf-8"))
+    alias_data = json.loads(ALIAS_MAP_FILE.read_text(encoding="utf-8")) if ALIAS_MAP_FILE.exists() else {}
+    new_to_legacy = alias_data.get("new_to_legacy", {})
+
+    cols = 3
+    first_style = styles[0]["number"]
+    last_style = styles[-1]["number"]
+    total_styles = len(styles)
 
     # 1. Chinese STYLES.md
     zh_lines = [
@@ -56,26 +74,71 @@ def build_styles_md() -> None:
         '  <strong>中文</strong> | <a href="STYLES_en.md">English</a>',
         '</p>',
         '',
-        f"# 手绘风格完整图鉴（001–{total_styles_str}）",
+        f"# 手绘风格完整图鉴（{first_style}–{last_style} · 共 {total_styles} 种）",
         "",
-        f"> 这里汇总了本库收录的 **001–{total_styles_str} 种手绘风格**的全部拼图大表。每张拼图包含对应风格编号与画面参考，供在 GitHub 上直接图文浏览选款。详细的英文生图名称与提示词特征对照表见 [styles_200_reorganized.md](styles_200_reorganized.md)。",
+        f"> 这里收录了本库全部 **{total_styles} 种手绘风格**的独立编号图鉴与核心提示词特征。每种风格均配有标准图样预览、分类编号、英文生图名称、风格参考来源与核心视觉特征，供在 GitHub 上直接图文浏览选款。详细对照表见 [styles_200_reorganized.md](styles_200_reorganized.md)。",
         "",
         "## 目录导航",
         "",
     ]
-    for letter, title_zh, _, _ in sheet_groups:
-        zh_lines.append(f"- [{letter} · {title_zh}](#group-{letter.lower()})")
+    for cat_id, title_zh, _, _, _ in STYLE_CATEGORIES:
+        cat_styles = [s for s in styles if s["number"].startswith(f"{cat_id}-")]
+        if cat_styles:
+            r_start = cat_styles[0]["number"]
+            r_end = cat_styles[-1]["number"]
+            zh_lines.append(f"- [{cat_id} · {title_zh}（{r_start}–{r_end} · {len(cat_styles)} 种）](#group-{cat_id.lower()})")
     zh_lines.extend(["", "---", ""])
 
-    for letter, title_zh, _, sheets in sheet_groups:
-        zh_lines.append(f'<a id="group-{letter.lower()}"></a>')
-        zh_lines.append(f"## {letter} · {title_zh}")
+    for cat_id, title_zh, _, desc_zh, _ in STYLE_CATEGORIES:
+        cat_styles = [s for s in styles if s["number"].startswith(f"{cat_id}-")]
+        if not cat_styles:
+            continue
+        r_start = cat_styles[0]["number"]
+        r_end = cat_styles[-1]["number"]
+        zh_lines.append(f'<a id="group-{cat_id.lower()}"></a>')
+        zh_lines.append(f"## {cat_id} · {title_zh}（{r_start}–{r_end} · {len(cat_styles)} 种）")
         zh_lines.append("")
-        for sheet in sheets:
+        zh_lines.append(desc_zh)
+        zh_lines.append("")
+        zh_lines.append("| 效果预览 | 效果预览 | 效果预览 |")
+        zh_lines.append("| :---: | :---: | :---: |")
+
+        for i in range(0, len(cat_styles), cols):
+            chunk = cat_styles[i:i + cols]
+            row_cells = []
+            for s in chunk:
+                num = s["number"]
+                cat = num.split("-")[0]
+                legacy = new_to_legacy.get(num, "")
+                legacy_str = f" <small>(#{legacy})</small>" if legacy else ""
+                gen_name = s.get("generation_name", "")
+                ref = s.get("reference", "")
+                traits = s.get("traits", "").replace("|", "&#124;").replace("\n", "<br>")
+
+                cell = f"<img src='images/individual/{cat}/{num}.webp' width='220' alt='{num} {gen_name}'><br>**{num}**{legacy_str} · {gen_name}"
+                if ref:
+                    cell += f"<br><sub>参考: {ref}</sub>"
+                if traits:
+                    cell += f"<br><details><summary>查看核心特征</summary><br>{traits}</details>"
+                row_cells.append(cell)
+            while len(row_cells) < cols:
+                row_cells.append("")
+            zh_lines.append(f"| {' | '.join(row_cells)} |")
+
+        zh_lines.append("")
+        zh_lines.append("---")
+        zh_lines.append("")
+
+    archive_sheets = sorted([p.name for p in (ROOT / "images").glob("[A-H]_*.webp")])
+    if archive_sheets:
+        zh_lines.append("<details>")
+        zh_lines.append("<summary>📦 拼图大表历史归档 (Contact Sheets Archive)</summary>")
+        zh_lines.append("")
+        for sheet in archive_sheets:
             label = sheet.replace(".webp", "").replace("_", " ")
             zh_lines.append(f"![{label}](images/{sheet})")
             zh_lines.append("")
-        zh_lines.append("---")
+        zh_lines.append("</details>")
         zh_lines.append("")
 
     (ROOT / "STYLES.md").write_text("\n".join(zh_lines).strip() + "\n", encoding="utf-8")
@@ -87,26 +150,70 @@ def build_styles_md() -> None:
         '  <a href="STYLES.md">中文</a> | <strong>English</strong>',
         '</p>',
         '',
-        f"# Hand-drawn Style Visual Sheet (001–{total_styles_str})",
+        f"# Hand-drawn Style Visual Gallery ({first_style}–{last_style} · {total_styles} Styles)",
         "",
-        f"> Visual contact sheets for all **{total_styles_str} hand-drawn illustration styles** (001–{total_styles_str}). Each sheet displays style numbers and visual references for easy browsing and selection directly on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).",
+        f"> Complete visual catalogue and prompt traits for all **{total_styles} hand-drawn illustration styles** ({first_style}–{last_style}). Each style includes image preview, classification ID, generation name, artistic reference, and core prompt traits for direct browsing on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).",
         "",
         "## Table of Contents",
         "",
     ]
-    for letter, _, title_en, _ in sheet_groups:
-        en_lines.append(f"- [{letter} · {title_en}](#group-{letter.lower()})")
+    for cat_id, _, title_en, _, _ in STYLE_CATEGORIES:
+        cat_styles = [s for s in styles if s["number"].startswith(f"{cat_id}-")]
+        if cat_styles:
+            r_start = cat_styles[0]["number"]
+            r_end = cat_styles[-1]["number"]
+            en_lines.append(f"- [{cat_id} · {title_en} ({r_start}–{r_end} · {len(cat_styles)} Styles)](#group-{cat_id.lower()})")
     en_lines.extend(["", "---", ""])
 
-    for letter, _, title_en, sheets in sheet_groups:
-        en_lines.append(f'<a id="group-{letter.lower()}"></a>')
-        en_lines.append(f"## {letter} · {title_en}")
+    for cat_id, _, title_en, _, desc_en in STYLE_CATEGORIES:
+        cat_styles = [s for s in styles if s["number"].startswith(f"{cat_id}-")]
+        if not cat_styles:
+            continue
+        r_start = cat_styles[0]["number"]
+        r_end = cat_styles[-1]["number"]
+        en_lines.append(f'<a id="group-{cat_id.lower()}"></a>')
+        en_lines.append(f"## {cat_id} · {title_en} ({r_start}–{r_end} · {len(cat_styles)} Styles)")
         en_lines.append("")
-        for sheet in sheets:
+        en_lines.append(desc_en)
+        en_lines.append("")
+        en_lines.append("| Visual Preview | Visual Preview | Visual Preview |")
+        en_lines.append("| :---: | :---: | :---: |")
+
+        for i in range(0, len(cat_styles), cols):
+            chunk = cat_styles[i:i + cols]
+            row_cells = []
+            for s in chunk:
+                num = s["number"]
+                cat = num.split("-")[0]
+                legacy = new_to_legacy.get(num, "")
+                legacy_str = f" <small>(#{legacy})</small>" if legacy else ""
+                gen_name = s.get("generation_name", "")
+                ref = s.get("reference", "")
+                traits = s.get("traits", "").replace("|", "&#124;").replace("\n", "<br>")
+
+                cell = f"<img src='images/individual/{cat}/{num}.webp' width='220' alt='{num} {gen_name}'><br>**{num}**{legacy_str} · {gen_name}"
+                if ref:
+                    cell += f"<br><sub>Ref: {ref}</sub>"
+                if traits:
+                    cell += f"<br><details><summary>View Traits</summary><br>{traits}</details>"
+                row_cells.append(cell)
+            while len(row_cells) < cols:
+                row_cells.append("")
+            en_lines.append(f"| {' | '.join(row_cells)} |")
+
+        en_lines.append("")
+        en_lines.append("---")
+        en_lines.append("")
+
+    if archive_sheets:
+        en_lines.append("<details>")
+        en_lines.append("<summary>📦 Contact Sheets Archive</summary>")
+        en_lines.append("")
+        for sheet in archive_sheets:
             label = sheet.replace(".webp", "").replace("_", " ")
             en_lines.append(f"![{label}](images/{sheet})")
             en_lines.append("")
-        en_lines.append("---")
+        en_lines.append("</details>")
         en_lines.append("")
 
     (ROOT / "STYLES_en.md").write_text("\n".join(en_lines).strip() + "\n", encoding="utf-8")

@@ -306,15 +306,16 @@
     "prompt_file": "layouts/SC-021.md",
     "keywords": [
       "自适应双拼",
-      "竖版左右拼",
-      "横版上下拼",
+      "比例驱动切分",
+      "画幅自适应",
       "照片转译",
-      "实景转绘",
+      "视线锚点跨界",
+      "撕纸第二世界",
+      "7种可选玩法",
       "前后对比",
       "真实与艺术",
       "微排版",
-      "四周负空间",
-      "四周留白"
+      "四周负空间"
     ],
     "name_en": "Adaptive Split Photo-to-Art Social Card"
   },
@@ -361,6 +362,25 @@
       "无分镜框融合"
     ],
     "name_en": "Representative Scenario Knowledge Cover Card"
+  },
+  {
+    "id": "SC-024",
+    "category": "social-card",
+    "name": "图下文上留白卡",
+    "image": "../../../images/layouts/social-cards/SC-024.webp",
+    "prompt_file": "layouts/SC-024.md",
+    "keywords": [
+      "图下文上",
+      "文上图下",
+      "无大标题",
+      "图文自然衔接",
+      "无明显界线",
+      "角色概括",
+      "纯色背景",
+      "大面积留白",
+      "简单构图"
+    ],
+    "name_en": "Text-Above-Image Whitespace Card"
   },
   {
     "id": "IG-001",

@@ -1,0 +1,41 @@
+{
+  "source": "https://github.com/trustfuture/simon-skills",
+  "commit": "3ad0a25127c17da48a0e869c9efbf4136c40848b",
+  "license": "MIT",
+  "adaptations": [
+    "parameterized frame/size, no upstream voice/branding workflow",
+    "episode gate and cache integration",
+    "portable dependency discovery and public source metadata; no author workstation paths"
+  ],
+  "files": [
+    {
+      "path": "assets/fonts/OFL.txt",
+      "sha256": "e69147d85df54f8ee5822cb0250155963cc4251595ecc31a4d815ad2e8a7e4d0"
+    },
+    {
+      "path": "assets/fonts/Xiaolai-Regular.ttf",
+      "sha256": "e2f68daf0e72777a8cf58bc83de1b98634b251e537ddbfca24b0ae50d1802da2"
+    },
+    {
+      "path": "lib/render.html",
+      "sha256": "95006819c7e30a0738d01660f48c933e13067b917ad355e64765f2e9b37e2706"
+    },
+    {
+      "path": "lib/scene-dsl.js",
+      "sha256": "2366a4d621910face771d0fbe0380bf0a7b2b63b0186ee197cf7243063e0a472"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "1c1541002639001436ce03b706a3464a69b77facba6de893d34e2d29a39a48a2"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "ba06120e5b30dfa0561f4c667f72b9697142e1a36a533a92531587256cbf17eb"
+    },
+    {
+      "path": "package.json",
+      "sha256": "27cd3061c0110ef729487cde4a70093bdc0f60f1c571dd0137bbbb49c7440f88"
+    }
+  ],
+  "source_subdirectory": "skills/whiteboard-video"
+}

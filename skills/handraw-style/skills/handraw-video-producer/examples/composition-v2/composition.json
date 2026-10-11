@@ -1,0 +1,299 @@
+{
+  "version": 2,
+  "duration_frames": 840,
+  "shots": [
+    {
+      "id": "S1",
+      "purpose": "单图动画技术展示",
+      "type": "ST-001",
+      "start_frame": 0,
+      "end_frame": 120,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "asset": "assets/fanren-dawn.png",
+        "keyframes": [
+          {
+            "at_frame": 0,
+            "region": [
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          {
+            "at_frame": 119,
+            "region": [
+              -0.06,
+              -0.04,
+              1.12,
+              1.12
+            ]
+          }
+        ]
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S2",
+      "purpose": "视频技术展示",
+      "type": "ST-002",
+      "start_frame": 120,
+      "end_frame": 240,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "asset": "assets/video.mp4",
+        "source_in": 1,
+        "source_out": 5
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S3",
+      "purpose": "背景＋透明素材动画技术展示",
+      "type": "ST-003",
+      "start_frame": 240,
+      "end_frame": 360,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "background": "assets/background.png",
+        "sprites": [
+          {
+            "id": "cat",
+            "frames": [
+              {
+                "asset": "assets/wave-a.png",
+                "hold_frames": 12
+              },
+              {
+                "asset": "assets/wave-b.png",
+                "hold_frames": 12
+              }
+            ],
+            "playback": "loop",
+            "region": [
+              0.13,
+              0.2,
+              0.25,
+              0.57
+            ],
+            "contact_anchors": {
+              "foot": [
+                0.5,
+                1
+              ]
+            },
+            "motion": {
+              "type": "oscillate",
+              "amplitude": [
+                0.05,
+                0
+              ],
+              "period_frames": 60,
+              "start_frame": 0,
+              "end_frame": 120
+            },
+            "z_index": 1
+          },
+          {
+            "id": "coffee",
+            "asset": "assets/coffee.png",
+            "playback": "static",
+            "region": [
+              0.62,
+              0.48,
+              0.16,
+              0.23
+            ],
+            "start_frame": 20,
+            "z_index": 2
+          },
+          {
+            "id": "once",
+            "frames": [
+              {
+                "asset": "assets/neutral.png",
+                "hold_frames": 20
+              },
+              {
+                "asset": "assets/wave-a.png",
+                "hold_frames": 20
+              },
+              {
+                "asset": "assets/wave-b.png",
+                "hold_frames": 20
+              }
+            ],
+            "playback": "once",
+            "on_end": "hold",
+            "region": [
+              0.43,
+              0.26,
+              0.17,
+              0.42
+            ],
+            "start_frame": 30,
+            "z_index": 3
+          }
+        ]
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S4",
+      "purpose": "全图有限帧动画技术展示",
+      "type": "ST-004",
+      "start_frame": 360,
+      "end_frame": 480,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "frames": [
+          {
+            "asset": "assets/full-scene-pose-0.png",
+            "hold_frames": 30
+          },
+          {
+            "asset": "assets/full-scene-pose-1.png",
+            "hold_frames": 30
+          },
+          {
+            "asset": "assets/full-scene-pose-2.png",
+            "hold_frames": 30
+          },
+          {
+            "asset": "assets/full-scene-pose-3.png",
+            "hold_frames": 30
+          }
+        ]
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S5",
+      "purpose": "Remotion 动画技术展示",
+      "type": "ST-005",
+      "start_frame": 480,
+      "end_frame": 600,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "entry": "work/Scene.tsx",
+        "inputs": [
+          "assets/neutral.png"
+        ],
+        "props": {}
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S6",
+      "purpose": "simo 版白板动画技术展示",
+      "type": "ST-006",
+      "start_frame": 600,
+      "end_frame": 720,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "scene": "work/simo-scene.json",
+        "inputs": [
+          "assets/coffee.png"
+        ]
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    },
+    {
+      "id": "S7",
+      "purpose": "SRT 版白板动画技术展示",
+      "type": "ST-007",
+      "start_frame": 720,
+      "end_frame": 840,
+      "voice_anchor": "无旁白本地测试",
+      "config": {
+        "image": "assets/line-art.png",
+        "annotation": "assets/annotation.json",
+        "grid_edge": 6,
+        "bare_tip": false
+      },
+      "layers": [],
+      "events": [],
+      "transition": {
+        "type": "cut",
+        "frames": 0
+      }
+    }
+  ],
+  "subtitle_cues": [
+    {
+      "start_frame": 0,
+      "end_frame": 120,
+      "text": "ST-001  单图动画"
+    },
+    {
+      "start_frame": 120,
+      "end_frame": 240,
+      "text": "ST-002  视频"
+    },
+    {
+      "start_frame": 240,
+      "end_frame": 360,
+      "text": "ST-003  背景＋透明素材动画"
+    },
+    {
+      "start_frame": 360,
+      "end_frame": 480,
+      "text": "ST-004  全图有限帧动画"
+    },
+    {
+      "start_frame": 480,
+      "end_frame": 600,
+      "text": "ST-005  Remotion 动画"
+    },
+    {
+      "start_frame": 600,
+      "end_frame": 720,
+      "text": "ST-006  simo 版白板动画"
+    },
+    {
+      "start_frame": 720,
+      "end_frame": 840,
+      "text": "ST-007  SRT 版白板动画"
+    }
+  ],
+  "audio_tracks": [
+    {
+      "path": "assets/tone.wav",
+      "start_frame": 0,
+      "end_frame": 840,
+      "gain": 0.1
+    }
+  ],
+  "local_types": []
+}

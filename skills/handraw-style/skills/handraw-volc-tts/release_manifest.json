@@ -1,0 +1,22 @@
+{
+  "skill": "handraw-volc-tts",
+  "files": {
+    "SKILL.md": "52b4cdb6abf20293e0d626cada361ef158b7fa50057fdb127ee0cd798c822329",
+    "agents/openai.yaml": "d80e396b4e6b60f849f922ef49d7535559ffe50fcc3c55b37bbb631b339260d2",
+    "references/account_and_api.md": "07d2a5cd26bc1edd9967d25b4dd523ed6d00f7a7c9eea901db4912b831d9f919",
+    "references/episode_voice.md": "194d2c3653556ca5d3e577effa14a10730ccea712aca6cc46b3503f17bc03a68",
+    "references/validation.md": "c295baab273573efb6c1050a58ec0c3023836b167f234630b479567b86995abc",
+    "scripts/volc_voice.py": "2edf7c0bc72c94811eb0c8dd4b4e80ed9cbba33f1ff7a324f15e064eec6933f1",
+    "scripts/handraw_volc/client.py": "d7fc400f75b4676b656f0480fba5a2c35858fdbf8b40c956db6dfe6d139b273f",
+    "scripts/handraw_volc/credentials.py": "24f129f43c43e6efc4b1869eea2080c771848b9a08eac9ae99defd63bc1c334e",
+    "scripts/handraw_volc/timing.py": "f2783959b239b5f6b6dff97f7d2e8ce845108062acbd89f8431d1bb0d198d861",
+    "scripts/handraw_volc/workflow.py": "e0df644fdf6afc237f60c0f2a9209cb2e9b01db258626d7de1cdadeefdf2e91f",
+    "scripts/handraw_volc/__init__.py": "d907f118cabd2376d43a9c4a9b1ba2741a99b77fd4115c26ee453d4d07e03ec6",
+    "tests/test_voice.py": "719e9f9387fd952e072d785d93ea2b9ea254ac636967fd37e8c513051c6ba2a7"
+  },
+  "removed": [
+    "release_manifest.json"
+  ],
+  "excluded_videos": [],
+  "installed_hashes": "all_match"
+}

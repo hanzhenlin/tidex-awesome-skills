@@ -688,6 +688,10 @@
         "FG-021": {
           "name_activation": "strong",
           "traits_activation": "none"
+        },
+        "FC-032": {
+          "name_activation": "strong",
+          "traits_activation": "none"
         }
       }
     }

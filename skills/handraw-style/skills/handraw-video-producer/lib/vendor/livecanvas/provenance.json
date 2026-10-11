@@ -1,0 +1,42 @@
+{
+  "source": "https://github.com/pengchujin/livecanvas",
+  "commit": "a04f18f1bd43d1a7434dfbff5a908fe9452ceba4",
+  "license": "MIT",
+  "adaptations": [
+    "parameterized frame/size, no upstream voice/branding workflow",
+    "episode gate and cache integration",
+    "portable dependency discovery and public source metadata; no author workstation paths"
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "213bdf4d3e26e1b70057f091ae3fa6a496502f0963321f3f5f2a53fbc8e57ed2"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "0c1adc664e3c830688ec46bfda5a8b7240f8385b87efcdc7f7c6413000e5c45b"
+    },
+    {
+      "path": "package.json",
+      "sha256": "b973d710e8c1ab127e26eb4ff89935be766081a7659e9204961b8d22de340226"
+    },
+    {
+      "path": "render-shot.mjs",
+      "sha256": "00a6924028cae19f0fbc36dc8be652445f80379c131370cd01647deda42b52d8"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "562f3609136ab98768aa00e084993939114733ce93af996ca0e63337f848821a",
+      "imported_sha256": "d25dc01e1b2f915288d9474eae410d105ba47f90dfe6a821e9992ed237d0cfc3"
+    },
+    {
+      "path": "docs/licenses/Emil-skills-MIT.txt",
+      "sha256": "d24da413cccbc3d844929a1cc08e5ba79385139c0c47c9d5bd0dd2df24ffe15c"
+    },
+    {
+      "path": "docs/licenses/Twemoji-graphics.txt",
+      "sha256": "f7c011ea2361bca6404b53a3e4d7ae8f9ca2d5abdc3916f83787789e71029d07"
+    }
+  ],
+  "source_subdirectory": "livecanvas"
+}

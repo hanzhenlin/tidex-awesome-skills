@@ -1,0 +1,11 @@
+{
+  "skill": "handraw-browser-producer",
+  "files": {
+    "SKILL.md": "6f26cd990c51e0cc21d123b08f8db821c241f582e9764f4745fd5e94f7f837e6"
+  },
+  "removed": [
+    "release_manifest.json"
+  ],
+  "excluded_videos": [],
+  "installed_hashes": "all_match"
+}

@@ -1,0 +1,3 @@
+# Gallery building and Skill metadata tools; video engines have separate requirements.
+Pillow==12.2.0
+PyYAML==6.0.3
