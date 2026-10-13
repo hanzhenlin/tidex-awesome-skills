@@ -1,4 +1,4 @@
-# 328 种人物 IP 手绘风格库（全新品类独立编号版）
+# 329 种人物 IP 手绘风格库（全新品类独立编号版）
 
 规则：采用 FA~FH 8 大品类独立编号（FA-001 ~ FH-043）；保留原参考名称用于索引；生图时优先使用“生图名称”。通用/历史风格保持短描述；当代个人创作者型条目使用稍详细的视觉描述，以减少只靠作者名造成的生成不稳定。
 
@@ -599,6 +599,8 @@
 | FG-020 · 复古青年漫画与美式叙事插画 / Retro Seinen Manga & American Narrative Illustration | Retro Seinen Manga Line Art, American Narrative Illustration, Digital Cel Shading | 复古漫画、半写实人物、日式青年漫画线稿、美式叙事插画、暖色低饱和、手绘墨线、复古纸张纹理、夸张表情、动态速度线、数字赛璐璐上色。 |
 
 | FG-021 · 韩漫webtoon / Korean Webtoon | Korean Webtoon |  |
+
+| FG-022 · 动画片《蜘蛛侠：平行宇宙》 / Spider-Man: Into the Spider-Verse | Spider-Man: Into the Spider-Verse Animation Style |  |
 
 ## FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts
 

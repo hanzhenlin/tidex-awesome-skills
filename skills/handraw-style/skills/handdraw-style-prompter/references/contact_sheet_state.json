@@ -1,7 +1,7 @@
 {
   "version": 1,
   "capacity": 16,
-  "active_start": 313,
-  "filled": 16,
-  "next_cell": 1
+  "active_start": 329,
+  "filled": 1,
+  "next_cell": 2
 }
