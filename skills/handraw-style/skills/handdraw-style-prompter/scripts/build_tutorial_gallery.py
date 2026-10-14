@@ -518,7 +518,7 @@ dialog::backdrop{{background:#000a}}
         </div>
         <div class="step-body">
           <div class="form-group">
-            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪..." aria-label="画面主题或文章内容"></textarea>
+            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，亦可输入本地文件或文件夹路径（如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:/path/to/...）..." aria-label="画面主题、文件或文件夹路径"></textarea>
           </div>
 
           <!-- Extra fields for poster mode only -->
@@ -896,6 +896,14 @@ dialog::backdrop{{background:#000a}}
           <div class="step-title-wrap">
             <span class="step-badge">5</span>
             <h2 class="step-title output-title" data-i18n="step5Title">拼装生成的出图指令</h2>
+            <label class="fusion-checkbox-wrap" id="batch-checkbox-wrap">
+              <input type="checkbox" id="checkbox-batch" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="batchCheckboxLabel">批量出图</span>
+            </label>
+            <label class="fusion-checkbox-wrap" id="mix-layouts-checkbox-wrap" hidden>
+              <input type="checkbox" id="checkbox-mix-layouts" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="mixLayoutsCheckboxLabel">混合多种图型</span>
+            </label>
           </div>
           <div class="output-actions">
             <button type="button" id="btn-copy-assembled" class="copy-main-btn">
@@ -983,6 +991,8 @@ const assembledText=document.querySelector('#assembled-text'),btnCopyAssembled=d
 const pickerDialog=document.querySelector('#picker-dialog'),pickerTitle=document.querySelector('#picker-title'),pickerFilters=document.querySelector('#picker-filters'),pickerSearch=document.querySelector('#picker-search'),pickerGrid=document.querySelector('#picker-grid');
 const checkboxFusion=document.querySelector('#checkbox-fusion'),fusionWrap=document.querySelector('#fusion-checkbox-wrap');
 const checkboxTone=document.querySelector('#checkbox-tone'),toneWrap=document.querySelector('#tone-checkbox-wrap'),slotTone=document.querySelector('#slot-tone');
+const checkboxBatch=document.querySelector('#checkbox-batch'),batchWrap=document.querySelector('#batch-checkbox-wrap');
+const checkboxMixLayouts=document.querySelector('#checkbox-mix-layouts'),mixLayoutsWrap=document.querySelector('#mix-layouts-checkbox-wrap');
 const slotsGrid=document.querySelector('#slots-grid'),slotStyle=document.querySelector('#slot-style'),slotCharStyle=document.querySelector('#slot-char-style'),slotSceneStyle=document.querySelector('#slot-scene-style');
 const modalAssetFooter=document.querySelector('#modal-asset-footer'),modalAssetSummary=document.querySelector('#modal-asset-summary');
 const btnModalClearAssets=document.querySelector('#btn-modal-clear-assets'),btnModalConfirmAssets=document.querySelector('#btn-modal-confirm-assets');
@@ -1006,6 +1016,8 @@ let currentPickerType = null;
 let currentPickerFilter = 'all';
 let isFusionActive = false;
 let isToneActive = false;
+let isBatchActive = false;
+let isMixLayoutsActive = false;
 
 const REALISTIC_ITEM = {{
   id: 'realistic',
@@ -1031,6 +1043,8 @@ const I18N = {{
     assemblerSub: "交互式点选图型、风格与色彩，实时拼装出图指令。",
     fusionCheckboxLabel: "风格融合",
     toneCheckboxLabel: "影调",
+    batchCheckboxLabel: "批量出图",
+    mixLayoutsCheckboxLabel: "混合多种图型",
     step1Title: "出图模式与留白",
     step2Title: "画面主题与内容",
     step3Title: "画幅比例与情绪",
@@ -1058,8 +1072,8 @@ const I18N = {{
     whitespaceModeratePrompt: "【大量留白】",
     whitespaceHighPrompt: "【大量留白，场景只显示必要部分，不要显示全】",
     themeLabel: "主题：",
-    articlePathLabel: "文章文件地址：",
-    articleCoverPathLabel: "文章文件地址或内容：",
+    articlePathLabel: "文件或文件夹地址：",
+    articleCoverPathLabel: "文件/文件夹地址或内容：",
     shootTypeLabel: "拍摄类型：",
     audienceLabel: "受众：",
     channelLabel: "海报投放渠道：",
@@ -1084,8 +1098,8 @@ const I18N = {{
     jianyingNote: "使用剪映渲染必须先填写剪映草稿箱文件夹位置。",
     volcTtsNote: "默认使用火山引擎配音，需要配音可前往官网申请 API Key。",
     volcTtsGuide: "申请指南 ↗",
-    themePlaceholder: "输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪...",
-    themeVideoPlaceholder: "说说你想做什么视频，也可以直接粘贴文章或脚本，或填写本地文章路径。如果对开头台词、结尾互动有要求，也一起告诉我。",
+    themePlaceholder: "输入画面主题，亦可输入本地文件或文件夹路径（例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:\\\\path\\\\to\\\\...）...",
+    themeVideoPlaceholder: "说说你想做什么视频，亦可直接粘贴文章或脚本，或填写本地文件或文件夹路径。如果对开头台词、结尾互动有要求，也一起告诉我。",
     videoShotsLabel: "视频类型库",
     videoShotsSub: "点击截图选择，可多选，也可以让 AI 帮你搭配。",
     videoShotsAuto: "未选择 · 由 AI 搭配",
@@ -1096,9 +1110,9 @@ const I18N = {{
     videoShotsBoth: "剪映 · 浏览器",
     videoShotsBrowserOnly: "仅浏览器",
     videoShotsRouteWarning: "所选 {{ids}} 仅支持浏览器，请调整视频类型或改用浏览器渲染。",
-    themePhotoPlaceholder: "选填：输入特定主题或场景（如：海边夕阳 / 90年代港风），不填由AI推荐...",
-    articlePathPlaceholder: "请输入文章的本地绝对路径，例如：D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "请输入文章的本地绝对路径（例如：D:\\\\path\\\\to\\\\article.md）或直接粘贴文章内容...",
+    themePhotoPlaceholder: "选填：输入特定主题或场景，亦可输入本地文件或文件夹路径（如：海边夕阳 / 90年代港风），不填由AI推荐...",
+    articlePathPlaceholder: "请输入本地文件或文件夹绝对路径（支持单篇或批量配图，例如：D:\\\\path\\\\to\\\\article.md 或文件夹）...",
+    articleCoverPathPlaceholder: "请输入本地文件或文件夹绝对路径（例如：D:\\\\path\\\\to\\\\article.md），或直接粘贴文章内容...",
     articleCoverFixedPrompt: "先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。",
     shootTypePlaceholder: "点选上方标签，或手动输入/修改拍摄类型...",
     shootTypeCouple: "情侣",
@@ -1199,7 +1213,7 @@ const I18N = {{
     filterNeutral: "中性色系",
     fallbackPrompt: "其他你帮我选择",
     themeEmptyText: "【输入主题】",
-    articlePathEmptyText: "【输入文章文件地址】",
+    articlePathEmptyText: "【输入文件或文件夹地址】",
     audienceEmptyText: "【输入受众】",
     channelEmptyText: "【输入海报投放渠道】",
     wechatTitle: "💬 创作变现交流群",
@@ -1222,6 +1236,8 @@ const I18N = {{
     assemblerSub: "Visually select layout, style, and color to assemble prompt commands in real time.",
     fusionCheckboxLabel: "Style Fusion",
     toneCheckboxLabel: "Tone",
+    batchCheckboxLabel: "Batch Generation",
+    mixLayoutsCheckboxLabel: "Mix Multiple Layouts",
     step1Title: "Mode & Negative Space",
     step2Title: "Theme & Content",
     step3Title: "Aspect Ratio & Mood",
@@ -1249,8 +1265,8 @@ const I18N = {{
     whitespaceModeratePrompt: "[Generous negative space]",
     whitespaceHighPrompt: "[Generous negative space, scene shows only essential parts, do not show in full]",
     themeLabel: "Theme:",
-    articlePathLabel: "Article File Path:",
-    articleCoverPathLabel: "Article File Path or Text:",
+    articlePathLabel: "File or Folder Path:",
+    articleCoverPathLabel: "File / Folder Path or Text:",
     shootTypeLabel: "Shoot Type:",
     audienceLabel: "Audience:",
     channelLabel: "Distribution Channel:",
@@ -1275,8 +1291,8 @@ const I18N = {{
     jianyingNote: "Jianying rendering requires configuring the Jianying draft folder path first.",
     volcTtsNote: "Voiceover uses Volcengine by default. If you need voiceover, apply for an API key on its official website.",
     volcTtsGuide: "API key guide ↗",
-    themePlaceholder: "Enter theme, e.g. Autumn milk tea / Cat sunbathing on windowsill...",
-    themeVideoPlaceholder: "Tell us what video you want to make. You can paste an article or script, or provide a local article path. Include any requests for the opening lines or closing call to action.",
+    themePlaceholder: "Enter theme, or local file/folder path (e.g. Autumn milk tea / Cat on windowsill, or D:\\\\path\\\\to\\\\dir)...",
+    themeVideoPlaceholder: "Tell us what video you want to make. You can paste an article or script, or provide a local file or folder path. Include any requests for the opening lines or closing call to action.",
     videoShotsLabel: "Video Type Library",
     videoShotsSub: "Click images to select multiple types, or let AI choose for you.",
     videoShotsAuto: "No selection · AI will choose",
@@ -1287,9 +1303,9 @@ const I18N = {{
     videoShotsBoth: "Jianying · Browser",
     videoShotsBrowserOnly: "Browser only",
     videoShotsRouteWarning: "{{ids}} support browser rendering only. Change the types or choose browser rendering.",
-    themePhotoPlaceholder: "Optional: Enter specific theme or setting (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
-    articlePathPlaceholder: "Enter absolute local file path, e.g. D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "Enter absolute local file path (e.g. D:\\\\path\\\\to\\\\article.md) or paste article text...",
+    themePhotoPlaceholder: "Optional: Enter specific theme or setting, or local file/folder path (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
+    articlePathPlaceholder: "Enter absolute local file or folder path (supports single or batch illustration, e.g. D:\\\\path\\\\to\\\\article.md or folder)...",
+    articleCoverPathPlaceholder: "Enter absolute local file or folder path (e.g. D:\\\\path\\\\to\\\\article.md), or paste article text...",
     articleCoverFixedPrompt: "Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me.",
     shootTypePlaceholder: "Click tags above, or type/edit shoot type...",
     shootTypeCouple: "Couple",
@@ -1390,7 +1406,7 @@ const I18N = {{
     filterNeutral: "Classic Neutral Tones",
     fallbackPrompt: "pick the rest for me",
     themeEmptyText: "[Enter Theme]",
-    articlePathEmptyText: "[Enter Article File Path]",
+    articlePathEmptyText: "[Enter File or Folder Path]",
     audienceEmptyText: "[Enter Audience]",
     channelEmptyText: "[Enter Channel]",
     wechatTitle: "💬 Creator Monetization Community",
@@ -1594,9 +1610,9 @@ function updatePrompt() {{
   const themeVal = inputTheme.value.trim();
   if (currentMode === 'article-illust') {{
     const articleDisplay = themeVal || t.articlePathEmptyText;
-    parts.push(isZh ? `文章文件地址：${{articleDisplay}}` : `Article file path: ${{articleDisplay}}`);
+    parts.push(isZh ? `文件或文章地址：${{articleDisplay}}` : `File or article path: ${{articleDisplay}}`);
   }} else if (currentMode === 'article-cover') {{
-    const articleDisplay = themeVal || (isZh ? '【输入文章文件地址或内容】' : '[Enter article file path or text]');
+    const articleDisplay = themeVal || (isZh ? '【输入文件/文件夹地址或文章内容】' : '[Enter file/folder path or article text]');
     parts.push(isZh ? `文章：${{articleDisplay}}` : `Article: ${{articleDisplay}}`);
     let scenario = isZh ? '公众号文章封面' : 'WeChat Official Account Cover';
     if (ratioVal === '5:2' || ratioVal === '16:9') scenario = isZh ? 'X文章封面' : 'X Article Cover';
@@ -1656,7 +1672,14 @@ function updatePrompt() {{
   }}
 
   const delimiter = isZh ? '，' : ', ';
-  assembledText.textContent = parts.join(delimiter);
+  let promptText = parts.join(delimiter);
+  if (isBatchActive) {{
+    promptText += isZh ? ' | 批量出图' : ' | Batch Generation';
+    if (isMixLayoutsActive) {{
+      promptText += isZh ? ' | 混合多种图型' : ' | Mix Multiple Layouts';
+    }}
+  }}
+  assembledText.textContent = promptText;
 }}
 
 function updateSlotUI(type) {{
@@ -2518,6 +2541,34 @@ if (checkboxTone) {{
   }});
 }}
 
+// Batch Generation Checkbox Listener
+if (checkboxBatch) {{
+  checkboxBatch.addEventListener('change', () => {{
+    isBatchActive = checkboxBatch.checked;
+    if (batchWrap) batchWrap.classList.toggle('is-active', isBatchActive);
+    if (!isBatchActive) {{
+      isMixLayoutsActive = false;
+      if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+      if (mixLayoutsWrap) {{
+        mixLayoutsWrap.classList.remove('is-active');
+        mixLayoutsWrap.hidden = true;
+      }}
+    }} else {{
+      if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+    }}
+    updatePrompt();
+  }});
+}}
+
+// Mix Multiple Layouts Checkbox Listener
+if (checkboxMixLayouts) {{
+  checkboxMixLayouts.addEventListener('change', () => {{
+    isMixLayoutsActive = checkboxMixLayouts.checked;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.toggle('is-active', isMixLayoutsActive);
+    updatePrompt();
+  }});
+}}
+
 // Toolbar Actions: Gacha & Reset
 document.querySelector('#btn-gacha').addEventListener('click', () => {{
   // Random layout (skip in article-illust and article-cover mode)
@@ -2598,6 +2649,15 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
     inputMood.value = '';
     if (btnClearMood) btnClearMood.hidden = true;
     document.querySelectorAll('.mood-preset-btn').forEach(b => b.classList.remove('is-active'));
+  }}
+  isBatchActive = false;
+  isMixLayoutsActive = false;
+  if (checkboxBatch) checkboxBatch.checked = false;
+  if (batchWrap) batchWrap.classList.remove('is-active');
+  if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+  if (mixLayoutsWrap) {{
+    mixLayoutsWrap.classList.remove('is-active');
+    mixLayoutsWrap.hidden = true;
   }}
   renderAssetsTray();
   updateSlotUI('layout');
@@ -2817,7 +2877,21 @@ if (toneParam) {{
   }}
 }}
 
-if (assetParam || styleParam || layoutParam || colorParam || toneParam || modeParam || shotParam) {{
+const batchParam = urlParams.get('batch');
+if (batchParam === '1' || batchParam === 'true') {{
+  isBatchActive = true;
+  if (checkboxBatch) checkboxBatch.checked = true;
+  if (batchWrap) batchWrap.classList.add('is-active');
+  if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+  const mixParam = urlParams.get('mix') || urlParams.get('mix_layouts');
+  if (mixParam === '1' || mixParam === 'true') {{
+    isMixLayoutsActive = true;
+    if (checkboxMixLayouts) checkboxMixLayouts.checked = true;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.add('is-active');
+  }}
+}}
+
+if (assetParam || styleParam || layoutParam || colorParam || toneParam || modeParam || shotParam || batchParam) {{
   renderAssetsTray();
   updateSlotUI('layout');
   updateSlotUI('style');
