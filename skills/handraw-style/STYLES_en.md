@@ -2,9 +2,9 @@
   <a href="STYLES.md">中文</a> | <strong>English</strong>
 </p>
 
-# Hand-drawn Style Visual Gallery (FA-001–FH-043 · 330 Styles)
+# Hand-drawn Style Visual Gallery (FA-001–FH-044 · 331 Styles)
 
-> Complete visual catalogue and prompt traits for all **330 hand-drawn illustration styles** (FA-001–FH-043). Each style includes image preview, classification ID, generation name, artistic reference, and core prompt traits for direct browsing on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).
+> Complete visual catalogue and prompt traits for all **331 hand-drawn illustration styles** (FA-001–FH-044). Each style includes image preview, classification ID, generation name, artistic reference, and core prompt traits for direct browsing on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
 - [FE · Chinese Traditional & Folk Craft (FE-001–FE-067 · 67 Styles)](#group-fe)
 - [FF · 3D Clay, Felt & Papercraft (FF-001–FF-017 · 17 Styles)](#group-ff)
 - [FG · Anime, Cel Animation & Retro Game (FG-001–FG-023 · 23 Styles)](#group-fg)
-- [FH · Mixed Media & Impasto Arts (FH-001–FH-043 · 43 Styles)](#group-fh)
+- [FH · Mixed Media & Impasto Arts (FH-001–FH-044 · 44 Styles)](#group-fh)
 
 ---
 
@@ -188,7 +188,7 @@ Ideal for action anime, classic cel animation, retro pixel art, and manga adapta
 ---
 
 <a id="group-fh"></a>
-## FH · Mixed Media & Impasto Arts (FH-001–FH-043 · 43 Styles)
+## FH · Mixed Media & Impasto Arts (FH-001–FH-044 · 44 Styles)
 
 Ideal for experimental visuals, avant-garde illustration, mixed-media collage, and heavy impasto. Features expressive brushwork, tactile mixed media, and bold creative statements.
 
@@ -208,7 +208,7 @@ Ideal for experimental visuals, avant-garde illustration, mixed-media collage, a
 | <img src='images/individual/FH/FH-034.webp' width='220' alt='FH-034 Oil-Pastel Healing Illustration'><br>**FH-034** <small>(#196)</small> · Oil-Pastel Healing Illustration<br><sub>Ref: 油画棒治愈手绘</sub><br><details><summary>View Traits</summary><br>粗颗粒、蜡质色块、奶油高饱和、拙朴人物。</details> | <img src='images/individual/FH/FH-035.webp' width='220' alt='FH-035 Childlike Crayon Naive Style'><br>**FH-035** <small>(#197)</small> · Childlike Crayon Naive Style<br><sub>Ref: 儿童蜡笔稚拙风</sub><br><details><summary>View Traits</summary><br>不准比例、蜡笔越线、高纯色、童真怪萌。</details> | <img src='images/individual/FH/FH-036.webp' width='220' alt='FH-036 Black-White Pen Deadpan Humor'><br>**FH-036** <small>(#198)</small> · Black-White Pen Deadpan Humor<br><sub>Ref: 黑白钢笔冷幽默</sub><br><details><summary>View Traits</summary><br>极简黑线、冷脸人物、大留白、视觉梗。</details> |
 | <img src='images/individual/FH/FH-037.webp' width='220' alt='FH-037 Red-Blue Riso Guochao'><br>**FH-037** <small>(#199)</small> · Red-Blue Riso Guochao<br><sub>Ref: 红蓝双色孔版 / Riso 国潮</sub><br><details><summary>View Traits</summary><br>红蓝套印、错版颗粒、中国元素、青年 Zine。</details> | <img src='images/individual/FH/FH-038.webp' width='220' alt='FH-038 Mid-century Deadpan Ink Mascot'><br>**FH-038** <small>(#200)</small> · Mid-century Deadpan Ink Mascot<br><sub>Ref: Mid-century Deadpan Ink Mascot</sub><br><details><summary>View Traits</summary><br>黑白墨线、细长身体、成人服装、冷脸、强留白、Mid-century 社论味。</details> | <img src='images/individual/FH/FH-039.webp' width='220' alt='FH-039 Quirky Fantasy Sketchbook Character Concept'><br>**FH-039** <small>(#238)</small> · Quirky Fantasy Sketchbook Character Concept<br><sub>Ref: OscarAI</sub><br><details><summary>View Traits</summary><br>奇幻动画概念速写风、松散纤细的钢笔墨线、质朴水彩晕染与颗粒纸感、精灵耳与慵懒不羁的叛逆神态、层次丰富的异域服饰设计与独立动画设定集美学。</details> |
 | <img src='images/individual/FH/FH-040.webp' width='220' alt='FH-040 Medieval Dark Fantasy Ink & Ochre Illustration'><br>**FH-040** <small>(#244)</small> · Medieval Dark Fantasy Ink & Ochre Illustration<br><sub>Ref: OscarAI</sub><br><details><summary>View Traits</summary><br>中世纪暗黑奇幻墨线插画风、精密细腻的钢笔交错排线、暗调羊皮纸暖赭色调、压迫感十足的重装牛角铠甲骑士与古老石阶遗迹氛围。</details> | <img src='images/individual/FH/FH-041.webp' width='220' alt='FH-041 Modern Minimalist Sumi-e & Red Gouache Illustration'><br>**FH-041** <small>(#255)</small> · Modern Minimalist Sumi-e & Red Gouache Illustration<br><sub>Ref: midlibrary</sub><br><details><summary>View Traits</summary><br>现代极简水墨与高对比度红黑插画风、粗粝松弛的宣纸焦墨飞白干笔、大块纯色水粉撞色平涂、现代几何构图与东方意境留白。</details> | <img src='images/individual/FH/FH-042.webp' width='220' alt='FH-042 Van Gogh Expressive Impasto Oil Painting'><br>**FH-042** <small>(#259)</small> · Van Gogh Expressive Impasto Oil Painting<br><sub>Ref: 梵高</sub><br><details><summary>View Traits</summary><br>后印象派厚涂油画质感、短促而强烈的雕塑感厚堆笔触、充满律动感与生命力的线条走势、纯正浓郁的色彩并置与情感张力；只采用梵高标志性的油画画风与笔触肌理，画面元素的选择必须完全切合指定主题，除非用户明确指定，杜绝默认套用星空漩涡、柏树、向日葵、麦田等梵高惯用符号。</details> |
-| <img src='images/individual/FH/FH-043.webp' width='220' alt='FH-043 Vintage Risograph and Silkscreen Print Illustration'><br>**FH-043** <small>(#275)</small> · Vintage Risograph and Silkscreen Print Illustration<br><sub>Ref: 复古 Risograph 与丝网印刷插画</sub><br><details><summary>View Traits</summary><br>暖象牙色纤维旧纸底；深普鲁士蓝与灰珊瑚红限色双色套印；大量纸白留白与大面积负空间；手绘轮廓、蚀刻排线、断续干笔、粗颗粒半调网点、点描与平涂墨块塑形；墨色浓淡不均、磨损边缘、纸纹透出、轻微双色套印错位与局部掉墨；构图简洁疏朗，主体突出，背景层叠概括；20世纪中期复古旅行宣传插画与私人速写怀旧文学感</details> |  |  |
+| <img src='images/individual/FH/FH-043.webp' width='220' alt='FH-043 Vintage Risograph and Silkscreen Print Illustration'><br>**FH-043** <small>(#275)</small> · Vintage Risograph and Silkscreen Print Illustration<br><sub>Ref: 复古 Risograph 与丝网印刷插画</sub><br><details><summary>View Traits</summary><br>暖象牙色纤维旧纸底；深普鲁士蓝与灰珊瑚红限色双色套印；大量纸白留白与大面积负空间；手绘轮廓、蚀刻排线、断续干笔、粗颗粒半调网点、点描与平涂墨块塑形；墨色浓淡不均、磨损边缘、纸纹透出、轻微双色套印错位与局部掉墨；构图简洁疏朗，主体突出，背景层叠概括；20世纪中期复古旅行宣传插画与私人速写怀旧文学感</details> | <img src='images/individual/FH/FH-044.webp' width='220' alt='FH-044 Claude Monet'><br>**FH-044** <small>(#331)</small> · Claude Monet<br><sub>Ref: 莫奈 / Claude Monet</sub> |  |
 
 ---
 
@@ -261,6 +261,6 @@ Ideal for experimental visuals, avant-garde illustration, mixed-media collage, a
 
 ![H 313-328](images/H_313-328.webp)
 
-![H 329-330](images/H_329-330.webp)
+![H 329-331](images/H_329-331.webp)
 
 </details>

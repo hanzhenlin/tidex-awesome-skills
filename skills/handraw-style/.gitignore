@@ -13,6 +13,8 @@ _preview-chrome/
 temp/
 downloads/
 output/
+dist/
+*.zip
 *.tmp
 
 # OS files

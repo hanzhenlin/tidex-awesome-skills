@@ -41,6 +41,14 @@
 
 </div>
 
+<!-- MCSTOMACH-PROMO-202610-START -->
+[![麦门胃：女娲这次，捏了个胃。](assets/mcstomach-promo-202610.png)](https://github.com/alchaincyf/mcstomach)
+
+我用女娲把自己的胃蒸馏成了Skill，还长出了毛绒分身。去看看你的胃是什么性格，觉得好玩，就在仓库右上角点颗Star。
+
+[🍟 看看麦门胃，投喂一颗Star →](https://github.com/alchaincyf/mcstomach)
+<!-- MCSTOMACH-PROMO-202610-END -->
+
 ---
 
 ## 效果示例

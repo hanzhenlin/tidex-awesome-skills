@@ -15,6 +15,8 @@ if not (ROOT / "images" / "individual").exists():
 
 INDIVIDUAL_ROOT = ROOT / "images" / "individual"
 ALIAS_MAP_FILE = ROOT / "skills" / "handdraw-style-prompter" / "references" / "style_alias_map.json"
+if not ALIAS_MAP_FILE.exists():
+    ALIAS_MAP_FILE = ROOT / "references" / "style_alias_map.json"
 
 _ALIAS_CACHE: dict[str, str] | None = None
 
