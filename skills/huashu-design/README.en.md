@@ -19,7 +19,7 @@
 
 3 to 30 minutes — you ship a **product launch animation**, a clickable App prototype, an editable PPT deck, a print-grade infographic.
 
-Not "decent for AI" quality — it looks like a real design team made it. Give the skill your brand assets (logo, colors, UI screenshots) and it reads your brand's voice; give it nothing and the built-in 20 design vocabularies still keep you out of AI slop territory.
+Not "decent for AI" quality — it looks like a real design team made it. Give the skill your brand assets (logo, colors, UI screenshots) and it reads your brand's voice; give it nothing and **three real directions picked from six thumbnails, backed by an 84-style library with a visual specimen for every style**, still keep you out of AI slop territory.
 
 **Every animation in this README was made by huashu-design itself.** No Figma, no After Effects — just a sentence + skill run. Next product launch needs a promo video? You can make it too.
 
@@ -28,6 +28,8 @@ npx skills add alchaincyf/huashu-design
 ```
 
 > 📣 **Now MIT-licensed.** As of 2026-05-14 this skill is fully open-source under the [MIT License](LICENSE) — free for personal **and** commercial use, no authorization required. ([what changed](#license))
+
+> 🆕 **3.0: bolder directions, and projects that stop looking alike.** Six thumbnails first, then the three strongest become real designs; the style library grows to 84 (new App and Chinese & East Asian sections), each with a specimen; reference works are screenshotted before they are borrowed from; plus a facts-only design check and a "look ledger" that remembers what you've already shipped. [How it works](#core-mechanics)
 
 [See it work](#demo-gallery) · [Install](#install) · [What it does](#what-it-does) · [How it works](#core-mechanics) · [vs. Claude Design](#vs-claude-design)
 
@@ -99,7 +101,7 @@ No buttons, no panels, no Figma plugin. Agent-agnostic — drops into Claude Cod
 | Motion design | MP4 (25fps / 60fps interpolation) + GIF (palette-optimized) + BGM | 8–12 min |
 | Design variations | 3+ side-by-side · Tweaks live params · cross-dimension exploration | 10 min |
 | Infographic / data viz | Print-quality typography · exports to PDF/PNG/SVG | 10 min |
-| Design direction advisor | 5 schools × 20 philosophies · 3 directions recommended · Demos generated in parallel | 5 min |
+| Design direction advisor | Three logics × two candidates each · six thumbnails → three real designs, the other three kept as alternates | 10 min |
 | 5-dimension expert critique | Radar chart + Keep/Fix/Quick Wins · actionable punch list | 3 min |
 
 ---
@@ -110,9 +112,15 @@ No buttons, no panels, no Figma plugin. Agent-agnostic — drops into Claude Cod
 
 ### Design Direction Advisor
 
-The fallback for vague briefs: pick 3 differentiated directions from 5 schools × 20 philosophies, generate all 3 demos in parallel, let the user choose.
+The fallback for vague briefs: **three complementary logics, two candidates each** — best designer, an award-winning work in the same medium (screenshotted first), and a seconds roulette over the style library. Six thumbnails, then the three strongest and most distinct become **real designs** to choose from, with the other three as alternates. Backed by an **84-style HTML-native library** (web 20 + deck 20 + infographic 20 + app 12 + Chinese & East Asian 12, pure CSS, no image generation), each with a specimen.
 
 <p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/w3-fallback-advisor-en.gif" width="100%"></p>
+<p align="center"><sub>The animation shows the 2.0 flow (one design per logic)</sub></p>
+
+The two sections new in 3.0 — every cell is a specimen (pure HTML/CSS, fictional subjects and numbers):
+
+<p align="center"><img src="assets/style-specimens/sheet-east.jpg" width="100%" alt="12 Chinese and East Asian design styles"></p>
+<p align="center"><img src="assets/style-specimens/sheet-app.jpg" width="100%" alt="12 app styles"></p>
 
 ### iOS App Prototype
 
@@ -190,13 +198,23 @@ A/B-tested (v1 vs v2, 6 agents each): **v2 reduced stability variance by 5×**. 
 
 ### Design Direction Advisor (Fallback)
 
-Triggered when the brief is too vague to execute:
+Triggered when the brief is too vague to execute (rebuilt in 3.0):
 
-- Don't run on generic intuition — enter Fallback mode
-- Recommend 3 differentiated directions from 5 schools × 20 philosophies, each **from a different school**
-- Each comes with flagship works, gestalt keywords, representative designer
-- Generate 3 visual demos in parallel, let the user choose
-- Once chosen, continue into the Junior Designer main flow
+- One round of questions, asking for references up front (name / logo / brand colors / sites you like)
+- Fetch the real images the content needs (public domain / royalty-free) before designing
+- **Three logics, two candidates each — six in total**: ① Best designer (two designers of different temperament, thinking from scratch the way they would) ② Real-world reference (two award-winning works **in the same medium** — apps for an app, publications for a deck; `scripts/ref_board.py` screenshots them so the agent actually looks before extracting grid, type ratios and color proportions) ③ Seconds roulette (`date +%S` picks one style from the matching section and one from the Chinese & East Asian section; the agent opens its specimen first)
+- **Six thumbnails → three full designs**: strong on its own, different from each other, not a repeat of your recent projects. The other three thumbnails come along as alternates
+- **You never pick a style from words alone** — it stops once the designs are on the table
+- Backed by an **84-style HTML-native library**, each with a specimen image and source (`assets/style-specimens/`) — ammunition, not dogma
+
+Why: we ran three rounds of blind before/after tests on fixed briefs (internal). Round one forced a big metaphor onto every direction, turned pages into props, and won 1 of 4; round two piled on bans to dodge the "AI default look", made all three directions "too regular, too boring", and lost both briefs; round three switched to more options instead of more bans — more candidates, visible specimens, real references — and won both.
+
+### Learns as you use it: experience, look ledger, design check
+
+- **Experience**: `scripts/learn.py` recalls your verbatim taste notes ("too plain", "A's layout with C's colors") and past lessons before work starts, and records what's worth keeping afterwards — it tells you when it records, and you can decline
+- **Look ledger**: every delivery logs what it looked like (background, palette, fonts, layout skeleton, plus the project name and path), so the next project steers away — the "each one fine, together all the same" kind of monotony
+- **Design check**: `scripts/design_lint.py` only measures checkable facts — broken images, unreadably small text, low contrast, console errors are red; habitual template chrome (uppercase eyebrows, "A · B · C" chains) is yellow; `compare` and `ledger check` catch reskins and repeats. Whether it looks good is your call; it gives no score
+- All of this lives only on your machine in `~/.huashu-design/`, never ships with the skill; delete the folder to forget everything
 
 ### Junior Designer Workflow
 
@@ -214,7 +232,9 @@ The highest-priority rule, added after a real failure mode: when the task mentio
 
 ### Anti AI-slop Rules
 
-Avoid the visual common denominator of AI output (purple gradients / emoji icons / rounded-corner + left border accent / SVG humans / Inter-as-display / **CSS silhouettes standing in for real product shots**). Use `text-wrap: pretty` + CSS Grid + carefully chosen serif display faces + oklch colors.
+Avoid the visual common denominator of AI output: purple gradients, emoji icons, rounded-corner + left border accent, SVG humans, Inter-as-display, **CSS silhouettes standing in for real product shots**, and the 2026 generation of template chrome (an uppercase eyebrow over every heading, "A · B · C" dot chains, trailing "→", one recolored word per headline). No invented data, testimonials or logo walls.
+
+"Look families" like warm paper + serif or dark + one accent are not banned: the versions users approved in blind tests included both. What to avoid is all three directions crowding into one family, or every project looking the same — that's the look ledger's job.
 
 ---
 
@@ -239,7 +259,7 @@ Claude Design is a **better graphics tool**. Huashu-design makes **the graphics-
 
 ## Security & Data Flow
 
-The core pipeline (design → render → MP4/PDF/PPTX export) runs **100% locally — zero network calls, zero API keys**. Cloud features (Doubao TTS narration, AI video review) are isolated in `scripts/cloud/`, fully optional: your own keys, official vendor APIs only, and an explicit `--yes` consent gate before anything leaves your machine. No telemetry; nothing is ever sent to any author-controlled server. Every outbound host, credential touchpoint, and deletion boundary is exhaustively declared in [SECURITY.md](SECURITY.md) — point your agent at it and verify against the code.
+The core pipeline (design → render → MP4/PDF/PPTX export) runs **100% locally — zero network calls, zero API keys**. Cloud features (Doubao TTS narration, AI video review) are isolated in `scripts/cloud/`, fully optional: your own keys, official vendor APIs only, and an explicit `--yes` consent gate before anything leaves your machine. No telemetry; nothing is ever sent to any author-controlled server. The 3.0 local records (taste experience, look ledger) are written only to `~/.huashu-design/` and never uploaded; the reference board only visits URLs when you have the agent screenshot reference works. Every outbound host, credential touchpoint, and deletion boundary is exhaustively declared in [SECURITY.md](SECURITY.md) — point your agent at it and verify against the code.
 
 ---
 
@@ -270,10 +290,13 @@ huashu-design/
 │   ├── deck_index.html      # Multi-file deck assembler
 │   ├── design_canvas.jsx    # Side-by-side variation display
 │   ├── showcases/           # 24 prebuilt samples (8 scenes × 3 styles)
+│   ├── style-specimens/     # Specimens for all 84 styles (html source + jpg) and section overviews
 │   └── bgm-*.mp3            # 6 scene-specific background tracks
 ├── references/              # Drill-down docs by task (Chinese)
 │   ├── animation-pitfalls.md
-│   ├── design-styles.md     # 20 design philosophies in detail
+│   ├── directions.md        # Three directions: six candidates → thumbnails → pick three
+│   ├── design-styles.md     # 84 HTML-native styles (web 20 + deck 20 + infographic 20 + app 12 + Chinese & East Asian 12)
+│   ├── modules/             # Web / deck / infographic / motion module manuals
 │   ├── slide-decks.md
 │   ├── editable-pptx.md
 │   ├── critique-guide.md
@@ -286,6 +309,10 @@ huashu-design/
 │   ├── export_deck_pdf.mjs
 │   ├── export_deck_pptx.mjs
 │   ├── html2pptx.js
+│   ├── design_lint.py       # Design check, reskin/repeat detection, look ledger
+│   ├── learn.py             # Taste experience read/write
+│   ├── ref_board.py         # Screenshot reference works into a board
+│   ├── capabilities.py      # Detect local capabilities (image gen, sibling skills, Node, ffmpeg)
 │   └── verify.py
 └── demos/                   # Capability demos referenced by this README
 ```

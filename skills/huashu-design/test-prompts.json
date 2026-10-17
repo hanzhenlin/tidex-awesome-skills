@@ -2,14 +2,14 @@
   {
     "id": 1,
     "prompt": "我想做一个SaaS产品的登录页面，给我3个风格方向对比看看",
-    "expected": "触发clarifying questions问design context/brand；产出3个variation的design_canvas；不用紫渐变/emoji/Inter等AI slop；有具体理由说明每个variation的差异维度",
-    "tests": "workflow问问题 + variations逻辑 + 反AI slop清单 + design_canvas使用"
+    "expected": "先跑开工三件事（learn / ledger / capabilities）；只问一轮问题并索要参考；三套逻辑各出两个候选共六张方向卡（现实参照用 ref_board.py 截图、轮盘先看样张图）；六格缩略图后挑三张做完整 HTML＋截图（不挤同一家族、不撞外观账本、最多一张用力过头），design_lint compare 不撞；三张完整版加缩略图备选一起摆出来就停",
+    "tests": "三方向门 + 六候选挑三 + 参考板与样张 + compare 与外观账本自检"
   },
   {
     "id": 2,
     "prompt": "帮我做一份10页的产品pitch deck，讲一个AI工具的创业项目",
-    "expected": "用deck_stage.js起手；先口头vocalize设计系统（色彩/字型/layout节奏）等确认；Section divider/content/data/quote多种layout交替；字号≥24px；1-indexed labels",
-    "tests": "Junior Designer先汇报再做 + deck_stage使用 + 视觉节奏 + scale规范"
+    "expected": "三方向各出 2 页代表页（封面＋差异最大的一页），deck 外壳用 assets/deck_index.html 多文件概览墙；摆出来就停；选定后先定 2 页 showcase grammar 再批量；正文 ≥24px、标签 ≥16px；单页不自带页码；完成后自动出 PDF",
+    "tests": "三方向门 + deck 模块交付链 + 多文件架构 + 字号底线"
   },
   {
     "id": 3,

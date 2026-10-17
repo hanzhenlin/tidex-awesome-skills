@@ -1,2 +1,0 @@
--r requirements-base.txt
-playwright==1.62.0

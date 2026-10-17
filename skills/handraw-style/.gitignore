@@ -69,3 +69,14 @@ skills/couple-photo-orchestrator/images/
 .pytest_cache/
 node_modules/
 tmp/
+client/cache/
+client/history/
+build/
+dist/
+release/
+
+# Unfinished desktop workbench stays local until explicitly approved for release
+/client/
+/client2/
+/scripts/build_installer.py
+/启动客户端.bat

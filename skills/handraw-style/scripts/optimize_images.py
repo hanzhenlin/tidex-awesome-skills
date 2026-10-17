@@ -5,7 +5,7 @@ optimize_images.py - Optimize and compress oversized images in the repository.
 Targets:
 1. WebP images > 200KB: Re-compress with high-quality lossy WebP (quality=85, method=6)
    if it yields at least a 10% reduction.
-2. Large PNG files (wechat_personal.png, video-shot-previews): Compress with palette/optimization.
+2. Large PNG files (such as wechat_personal.png): Compress with palette/optimization.
 """
 from __future__ import annotations
 

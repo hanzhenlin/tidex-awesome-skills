@@ -10,7 +10,7 @@ Generates:
 2. dist/handdraw-style-prompter-folder-v{version}.zip
    - Enclosed folder package (handdraw-style-prompter/ at zip root).
 3. dist/handraw-style-ecosystem-v{version}.zip
-   - Complete multi-skill ecosystem package (all 15 skills + assets).
+   - Complete static-image Skill ecosystem package (image design skills + assets).
 
 Validations:
 - Executes validate_library.py and audit_release.py
@@ -34,6 +34,19 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "skills" / "handdraw-style-prompter"
 DIST_DIR = ROOT / "dist"
 VERSION_FILE = ROOT / "version.json"
+VIDEO_SKILLS = {"handraw-video-producer", "handraw-browser-producer", "handraw-jianying-producer", "handraw-volc-tts", "knowledge-video-director"}
+
+
+def verify_image_only(source_dir: Path) -> None:
+    """Fail if retired video implementation or UI is accidentally reintroduced."""
+    for item in source_dir.rglob("*"):
+        rel = item.relative_to(source_dir)
+        if any(part in VIDEO_SKILLS for part in rel.parts) or item.name in {"video-shots.html", "video-shot-previews", "build_video_shot_gallery.py"}:
+            raise RuntimeError(f"Video artifact in image package: {rel}")
+        if item.is_file() and item.suffix == ".html":
+            text = item.read_text(encoding="utf-8")
+            if 'data-mode="video"' in text or 'href="video-shots.html"' in text:
+                raise RuntimeError(f"Retired video UI in image package: {rel}")
 
 IMAGE_FALLBACK_SCRIPT = """<script>
 (function() {
@@ -180,6 +193,7 @@ def build_standalone_staging(staging_dir: Path) -> None:
 
 
 def create_zip_archive(source_dir: Path, zip_path: Path, prefix: str = "") -> None:
+    verify_image_only(source_dir)
     zip_path.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
         for root_dir, dirs, files in os.walk(source_dir):
@@ -314,7 +328,8 @@ def main() -> int:
 
     DIST_DIR.mkdir(parents=True, exist_ok=True)
 
-    with tempfile.TemporaryDirectory() as tmp_dir_str:
+    (ROOT / "tmp").mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=ROOT / "tmp") as tmp_dir_str:
         tmp_dir = Path(tmp_dir_str)
 
         # Step 2: Build Standalone Packages
