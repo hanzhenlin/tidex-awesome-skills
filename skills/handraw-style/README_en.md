@@ -12,7 +12,7 @@
 
 > **Struggling to describe art styles? Trouble structuring visual layouts? Simply pick an index number to generate highly recognizable AI image prompts.**
 
-This repository curates **331 distinct hand-drawn illustration styles** (supporting both `FA`~`FH` category IDs and legacy `001`–`331`), **166 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
+This repository curates **331 distinct hand-drawn illustration styles** (supporting both `FA`~`FH` category IDs and legacy `001`–`331`), **167 composition layout patterns** (`SC-*` Social Cards, `IG-*` Infographics, `SB-*` Comic Storyboards, `IP-*` IP Design, `EC-*` E-commerce), and **36 curated classic monochrome colors** (`C-01`–`C-36`).
 
 Whether you are crafting social media post covers, educational infographics, architectural comparisons, or multi-panel narrative comics, you no longer need to memorize obscure art history terminology or struggle with complex compositions. **Simply choose a style number, layout ID, and theme color, supply your topic, and instantly get verified, high-fidelity bilingual prompts ready to paste into Midjourney, DALL-E 3, Flux, Stable Diffusion, or any other image generator.**
 
@@ -25,7 +25,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 > ### 📚 Official Feishu Knowledge Base is Live
 > 🔗 **[👉 Click to Access Feishu Knowledge Base ↗](https://ecmn3m3i17.feishu.cn/wiki/space/7689222460876524523?ccm_open_type=lark_wiki_spaceLink&open_tab_from=wiki_home)**
 > 
-> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 331 illustration styles and 166 layouts
+> 1. 🖼️ **Quick Visual Gallery**: Instant mobile & desktop browsing of all 331 illustration styles and 167 layouts
 > 2. ❓ **Skill FAQ & Prompt Cheat Sheet**: Setup walkthroughs, troubleshooting tips, and ready-to-use prompt patterns
 > 3. 💡 **Entrepreneurship & Monetization**: Continuously updated real-world case studies and revenue strategies shared by the community
 
@@ -36,7 +36,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
 | **Vague style descriptions lead to style drift** | **Numbered Indexing**: 331 systematically categorized illustration styles (dual-indexed by FA~FH categories and 001–331), eliminating guess-and-pray prompting. |
-| **Monotonous composition; hard to format complex graphics** | **166 Layout Compositions**: 23 Social Cards, 35 Infographics, 71 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
+| **Monotonous composition; hard to format complex graphics** | **167 Layout Compositions**: 23 Social Cards, 36 Infographics, 71 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
 | **Models ignore style keywords or lack style fidelity** | **Tiered Model Adaptation & Fallback**: Calibrated keyword activation for native models; automatic Reference Image Fallback (4-grid sheets) for all third-party models. |
@@ -220,7 +220,7 @@ Here is a contact sheet preview of featured hand-drawn illustration styles (FA-0
 
 ## Layout Compositions Showcase
 
-In addition to 331 illustration styles, this library includes **166 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
+In addition to 331 illustration styles, this library includes **167 composition layout patterns**, covering social cards, data infographics, multi-panel storyboards, IP design, and e-commerce. Combine any style with any layout with a single command.
 
 ### 1. Social Cards (21 Layouts)
 
@@ -268,7 +268,7 @@ Ideal for e-commerce single product hero shots, multi-angle views, detail closeu
 
 ---
 
-- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 166 Layouts & Prompts ↗](LAYOUTS_en.md)**
+- 💡 **[👉 Enter Full Layout Visual Sheet to Browse All 167 Layouts & Prompts ↗](LAYOUTS_en.md)**
 - 💻 *(For offline interactive search and category filtering, open `skills/handdraw-style-prompter/gallery/layouts.html` in your local browser)*
 
 ---

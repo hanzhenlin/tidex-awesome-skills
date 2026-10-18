@@ -953,6 +953,25 @@
     "name_en": "2.5D Isometric Miniature Scene"
   },
   {
+    "id": "IG-036",
+    "category": "infographic",
+    "name": "迷宫大侦探高密度轴测全景信息图",
+    "image": "../../../images/layouts/infographics/IG-036.webp",
+    "prompt_file": "layouts/IG-036.md",
+    "keywords": [
+      "迷宫大侦探",
+      "轴测俯瞰",
+      "高密度构图",
+      "多中心分区叙事",
+      "立体空间布局",
+      "微细节嵌套",
+      "连续动线",
+      "可探索全景",
+      "45度轴测"
+    ],
+    "name_en": "Maze Detective High-Density Isometric Exploration Infographic"
+  },
+  {
     "id": "SB-001",
     "category": "comic-storyboard",
     "name": "规则网格",

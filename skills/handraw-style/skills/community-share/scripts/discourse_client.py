@@ -26,7 +26,11 @@ HOME_DIR = Path.home() / ".handraw-style"
 AUTH_FILE = HOME_DIR / "community_auth.json"
 COOKIE_FILE = HOME_DIR / "community_cookies.txt"
 
-CLIENT_CACHE_DIR = Path("E:/handraw-style/client/cache")
+if getattr(sys, "frozen", False):
+    _local_app_data = os.environ.get("LOCALAPPDATA") or os.environ.get("APPDATA")
+    CLIENT_CACHE_DIR = (Path(_local_app_data) / "HandRawStyleStudio" / "cache") if _local_app_data else HOME_DIR / "cache"
+else:
+    CLIENT_CACHE_DIR = Path(__file__).resolve().parent.parent / "client" / "cache"
 CLIENT_AUTH_FILE = CLIENT_CACHE_DIR / "community_auth.json"
 
 
