@@ -98,6 +98,7 @@ def build_html() -> str:
             "name": s["generation_name"],
             "ref": s["reference"],
             "group": s["number"].split("-")[0],
+            "group_name": s.get("group", ""),
             "img": individual_image_path(s["number"]),
         }
         for s in styles_raw
@@ -877,7 +878,7 @@ let isMixLayoutsActive = false;
 const REALISTIC_ITEM = {{
   id: 'realistic',
   isRealistic: true,
-  group: 'all',
+  group: 'FI',
   name: '写实',
   name_en: 'Realistic',
   ref: '写实摄影 / 真实电影质感摄影',
@@ -983,7 +984,7 @@ const I18N = {{
     optional: "可选",
     optionalAsset: "可选 ({assets_count})",
     optionalLayout: "可选 ({layouts_count})",
-    optionalStyle: "可选 ({styles_count})",
+    optionalStyle: "可选 ({styles_count} / 写实)",
     optionalCharStyle: "可选 (风格/写实)",
     optionalSceneStyle: "可选 (风格/写实)",
     optionalColor: "可选 (36)",
@@ -991,7 +992,7 @@ const I18N = {{
     layoutNotApplicable: "不适用",
     pickAssetText: "按图选择自建资产",
     pickLayoutText: "按图选择图型 ({layouts_count})",
-    pickStyleText: "按图选择风格 ({styles_count})",
+    pickStyleText: "按图选择风格 / 写实 ({styles_count})",
     pickCharStyleText: "按图选择角色风格",
     pickSceneStyleText: "按图选择场景风格",
     pickColorText: "按图选择主题色 (36)",
@@ -1007,7 +1008,7 @@ const I18N = {{
     searchPlaceholder: "输入编号或名称过滤...",
     pickerTitleAsset: "选择视觉资产（角色 / 道具 / 场景）",
     pickerTitleLayout: "选择图型 ({layouts_count})",
-    pickerTitleStyle: "选择手绘风格 ({styles_count})",
+    pickerTitleStyle: "选择手绘与写实风格 ({styles_count})",
     pickerTitleCharStyle: "选择角色风格",
     pickerTitleSceneStyle: "选择场景风格",
     styleConflictAlert: "角色风格与场景风格必须不同，请选择不同的风格！",
@@ -1142,7 +1143,7 @@ const I18N = {{
     optional: "Optional",
     optionalAsset: "Optional ({assets_count})",
     optionalLayout: "Optional ({layouts_count})",
-    optionalStyle: "Optional ({styles_count})",
+    optionalStyle: "Optional ({styles_count} / Realistic)",
     optionalCharStyle: "Optional (Style/Realistic)",
     optionalSceneStyle: "Optional (Style/Realistic)",
     optionalColor: "Optional (36)",
@@ -1150,7 +1151,7 @@ const I18N = {{
     layoutNotApplicable: "N/A",
     pickAssetText: "Pick Custom Asset",
     pickLayoutText: "Pick Layout ({layouts_count})",
-    pickStyleText: "Pick Style ({styles_count})",
+    pickStyleText: "Pick Style / Realistic ({styles_count})",
     pickCharStyleText: "Pick Character Style",
     pickSceneStyleText: "Pick Scene Style",
     pickColorText: "Pick Theme Color (36)",
@@ -1166,7 +1167,7 @@ const I18N = {{
     searchPlaceholder: "Search ID or name...",
     pickerTitleAsset: "Select Visual Asset (Character / Prop / Scene)",
     pickerTitleLayout: "Select Layout ({layouts_count})",
-    pickerTitleStyle: "Select Style ({styles_count})",
+    pickerTitleStyle: "Select Style / Realistic ({styles_count})",
     pickerTitleCharStyle: "Select Character Style",
     pickerTitleSceneStyle: "Select Scene Style",
     styleConflictAlert: "Character style and scene style must be different!",
@@ -1346,7 +1347,8 @@ function updatePrompt() {{
     }}
   }} else {{
     if (selectedStyle) {{
-      parts.push(isZh ? `风格：${{selectedStyle.id}}` : `Style: ${{selectedStyle.id}}`);
+      const styleName = selectedStyle.isRealistic ? (isZh ? '写实' : 'Realistic') : selectedStyle.id;
+      parts.push(isZh ? `风格：${{styleName}}` : `Style: ${{styleName}}`);
     }}
   }}
 
@@ -1500,7 +1502,7 @@ function updateSlotUI(type) {{
       name.textContent = currentLang === 'en' ? (item.name_en || 'Realistic') : item.name;
     }} else {{
       code.textContent = item.id ? ((type === 'style' || type === 'char-style' || type === 'scene-style') ? `#${{item.id}}` : item.id) : '';
-      name.textContent = '';
+      name.textContent = (type === 'style' || type === 'char-style' || type === 'scene-style') ? (currentLang === 'en' && item.name_en ? item.name_en : (item.ref ? item.ref.split('/')[0].trim() : item.name)) || '' : '';
     }}
   }} else {{
     slotEl.classList.remove('has-value');
@@ -1693,10 +1695,18 @@ function renderStyleFilters() {{
     {{ id: 'FE', zh: 'FE 新国风非遗', en: 'FE Traditional' }},
     {{ id: 'FF', zh: 'FF 3D黏土纸雕', en: 'FF 3D & Paper' }},
     {{ id: 'FG', zh: 'FG 动漫和赛璐璐', en: 'FG Anime & Cel' }},
-    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }}
+    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }},
+    {{ id: 'FI', zh: 'FI 写实摄影', en: 'FI Photography' }}
   ];
   pickerFilters.innerHTML = groups.map(g => {{
-    const count = g.id === 'all' ? STYLES_DATA.length : STYLES_DATA.filter(x => x.group === g.id).length;
+    let count;
+    if (g.id === 'all') {{
+      count = STYLES_DATA.length + 1;
+    }} else if (g.id === 'FI') {{
+      count = STYLES_DATA.filter(x => x.group === 'FI').length + 1;
+    }} else {{
+      count = STYLES_DATA.filter(x => x.group === g.id).length;
+    }}
     const label = isZh ? g.zh : g.en;
     const isActive = currentPickerFilter === g.id ? ' is-active' : '';
     return `<button type="button" class="modal-filter-btn${{isActive}}" data-filter="${{g.id}}">${{label}} (${{count}})</button>`;
@@ -1739,8 +1749,8 @@ function renderPickerItems() {{
     list = LAYOUTS_DATA;
     selectedId = selectedLayout ? selectedLayout.id : null;
   }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
-    const realisticMatch = !query || '写实'.includes(query) || 'realistic'.includes(query) || '摄影'.includes(query) || 'photo'.includes(query);
-    const filterAllows = currentPickerFilter === 'all';
+    const realisticMatch = !query || '写实'.includes(query) || 'realistic'.includes(query) || '摄影'.includes(query) || 'photo'.includes(query) || '真实'.includes(query) || '实景'.includes(query);
+    const filterAllows = currentPickerFilter === 'all' || currentPickerFilter === 'FI';
     list = (realisticMatch && filterAllows) ? [REALISTIC_ITEM, ...STYLES_DATA] : STYLES_DATA;
     if (currentPickerType === 'style') selectedId = selectedStyle ? selectedStyle.id : null;
     else if (currentPickerType === 'char-style') selectedId = selectedCharStyle ? selectedCharStyle.id : null;
@@ -1751,7 +1761,14 @@ function renderPickerItems() {{
   }}
 
   const filtered = list.filter(item => {{
-    if (item.isRealistic) return true;
+    if (item.isRealistic) {{
+      if (currentPickerFilter !== 'all' && currentPickerFilter !== 'FI') return false;
+      if (query) {{
+        const q = query.toLowerCase();
+        return '写实'.includes(q) || 'realistic'.includes(q) || '摄影'.includes(q) || 'photo'.includes(q) || '真实'.includes(q) || '实景'.includes(q) || item.name.toLowerCase().includes(q) || (item.name_en && item.name_en.toLowerCase().includes(q)) || (item.ref && item.ref.toLowerCase().includes(q));
+      }}
+      return true;
+    }}
     // Category match
     if (currentPickerType === 'asset') {{
       if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
@@ -1766,14 +1783,17 @@ function renderPickerItems() {{
     }}
     // Search match
     if (query) {{
-      const idMatch = item.id && item.id.toLowerCase().includes(query);
-      const legacyMatch = item.legacy_id && item.legacy_id.includes(query);
-      const nameMatch = item.name && item.name.toLowerCase().includes(query);
-      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(query);
-      const refMatch = item.ref && item.ref.toLowerCase().includes(query);
-      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(query));
-      const descMatch = (item.desc_zh && item.desc_zh.toLowerCase().includes(query)) || (item.desc_en && item.desc_en.toLowerCase().includes(query));
-      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch || descMatch;
+      const q = query.toLowerCase();
+      const idMatch = item.id && item.id.toLowerCase().includes(q);
+      const legacyMatch = item.legacy_id && String(item.legacy_id).includes(q);
+      const nameMatch = item.name && item.name.toLowerCase().includes(q);
+      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(q);
+      const refMatch = item.ref && item.ref.toLowerCase().includes(q);
+      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(q));
+      const descMatch = (item.desc_zh && item.desc_zh.toLowerCase().includes(q)) || (item.desc_en && item.desc_en.toLowerCase().includes(q));
+      const groupMatch = (item.group && item.group.toLowerCase().includes(q)) || (item.group_name && item.group_name.toLowerCase().includes(q));
+      const fiMatch = item.group === 'FI' && ('写实'.includes(q) || q.includes('写实') || '摄影'.includes(q) || q.includes('摄影') || '实景'.includes(q) || q.includes('实景') || '真实'.includes(q) || q.includes('真实') || 'photo'.includes(q) || 'realistic'.includes(q));
+      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch || descMatch || groupMatch || fiMatch;
     }}
     return true;
   }});
@@ -2239,7 +2259,8 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
   }}
 
   // Random style
-  selectedStyle = STYLES_DATA[Math.floor(Math.random() * STYLES_DATA.length)];
+  const stylePool = [REALISTIC_ITEM, ...STYLES_DATA];
+  selectedStyle = stylePool[Math.floor(Math.random() * stylePool.length)];
 
   updateSlotUI('layout');
   updateSlotUI('style');
@@ -2449,9 +2470,11 @@ if (assetParam) {{
 if (styleParam) {{
   const clean = styleParam.trim().replace(/^#/, '');
   const norm = clean.padStart(3, '0');
-  const found = STYLES_DATA.find(x => x.id === norm || x.id === styleParam.trim());
+  const found = STYLES_DATA.find(x => x.id === norm || x.id.toUpperCase() === clean.toUpperCase() || String(x.legacy_id) === clean);
   if (found) {{
     selectedStyle = found;
+  }} else if (clean.toLowerCase() === 'realistic' || clean === '写实') {{
+    selectedStyle = REALISTIC_ITEM;
   }}
 }}
 if (layoutParam) {{

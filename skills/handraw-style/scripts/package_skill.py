@@ -96,10 +96,10 @@ def get_version() -> str:
     if VERSION_FILE.exists():
         try:
             data = json.loads(VERSION_FILE.read_text(encoding="utf-8"))
-            return str(data.get("version", "1.9.0"))
+            return str(data.get("version", "1.9.1"))
         except Exception:
             pass
-    return "1.9.0"
+    return "1.9.1"
 
 
 def sha256_file(filepath: Path) -> str:

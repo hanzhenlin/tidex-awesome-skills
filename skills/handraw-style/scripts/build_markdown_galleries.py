@@ -40,6 +40,9 @@ STYLE_CATEGORIES = [
     ("FH", "先锋实验与综合媒介", "Mixed Media & Impasto Arts",
      "适合实验艺术、先锋插画、综合材料拼贴与厚涂重彩。以肌理笔触、混合媒介、粗粝质感与强烈个性化表达为主要特征。",
      "Ideal for experimental visuals, avant-garde illustration, mixed-media collage, and heavy impasto. Features expressive brushwork, tactile mixed media, and bold creative statements."),
+    ("FI", "写实摄影与视觉大片", "Realistic, Photography & Cinematic Styles",
+     "适合品牌商摄、高级时尚大片、人文纪实摄影与电影大师视觉。以精准布光、电影级构图、光影层次与真实质感为主要特征。",
+     "Ideal for brand commercial photography, haute couture fashion editorials, humanist documentary, and cinematic master visuals. Features precise lighting, cinematic framing, rich light-shadow dynamics, and authentic realism."),
 ]
 
 LAYOUT_CATEGORIES = [
@@ -129,7 +132,7 @@ def build_styles_md() -> None:
         zh_lines.append("---")
         zh_lines.append("")
 
-    archive_sheets = sorted([p.name for p in (ROOT / "images").glob("[A-H]_*.webp")])
+    archive_sheets = sorted([p.name for p in (ROOT / "images").glob("[A-I]_*.webp")])
     if archive_sheets:
         zh_lines.append("<details>")
         zh_lines.append("<summary>📦 拼图大表历史归档 (Contact Sheets Archive)</summary>")

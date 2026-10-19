@@ -16,12 +16,16 @@ IMAGES = ROOT / "images"
 STATE_FILE = ROOT / "skills" / "handdraw-style-prompter" / "references" / "contact_sheet_state.json"
 CAPACITY = 16
 SHEET_SIZE = 1254
-SHEET = re.compile(r"^[GH]_(\d{3})(?:-(\d{3}))?\.webp$")
+SHEET = re.compile(r"^[GHI]_(\d{3})(?:-(\d{3}))?\.webp$")
 
 
 def sheet_group(start: int) -> str:
     """Return the display category prefix for a contact sheet range."""
-    return "G" if start <= 216 else "H"
+    if start <= 216:
+        return "G"
+    if start <= 331:
+        return "H"
+    return "I"
 
 
 def sheet_path(start: int, end: int) -> Path:
@@ -54,8 +58,8 @@ def parse_sheet(path: Path) -> tuple[int, int] | None:
 
 
 def recover_state(next_number: int) -> dict:
-    """Recover the last incomplete H sheet when the state file is missing."""
-    sheets = [(end, start, path) for path in IMAGES.glob("H_*.webp")
+    """Recover the last incomplete H/I sheet when the state file is missing."""
+    sheets = [(end, start, path) for path in IMAGES.glob("[HI]_*.webp")
               if (parsed := parse_sheet(path)) for start, end in [parsed]]
     if not sheets:
         return {"version": 1, "capacity": CAPACITY, "active_start": next_number,
@@ -131,7 +135,7 @@ def repair_active_sheet(start: int, end: int) -> Path:
              "filled": end - start + 1,
              "next_cell": end - start + 2 if end - start + 1 < CAPACITY else 1}
     write_state(state)
-    for path in IMAGES.glob("H_*.webp"):
+    for path in IMAGES.glob("[HI]_*.webp"):
         parsed = parse_sheet(path)
         if parsed and path != destination and parsed[0] >= start and parsed[1] <= end:
             path.unlink()

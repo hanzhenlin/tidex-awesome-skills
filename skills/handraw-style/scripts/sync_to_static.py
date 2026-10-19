@@ -89,11 +89,19 @@ def sync_data():
     save_json(STATIC_REPO_DIR / "manifest.json", manifest)
     print(f"  [OK] 已生成 manifest.json (版本: {now_ver}, 画风数: {len(styles)})")
 
-    # 3. 增量同步图片
+    # 3. 增量同步图片与静态资产
     target_img_dir = STATIC_REPO_DIR / "images"
     target_img_dir.mkdir(parents=True, exist_ok=True)
-    img_subdirs = ["individual", "colors", "layouts", "tones"]
+    img_subdirs = ["individual", "colors", "layouts", "tones", "characters", "custom"]
     copied_img_count = 0
+
+    # 根目录图片 (realistic.webp, 演示海报等)
+    for f in IMAGES_DIR.glob("*.*"):
+        if f.is_file() and f.suffix.lower() in [".webp", ".png", ".jpg", ".gif"]:
+            dst_f = target_img_dir / f.name
+            if not dst_f.exists() or f.stat().st_mtime > dst_f.stat().st_mtime:
+                shutil.copy2(f, dst_f)
+                copied_img_count += 1
 
     for sub in img_subdirs:
         src_sub = IMAGES_DIR / sub
@@ -112,6 +120,15 @@ def sync_data():
                     if not dst_f.exists() or src_f.stat().st_mtime > dst_f.stat().st_mtime:
                         shutil.copy2(src_f, dst_f)
                         copied_img_count += 1
+
+    # 4. 同步 HTML 画廊页面
+    src_gallery_dir = ROOT_DIR / "skills" / "handdraw-style-prompter" / "gallery"
+    target_gallery_dir = STATIC_REPO_DIR / "gallery"
+    if src_gallery_dir.exists():
+        target_gallery_dir.mkdir(parents=True, exist_ok=True)
+        for hf in src_gallery_dir.glob("*.html"):
+            shutil.copy2(hf, target_gallery_dir / hf.name)
+        print("  [OK] HTML 画廊页面已同步到 gallery/")
 
     print(f"  [OK] 图片同步完成 (新增/更新图片: {copied_img_count} 张)")
     return manifest
@@ -132,7 +149,7 @@ def deploy_to_vm():
     print("\n=== 执行部署至 tencent-vm ===")
     remote_target = "/home/yang0/projectHome/handraw-static"
     # 创建远程目录
-    ssh_cmd = ["ssh", "tencent-vm", f"mkdir -p {remote_target}/data {remote_target}/images"]
+    ssh_cmd = ["ssh", "tencent-vm", f"mkdir -p {remote_target}/data {remote_target}/images {remote_target}/images/characters {remote_target}/gallery"]
     subprocess.run(ssh_cmd, check=True)
 
     # 传输 manifest 与 data
@@ -141,7 +158,21 @@ def deploy_to_vm():
 
     scp_data = ["scp", "-r", f"{STATIC_REPO_DIR}/data/*", f"tencent-vm:{remote_target}/data/"]
     subprocess.run(scp_data, check=True)
-    print("  [OK] manifest 与 data 已成功推送到 tencent-vm！")
+
+    # 传输 gallery
+    if (STATIC_REPO_DIR / "gallery").exists():
+        scp_gallery = ["scp", "-r", f"{STATIC_REPO_DIR}/gallery/*", f"tencent-vm:{remote_target}/gallery/"]
+        subprocess.run(scp_gallery, check=True)
+
+    # 保持 discourse/public 软链接
+    link_cmd = [
+        "ssh", "tencent-vm",
+        "ln -sfn /home/yang0/projectHome/handraw-static/gallery /home/yang0/projectHome/discourse/public/gallery && "
+        "ln -sfn /home/yang0/projectHome/handraw-static/images/characters /home/yang0/projectHome/discourse/public/images/characters && "
+        "ln -sfn /home/yang0/projectHome/handraw-static/images/realistic.webp /home/yang0/projectHome/discourse/public/images/realistic.webp"
+    ]
+    subprocess.run(link_cmd, check=True)
+    print("  [OK] manifest, data, gallery 及软链接已成功部署到 tencent-vm！")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Sync data to handraw-static")

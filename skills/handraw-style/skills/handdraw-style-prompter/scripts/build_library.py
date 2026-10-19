@@ -73,6 +73,7 @@ GROUPS = (
     ("FF", "3D黏土纸雕", "3D Clay & Paper"),
     ("FG", "动漫和赛璐璐", "Anime & Cel"),
     ("FH", "先锋综合", "Mixed Media"),
+    ("FI", "写实摄影", "Realistic Photography"),
 )
 
 GROUP_LABELS = {
@@ -84,6 +85,7 @@ GROUP_LABELS = {
     "FF": ("3D黏土毛毡与纸雕", "3D Clay, Felt & Papercraft"),
     "FG": ("动漫和赛璐璐", "Anime, Cel Animation & Retro Game"),
     "FH": ("先锋实验与综合媒介", "Mixed Media & Impasto Arts"),
+    "FI": ("写实摄影与视觉大片", "Realistic, Photography & Cinematic Styles"),
 }
 
 
@@ -656,8 +658,8 @@ checkRepositoryUpdate();
 
 def main() -> None:
     styles = parse_styles()
-    if len(styles) != 331:
-        raise SystemExit(f"Expected exactly 331 styles, parsed {len(styles)}")
+    if len(styles) != 365:
+        raise SystemExit(f"Expected exactly 365 styles, parsed {len(styles)}")
     cat_counts: dict[str, int] = {}
     for item in styles:
         m = re.match(r"^([A-Za-z]{2})-(\d{3})$", item["number"])

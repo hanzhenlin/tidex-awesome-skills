@@ -71,6 +71,9 @@ node_modules/
 tmp/
 client/cache/
 client/history/
+skills/community-share/client/
+community_auth.json
+*.auth.json
 build/
 dist/
 release/

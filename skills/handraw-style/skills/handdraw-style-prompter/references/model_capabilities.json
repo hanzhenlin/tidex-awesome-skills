@@ -704,6 +704,112 @@
         "FH-044": {
           "name_activation": "strong",
           "traits_activation": "none"
+        },
+        "FI-001": {
+          "name_activation": "strong"
+        },
+        "FI-002": {
+          "name_activation": "strong"
+        },
+        "FI-003": {
+          "name_activation": "strong"
+        },
+        "FI-004": {
+          "name_activation": "strong"
+        },
+        "FI-005": {
+          "name_activation": "strong"
+        },
+        "FI-006": {
+          "name_activation": "strong"
+        },
+        "FI-007": {
+          "name_activation": "strong"
+        },
+        "FI-008": {
+          "name_activation": "strong"
+        },
+        "FI-009": {
+          "name_activation": "strong"
+        },
+        "FI-010": {
+          "name_activation": "strong"
+        },
+        "FI-011": {
+          "name_activation": "strong"
+        },
+        "FI-012": {
+          "name_activation": "strong"
+        },
+        "FI-013": {
+          "name_activation": "strong"
+        },
+        "FI-014": {
+          "name_activation": "strong"
+        },
+        "FI-015": {
+          "name_activation": "strong"
+        },
+        "FI-016": {
+          "name_activation": "strong"
+        },
+        "FI-017": {
+          "name_activation": "strong"
+        },
+        "FI-018": {
+          "name_activation": "strong"
+        },
+        "FI-019": {
+          "name_activation": "strong"
+        },
+        "FI-020": {
+          "name_activation": "strong"
+        },
+        "FI-021": {
+          "name_activation": "strong"
+        },
+        "FI-022": {
+          "name_activation": "strong"
+        },
+        "FI-023": {
+          "name_activation": "strong"
+        },
+        "FI-024": {
+          "name_activation": "strong"
+        },
+        "FI-025": {
+          "name_activation": "strong"
+        },
+        "FI-026": {
+          "name_activation": "strong"
+        },
+        "FI-027": {
+          "name_activation": "strong"
+        },
+        "FI-028": {
+          "name_activation": "strong"
+        },
+        "FI-029": {
+          "name_activation": "strong"
+        },
+        "FI-030": {
+          "name_activation": "strong"
+        },
+        "FI-031": {
+          "name_activation": "strong",
+          "traits_activation": "none"
+        },
+        "FI-032": {
+          "name_activation": "strong",
+          "traits_activation": "none"
+        },
+        "FI-033": {
+          "name_activation": "strong",
+          "traits_activation": "none"
+        },
+        "FI-034": {
+          "name_activation": "strong",
+          "traits_activation": "none"
         }
       }
     }

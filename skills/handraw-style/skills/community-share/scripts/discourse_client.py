@@ -291,13 +291,212 @@ class DiscourseClient:
             with self.opener.open(req, timeout=30) as resp:
                 return json.loads(resp.read().decode("utf-8"))
 
-    def share_creation(self, image_path, prompt, title=None, style_id=None, style_name=None,
-                       color_id=None, color_name=None, category_id=DEFAULT_CATEGORY_ID, tags=None, notes=None):
+    def list_categories(self, refresh=False):
+        """获取论坛所有板块列表（带缓存与离线兜底）"""
+        if hasattr(self, "_categories_cache") and self._categories_cache and not refresh:
+            return self._categories_cache
+        url = f"{self.base_url}/categories.json"
+        headers = {"User-Agent": "HandRawStudio/1.0", "Accept": "application/json"}
+        if self.auth.get("api_key"):
+            headers["Api-Key"] = self.auth.get("api_key")
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                cats = data.get("category_list", {}).get("categories", [])
+                result = []
+                for c in cats:
+                    result.append({
+                        "id": c.get("id"),
+                        "name": c.get("name"),
+                        "slug": c.get("slug"),
+                        "description": c.get("description_text", ""),
+                        "topic_count": c.get("topic_count", 0),
+                        "post_count": c.get("post_count", 0)
+                    })
+                self._categories_cache = result
+                return result
+        except Exception:
+            fallback = [
+                {"id": 4, "name": "综合大厅", "slug": "creation-monetization", "description": "社区公告、新人报到与行业资讯交流大厅"},
+                {"id": 5, "name": "好用的工具", "slug": "tools", "description": "开源项目与工具分享，工作流与排错求助"},
+                {"id": 6, "name": "创作交流", "slug": "creative-exchange", "description": "创作经验交流与提示词分享"},
+                {"id": 7, "name": "运营与变现", "slug": "operations", "description": "起号与运营变现经验分享"},
+                {"id": 8, "name": "实战作品与爆款", "slug": "showcase", "description": "晒成片、晒图文、爆款拆解点评"},
+                {"id": 9, "name": "手绘skill", "slug": "handraw-skill", "description": "手绘风专项Skill交流与改进建议"}
+            ]
+            self._categories_cache = fallback
+            return fallback
+
+    def resolve_category(self, category_input=None):
+        """智能解析板块名称、关键词或ID，返回规范的 category_id (支持泛用性全板块路由)"""
+        if category_input is None or category_input == "":
+            return DEFAULT_CATEGORY_ID
+
+        if isinstance(category_input, int):
+            return category_input
+        if str(category_input).strip().isdigit():
+            return int(str(category_input).strip())
+
+        cat_str = str(category_input).strip().lower()
+        cats = self.list_categories()
+
+        # 1. 精确名称或 slug 匹配
+        for c in cats:
+            if cat_str == c["name"].lower() or cat_str == str(c["slug"]).lower():
+                return c["id"]
+
+        # 2. 包含匹配
+        for c in cats:
+            if cat_str in c["name"].lower() or cat_str in str(c["slug"]).lower() or c["name"].lower() in cat_str:
+                return c["id"]
+
+        # 3. 语义关键词映射
+        keywords_map = {
+            "工具": 5, "开源": 5, "workflow": 5, "工作流": 5, "排错": 5, "软件": 5,
+            "创作": 6, "提示词": 6, "prompt": 6, "经验": 6, "交流": 6, "画风": 6,
+            "运营": 7, "变现": 7, "推流": 7, "带货": 7, "起号": 7, "商业": 7,
+            "爆款": 8, "作品": 8, "实战": 8, "晒图": 8, "成片": 8, "案例": 8,
+            "skill": 9, "手绘": 9, "技能": 9, "插件": 9,
+            "大厅": 4, "综合": 4, "公告": 4, "新人": 4
+        }
+        for kw, cid in keywords_map.items():
+            if kw in cat_str:
+                return cid
+
+        return DEFAULT_CATEGORY_ID
+
+    def create_topic(self, title, content, category=None, tags=None, image_path=None):
         """
-        一键分享作品与提示词到社区论坛
+        通用发帖方法：可向论坛任意板块发布纯文本或图文主题
         """
         if not self.auth:
             raise PermissionError("尚未登录手绘风社区账号，请先执行登录或绑定！")
+
+        category_id = self.resolve_category(category)
+
+        img_markdown = ""
+        img_url = None
+        if image_path:
+            p = Path(image_path)
+            if p.exists():
+                print(f"[*] 正在上传配图至社区: {image_path} ...")
+                upload_res = self.upload_image(str(p))
+                img_url = upload_res.get("url") or upload_res.get("short_url")
+                short_url = upload_res.get("short_url") or img_url
+                orig_name = upload_res.get("original_filename", "配图")
+                img_markdown = f"![{orig_name}]({short_url})\n\n"
+            else:
+                print(f"[!] 警告：配图文件不存在，将作为纯文本发布: {image_path}")
+
+        raw_text = content
+        if content.startswith("@") and Path(content[1:]).exists():
+            with open(content[1:], "r", encoding="utf-8") as f:
+                raw_text = f.read()
+        elif Path(content).exists() and Path(content).is_file():
+            try:
+                with open(content, "r", encoding="utf-8") as f:
+                    raw_text = f.read()
+            except Exception:
+                raw_text = content
+
+        full_raw = f"{img_markdown}{raw_text}".strip()
+
+        if len(title.strip()) < 5:
+            title = f"【分享】{title.strip()} · 手绘风社区"
+
+        tag_list = []
+        if tags:
+            if isinstance(tags, list):
+                tag_list = tags
+            elif isinstance(tags, str):
+                tag_list = [t.strip() for t in tags.replace("，", ",").split(",") if t.strip()]
+
+        payload = {
+            "title": title.strip(),
+            "raw": full_raw,
+            "category": category_id
+        }
+        if tag_list:
+            payload["tags"] = tag_list
+
+        cats = self.list_categories()
+        cat_name = next((c["name"] for c in cats if c["id"] == category_id), f"板块#{category_id}")
+        print(f"[*] 正在向 [{cat_name}] (ID: {category_id}) 发布主题: 《{title}》 ...")
+
+        post_data = self._post_json(f"{self.base_url}/posts.json", payload)
+
+        topic_id = post_data.get("topic_id")
+        topic_slug = post_data.get("topic_slug", "topic")
+        post_id = post_data.get("id")
+        full_url = f"{self.base_url}/t/{topic_slug}/{topic_id}"
+
+        return {
+            "success": True,
+            "post_id": post_id,
+            "topic_id": topic_id,
+            "topic_slug": topic_slug,
+            "category_id": category_id,
+            "category_name": cat_name,
+            "title": title,
+            "url": full_url,
+            "image_url": img_url
+        }
+
+    def reply_topic(self, topic_id, content, image_path=None):
+        """
+        通用回复方法：向指定主题发布跟帖回复
+        """
+        if not self.auth:
+            raise PermissionError("尚未登录手绘风社区账号，请先执行登录或绑定！")
+
+        img_markdown = ""
+        img_url = None
+        if image_path:
+            p = Path(image_path)
+            if p.exists():
+                print(f"[*] 正在上传跟帖配图至社区: {image_path} ...")
+                upload_res = self.upload_image(str(p))
+                img_url = upload_res.get("url") or upload_res.get("short_url")
+                short_url = upload_res.get("short_url") or img_url
+                orig_name = upload_res.get("original_filename", "配图")
+                img_markdown = f"![{orig_name}]({short_url})\n\n"
+
+        raw_text = content
+        if content.startswith("@") and Path(content[1:]).exists():
+            with open(content[1:], "r", encoding="utf-8") as f:
+                raw_text = f.read()
+
+        full_raw = f"{img_markdown}{raw_text}".strip()
+        payload = {
+            "topic_id": int(topic_id),
+            "raw": full_raw
+        }
+        print(f"[*] 正在向主题 (ID: {topic_id}) 发布回复 ...")
+        post_data = self._post_json(f"{self.base_url}/posts.json", payload)
+        post_num = post_data.get("post_number", 1)
+        full_url = f"{self.base_url}/t/topic/{topic_id}/{post_num}"
+
+        return {
+            "success": True,
+            "post_id": post_data.get("id"),
+            "topic_id": topic_id,
+            "post_number": post_num,
+            "url": full_url,
+            "image_url": img_url
+        }
+
+    def share_creation(self, image_path, prompt, title=None, style_id=None, style_name=None,
+                       color_id=None, color_name=None, category=None, tags=None, notes=None):
+        """
+        一键分享作品与提示词到社区论坛（支持指定任意板块）
+        """
+        if not self.auth:
+            raise PermissionError("尚未登录手绘风社区账号，请先执行登录或绑定！")
+
+        # 智能解析目标板块，默认优先"创作交流"板块 (ID 6)
+        target_category = category if category is not None else 6
+        category_id = self.resolve_category(target_category)
 
         print(f"[*] 正在上传作品图片至手绘风社区: {image_path} ...")
         upload_res = self.upload_image(image_path)
@@ -325,7 +524,6 @@ class DiscourseClient:
         meta_items.append(f"👤 **创作者**：@{self.auth.get('username')}")
 
         meta_block = "\n".join(meta_items)
-
         notes_block = f"\n> 💡 **创作心得/说明**：\n> {notes}\n" if notes else ""
 
         raw_content = f"""![{orig_name}]({short_url})
@@ -351,13 +549,17 @@ class DiscourseClient:
         }
         if tags and isinstance(tags, list):
             topic_payload["tags"] = tags
+        elif tags and isinstance(tags, str):
+            topic_payload["tags"] = [t.strip() for t in tags.replace("，", ",").split(",") if t.strip()]
         else:
             auto_tags = ["手绘风", "提示词分享"]
             if style_id:
                 auto_tags.append(f"style-{style_id}")
             topic_payload["tags"] = auto_tags
 
-        print(f"[*] 正在发布帖子: 《{title}》 ...")
+        cats = self.list_categories()
+        cat_name = next((c["name"] for c in cats if c["id"] == category_id), f"板块#{category_id}")
+        print(f"[*] 正在向 [{cat_name}] (ID: {category_id}) 发布帖子: 《{title}》 ...")
         post_data = self._post_json(f"{self.base_url}/posts.json", topic_payload)
 
         topic_id = post_data.get("topic_id")
@@ -370,6 +572,8 @@ class DiscourseClient:
             "post_id": post_id,
             "topic_id": topic_id,
             "topic_slug": topic_slug,
+            "category_id": category_id,
+            "category_name": cat_name,
             "title": title,
             "url": full_url,
             "image_url": img_url
@@ -446,24 +650,33 @@ class DiscourseClient:
             "Accept": "application/json"
         }
 
-        if self.auth.get("api_key"):
-            headers["Api-Key"] = self.auth.get("api_key")
-            username = self.auth.get("username")
-            if username:
-                try:
-                    username.encode('ascii')
-                    headers["Api-Username"] = username
-                except UnicodeEncodeError:
-                    pass
-            req = urllib.request.Request(url, headers=headers, method="DELETE")
-            with urllib.request.urlopen(req, timeout=10) as resp:
-                return resp.status in (200, 204)
-        else:
-            csrf = self.get_csrf_token()
-            headers["X-CSRF-Token"] = csrf
-            req = urllib.request.Request(url, headers=headers, method="DELETE")
-            with self.opener.open(req, timeout=10) as resp:
-                return resp.status in (200, 204)
+        try:
+            if self.auth.get("api_key"):
+                headers["Api-Key"] = self.auth.get("api_key")
+                username = self.auth.get("username")
+                if username:
+                    try:
+                        username.encode('ascii')
+                        headers["Api-Username"] = username
+                    except UnicodeEncodeError:
+                        pass
+                req = urllib.request.Request(url, headers=headers, method="DELETE")
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    return resp.status in (200, 204)
+            else:
+                csrf = self.get_csrf_token()
+                headers["X-CSRF-Token"] = csrf
+                req = urllib.request.Request(url, headers=headers, method="DELETE")
+                with self.opener.open(req, timeout=10) as resp:
+                    return resp.status in (200, 204)
+        except urllib.error.HTTPError as e:
+            try:
+                err_data = json.loads(e.read().decode("utf-8"))
+                errors = err_data.get("errors", [])
+                err_msg = " | ".join(errors) if errors else str(e)
+            except Exception:
+                err_msg = str(e)
+            raise PermissionError(f"删除失败 (HTTP {e.code}): {err_msg}")
 
     def edit_post(self, post_id, new_raw, new_title=None):
         """编辑帖子内容或标题"""
@@ -521,8 +734,14 @@ class DiscourseClient:
 # ---------------- 命令行 CLI 支持 ----------------
 
 def cli_main():
+    if hasattr(sys.stdout, 'reconfigure'):
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
+
     import argparse
-    parser = argparse.ArgumentParser(description="HandRaw Style 社区互动命令行工具")
+    parser = argparse.ArgumentParser(description="HandRaw Style 社区互动命令行工具 (全板块通用发帖与内容管理)")
     subparsers = parser.add_subparsers(dest="command", help="子命令")
 
     # login
@@ -537,15 +756,34 @@ def cli_main():
     # logout
     subparsers.add_parser("logout", help="退出当前登录账号")
 
-    # share
-    p_share = subparsers.add_parser("share", help="分享图片与提示词到社区")
+    # categories (板块列表)
+    subparsers.add_parser("categories", help="列出社区全部板块、ID与说明")
+
+    # post (通用全板块发帖)
+    p_post = subparsers.add_parser("post", help="发布通用帖子（支持任意板块、纯文本或图文）")
+    p_post.add_argument("--title", "-t", required=True, help="帖子标题（至少5个字符）")
+    p_post.add_argument("--content", "-c", required=True, help="Markdown正文内容，或传入 @filepath.md")
+    p_post.add_argument("--category", "-C", default=None, help="目标板块名称或ID (如 '创作交流' / '好用的工具' / '手绘skill' / 6 等)")
+    p_post.add_argument("--image", "-i", default=None, help="可选：自动上传并在帖首嵌入配图")
+    p_post.add_argument("--tags", default=None, help="逗号分隔的标签列表 (如 '手绘风,工具,分享')")
+
+    # share (手绘创作专用分享)
+    p_share = subparsers.add_parser("share", help="分享手绘作品与提示词到社区 (智能排版)")
     p_share.add_argument("--image", "-i", required=True, help="要分享的图片本地路径")
     p_share.add_argument("--prompt", required=True, help="生成的完整提示词")
     p_share.add_argument("--title", "-t", help="帖子标题（留空自动生成）")
+    p_share.add_argument("--category", "-C", default=None, help="目标板块名称或ID (默认优先: 创作交流 / 6)")
     p_share.add_argument("--style", "-s", help="画风编号 (如 048)")
     p_share.add_argument("--style-name", help="画风名称")
     p_share.add_argument("--color", "-c", help="主题色编号 (如 C-01)")
     p_share.add_argument("--notes", "-n", help="创作心得或说明")
+    p_share.add_argument("--tags", default=None, help="自定义标签 (逗号分隔)")
+
+    # reply (回复主题)
+    p_reply = subparsers.add_parser("reply", help="回复论坛指定主题")
+    p_reply.add_argument("--topic-id", "-id", type=int, required=True, help="目标主题ID")
+    p_reply.add_argument("--content", "-c", required=True, help="回复正文内容，或 @filepath.md")
+    p_reply.add_argument("--image", "-i", default=None, help="可选：回复中附带的配图路径")
 
     # my-posts
     p_posts = subparsers.add_parser("my-posts", help="查看我发布的帖子列表")
@@ -583,19 +821,52 @@ def cli_main():
         clear_auth_profile()
         print("[OK] 已安全退出手绘风社区账号并清除本地凭据。")
 
+    elif args.command == "categories":
+        cats = client.list_categories(refresh=True)
+        print("📌 手绘风社区可用板块一览 (发帖可直接指定板块名称或ID):")
+        print("-" * 65)
+        for c in cats:
+            desc = f" - {c['description']}" if c.get("description") else ""
+            print(f" • [ID: {c['id']:2d}] {c['name']:<12s} ({c.get('slug', 'default')}){desc}")
+        print("-" * 65)
+
+    elif args.command == "post":
+        res = client.create_topic(
+            title=args.title,
+            content=args.content,
+            category=args.category,
+            tags=args.tags,
+            image_path=args.image
+        )
+        print(f"🎉 帖子已成功发布至 [{res.get('category_name')}]！")
+        print(f"   标题: {res.get('title')}")
+        print(f"   直达链接: {res.get('url')}")
+        if res.get("image_url"):
+            print(f"   配图短链: {res.get('image_url')}")
+
     elif args.command == "share":
         res = client.share_creation(
             image_path=args.image,
             prompt=args.prompt,
             title=args.title,
+            category=args.category,
             style_id=args.style,
             style_name=args.style_name,
             color_id=args.color,
-            notes=args.notes
+            notes=args.notes,
+            tags=args.tags
         )
-        print(f"🎉 作品与提示词已成功分享到手绘风社区！")
+        print(f"🎉 作品与提示词已成功分享到 [{res.get('category_name')}]！")
         print(f"   标题: {res.get('title')}")
         print(f"   直达链接: {res.get('url')}")
+
+    elif args.command == "reply":
+        res = client.reply_topic(
+            topic_id=args.topic_id,
+            content=args.content,
+            image_path=args.image
+        )
+        print(f"💬 回复成功！直达链接: {res.get('url')}")
 
     elif args.command == "my-posts":
         posts = client.list_my_posts(limit=args.limit)
@@ -608,11 +879,14 @@ def cli_main():
                 print(f"    链接: {p['url']} | 浏览: {p['views']} | 点赞: {p['like_count']} | 回复: {p['posts_count']}")
 
     elif args.command == "delete":
-        ok = client.delete_post(topic_id=args.topic_id)
-        if ok:
-            print(f"🗑️ 帖子 (ID: {args.topic_id}) 已成功删除。")
-        else:
-            print(f"删除失败，请检查网络或是否拥有该帖子的删除权限。")
+        try:
+            ok = client.delete_post(topic_id=args.topic_id)
+            if ok:
+                print(f"🗑️ 帖子 (ID: {args.topic_id}) 已成功删除。")
+            else:
+                print(f"删除失败，请检查网络或是否拥有该帖子的删除权限。")
+        except Exception as e:
+            print(f"⚠️ {e}")
 
     else:
         parser.print_help()
