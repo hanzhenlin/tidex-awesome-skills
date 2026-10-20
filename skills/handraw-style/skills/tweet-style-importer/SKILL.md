@@ -71,6 +71,9 @@ python scripts/import_tweet_style.py "https://x.com/username/status/..." --name 
   - 状态：`references/contact_sheet_state.json` 记录活动展板、已填数量和下一格；单图以无角标纯净画面进入对应格。
 
 ### 3. 风格库与模型策略入库
+- **严禁提取推文原图的画面具体内容到特征描述 (Prohibition on Content Extraction)**：
+  - 无论推文原图绘制的是什么内容（例如特定动漫角色、机甲、女孩、动物、街景、武器等），**绝对禁止**将这些具体主体、角色外貌、服饰、动作或具体场景写入 --traits！
+  - --traits 只能且必须仅提取艺术媒介与渲染风格（如 3D 渲染质感、水彩晕染、胶片噪点、高饱和撞色、强轮廓光等），确保未来用户换用任何全新主题时不会被原图内容污染。
 - **主风格表 (`styles_200_reorganized.md`)**：
   - 更新总数标题并追加新行：
     `| {number} · {author} | {generation_name} | {traits} |`

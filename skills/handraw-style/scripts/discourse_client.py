@@ -10,6 +10,7 @@ import os
 import sys
 import json
 import uuid
+import subprocess
 import mimetypes
 import urllib.request
 import urllib.error
@@ -793,6 +794,11 @@ def cli_main():
     p_del = subparsers.add_parser("delete", help="删除我的指定帖子")
     p_del.add_argument("--topic-id", type=int, required=True, help="要删除的主题 ID")
 
+    # deploy (发布/同步画廊静态页面与资产至云端社区)
+    p_deploy = subparsers.add_parser("deploy", help="同步并发布画廊静态页面、样式数据与图片资产至云端社区")
+    p_deploy.add_argument("--announce", action="store_true", help="部署完成后自动在论坛「手绘skill」板块发布更新公告帖")
+    p_deploy.add_argument("--git", action="store_true", help="同时提交并推送到 GitHub 远端 handraw-static 仓库")
+
     args = parser.parse_args()
     client = DiscourseClient()
 
@@ -887,6 +893,80 @@ def cli_main():
                 print(f"删除失败，请检查网络或是否拥有该帖子的删除权限。")
         except Exception as e:
             print(f"⚠️ {e}")
+
+    elif args.command == "deploy":
+        candidates = [
+            Path(__file__).resolve().parent / "sync_to_static.py",
+            Path(__file__).resolve().parents[1] / "scripts" / "sync_to_static.py",
+            Path(__file__).resolve().parents[2] / "scripts" / "sync_to_static.py",
+            Path(os.environ.get("HANDRAW_STYLE_ROOT", Path(__file__).resolve().parents[1])) / "scripts" / "sync_to_static.py",
+        ]
+        sync_script = None
+        for c in candidates:
+            if c.exists():
+                sync_script = c
+                break
+
+        if not sync_script:
+            print("❌ 未找到 scripts/sync_to_static.py 脚本！")
+            sys.exit(1)
+
+        cmd = [sys.executable, str(sync_script), "--deploy"]
+        if getattr(args, "git", False):
+            cmd.append("--git")
+
+        print("🚀 正在执行静态画廊与资产部署上云...")
+        res = subprocess.run(cmd)
+        if res.returncode != 0:
+            print(f"❌ 静态部署执行失败 (Exit code {res.returncode})")
+            sys.exit(res.returncode)
+
+        print("\n✅ 风格画廊与静态资产已成功同步部署到云端服务器！")
+        print("   风格画廊首页: https://handraw-style.com/gallery/index.html")
+        print("   提示词拼装器: https://handraw-style.com/gallery/tutorials.html")
+        print("   自建资产图库: https://handraw-style.com/gallery/assets.html")
+
+        if getattr(args, "announce", False):
+            print("\n📢 正在自动生成论坛更新公告并发布至「手绘skill」板块...")
+            version_path = sync_script.parent.parent / "version.json"
+            version_str = "最新版"
+            if version_path.exists():
+                try:
+                    with open(version_path, "r", encoding="utf-8") as f:
+                        version_str = f"v{json.load(f).get('version', '')}"
+                except Exception:
+                    pass
+
+            manifest_path = sync_script.parent.parent.parent / "handraw-static" / "manifest.json"
+            styles_count = 365
+            if manifest_path.exists():
+                try:
+                    with open(manifest_path, "r", encoding="utf-8") as f:
+                        styles_count = json.load(f).get("styles_count", 365)
+                except Exception:
+                    pass
+
+            title = f"【官方更新】手绘风格画廊 {version_str} 全新上线与在线拼装指南"
+            content = f"""## 🎨 手绘风格画廊 {version_str} 已同步上线！
+
+手绘风生态静态资源与风格画廊已完成全量更新，包含全量 {styles_count} 种视觉画风、主题色彩、版式结构库以及全新写实摄影与自建资产！
+
+### 🔗 在线直达
+- 🏛️ **风格画廊首页**: [https://handraw-style.com/gallery/index.html](https://handraw-style.com/gallery/index.html)
+- 🧩 **提示词拼装器与教程**: [https://handraw-style.com/gallery/tutorials.html](https://handraw-style.com/gallery/tutorials.html)
+- 🗂️ **自建资产图库**: [https://handraw-style.com/gallery/assets.html](https://handraw-style.com/gallery/assets.html)
+
+欢迎大家在评论区交流画风使用心得或反馈建议！
+"""
+            post_res = client.post_topic(
+                title=title,
+                raw=content,
+                category_name="手绘skill",
+                tags="更新,画风库,公告,gallery"
+            )
+            print(f"🎉 公告帖子已发布至 [{post_res.get('category_name')}]！")
+            print(f"   标题: {post_res.get('title')}")
+            print(f"   直达链接: {post_res.get('url')}")
 
     else:
         parser.print_help()

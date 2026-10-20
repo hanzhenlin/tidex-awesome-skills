@@ -31,19 +31,42 @@ def parse_args() -> argparse.Namespace:
 
 
 def positive_traits(value: str) -> str:
-    """Keep only concrete positive traits for both metadata and prompting."""
+    """Keep only concrete positive traits for both metadata and prompting, stripping forbidden demo subject content."""
+    subject_leakage_patterns = [
+        r"[白黑红黄蓝绿米粉]\S*?(?:长裙|短裙|连衣裙|衬衫|风衣|T恤|衣服|背带裤)",
+        r"[黑金黄棕白]\S*?(?:短发|长发|马尾|卷发|发型)",
+        r"(?:侧身|回眸|侧脸|站姿|坐姿|奔跑|漫步|蹲下|招手)的?(?:自然)?(?:姿态|姿势|动态)?",
+        r"大面积\S*?(?:花田|花海|草地|植被|向日葵)",
+        r"(?:海湾|湖海|山峦|雪山|街道|马路|森林)\S*?(?:远景|中景|近景|层次)",
+        r"前景\S*?(?:轻微遮挡|虚化遮挡|花草遮挡)",
+        r"三分法构图人物偏[左右中]",
+        r"年轻[男女]性|年轻[男女]子",
+    ]
+    leakage_re = re.compile("|".join(subject_leakage_patterns))
+
     parts = [part.strip() for part in value.replace("。", "；").split("；")]
     cleaned = []
     for part in parts:
         if not part:
             continue
-        for marker in ("避免", "不要", "不准", "禁止"):
-            if marker in part:
-                part = part.split(marker, 1)[0]
-        part = re.sub(r"无(?:写实纹理|精细材质|真实纹理)[、，]?", "", part)
-        part = re.sub(r"[、，]\s*[、，]", "、", part).strip("、， ")
-        if part:
-            cleaned.append(part)
+        sub_clauses = re.split(r"[,，、]", part)
+        valid_sub = []
+        for sub in sub_clauses:
+            s = sub.strip()
+            if not s:
+                continue
+            for marker in ("避免", "不要", "不准", "禁止"):
+                if marker in s:
+                    s = s.split(marker, 1)[0]
+            s = re.sub(r"无(?:写实纹理|精细材质|真实纹理)[、，]?", "", s).strip("、， ")
+            if not s:
+                continue
+            if leakage_re.search(s):
+                print(f"[GUARD] 拦截示意图具体画面内容污染: {s}")
+                continue
+            valid_sub.append(s)
+        if valid_sub:
+            cleaned.append("、".join(valid_sub))
     return "；".join(cleaned)
 
 

@@ -45,6 +45,9 @@ def sync_data():
         ("colors.json", REF_DIR / "colors.json", target_data_dir / "colors.json"),
         ("tones.json", REF_DIR / "tones.json", target_data_dir / "tones.json"),
         ("partners.json", CLIENT_DIR / "partners.json", target_data_dir / "partners.json"),
+        ("version.json", REF_DIR / "version.json", target_data_dir / "version.json"),
+        ("model_capabilities.json", REF_DIR / "model_capabilities.json", target_data_dir / "model_capabilities.json"),
+        ("style_alias_map.json", REF_DIR / "style_alias_map.json", target_data_dir / "style_alias_map.json"),
     ]
 
     for name, src, dst in files_to_copy:
@@ -97,7 +100,7 @@ def sync_data():
 
     # 根目录图片 (realistic.webp, 演示海报等)
     for f in IMAGES_DIR.glob("*.*"):
-        if f.is_file() and f.suffix.lower() in [".webp", ".png", ".jpg", ".gif"]:
+        if f.is_file() and f.suffix.lower() in [".webp", ".png", ".jpg", ".gif", ".svg"]:
             dst_f = target_img_dir / f.name
             if not dst_f.exists() or f.stat().st_mtime > dst_f.stat().st_mtime:
                 shutil.copy2(f, dst_f)
@@ -114,7 +117,7 @@ def sync_data():
             dest_folder = dst_sub if rel_dir == "." else dst_sub / rel_dir
             dest_folder.mkdir(parents=True, exist_ok=True)
             for f in files:
-                if f.endswith((".webp", ".png", ".jpg", ".gif")):
+                if f.endswith((".webp", ".png", ".jpg", ".gif", ".svg", ".json", ".js")):
                     src_f = Path(root) / f
                     dst_f = dest_folder / f
                     if not dst_f.exists() or src_f.stat().st_mtime > dst_f.stat().st_mtime:
@@ -146,10 +149,11 @@ def git_push_static(manifest):
         print(f"  [Warn] Git 推送失败或无新变更: {e}")
 
 def deploy_to_vm():
+    import tarfile
     print("\n=== 执行部署至 tencent-vm ===")
     remote_target = "/home/yang0/projectHome/handraw-static"
     # 创建远程目录
-    ssh_cmd = ["ssh", "tencent-vm", f"mkdir -p {remote_target}/data {remote_target}/images {remote_target}/images/characters {remote_target}/gallery"]
+    ssh_cmd = ["ssh", "tencent-vm", f"mkdir -p {remote_target}/data {remote_target}/images {remote_target}/gallery"]
     subprocess.run(ssh_cmd, check=True)
 
     # 传输 manifest 与 data
@@ -164,15 +168,55 @@ def deploy_to_vm():
         scp_gallery = ["scp", "-r", f"{STATIC_REPO_DIR}/gallery/*", f"tencent-vm:{remote_target}/gallery/"]
         subprocess.run(scp_gallery, check=True)
 
+    # 增量检测并同步远程 images
+    local_img_dir = STATIC_REPO_DIR / "images"
+    res = subprocess.run(["ssh", "tencent-vm", f"find {remote_target}/images -type f"], capture_output=True, text=True)
+    remote_files = set()
+    prefix = f"{remote_target}/images/"
+    for line in res.stdout.strip().splitlines():
+        line = line.strip()
+        if line.startswith(prefix):
+            remote_files.add(line[len(prefix):])
+
+    missing_images = []
+    for r, _, files in os.walk(local_img_dir):
+        for f in files:
+            rel = Path(r, f).relative_to(local_img_dir).as_posix()
+            if rel not in remote_files:
+                missing_images.append(rel)
+
+    if missing_images:
+        print(f"  [Sync] 检测到 {len(missing_images)} 个远程缺失图片/资源，正在打包传输...")
+        tar_path = STATIC_REPO_DIR / "temp_images_delta.tar"
+        with tarfile.open(tar_path, "w") as tar:
+            for rel in missing_images:
+                tar.add(local_img_dir / rel, arcname=rel)
+
+        scp_tar = ["scp", str(tar_path), f"tencent-vm:/tmp/images_delta.tar"]
+        subprocess.run(scp_tar, check=True)
+        tar_path.unlink(missing_ok=True)
+
+        ssh_untar = [
+            "ssh", "tencent-vm",
+            f"tar -xf /tmp/images_delta.tar -C {remote_target}/images/ && rm -f /tmp/images_delta.tar"
+        ]
+        subprocess.run(ssh_untar, check=True)
+        print(f"  [OK] 已成功传输并解压 {len(missing_images)} 个新图片/资源！")
+    else:
+        print("  [OK] 远程图片库已是最新，无需增量传输。")
+
     # 保持 discourse/public 软链接
     link_cmd = [
         "ssh", "tencent-vm",
-        "ln -sfn /home/yang0/projectHome/handraw-static/gallery /home/yang0/projectHome/discourse/public/gallery && "
-        "ln -sfn /home/yang0/projectHome/handraw-static/images/characters /home/yang0/projectHome/discourse/public/images/characters && "
-        "ln -sfn /home/yang0/projectHome/handraw-static/images/realistic.webp /home/yang0/projectHome/discourse/public/images/realistic.webp"
+        f"ln -sfn {remote_target}/gallery /home/yang0/projectHome/discourse/public/gallery && "
+        f"ln -sfn {remote_target}/data /home/yang0/projectHome/discourse/public/data && "
+        f"for f in {remote_target}/images/*; do "
+        'bn=$(basename "$f"); '
+        'if [ ! -e "/home/yang0/projectHome/discourse/public/images/$bn" ]; then ln -s "$f" "/home/yang0/projectHome/discourse/public/images/$bn"; fi; '
+        "done; true"
     ]
     subprocess.run(link_cmd, check=True)
-    print("  [OK] manifest, data, gallery 及软链接已成功部署到 tencent-vm！")
+    print("  [OK] manifest, data, gallery, images 及软链接已成功部署到 tencent-vm！")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Sync data to handraw-static")
