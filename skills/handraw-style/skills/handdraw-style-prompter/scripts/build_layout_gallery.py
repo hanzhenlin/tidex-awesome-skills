@@ -337,7 +337,7 @@ if(urlCat&&filters.some(b=>b.dataset.category===urlCat)){{setCategory(urlCat);}}
 def main() -> None:
     layouts = load_layouts()
     GALLERY.parent.mkdir(parents=True, exist_ok=True)
-    GALLERY.write_text(gallery_html(layouts), encoding="utf-8")
+    GALLERY.write_text(gallery_html(layouts).replace("</body>", '<script src="personal-library.js" defer></script></body>'), encoding="utf-8")
     print(f"Built {len(layouts)} layouts.")
     try:
         import sys

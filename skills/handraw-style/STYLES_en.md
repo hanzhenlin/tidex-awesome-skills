@@ -2,9 +2,9 @@
   <a href="STYLES.md">中文</a> | <strong>English</strong>
 </p>
 
-# Hand-drawn Style Visual Gallery (FA-001–FI-034 · 365 Styles)
+# Hand-drawn Style Visual Gallery (FA-001–FI-034 · 366 Styles)
 
-> Complete visual catalogue and prompt traits for all **365 hand-drawn illustration styles** (FA-001–FI-034). Each style includes image preview, classification ID, generation name, artistic reference, and core prompt traits for direct browsing on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).
+> Complete visual catalogue and prompt traits for all **366 hand-drawn illustration styles** (FA-001–FI-034). Each style includes image preview, classification ID, generation name, artistic reference, and core prompt traits for direct browsing on GitHub. For detailed generation names and prompt traits, see [styles_200_reorganized.md](styles_200_reorganized.md).
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@
 - [FB · Picture Book & Watercolor (FB-001–FB-066 · 66 Styles)](#group-fb)
 - [FC · Modern Graphic & Pop (FC-001–FC-032 · 32 Styles)](#group-fc)
 - [FD · Japanese Contemporary & Manga (FD-001–FD-042 · 42 Styles)](#group-fd)
-- [FE · Chinese Traditional & Folk Craft (FE-001–FE-067 · 67 Styles)](#group-fe)
+- [FE · Chinese Traditional & Folk Craft (FE-001–FE-068 · 68 Styles)](#group-fe)
 - [FF · 3D Clay, Felt & Papercraft (FF-001–FF-017 · 17 Styles)](#group-ff)
 - [FG · Anime, Cel Animation & Retro Game (FG-001–FG-023 · 23 Styles)](#group-fg)
 - [FH · Mixed Media & Impasto Arts (FH-001–FH-044 · 44 Styles)](#group-fh)
@@ -122,7 +122,7 @@ Ideal for Japanese contemporary illustration, light novel art, city strolls, and
 ---
 
 <a id="group-fe"></a>
-## FE · Chinese Traditional & Folk Craft (FE-001–FE-067 · 67 Styles)
+## FE · Chinese Traditional & Folk Craft (FE-001–FE-068 · 68 Styles)
 
 Ideal for Chinese aesthetics, intangible cultural heritage, traditional festivals, and oriental art. Features fine-brush gongbi, Dunhuang murals, folk papercuts, and ink wash painting.
 
@@ -150,7 +150,7 @@ Ideal for Chinese aesthetics, intangible cultural heritage, traditional festival
 | <img src='images/individual/FE/FE-058.webp' width='220' alt='FE-058 Feng Zikai Literati Brushwork & Whimsical Ink Sketch'><br>**FE-058** <small>(#256)</small> · Feng Zikai Literati Brushwork & Whimsical Ink Sketch<br><sub>Ref: 丰子恺</sub><br><details><summary>View Traits</summary><br>丰子恺文人漫画风格、大面积宣纸意境留白、朴实幽默与生活哲思趣意、简练写意的传统毛笔水墨勾勒、高度概括生动的人形动态、温润清雅的传统国画设色。</details> | <img src='images/individual/FE/FE-059.webp' width='220' alt='FE-059 Airy Chinese Ink Fantasy Animation'><br>**FE-059** <small>(#257)</small> · Airy Chinese Ink Fantasy Animation<br><sub>Ref: 中国奇谭·鹅鹅鹅</sub><br><details><summary>View Traits</summary><br>参考作品：中国奇谭《鹅鹅鹅》的画风。仅参考其整体视觉语言、线条、笔触、水墨质感、设色方式、人物造型语言、东方幻想气质与手绘动画感，不直接复制或延续原作中的角色、服装、道具、场景、构图、剧情和具体视觉元素；如果主题没有明确指定，默认不要引入任何原作角色或标志性元素。 保留其古朴、诡谲、含蓄、荒诞的东方水墨动画气质，但整体画面不要过暗。减少大面积黑灰和重墨压暗，避免低曝光、强暗角和大片深色阴影；提高整体明度与空气感，多使用浅墨、淡彩、米白、灰青、浅赭等高明度低饱和色彩，让纸张底色、雾气和留白参与画面。画面可以神秘、诡异，但不要靠“压黑”制造氛围，整体保持清透、柔和、层次分明。</details> | <img src='images/individual/FE/FE-060.webp' width='220' alt='FE-060 Kobayashi Manga Minimal Ink Style'><br>**FE-060** <small>(#267)</small> · Kobayashi Manga Minimal Ink Style<br><sub>Ref: 小林漫画</sub><br><details><summary>View Traits</summary><br>白底中国式极简手绘漫画；黑色毛笔/软头笔快速勾画；线条松散粗粝、粗细变化明显、略带断笔与手绘抖动；人物高度概括、比例略夸张、造型笨拙有趣；场景只保留最必要的物件与动作；大面积留白；黑色线稿为主体；脸颊、衣服或小道具加入少量红黄绿局部平涂；中国写意人物画与老式讽刺漫画的味道；</details> |
 | <img src='images/individual/FE/FE-061.webp' width='220' alt='FE-061 Contemporary Literati Ink Cartoon'><br>**FE-061** <small>(#268)</small> · Contemporary Literati Ink Cartoon<br><sub>Ref: 当代人文水墨漫画</sub><br><details><summary>View Traits</summary><br>现代生活人物、动物和日常小场景；白色或微暖纸面、大面积留白；毛笔和墨线快速画人物；线条松弛、粗细不一、枯湿自然、允许断笔和不闭合轮廓；人物高度概括、比例略笨拙，以姿态和动作表达情绪；人物是画面的主要视觉主体；场景保留少量必要元素；墨色为主，少量朱红、赭石、石绿、湖蓝局部点染；书法题字和朱红印章自然嵌入留白；整体拙朴、松弛、幽默、闲适；现代生活速写与中国写意笔墨结合</details> | <img src='images/individual/FE/FE-062.webp' width='220' alt='FE-062 Socialist Realist Propaganda Poster'><br>**FE-062** <small>(#269)</small> · Socialist Realist Propaganda Poster<br><sub>Ref: 社会主义现实主义宣传画</sub> | <img src='images/individual/FE/FE-063.webp' width='220' alt='FE-063 Chinese Farmers Painting'><br>**FE-063** <small>(#270)</small> · Chinese Farmers Painting<br><sub>Ref: 中国农民画</sub><br><details><summary>View Traits</summary><br>错透视、鲜艳平涂、大量留白。</details> |
 | <img src='images/individual/FE/FE-064.webp' width='220' alt='FE-064 1980s-1990s Chinese Textbook Illustration'><br>**FE-064** <small>(#271)</small> · 1980s-1990s Chinese Textbook Illustration<br><sub>Ref: 八九十年代中国课本插图风</sub> | <img src='images/individual/FE/FE-065.webp' width='220' alt='FE-065 Vintage Chinese Handmade Puppet Stop-Motion Animation'><br>**FE-065** <small>(#277)</small> · Vintage Chinese Handmade Puppet Stop-Motion Animation<br><sub>Ref: 中国老式手工木偶定格动画风</sub><br><details><summary>View Traits</summary><br>中国老式手工木偶定格动画风；东方传统手工人偶；细长且略显笨拙的人体比例；狭长脸型、细眉凤眼、极简手绘五官与淡淡胭脂；苍白哑光的纸偶、木偶与泥偶面部；粗糙毛发纤维；朴素粗布古装，剪裁质朴，保留明显布料纤维与手工针线缝制痕迹；实体微缩手工布景，微缩道具，背景疏朗开阔与大面积空处；低技术微缩定格动画摄影棚质感，轻微胶片颗粒与浅景深；古典中式民间传说与志怪故事气息</details> | <img src='images/individual/FE/FE-066.webp' width='220' alt='FE-066 Dreams of the Mortal World: Red Chamber Color Illustration'><br>**FE-066** <small>(#289)</small> · Dreams of the Mortal World: Red Chamber Color Illustration<br><sub>Ref: 尘世梦影·彩绘红楼梦</sub><br><details><summary>View Traits</summary><br>参考风格：尘世梦影：彩绘红楼梦， 孙温，但是整体略微明亮鲜润，亮度提升约15%，饱和度适度提升，画面适当留白有呼吸感，更符合现代年轻人审美</details> |
-| <img src='images/individual/FE/FE-067.webp' width='220' alt='FE-067 The Legend of Sealed Book Animation Style'><br>**FE-067** <small>(#290)</small> · The Legend of Sealed Book Animation Style<br><sub>Ref: 天书奇谭</sub> |  |  |
+| <img src='images/individual/FE/FE-067.webp' width='220' alt='FE-067 The Legend of Sealed Book Animation Style'><br>**FE-067** <small>(#290)</small> · The Legend of Sealed Book Animation Style<br><sub>Ref: 天书奇谭</sub> | <img src='images/individual/FE/FE-068.webp' width='220' alt='FE-068 Tangshan Shadow Puppet'><br>**FE-068** <small>(#366)</small> · Tangshan Shadow Puppet<br><sub>Ref: 唐山皮影</sub> |  |
 
 ---
 
@@ -290,6 +290,6 @@ Ideal for brand commercial photography, haute couture fashion editorials, humani
 
 ![I 348-363](images/I_348-363.webp)
 
-![I 364-365](images/I_364-365.webp)
+![I 364-366](images/I_364-366.webp)
 
 </details>

@@ -1133,4 +1133,4 @@ async function copyPrompt(){
 filters.forEach(button=>button.addEventListener('click',()=>setCategory(button.dataset.category)));cards.forEach(card=>card.addEventListener('click',()=>openPreview(card)));copyButton.addEventListener('click',copyPrompt);dialog.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
 const urlCat=new URLSearchParams(window.location.search).get('cat')||(window.location.hash?window.location.hash.replace(/^#/,''):'');
 if(urlCat&&filters.some(b=>b.dataset.category===urlCat)){setCategory(urlCat);}else{setCategory('social-card');}
-</script></body></html>
+</script><script src="personal-library.js" defer></script></body></html>

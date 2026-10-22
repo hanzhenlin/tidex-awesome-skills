@@ -810,6 +810,10 @@
         "FI-034": {
           "name_activation": "strong",
           "traits_activation": "none"
+        },
+        "FE-068": {
+          "name_activation": "strong",
+          "traits_activation": "none"
         }
       }
     }

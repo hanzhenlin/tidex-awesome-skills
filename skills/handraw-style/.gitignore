@@ -83,3 +83,9 @@ release/
 /client2/
 /scripts/build_installer.py
 /启动客户端.bat
+
+# Private personal-library gallery mirror; never deploy
+/.handraw-personal/
+
+image_gen_config.json
+*config.local*

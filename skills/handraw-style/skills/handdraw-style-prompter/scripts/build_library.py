@@ -673,7 +673,7 @@ def main() -> None:
     STYLE_JSON.parent.mkdir(parents=True, exist_ok=True)
     GALLERY.parent.mkdir(parents=True, exist_ok=True)
     STYLE_JSON.write_text(json.dumps(styles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    GALLERY.write_text(gallery_html(styles), encoding="utf-8")
+    GALLERY.write_text(gallery_html(styles).replace("</body>", '<script src="personal-library.js" defer></script></body>'), encoding="utf-8")
     print(f"Built {len(styles)} styles into adaptive waterfall gallery.")
     try:
         import sys

@@ -515,6 +515,7 @@
 | FE-066 · 尘世梦影·彩绘红楼梦 | Dreams of the Mortal World: Red Chamber Color Illustration | 参考风格：尘世梦影：彩绘红楼梦， 孙温，但是整体略微明亮鲜润，亮度提升约15%，饱和度适度提升，画面适当留白有呼吸感，更符合现代年轻人审美 |
 
 | FE-067 · 天书奇谭 | The Legend of Sealed Book Animation Style |  |
+| FE-068 · 唐山皮影 | Tangshan Shadow Puppet |  |
 
 ## FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft
 

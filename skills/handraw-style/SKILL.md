@@ -59,6 +59,9 @@ When the user supplies an X/Twitter tweet link and asks to scrape, import, or co
 When the user asks to add a new visual layout or composition structure to the layout gallery (such as social cards, infographics, comic storyboards, IP cards, or e-commerce layouts; 例如“添加排版图型”、“录入新版式”、“导入排版”、“新增Layout”), read and invoke
 [layout-library-importer](skills/layout-library-importer/SKILL.md) before handling the request. It losslessly converts the reference image to WebP, records category metadata, creates bilingual prompt files, and updates the layout gallery.
 
+When the user asks to analyze the commercial application of a style, write or update style business guides, plan business use cases/products, or audit missing business documents (例如“商业应用”、“风格商业分析”、“商业指南”、“适合什么生意”、“商业落地”、“变现策划”、“business指南”、“补充商业文档”), read and invoke
+[style-business-analyzer](skills/style-business-analyzer/SKILL.md) before handling the request. It authors gold-standard 5-module business guides in `business/{number}.md` with deep insights, product portfolios, and layout/color synergy.
+
 
 
 ## Default mode
@@ -73,7 +76,7 @@ Default to creating prompts only. Do not call an image-generation tool unless th
 > **【核心准则：每次由 AI 实时动态判断，严禁写死/机械套用】**
 > - **实时动态研判**：严禁在记忆、规则或提示词中维护任何“主题关键词 -> 固定风格编号/颜色编号”的静态死板映射（例如严禁一见节气/传统就推 268、一见自然就推 266、一见科技就推 011/054、一见生活就推 018）。
 > - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 365 种视觉风格（#001–#366）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
-> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 367 种画风与 36 种色彩的丰富生命力。
+> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 366 种画风与 36 种色彩的丰富生命力。
 > - **美学理由具象化**：AI 给出的美学推荐理由必须紧扣当前主题的视觉隐喻和画面构图，说明为什么该画风的笔触/质感与该色彩的情绪能完美传达这一主题，杜绝套话。
 
 1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 365 种视觉风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#366) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
@@ -197,3 +200,8 @@ In `pure-image` mode, describe only concrete visible content implied by the them
 - Resolve image-reference policy: `python skills/handdraw-style-prompter/scripts/resolve_reference.py --model <model> --style 18`
 
 The CLI is a convenience check. For normal conversational use, write natural bilingual prompts rather than echoing its template mechanically.
+
+
+## Personal resources and community collections
+
+When the user asks for 我的画风、我的图型、我的收藏、同步收藏、个人画风/图型 or importing a community resource package, read [personal-library](skills/personal-library/SKILL.md). Official entries remain unchanged; user-created and community-acquired entries live in the separate user library. Never upload personal resources without an explicit sharing request.

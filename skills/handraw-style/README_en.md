@@ -35,7 +35,7 @@ Whether you are crafting social media post covers, educational infographics, arc
 
 | Creator Pain Point | How This Library Solves It |
 | :--- | :--- |
-| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 367 systematically categorized visual styles (dual-indexed by FA~FI categories and 001–366), eliminating guess-and-pray prompting. |
+| **Vague style descriptions lead to style drift** | **Numbered Indexing**: 366 systematically categorized visual styles (dual-indexed by FA~FI categories and 001–366), eliminating guess-and-pray prompting. |
 | **Monotonous composition; hard to format complex graphics** | **167 Layout Compositions**: 23 Social Cards, 36 Infographics, 71 Comic Storyboards, 13 IP Design, 24 E-commerce ready out-of-the-box. |
 | **Chaotic color palettes lack a cohesive tonal mood** | **36 Curated Monochrome Colors**: Klein Blue, Sage Green, Hermes Orange, Payne's Grey, etc., setting pure and sophisticated tones with one click. |
 | **Text disconnects from art; awkward typography placement** | **Dual-Mode Workflow**: Seamlessly toggle between "Pure-Image Mode" (pure illustration) and "Graphic-Text Mode" (unified visual-textual composition). |
