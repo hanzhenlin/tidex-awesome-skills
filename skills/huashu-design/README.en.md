@@ -21,7 +21,7 @@
 
 Not "decent for AI" quality — it looks like a real design team made it. Give the skill your brand assets (logo, colors, UI screenshots) and it reads your brand's voice; give it nothing and **three real directions picked from six thumbnails, backed by an 84-style library with a visual specimen for every style**, still keep you out of AI slop territory.
 
-**Every animation in this README was made by huashu-design itself.** No Figma, no After Effects — just a sentence + skill run. Next product launch needs a promo video? You can make it too.
+**Every design in this README was made by huashu-design itself.** No Figma, no After Effects — just a sentence + skill run. Next product launch needs a promo video? You can make it too.
 
 ```
 npx skills add alchaincyf/huashu-design
@@ -31,7 +31,7 @@ npx skills add alchaincyf/huashu-design
 
 > 🆕 **3.0: bolder directions, and projects that stop looking alike.** Six thumbnails first, then the three strongest become real designs; the style library grows to 84 (new App and Chinese & East Asian sections), each with a specimen; reference works are screenshotted before they are borrowed from; plus a facts-only design check and a "look ledger" that remembers what you've already shipped. [How it works](#core-mechanics)
 
-[See it work](#demo-gallery) · [Install](#install) · [What it does](#what-it-does) · [How it works](#core-mechanics) · [vs. Claude Design](#vs-claude-design)
+[See it work](#30-showcase) · [Install](#install) · [What it does](#what-it-does) · [How it works](#core-mechanics) · [vs. Claude Design](#vs-claude-design)
 
 > 📖 **Note for English readers**: this skill is built by a Chinese-speaking developer. The skill's agent prompts (`SKILL.md`, `references/*.md`) are in Chinese but the agent is bilingual — works fine with English tasks. The demos below are the English parallel versions; the Chinese ones are in the default [Chinese README](README.md).
 >
@@ -42,12 +42,74 @@ npx skills add alchaincyf/huashu-design
 ---
 
 <p align="center">
-  <video src="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.mp4" autoplay muted loop playsinline width="100%">
-    Your browser doesn't support inline video. <a href="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.mp4">Download MP4</a>.
-  </video>
+  <img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/launch-3.0.gif" alt="huashu-design 3.0 launch film" width="100%">
 </p>
 
-<p align="center"><sub>▲ 10-second hero animation showing what huashu-design does (<a href="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.mp4">download MP4</a> if autoplay doesn't work)</sub></p>
+<p align="center"><sub>
+  ▲ 3.0 launch film · 32s · every page in it was designed by 3.0 itself; edited with <a href="https://github.com/alchaincyf/huashu-motion">huashu-motion</a><br>
+  👉 <a href="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/launch-3.0.mp4">Download MP4 (1080p · with music · 24MB)</a> ·
+  <a href="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.mp4">2.0 hero animation (English)</a>
+</sub></p>
+
+---
+
+## 3.0 Showcase
+
+All made with 3.0. The first five are picked from 6 fresh prompts run for the launch: one sentence each, the agent picked the direction, the author didn't step in. The last two are the version that won the third blind round, and a real project the author built with it after release. (Prompts and on-page copy are in Chinese.)
+
+### Web · *Thirty-six Views of Mount Fuji* online exhibition
+
+> "Make an online exhibition site for Hokusai's *Thirty-six Views of Mount Fuji*"
+
+Three directions: a Rijksmuseum-style dark gallery, an Ikko Tanaka triangle window, and a Republic-era book-cover title frame. The design check flagged a collision: two versions opened with *The Great Wave*, so the dark gallery switched to *Rainstorm Beneath the Summit*.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-hero.jpg" width="100%" alt="Hokusai exhibition hero"></p>
+
+A chapter on Prussian blue follows, based on the Met's spectral research; all 46 prints come from the open-access collections of the Art Institute of Chicago and the Met.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-prussian-blue.jpg" width="100%" alt="Prussian blue chapter"></p>
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-all-46.jpg" width="60%" alt="All 46 prints"></p>
+
+### App · Mingji (birding log)
+
+> "Make a prototype of a birding log App"
+
+The real-world reference was CapWords, a 2025 Apple Design Award winner; `ref_board.py` screenshotted it into a reference board before any design started. What it borrowed: "peel a sticker out of a photo". Every bird is segmented from a real Wikimedia photo and stuck into a year-long notebook; the call waveforms are computed from real recordings.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-mingji-birding-app.jpg" width="75%" alt="Mingji birding app board"></p>
+
+### App · What's for dinner (home recipes)
+
+> "Make a home-cooking recipe App"
+
+The seconds roulette landed on Lü Jingren's book design, so it became a recipe book: one dish per page, a margin column beside the fore-edge for notes like "pat it dry so the oil won't spit", and the cinnabar red reserved for the single "start cooking" seal. The look ledger noticed 5 of the last 6 deliveries used sans-serif headlines, so this one went with Song type.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-recipe-app.jpg" width="75%" alt="Recipe app board"></p>
+
+### Slides · *A Thousand Li of Rivers and Mountains* lecture
+
+An Abbott Miller–style dark display case; the dark ground is sampled from the darkest part of the silk. The thin bar under the cover is a thumbnail of the whole scroll, framing which stretch of the 11.9-meter painting the current slide is on.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-qianli-cover.jpg" width="100%" alt="Lecture cover"></p>
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-qianli-pages.jpg" width="100%" alt="Four lecture slides"></p>
+
+### Slides · How the black hole photo was taken
+
+Referenced Jonathan Corum's lecture slides: black ground, photos as the protagonist, labels written directly on the image. Every slide cites its sources.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-blackhole-pages.jpg" width="100%" alt="Black hole deck, four slides"></p>
+
+### App · Green Thumb (won the third blind round)
+
+Reads a plant like vital signs. The App prototype is laid out as a composed presentation board, with the phones staggered.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-plant-health-app.jpg" width="75%" alt="Green Thumb plant health app"></p>
+
+### Web · Travel archive (the author's own project)
+
+A map of every travel photo from three years, in a Kaoru Kasai–style long scroll of white paper and Mincho type: a satellite map ties all the trips together up top, then one chapter per trip. After picking it the author said "try not to leave any out", and it saved that as experience: personal memory archives should be complete, scoped to photo archives only, not product UIs.
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-travel-archive.jpg" width="100%" alt="Travel archive"></p>
 
 ---
 
@@ -353,7 +415,7 @@ Under the [MIT License](LICENSE) you are free to **use, modify, and distribute**
 
 ## Connect · Huasheng (Huashu)
 
-Huasheng is an AI-native coder, independent developer, and AI content creator. Notable work: Cat Fill Light (App Store Top 1 in Paid category), *A Book on DeepSeek*, Nüwa.skill (GitHub 21k+ stars). Combined 300k+ followers across platforms.
+Huasheng is an AI-native coder, independent developer, and AI content creator. Notable work: Cat Fill Light (App Store Top 1 in Paid category), *A Book on DeepSeek*, Nüwa.skill (GitHub 30k+ stars). Combined 300k+ followers across platforms.
 
 | Platform | Handle | Link |
 |---|---|---|
@@ -366,3 +428,5 @@ Huasheng is an AI-native coder, independent developer, and AI content creator. N
 | Developer Hub | bookai.top | https://bookai.top |
 
 For collaborations or sponsored content, DM on any of the above.
+
+<p align="center"><img src="https://raw.githubusercontent.com/alchaincyf/alchaincyf/main/assets/follow.svg" width="100%" alt="Follow Huashu: WeChat 花叔 · Bilibili 花叔v · Xiaohongshu 花叔"></p>

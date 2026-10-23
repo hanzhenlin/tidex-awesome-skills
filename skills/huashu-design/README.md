@@ -21,7 +21,7 @@
 
 不是「AI 做的还行」那种水平——是看起来像大厂设计团队做的。给 skill 你的品牌资产（logo、色板、UI 截图），它会读懂你的品牌气质；什么都不给，**六张缩略图里挑出的三个真实方向 + 84 种带样张的风格库**也能兜底到不出 AI slop。
 
-**你看到这篇 README 里的每一个动画，都是 huashu-design 自己做的。** 不是 Figma，不是 AE，就是一句话 prompt + skill 跑通。下次产品发布要做宣传片？现在你也能做。
+**你看到这篇 README 里的每一页设计，都是 huashu-design 自己做的。** 不是 Figma，不是 AE，就是一句话 prompt + skill 跑通。下次产品发布要做宣传片？现在你也能做。
 
 ```
 npx skills add alchaincyf/huashu-design
@@ -33,21 +33,81 @@ npx skills add alchaincyf/huashu-design
 
 > 🆕 **3.0：三个方向更敢，项目之间也不再长一个样。** 先出六张缩略图再挑三版做成真稿；风格库扩到 84 种（新增 App、中文与东亚两个分区），每种都有样张；参照作品先截图再动手；带一个只量事实的设计体检，和一本记住你做过什么样子的外观账本。[详见核心机制](#核心机制)
 
-[看效果](#demo-画廊) · [安装](#装上就能用) · [能做什么](#能做什么) · [核心机制](#核心机制) · [和 Claude Design 的关系](#和-claude-design-的关系)
+[看效果](#30-案例) · [安装](#装上就能用) · [能做什么](#能做什么) · [核心机制](#核心机制) · [和 Claude Design 的关系](#和-claude-design-的关系)
 
 </div>
 
 ---
 
 <p align="center">
-  <img src="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.gif" alt="huashu-design Hero · 打字 → 选方向 → 画廊展开 → 聚焦 → 品牌显形" width="100%">
+  <img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/launch-3.0.gif" alt="huashu-design 3.0 发布片" width="100%">
 </p>
 
 <p align="center"><sub>
-  ▲ 25 秒 · Terminal → 4 方向 → Gallery ripple → 4 次 Focus → Brand reveal<br>
-  👉 <a href="https://www.huasheng.ai/huashu-design-hero/">访问带音效的 HTML 互动版</a> ·
-  <a href="https://github.com/alchaincyf/huashu-design/releases/download/v2.0/hero-animation-v10-en.mp4">下载 MP4（含 BGM+SFX · 10MB）</a>
+  ▲ 3.0 发布片 · 32 秒 · 片里每一页设计都是 3.0 自己做的，剪辑用的是 <a href="https://github.com/alchaincyf/huashu-motion">huashu-motion</a><br>
+  👉 <a href="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/launch-3.0.mp4">下载 MP4（1080p · 含配乐 · 24MB）</a> ·
+  <a href="https://www.huasheng.ai/huashu-design-hero/">2.0 的带音效 HTML 互动版</a>
 </sub></p>
+
+---
+
+## 3.0 案例
+
+下面这些都是 3.0 跑出来的。前五个是从发布时新跑的 6 道题里挑的，每道只给一句话需求，方向是 agent 自己挑的，作者没插手；后两个一个是第三轮盲选赢下来的那版，一个是发布后作者拿它做的真实项目。
+
+### 网页 · 《富岳三十六景》线上展
+
+> 「给葛饰北斋的《富岳三十六景》做一个线上展览网站」
+
+三版分别是 Rijksmuseum 官网式的暗场展厅、田中一光式的三角窗、民国书衣式的题签框。设计体检报过一次撞车：两版首屏都用了《神奈川冲浪里》，它就把暗场那版换成了《山下白雨》。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-hero.jpg" width="100%" alt="富岳三十六景线上展首屏：暗场满屏《山下白雨》"></p>
+
+往下一章讲普鲁士蓝，依据是大都会博物馆的光谱研究；全 46 幅都来自芝加哥艺术博物馆和大都会的开放馆藏。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-prussian-blue.jpg" width="100%" alt="一种进口的蓝：普鲁士蓝章节"></p>
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-hokusai-all-46.jpg" width="60%" alt="全四十六幅作品墙"></p>
+
+### App · 鸣迹（观鸟记录）
+
+> 「做一个观鸟记录 App 的原型」
+
+现实参照找的是拿了 2025 年苹果设计奖的 CapWords，`ref_board.py` 先把它截成参考板，agent 亲眼看过再动手。借来的是「从照片里撕下一张贴纸」：每只鸟都从 Wikimedia 的真实照片里分割出来，贴进一年的本子里，叫声波形是拿真实录音算的。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-mingji-birding-app.jpg" width="75%" alt="鸣迹：听到一只鸟，撕下一张贴纸"></p>
+
+### App · 今晚吃啥（家常菜谱）
+
+> 「做一个家常菜谱 App」
+
+秒数轮盘恰好抽到吕敬人书籍设计，最后做成了一本菜谱：一道菜一页方子，切口旁边留一条旁注栏，写「擦干再煎才不溅油」「老抽只要几滴」，朱砂只给「开做」这一方印。外观账本看到最近 6 个交付里 5 个是无衬线标题，这一版挑了宋体。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-recipe-app.jpg" width="75%" alt="今晚吃啥：一道菜一页方子"></p>
+
+### PPT · 《千里江山图》讲座
+
+走的是最佳设计师 Abbott Miller 式的暗场展柜，暗底取的是绢地最暗处的颜色。封面底下那条细长的位置条就是整卷缩略图，框出这一页在 11.9 米长卷的哪一段。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-qianli-cover.jpg" width="100%" alt="千里江山图讲座封面"></p>
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-qianli-pages.jpg" width="100%" alt="一张多大的画、希孟年十八岁、小如豆、颜色来自石头"></p>
+
+### PPT · 黑洞的照片是怎么拍出来的
+
+现实参照是 Jonathan Corum 的讲座幻灯片：黑底、照片做主角、标注直接写在图上。每页都标了出处，事实先过核查再上页面。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-blackhole-pages.jpg" width="100%" alt="黑洞科普 PPT 四页"></p>
+
+### App · 绿拇指（第三轮盲选赢的那版）
+
+把植物当成会呼吸的生命体征来读。App 原型做成一张有构图的展示板，几台手机错落排开。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-plant-health-app.jpg" width="75%" alt="绿拇指：把植物当成会呼吸的生命体征来读"></p>
+
+### 网页 · 旅居档案（作者自己的项目）
+
+三年里所有旅行照片的地图。选的是葛西薰式的白纸明朝体长卷，开头一张卫星地图串起所有旅程，往下一段旅程一章。选完作者顺口说了句「尽量不要遗漏」，它就记进了经验：个人回忆类档案照片要全，而且注明只适用于照片档案，不外溢到产品界面。
+
+<p align="center"><img src="https://github.com/alchaincyf/huashu-design/releases/download/v3.0.0/case-travel-archive.jpg" width="100%" alt="旅居档案"></p>
 
 ---
 
@@ -182,7 +242,7 @@ HTML deck 浏览器演讲 · `html2pptx.js` 读 DOM 的 computedStyle 逐元素�
 
 ---
 
-## Showcase · 真实案例
+## Showcase · 2.0 时期的真实案例
 
 ### 鹦鹉进化史网站 · 设计方向顾问三套逻辑实战（2.0）
 
@@ -391,7 +451,7 @@ Anthropic 发布 Claude Design 那天我玩到凌晨四点。几天之后发现�
 
 ## Connect · 花生（花叔）
 
-花生是 AI Native Coder、独立开发者、AI 自媒体博主。代表作：小猫补光灯（AppStore 付费榜 Top 1）、《一本书玩转 DeepSeek》、女娲 .skill（GitHub 12000+ star）。自媒体全平台 30 万+ 粉丝。
+花生是 AI Native Coder、独立开发者、AI 自媒体博主。代表作：小猫补光灯（AppStore 付费榜 Top 1）、《一本书玩转 DeepSeek》、女娲 .skill（GitHub 3 万+ star）。自媒体全平台 30 万+ 粉丝。
 
 | 平台 | 账号 | 链接 |
 |---|---|---|
@@ -404,3 +464,5 @@ Anthropic 发布 Claude Design 那天我玩到凌晨四点。几天之后发现�
 | 开发者主页 | bookai.top | https://bookai.top |
 
 合作咨询、自媒体约稿 → 以上任一平台私信花生即可。
+
+<p align="center"><img src="https://raw.githubusercontent.com/alchaincyf/alchaincyf/main/assets/follow.svg" width="100%" alt="关注花叔：公众号「花叔」· B站「花叔v」· 小红书「花叔」"></p>

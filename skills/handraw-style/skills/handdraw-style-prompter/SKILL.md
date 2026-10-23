@@ -69,7 +69,7 @@ Users can browse `gallery/index.html` for numbered style contact sheets, `galler
 
 - A layout ID selects composition and text structure, not illustration style. Use its prompt file verbatim in the selected output language, then append the user's theme as the only source of subject matter and copy.
 - **排版图型的两大架构分类 (Dual Architecture of Layout Patterns)**：
-  本库全部 167 种排版图型在底层设计与执行机制上明确划分为两大类：
+  本库全部 168 种排版图型在底层设计与执行机制上明确划分为两大类：
   1. **确定性静态排版（纯文本直接拼接型 · Static Templates）**：
      - 包括绝大多数常规图型（如 `SC-001`~`SC-023` 社媒卡、`IG-001`~`IG-035` 信息图、`SB-001`~`SB-071` 漫画分镜、`IP-001`~`IP-013` IP设计、`EC-001`~`EC-024` 电商）。
      - 构图拓扑关系单一固定，生图模型能直白无误地理解。处理方式为拿来即用，直接提取其 prompt 模板并拼接指定画风与主题输出。
