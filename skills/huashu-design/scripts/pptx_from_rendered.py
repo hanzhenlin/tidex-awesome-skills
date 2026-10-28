@@ -51,7 +51,7 @@ JS = r"""
   // 浏览器按 white-space:normal 折叠掉（连续空白→一个空格，行首行尾丢弃），
   // 但 PPTX 没有这套规则——原样搬过去，那个 \n 在 PowerPoint 里就是一个真换行，
   // 会把后面的内容整段推到下一行去压住别的元素。
-  const runsOf = (root) => {
+  const runsOf = (root, op) => {
     const out = [];
     let atLineStart = true, pendingSpace = false;
     const push = (node, styleEl) => {
@@ -65,8 +65,13 @@ JS = r"""
       if (!t) return;
       atLineStart = false;
       const cs = getComputedStyle(styleEl);
+      // text-transform 只改渲染不改 textContent，要自己套一遍，否则大写标签会变回源码大小写
+      const tt = cs.textTransform;
+      if (tt === 'uppercase') t = t.toUpperCase();
+      else if (tt === 'lowercase') t = t.toLowerCase();
+      else if (tt === 'capitalize') t = t.replace(/(^|\s)(\S)/g, (_, a, b) => a + b.toUpperCase());
       out.push({
-        t, fs: px(cs.fontSize), fw: cs.fontWeight, color: cs.color,
+        t, op, fs: px(cs.fontSize), fw: cs.fontWeight, color: cs.color,
         ls: cs.letterSpacing === 'normal' ? 0 : px(cs.letterSpacing),
         italic: cs.fontStyle === 'italic',
         under: cs.textDecorationLine.includes('underline'),
@@ -113,11 +118,43 @@ JS = r"""
     const out = [];
     let svgSeq = 0;
 
-    const walk = (el) => {
+    // 一组相邻节点 → 一个文本元素。own=true 表示这是「块级子元素之间的裸文字」，
+    // 位置要用文字自己的包围盒，不能套容器的 x/w（否则会盖到旁边的图标上）。
+    const emitText = (el, cs, base, g, op, own) => {
+      const nodes = g.filter(n => n.nodeType !== 3 || n.textContent.trim());
+      if (!nodes.length) return;
+      const {bb, lines} = measure(nodes);
+      if (!bb.height) return;
+      const tmp = document.createElement('div');
+      for (const n of g) tmp.appendChild(n.cloneNode(true));
+      tmp.style.cssText = 'position:absolute;visibility:hidden';
+      el.appendChild(tmp);
+      const rs = runsOf(tmp, op);
+      tmp.remove();
+      if (!rs.length) return;
+      const fsMax = Math.max(px(cs.fontSize), ...rs.filter(r => !r.br).map(r => r.fs));
+      out.push({
+        tag: base.tag, cls: base.cls, kind: 'text',
+        // x/w 用容器的：居中的段落要靠容器宽度维持居中语义，
+        // 用段落自己收缩后的宽度会在换字体后左右飘。
+        x: own ? bb.left - pb.left : base.x, w: own ? bb.width : base.w,
+        y: bb.top - pb.top, h: bb.height,
+        fs: px(cs.fontSize), fsMax, fw: cs.fontWeight, color: cs.color,
+        ls: cs.letterSpacing === 'normal' ? 0 : px(cs.letterSpacing),
+        ta: own ? 'left' : cs.textAlign,
+        lhEff: bb.height / lines, lines,
+        wrap: lines > 1,
+        runs: rs,
+      });
+    };
+
+    // op：祖先链上 opacity 的累乘（CSS 的 opacity 会作用到整棵子树）
+    const walk = (el, parentOp = 1) => {
       const cs = getComputedStyle(el);
       const r = el.getBoundingClientRect();
       const tag = el.tagName.toLowerCase();
-      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
+      const op = parentOp * (parseFloat(cs.opacity) || 0);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || op === 0) return;
 
       const cls = (typeof el.className === 'string' ? el.className : '');
       const base = {tag, cls, x: r.left - pb.left, y: r.top - pb.top, w: r.width, h: r.height};
@@ -139,7 +176,7 @@ JS = r"""
       const painted = (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent');
       const bdw = px(cs.borderTopWidth);
       if (painted || bdw > 0) {          // 背景/描边先出矩形，画在文字之下
-        out.push({...base, kind: 'shape', bg, bdw, bdc: cs.borderTopColor,
+        out.push({...base, kind: 'shape', bg, bdw, bdc: cs.borderTopColor, op,
                   radius: px(cs.borderRadius), shadow: cs.boxShadow, rot: 0});
       }
 
@@ -154,33 +191,7 @@ JS = r"""
           if (n.nodeType === 1 && n.tagName.toLowerCase() === 'br') groups.push([]);
           else groups[groups.length - 1].push(n);
         }
-        for (const g of groups) {
-          const nodes = g.filter(n => n.nodeType !== 3 || n.textContent.trim());
-          if (!nodes.length) continue;
-          const {bb, lines} = measure(nodes);
-          if (!bb.height) continue;
-          const tmp = document.createElement('div');
-          for (const n of g) tmp.appendChild(n.cloneNode(true));
-          tmp.style.cssText = 'position:absolute;visibility:hidden';
-          el.appendChild(tmp);
-          const rs = runsOf(tmp);
-          tmp.remove();
-          if (!rs.length) continue;
-          const fsMax = Math.max(px(cs.fontSize), ...rs.filter(r => !r.br).map(r => r.fs));
-          out.push({
-            tag, cls, kind: 'text',
-            // x/w 用容器的：居中的段落要靠容器宽度维持居中语义，
-            // 用段落自己收缩后的宽度会在换字体后左右飘。
-            x: base.x, w: base.w,
-            y: bb.top - pb.top, h: bb.height,
-            fs: px(cs.fontSize), fsMax, fw: cs.fontWeight, color: cs.color,
-            ls: cs.letterSpacing === 'normal' ? 0 : px(cs.letterSpacing),
-            ta: cs.textAlign,
-            lhEff: bb.height / lines, lines,
-            wrap: lines > 1,
-            runs: rs,
-          });
-        }
+        for (const g of groups) emitText(el, cs, base, g, op, false);
 
         // 行内的纯装饰色块（压在字上的删除线、高亮条）不能跟着文字被吞掉，
         // 单独出形状，且要画在文字之上。
@@ -204,11 +215,26 @@ JS = r"""
         }
         return;
       }
-      for (const c of el.children) walk(c);
+      // 混合内容：既有非行内子元素（svg/div…）又有裸文字。el.children 看不到文本节点，
+      // 必须按 childNodes 走，否则裸文字被静默丢掉（issue #56）。
+      let run = [];
+      const flush = () => { emitText(el, cs, base, run, op, true); run = []; };
+      for (const n of el.childNodes) {
+        if (n.nodeType === 3) run.push(n);
+        else if (n.nodeType === 1) { flush(); walk(n, op); }
+      }
+      flush();
     };
 
     for (const c of pg.children) walk(c);
-    return {w: pb.width, h: pb.height, els: out};
+    // ref：浏览器自己渲染出来的 innerText。它不经过上面任何一行提取逻辑，
+    // 是校验丢字时唯一独立的对照源（已含 text-transform）。
+    // svg/canvas 整块截成图片，里面的字本来就不进文本框，对照时先把它们藏掉。
+    const hid = [...pg.querySelectorAll('svg,canvas')].map(n => [n, n.style.display]);
+    hid.forEach(([n]) => { n.style.display = 'none'; });
+    const ref = pg.innerText;
+    hid.forEach(([n, d]) => { n.style.display = d; });
+    return {w: pb.width, h: pb.height, els: out, ref};
   });
 }
 """
@@ -284,6 +310,7 @@ class Builder:
             el.set("typeface", val)
         if r.get("ls"):
             rPr.set("spc", str(int(round(r["ls"] * self.k * 100))))   # 单位 1/100 pt
+        alpha *= r.get("op", 1)              # 祖先链累乘的 CSS opacity
         if col and alpha < 1:
             solid = rPr.find(qn("a:solidFill"))
             if solid is not None and solid.find(qn("a:srgbClr")) is not None:
@@ -341,7 +368,9 @@ class Builder:
             MSO_SHAPE.ROUNDED_RECTANGLE if rounded else MSO_SHAPE.RECTANGLE,
             Pt(e["x"] * k), Pt(e["y"] * k), Pt(e["w"] * k), Pt(e["h"] * k))
         shp.shadow.inherit = False
+        op = e.get("op", 1)                # 祖先链累乘的 CSS opacity
         col, alpha = parse_color(e.get("bg"))
+        alpha *= op
         if col and alpha > 0:
             shp.fill.solid()
             shp.fill.fore_color.rgb = col
@@ -352,8 +381,12 @@ class Builder:
             shp.fill.background()
 
         bcol, balpha = parse_color(e.get("bdc"))
+        balpha *= op
         if e.get("bdw", 0) > 0 and bcol and balpha > 0:
             shp.line.color.rgb = bcol
+            if balpha < 1:
+                ln = shp.line._get_or_add_ln().find(qn("a:solidFill"))
+                _alpha(ln.find(qn("a:srgbClr")), balpha)
             shp.line.width = Pt(e["bdw"] * k)
         else:
             shp.line.fill.background()
@@ -458,6 +491,46 @@ class Builder:
 
 
 # ─────────────────────────────────────────────────────────────
+# 二点五、丢字校验（对照源 = 浏览器渲染后的 innerText）
+# ─────────────────────────────────────────────────────────────
+
+def _norm(t):
+    # 去全部空白、统一大小写：innerText 已含 text-transform，PPTX 里则是源码大小写的历史包袱
+    return re.sub(r"\s+", "", t or "").lower()
+
+
+def verify_text(refs, pptx_path):
+    """逐页比对：渲染后的 innerText（refs[i]）里有、但 PPTX 第 i 页文本框里没有的片段。
+
+    返回 [[缺失片段, ...], ...]，每页一个列表；全空 = 没丢字。
+    对照源必须独立于提取逻辑——拿 --dump-json 的清单去比，提取阶段丢的字两边都没有，
+    必然漏检。
+    """
+    import difflib
+    prs = Presentation(pptx_path)
+    res = []
+    for ref, slide in zip(refs, prs.slides):
+        got = _norm("".join(sh.text_frame.text for sh in slide.shapes if sh.has_text_frame))
+        want = _norm(ref)
+        sm = difflib.SequenceMatcher(None, want, got, autojunk=False)
+        res.append([want[i1:i2] for tag, i1, i2, _, _ in sm.get_opcodes()
+                    if tag in ("delete", "replace")])
+    return res
+
+
+def report_missing(missing):
+    n = sum(len(m) for m in missing)
+    if not n:
+        print("🔍 丢字校验：渲染后的页面文字全部在 PPTX 里，没有丢字")
+        return
+    print(f"⚠️ 丢字校验：{n} 处文字在浏览器里看得见、PPTX 里没有（已去空白比对）")
+    for pi, segs in enumerate(missing):
+        for sg in segs:
+            print(f"   第 {pi+1} 页缺：{sg[:60]}{'…' if len(sg) > 60 else ''}")
+    print("   （--skip-class 跳过的元素会出现在这里，属预期；其余请排查）")
+
+
+# ─────────────────────────────────────────────────────────────
 # 三、模板相关的三个小手术
 # ─────────────────────────────────────────────────────────────
 
@@ -532,6 +605,7 @@ def main():
             kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
     print(f"📐 量到 {len(pages)} 页　{kinds}")
     Builder(cfg).run(pages)
+    report_missing(verify_text([p["ref"] for p in pages], cfg.out))
 
 
 if __name__ == "__main__":

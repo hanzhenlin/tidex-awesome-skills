@@ -1,5 +1,9 @@
 # couple-photo-orchestrator Changelog
 
+## 2.24.26 — 2026-10-25
+- 所有摄影拍摄类型统一加入关键词：高级摄影师风格，创意构图，强烈的戏剧张力。
+- 同步方向卡、Shot 模板与编译脚本，覆盖八宫格及单张放大；人物身份、已确认造型与八宫格优先流程继续继承。
+
 ## 2.24.24 — 2026-09-14
 - 新增 **Identity Lock v2**，重点解决 8 宫格 / contact sheet 中同一真人跨 Panel 人脸逐格漂移。
 - Grid Prompt 新增高优先级 `IDENTITY LOCK — HIGHEST PRIORITY`，明确身份一致性优先于姿势、构图、灯光、环境尺度与电影化效果。

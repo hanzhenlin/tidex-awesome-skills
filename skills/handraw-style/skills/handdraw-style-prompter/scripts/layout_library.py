@@ -65,7 +65,11 @@ def load_layouts() -> list[dict[str, object]]:
             raise ValueError(f"Layout {identifier} needs a prompt file.")
         if not isinstance(keywords, list) or not all(isinstance(keyword, str) and keyword.strip() for keyword in keywords):
             raise ValueError(f"Layout {identifier} needs non-empty keyword strings.")
-        prompt_path = REFERENCES / prompt_file
+        prompt_path = SKILL / prompt_file
+        if not prompt_path.is_file():
+            prompt_path = REFERENCES / prompt_file
+        if not prompt_path.is_file():
+            prompt_path = REFERENCES / Path(prompt_file).name
         if not prompt_path.is_file():
             raise ValueError(f"Layout prompt file is missing: {prompt_path}")
         seen.add(identifier)

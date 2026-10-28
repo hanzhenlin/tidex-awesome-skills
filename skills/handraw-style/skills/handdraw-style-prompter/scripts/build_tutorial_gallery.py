@@ -16,6 +16,54 @@ COLORS_JSON = SKILL / "references" / "colors.json"
 CHARACTERS_JSON = SKILL / "references" / "characters.json"
 PROPS_JSON = SKILL / "references" / "props.json"
 SCENES_JSON = SKILL / "references" / "scenes.json"
+TONES_JSON = SKILL / "references" / "tones.json"
+
+IMAGE_FALLBACK_SCRIPT = """<script>
+(function() {
+  function fixImg(img) {
+    if (!img || img.__fixed) return;
+    var src = img.getAttribute('src') || '';
+    var idx = src.indexOf('images/');
+    if (idx === -1) return;
+    var sub = src.substring(idx);
+    var step = parseInt(img.dataset.retry || '0', 10);
+    var candidates = [
+      '../../../../' + sub,
+      '../../../' + sub,
+      '../../' + sub,
+      '../' + sub,
+      './' + sub,
+      '/' + sub,
+      'https://img.handraw-style.com/' + sub,
+      'https://raw.githubusercontent.com/yang0/handraw-style/master/' + sub
+    ];
+    while (step < candidates.length) {
+      var nextSrc = candidates[step];
+      step++;
+      if (nextSrc !== src) {
+        img.dataset.retry = step.toString();
+        img.src = nextSrc;
+        return;
+      }
+    }
+    img.__fixed = true;
+  }
+  window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      fixImg(e.target);
+    }
+  }, true);
+  window.addEventListener('load', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      var card = e.target.closest('.style-card, .layout-card, .color-card, .asset-card, .picker-card');
+      if (card && e.target.src) {
+        card.dataset.image = e.target.src;
+      }
+    }
+  }, true);
+})();
+</script>"""
+
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
@@ -60,6 +108,7 @@ def build_html() -> str:
     characters_raw = json.loads(CHARACTERS_JSON.read_text(encoding="utf-8")) if CHARACTERS_JSON.exists() else []
     props_raw = json.loads(PROPS_JSON.read_text(encoding="utf-8")) if PROPS_JSON.exists() else []
     scenes_raw = json.loads(SCENES_JSON.read_text(encoding="utf-8")) if SCENES_JSON.exists() else []
+    tones_raw = json.loads(TONES_JSON.read_text(encoding="utf-8")) if TONES_JSON.exists() else []
 
     try:
         import custom_library_manager
@@ -96,6 +145,7 @@ def build_html() -> str:
             "name": s["generation_name"],
             "ref": s["reference"],
             "group": s["number"].split("-")[0],
+            "group_name": s.get("group", ""),
             "img": individual_image_path(s["number"]),
         }
         for s in styles_raw
@@ -125,14 +175,31 @@ def build_html() -> str:
         for c in colors_raw
     ]
 
+    tones_data = [
+        {
+            "id": t["id"],
+            "name": t["name_zh"],
+            "name_en": t.get("name_en", t["name_zh"]),
+            "cat": t.get("category", "atmosphere"),
+            "cat_zh": t.get("category_zh", ""),
+            "cat_en": t.get("category_en", ""),
+            "desc_zh": t.get("desc_zh", ""),
+            "desc_en": t.get("desc_en", ""),
+            "img": t["image"],
+        }
+        for t in tones_raw
+    ]
+
     assets_json_str = json.dumps(assets_data, ensure_ascii=False, separators=(",", ":"))
     styles_json_str = json.dumps(styles_data, ensure_ascii=False, separators=(",", ":"))
     layouts_json_str = json.dumps(layouts_data, ensure_ascii=False, separators=(",", ":"))
     colors_json_str = json.dumps(colors_data, ensure_ascii=False, separators=(",", ":"))
+    tones_json_str = json.dumps(tones_data, ensure_ascii=False, separators=(",", ":"))
     assets_count = len(assets_data)
     styles_count = len(styles_data)
     layouts_count = len(layouts_data)
     colors_count = len(colors_data)
+    tones_count = len(tones_data)
     color_categories_data = [{"id": cid, "zh": czh, "en": cen} for cid, czh, cen in COLOR_CATEGORIES]
     color_categories_json_str = json.dumps(color_categories_data, ensure_ascii=False, separators=(",", ":"))
 
@@ -210,6 +277,7 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .extra-fields-grid.single-col{{grid-template-columns:1fr}}
 .extra-fields-grid[hidden]{{display:none!important}}
 
+
 /* Aspect Ratio Selector */
 .ratio-form-group{{display:flex;flex-direction:column;gap:8px}}
 .selector-options-row{{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px;align-items:start}}
@@ -227,8 +295,8 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .mood-form-group{{display:flex;flex-direction:column;gap:8px}}
 .mood-presets-row{{display:flex;flex-wrap:wrap;gap:7px;align-items:center}}
 .mood-preset-btn,.shoot-type-preset-btn{{border:1px solid #dcd5ca;background:#faf8f5;color:#4a423a;padding:4px 11px;border-radius:16px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;line-height:1.3;transition:all .15s}}
-.mood-preset-btn:hover,.shoot-type-preset-btn:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
-.mood-preset-btn.is-active,.shoot-type-preset-btn.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 3px rgba(183,66,39,0.25)}}
+.mood-preset-btn:hover,.shoot-type-preset-btn:hover:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
+.mood-preset-btn.is-active,.shoot-type-preset-btn.is-active.is-active{{background:#b74227;color:#fff;border-color:#b74227;box-shadow:0 1px 3px rgba(183,66,39,0.25)}}
 
 /* Slots Grid */
 .fusion-checkbox-wrap{{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:3px 10px;border-radius:16px;background:#eee8df;border:1px solid #dcd5ca;cursor:pointer;font-size:12.5px;font-weight:750;color:#514a43;user-select:none;transition:all .15s}}
@@ -268,8 +336,11 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 
 .slots-grid{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:0}}
 .slots-grid.is-fusion{{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:1100px){{.slots-grid.is-fusion{{grid-template-columns:repeat(2,1fr)}}}}
-@media(max-width:860px){{.slots-grid,.slots-grid.is-fusion{{grid-template-columns:1fr}}}}
+.slots-grid.is-tone{{grid-template-columns:repeat(4,1fr)}}
+.slots-grid.is-fusion.is-tone{{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:1200px){{.slots-grid.is-fusion.is-tone{{grid-template-columns:repeat(3,1fr)}}}}
+@media(max-width:1100px){{.slots-grid.is-tone,.slots-grid.is-fusion{{grid-template-columns:repeat(2,1fr)}}}}
+@media(max-width:860px){{.slots-grid,.slots-grid.is-fusion,.slots-grid.is-tone,.slots-grid.is-fusion.is-tone{{grid-template-columns:1fr}}}}
 .picker-card.is-realistic .picker-card-name{{font-weight:750}}
 .slot-card[hidden]{{display:none!important}}
 .slot-card{{border:1px solid #ded8cf;border-radius:12px;background:#fff;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s,box-shadow .15s,opacity .15s}}
@@ -284,8 +355,9 @@ main{{max-width:1240px;margin:auto;padding:24px 30px 50px}}
 .slot-trigger{{width:100%;min-height:92px;border:2px dashed #c9c1b6;border-radius:8px;background:#fffdfa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;color:#786f65;font:inherit;font-size:13px;font-weight:650;transition:all .15s}}
 .slot-trigger:hover{{border-color:#b74227;color:#b74227;background:#fff8f5}}
 .slot-filled{{display:flex;align-items:center;gap:10px;min-height:92px;box-sizing:border-box;background:#fff;border-radius:8px}}
-.slot-img-wrap{{width:72px;height:72px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#eee;border:1px solid #dcd5ca}}
+.slot-img-wrap{{position:relative;width:72px;height:72px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#eee;border:1px solid #dcd5ca}}
 .slot-img-wrap img{{width:100%;height:100%;object-fit:cover;display:block}}
+.slot-count-badge{{position:absolute;top:4px;right:4px;background:#b74227;color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:10px;line-height:1.2;box-shadow:0 1px 3px rgba(0,0,0,0.3);z-index:2}}
 .slot-meta{{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}}
 .slot-code{{font-size:12px;font-weight:800;color:#b74227}}
 .slot-name{{font-size:13px;font-weight:700;color:#24211e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
@@ -371,9 +443,11 @@ dialog::backdrop{{background:#000a}}
   .copy-main-btn{{width:100%;justify-content:center}}
   .modal-grid{{grid-template-columns:repeat(auto-fill,minmax(95px,1fr))}}
 }}
-</style></head><body>
+</style>
+{IMAGE_FALLBACK_SCRIPT}
+</head><body>
 <header class="sticky-header">
-<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="assets.html" data-i18n="assetsNav">自建图库</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="wechat-btn" type="button" data-i18n="wechatBtn">💬 创作变现交流群</button><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
+<nav class="site-nav" aria-label="画廊导航"><a href="index.html" data-i18n="stylesNav">风格画廊</a><a href="layouts.html" data-i18n="layoutsNav">图型画廊</a><a href="colors.html" data-i18n="colorsNav">色彩画廊</a><a href="assets.html" data-i18n="assetsNav">自建图库</a><a href="tutorials.html" aria-current="page" data-i18n="tutorialsNav">提示词</a><div class="nav-right"><a class="nav-ext" href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" title="GitHub 仓库"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a><a class="nav-ext" href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" title="X (Twitter) @yang02010"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X (@yang02010)</a><button class="nav-btn" id="lang-btn" type="button" aria-label="Switch Language">🌐 EN / 中</button></div></nav>
 </header>
 <main>
 <!-- Prompt Assembler Studio -->
@@ -430,7 +504,7 @@ dialog::backdrop{{background:#000a}}
         </div>
         <div class="step-body">
           <div class="form-group">
-            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪..." aria-label="画面主题或文章内容"></textarea>
+            <textarea id="input-theme" class="text-input text-area" rows="2" placeholder="输入画面主题，亦可输入本地文件或文件夹路径（如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:/path/to/...）..." aria-label="画面主题、文件或文件夹路径"></textarea>
           </div>
 
           <!-- Extra fields for poster mode only -->
@@ -540,6 +614,10 @@ dialog::backdrop{{background:#000a}}
               <input type="checkbox" id="checkbox-fusion" class="fusion-checkbox">
               <span class="fusion-checkbox-text" data-i18n="fusionCheckboxLabel">风格融合</span>
             </label>
+            <label class="fusion-checkbox-wrap" id="tone-checkbox-wrap">
+              <input type="checkbox" id="checkbox-tone" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="toneCheckboxLabel">影调</span>
+            </label>
           </div>
           <div class="step-toolbar">
             <button type="button" id="btn-gacha" class="btn-tool" title="随机抽选图型、风格与色彩">
@@ -630,7 +708,7 @@ dialog::backdrop{{background:#000a}}
             <div class="slot-card" id="slot-char-style" hidden>
               <div class="slot-header">
                 <span class="slot-title">🎭 <span data-i18n="slotCharStyle">角色风格</span></span>
-                <span class="slot-optional" data-i18n="optionalCharStyle">可选 (风格/写实)</span>
+                <span class="slot-optional" data-i18n="optionalCharStyle">可选 ({styles_count})</span>
               </div>
               <button type="button" class="slot-trigger" data-picker="char-style">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 2a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9 10 10 0 0 1 0-18z"/></svg>
@@ -653,7 +731,7 @@ dialog::backdrop{{background:#000a}}
             <div class="slot-card" id="slot-scene-style" hidden>
               <div class="slot-header">
                 <span class="slot-title">🌄 <span data-i18n="slotSceneStyle">场景风格</span></span>
-                <span class="slot-optional" data-i18n="optionalSceneStyle">可选 (风格/写实)</span>
+                <span class="slot-optional" data-i18n="optionalSceneStyle">可选 ({styles_count})</span>
               </div>
               <button type="button" class="slot-trigger" data-picker="scene-style">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -694,6 +772,32 @@ dialog::backdrop{{background:#000a}}
                 </div>
               </div>
             </div>
+
+            <!-- Tone Slot (Hidden when not enabled) -->
+            <div class="slot-card" id="slot-tone" hidden>
+              <div class="slot-header">
+                <span class="slot-title">💡 <span data-i18n="slotTone">影调</span></span>
+                <span class="slot-optional" id="slot-tone-optional" data-i18n="optionalTone">可选 ({tones_count}) · 多选</span>
+              </div>
+              <button type="button" class="slot-trigger" data-picker="tone">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <span data-i18n="pickToneText">按图选择影调 ({tones_count})</span>
+              </button>
+              <div class="slot-filled" hidden>
+                <div class="slot-img-wrap">
+                  <img src="" alt="">
+                  <span class="slot-count-badge" id="slot-tone-badge" hidden>+1</span>
+                </div>
+                <div class="slot-meta">
+                  <span class="slot-code"></span>
+                  <span class="slot-name"></span>
+                </div>
+                <div class="slot-actions">
+                  <button type="button" class="btn-change" data-picker="tone" data-i18n="changeBtn">更换</button>
+                  <button type="button" class="btn-clear" data-clear="tone" title="清除选择" aria-label="清除选择">×</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -704,6 +808,14 @@ dialog::backdrop{{background:#000a}}
           <div class="step-title-wrap">
             <span class="step-badge">5</span>
             <h2 class="step-title output-title" data-i18n="step5Title">拼装生成的出图指令</h2>
+            <label class="fusion-checkbox-wrap" id="batch-checkbox-wrap">
+              <input type="checkbox" id="checkbox-batch" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="batchCheckboxLabel">批量出图</span>
+            </label>
+            <label class="fusion-checkbox-wrap" id="mix-layouts-checkbox-wrap" hidden>
+              <input type="checkbox" id="checkbox-mix-layouts" class="fusion-checkbox">
+              <span class="fusion-checkbox-text" data-i18n="mixLayoutsCheckboxLabel">混合多种图型</span>
+            </label>
           </div>
           <div class="output-actions">
             <button type="button" id="btn-copy-assembled" class="copy-main-btn">
@@ -747,8 +859,7 @@ dialog::backdrop{{background:#000a}}
   </div>
 </dialog>
 
-<!-- WeChat QR Modal -->
-<dialog id="wechat-modal" aria-labelledby="wechat-title" style="width:min(94vw,560px);padding:22px;border:0;border-radius:14px;background:#1e1b18;color:#fff;box-shadow:0 20px 70px #000a;text-align:center"><button class="close" type="button" aria-label="关闭" style="position:absolute;top:12px;right:12px;border:0;border-radius:7px;padding:5px 9px;background:#fff;color:#24211e;cursor:pointer;font:inherit">关闭 ×</button><h3 id="wechat-title" style="margin:4px 0 10px;font-size:17px;color:#fff" data-i18n="wechatTitle">💬 创作变现交流群</h3><p style="margin:0 0 4px;font-size:14px;color:#eee" data-i18n="wechatSub">请优先加群，满了的话也可以尝试加我个人微信</p><p style="margin:0 0 16px;font-size:13px;color:#d67d4d;font-weight:600" data-i18n="wechatNote">请备注：手绘</p><div style="display:flex;justify-content:center;align-items:flex-start;gap:24px;flex-wrap:wrap"><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatGroupLabel">① 优先加入群聊</div><img src="../../../images/wechat_group.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_group.png';" alt="手绘交流群二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div><div style="flex:1 1 200px;max-width:240px;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><div style="color:#24211e;font-size:13px;font-weight:700;margin-bottom:6px" data-i18n="wechatPersonalLabel">② 个人微信备用</div><img src="../../../images/wechat_personal.png" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/yang0/handraw-style/master/images/wechat_personal.png';" alt="旺德福个人微信二维码" style="display:block;width:100%;height:auto;border-radius:6px"></div></div><div style="margin-top:16px;padding-top:12px;border-top:1px solid #332f2b;display:flex;justify-content:center;gap:16px;font-size:13px"><a href="https://github.com/yang0/handraw-style" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">GitHub 仓库 ↗</a><a href="https://x.com/yang02010" target="_blank" rel="noopener noreferrer" style="color:#d67d4d;text-decoration:none;font-weight:600">X @yang02010 ↗</a></div></dialog>
+
 
 <script src="../../../images/custom/custom_assets.js" onerror="window.CUSTOM_ASSETS_DATA=null;"></script>
 <script>
@@ -778,8 +889,9 @@ const STYLES_DATA = {styles_json_str};
 const LAYOUTS_DATA = {layouts_json_str};
 const COLORS_DATA = {colors_json_str};
 const COLOR_CATEGORIES = {color_categories_json_str};
+const TONES_DATA = {tones_json_str};
 
-const wechatBtn=document.querySelector('#wechat-btn'),wechatModal=document.querySelector('#wechat-modal'),langBtn=document.querySelector('#lang-btn');
+const langBtn=document.querySelector('#lang-btn');
 const inputTheme=document.querySelector('#input-theme'),themeLabelText=document.querySelector('#theme-label-text'),inputAudience=document.querySelector('#input-audience'),inputChannel=document.querySelector('#input-channel'),posterExtraFields=document.querySelector('#poster-extra-fields');
 const inputShootType=document.querySelector('#input-shoot-type'),photoExtraFields=document.querySelector('#photo-extra-fields'),btnClearShootType=document.querySelector('#btn-clear-shoot-type');
 const inputRatio=document.querySelector('#input-ratio'),btnClearRatio=document.querySelector('#btn-clear-ratio');
@@ -787,12 +899,15 @@ const inputMood=document.querySelector('#input-mood'),btnClearMood=document.quer
 const assembledText=document.querySelector('#assembled-text'),btnCopyAssembled=document.querySelector('#btn-copy-assembled'),copyBtnText=document.querySelector('#copy-btn-text');
 const pickerDialog=document.querySelector('#picker-dialog'),pickerTitle=document.querySelector('#picker-title'),pickerFilters=document.querySelector('#picker-filters'),pickerSearch=document.querySelector('#picker-search'),pickerGrid=document.querySelector('#picker-grid');
 const checkboxFusion=document.querySelector('#checkbox-fusion'),fusionWrap=document.querySelector('#fusion-checkbox-wrap');
+const checkboxTone=document.querySelector('#checkbox-tone'),toneWrap=document.querySelector('#tone-checkbox-wrap'),slotTone=document.querySelector('#slot-tone');
+const checkboxBatch=document.querySelector('#checkbox-batch'),batchWrap=document.querySelector('#batch-checkbox-wrap');
+const checkboxMixLayouts=document.querySelector('#checkbox-mix-layouts'),mixLayoutsWrap=document.querySelector('#mix-layouts-checkbox-wrap');
 const slotsGrid=document.querySelector('#slots-grid'),slotStyle=document.querySelector('#slot-style'),slotCharStyle=document.querySelector('#slot-char-style'),slotSceneStyle=document.querySelector('#slot-scene-style');
 const modalAssetFooter=document.querySelector('#modal-asset-footer'),modalAssetSummary=document.querySelector('#modal-asset-summary');
 const btnModalClearAssets=document.querySelector('#btn-modal-clear-assets'),btnModalConfirmAssets=document.querySelector('#btn-modal-confirm-assets');
 const assetsTrayCards=document.querySelector('#assets-tray-cards'),assetsEmptyTrigger=document.querySelector('#assets-empty-trigger'),btnClearAssets=document.querySelector('#btn-clear-assets');
 
-let currentMode = 'pure'; // 'pure' | 'graphic-text' | 'poster' | 'article-illust'
+let currentMode = 'pure'; // 'pure' | 'graphic-text' | 'poster' | 'article-illust' | 'photo'
 let currentWhitespace = 'normal'; // 'normal' | 'moderate' | 'high'
 let selectedAssets = [];
 let selectedLayout = null;
@@ -800,19 +915,15 @@ let selectedStyle = null;
 let selectedCharStyle = null;
 let selectedSceneStyle = null;
 let selectedColor = null;
+let selectedTones = [];
 let currentPickerType = null;
 let currentPickerFilter = 'all';
 let isFusionActive = false;
+let isToneActive = false;
+let isBatchActive = false;
+let isMixLayoutsActive = false;
 
-const REALISTIC_ITEM = {{
-  id: 'realistic',
-  isRealistic: true,
-  group: 'all',
-  name: '写实',
-  name_en: 'Realistic',
-  ref: '写实摄影 / 真实电影质感摄影',
-  img: '../../../images/realistic.webp'
-}};
+
 
 const I18N = {{
   zh: {{
@@ -822,10 +933,12 @@ const I18N = {{
     colorsNav: "色彩画廊",
     assetsNav: "自建图库",
     tutorialsNav: "提示词",
-    wechatBtn: "💬 创作变现交流群",
     assemblerTitle: "🛠️ 提示词拼装器",
     assemblerSub: "交互式点选图型、风格与色彩，实时拼装出图指令。",
     fusionCheckboxLabel: "风格融合",
+    toneCheckboxLabel: "影调",
+    batchCheckboxLabel: "批量出图",
+    mixLayoutsCheckboxLabel: "混合多种图型",
     step1Title: "出图模式与留白",
     step2Title: "画面主题与内容",
     step3Title: "画幅比例与情绪",
@@ -852,15 +965,15 @@ const I18N = {{
     whitespaceModeratePrompt: "【大量留白】",
     whitespaceHighPrompt: "【大量留白，场景只显示必要部分，不要显示全】",
     themeLabel: "主题：",
-    articlePathLabel: "文章文件地址：",
-    articleCoverPathLabel: "文章文件地址或内容：",
+    articlePathLabel: "文件或文件夹地址：",
+    articleCoverPathLabel: "文件/文件夹地址或内容：",
     shootTypeLabel: "拍摄类型：",
     audienceLabel: "受众：",
     channelLabel: "海报投放渠道：",
-    themePlaceholder: "输入画面主题，例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪...",
-    themePhotoPlaceholder: "选填：输入特定主题或场景（如：海边夕阳 / 90年代港风），不填由AI推荐...",
-    articlePathPlaceholder: "请输入文章的本地绝对路径，例如：D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "请输入文章的本地绝对路径（例如：D:\\\\path\\\\to\\\\article.md）或直接粘贴文章内容...",
+    themePlaceholder: "输入画面主题，亦可输入本地文件或文件夹路径（例如：秋天的第一杯奶茶 / 窗台晒太阳的猫咪，或 D:\\\\path\\\\to\\\\...）...",
+    themePhotoPlaceholder: "选填：输入特定主题或场景，亦可输入本地文件或文件夹路径（如：海边夕阳 / 90年代港风），不填由AI推荐...",
+    articlePathPlaceholder: "请输入本地文件或文件夹绝对路径（支持单篇或批量配图，例如：D:\\\\path\\\\to\\\\article.md 或文件夹）...",
+    articleCoverPathPlaceholder: "请输入本地文件或文件夹绝对路径（例如：D:\\\\path\\\\to\\\\article.md），或直接粘贴文章内容...",
     articleCoverFixedPrompt: "先设计隐喻再出图，主标题明显，小字少或者没有小字。 其他你帮我设计。",
     shootTypePlaceholder: "点选上方标签，或手动输入/修改拍摄类型...",
     shootTypeCouple: "情侣",
@@ -906,13 +1019,15 @@ const I18N = {{
     slotCharStyle: "角色风格",
     slotSceneStyle: "场景风格",
     slotColor: "主题色",
+    slotTone: "影调",
     optional: "可选",
     optionalAsset: "可选 ({assets_count})",
     optionalLayout: "可选 ({layouts_count})",
     optionalStyle: "可选 ({styles_count})",
-    optionalCharStyle: "可选 (风格/写实)",
-    optionalSceneStyle: "可选 (风格/写实)",
+    optionalCharStyle: "可选 ({styles_count})",
+    optionalSceneStyle: "可选 ({styles_count})",
     optionalColor: "可选 (36)",
+    optionalTone: "可选 ({tones_count}) · 多选",
     layoutNotApplicable: "不适用",
     pickAssetText: "按图选择自建资产",
     pickLayoutText: "按图选择图型 ({layouts_count})",
@@ -920,6 +1035,7 @@ const I18N = {{
     pickCharStyleText: "按图选择角色风格",
     pickSceneStyleText: "按图选择场景风格",
     pickColorText: "按图选择主题色 (36)",
+    pickToneText: "按图选择影调 ({tones_count})",
     changeBtn: "更换",
     gachaBtn: "智能随机抽卡",
     resetBtn: "一键清空",
@@ -931,11 +1047,16 @@ const I18N = {{
     searchPlaceholder: "输入编号或名称过滤...",
     pickerTitleAsset: "选择视觉资产（角色 / 道具 / 场景）",
     pickerTitleLayout: "选择图型 ({layouts_count})",
-    pickerTitleStyle: "选择手绘风格 ({styles_count})",
+    pickerTitleStyle: "选择视觉风格 ({styles_count})",
     pickerTitleCharStyle: "选择角色风格",
     pickerTitleSceneStyle: "选择场景风格",
     styleConflictAlert: "角色风格与场景风格必须不同，请选择不同的风格！",
     pickerTitleColor: "选择主题色 (36)",
+    pickerTitleTone: "选择影调 ({tones_count} · 可多选)",
+    modalToneCount: "已选择 {{count}} 项影调",
+    filterToneKey: "明暗阶调",
+    filterToneContrast: "反差过渡",
+    filterToneAtmosphere: "氛围风格",
     filterAll: "全部",
     filterCharacters: "角色库",
     filterProps: "道具库",
@@ -953,14 +1074,9 @@ const I18N = {{
     filterNeutral: "中性色系",
     fallbackPrompt: "其他你帮我选择",
     themeEmptyText: "【输入主题】",
-    articlePathEmptyText: "【输入文章文件地址】",
+    articlePathEmptyText: "【输入文件或文件夹地址】",
     audienceEmptyText: "【输入受众】",
     channelEmptyText: "【输入海报投放渠道】",
-    wechatTitle: "💬 创作变现交流群",
-    wechatSub: "请优先加群，满了的话也可以尝试加我个人微信",
-    wechatNote: "请备注：手绘",
-    wechatGroupLabel: "① 优先加入群聊",
-    wechatPersonalLabel: "② 个人微信备用",
     langBtn: "🌐 English"
   }},
   en: {{
@@ -970,10 +1086,12 @@ const I18N = {{
     colorsNav: "Colors",
     assetsNav: "Custom Library",
     tutorialsNav: "Prompts",
-    wechatBtn: "💬 Creator Community",
     assemblerTitle: "🛠️ Prompt Assembler",
     assemblerSub: "Visually select layout, style, and color to assemble prompt commands in real time.",
     fusionCheckboxLabel: "Style Fusion",
+    toneCheckboxLabel: "Tone",
+    batchCheckboxLabel: "Batch Generation",
+    mixLayoutsCheckboxLabel: "Mix Multiple Layouts",
     step1Title: "Mode & Negative Space",
     step2Title: "Theme & Content",
     step3Title: "Aspect Ratio & Mood",
@@ -1000,15 +1118,15 @@ const I18N = {{
     whitespaceModeratePrompt: "[Generous negative space]",
     whitespaceHighPrompt: "[Generous negative space, scene shows only essential parts, do not show in full]",
     themeLabel: "Theme:",
-    articlePathLabel: "Article File Path:",
-    articleCoverPathLabel: "Article File Path or Text:",
+    articlePathLabel: "File or Folder Path:",
+    articleCoverPathLabel: "File / Folder Path or Text:",
     shootTypeLabel: "Shoot Type:",
     audienceLabel: "Audience:",
     channelLabel: "Distribution Channel:",
-    themePlaceholder: "Enter theme, e.g. Autumn milk tea / Cat sunbathing on windowsill...",
-    themePhotoPlaceholder: "Optional: Enter specific theme or setting (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
-    articlePathPlaceholder: "Enter absolute local file path, e.g. D:\\\\path\\\\to\\\\article.md...",
-    articleCoverPathPlaceholder: "Enter absolute local file path (e.g. D:\\\\path\\\\to\\\\article.md) or paste article text...",
+    themePlaceholder: "Enter theme, or local file/folder path (e.g. Autumn milk tea / Cat on windowsill, or D:\\\\path\\\\to\\\\dir)...",
+    themePhotoPlaceholder: "Optional: Enter specific theme or setting, or local file/folder path (e.g. Sunset beach / Vintage cafe), or leave empty for AI recommendation...",
+    articlePathPlaceholder: "Enter absolute local file or folder path (supports single or batch illustration, e.g. D:\\\\path\\\\to\\\\article.md or folder)...",
+    articleCoverPathPlaceholder: "Enter absolute local file or folder path (e.g. D:\\\\path\\\\to\\\\article.md), or paste article text...",
     articleCoverFixedPrompt: "Design a visual metaphor first, then generate the image. Ensure the main title is bold and prominent, with few or no small text. Pick the rest of the design for me.",
     shootTypePlaceholder: "Click tags above, or type/edit shoot type...",
     shootTypeCouple: "Couple",
@@ -1054,13 +1172,15 @@ const I18N = {{
     slotCharStyle: "Character Style",
     slotSceneStyle: "Scene Style",
     slotColor: "Theme Color",
+    slotTone: "Tone",
     optional: "Optional",
     optionalAsset: "Optional ({assets_count})",
     optionalLayout: "Optional ({layouts_count})",
     optionalStyle: "Optional ({styles_count})",
-    optionalCharStyle: "Optional (Style/Realistic)",
-    optionalSceneStyle: "Optional (Style/Realistic)",
+    optionalCharStyle: "Optional ({styles_count})",
+    optionalSceneStyle: "Optional ({styles_count})",
     optionalColor: "Optional (36)",
+    optionalTone: "Optional ({tones_count}) · Multi",
     layoutNotApplicable: "N/A",
     pickAssetText: "Pick Custom Asset",
     pickLayoutText: "Pick Layout ({layouts_count})",
@@ -1068,6 +1188,7 @@ const I18N = {{
     pickCharStyleText: "Pick Character Style",
     pickSceneStyleText: "Pick Scene Style",
     pickColorText: "Pick Theme Color (36)",
+    pickToneText: "Pick Visual Tone ({tones_count})",
     changeBtn: "Change",
     gachaBtn: "Random Gacha",
     resetBtn: "Reset All",
@@ -1079,11 +1200,16 @@ const I18N = {{
     searchPlaceholder: "Search ID or name...",
     pickerTitleAsset: "Select Visual Asset (Character / Prop / Scene)",
     pickerTitleLayout: "Select Layout ({layouts_count})",
-    pickerTitleStyle: "Select Style ({styles_count})",
+    pickerTitleStyle: "Select Visual Style ({styles_count})",
     pickerTitleCharStyle: "Select Character Style",
     pickerTitleSceneStyle: "Select Scene Style",
     styleConflictAlert: "Character style and scene style must be different!",
     pickerTitleColor: "Select Theme Color (36)",
+    pickerTitleTone: "Select Tone ({tones_count} · Multi-select)",
+    modalToneCount: "{{count}} Tone(s) Selected",
+    filterToneKey: "Key & Exposure",
+    filterToneContrast: "Contrast & Transition",
+    filterToneAtmosphere: "Atmosphere & Style",
     filterAll: "All",
     filterCharacters: "Characters",
     filterProps: "Props",
@@ -1101,14 +1227,9 @@ const I18N = {{
     filterNeutral: "Classic Neutral Tones",
     fallbackPrompt: "pick the rest for me",
     themeEmptyText: "[Enter Theme]",
-    articlePathEmptyText: "[Enter Article File Path]",
+    articlePathEmptyText: "[Enter File or Folder Path]",
     audienceEmptyText: "[Enter Audience]",
     channelEmptyText: "[Enter Channel]",
-    wechatTitle: "💬 Creator Monetization Community",
-    wechatSub: "Please prioritize joining the group; if full, try adding personal WeChat",
-    wechatNote: "Note: handdraw",
-    wechatGroupLabel: "① Join Group (Priority)",
-    wechatPersonalLabel: "② Personal WeChat (Fallback)",
     langBtn: "🌐 中文"
   }}
 }};
@@ -1245,12 +1366,10 @@ function updatePrompt() {{
   // Style(s)
   if (isFusionActive) {{
     if (selectedCharStyle) {{
-      const charName = selectedCharStyle.isRealistic ? (isZh ? '写实' : 'Realistic') : selectedCharStyle.id;
-      parts.push(isZh ? `角色风格：${{charName}}` : `Character style: ${{charName}}`);
+      parts.push(isZh ? `角色风格：${{selectedCharStyle.id}}` : `Character style: ${{selectedCharStyle.id}}`);
     }}
     if (selectedSceneStyle) {{
-      const sceneName = selectedSceneStyle.isRealistic ? (isZh ? '写实' : 'Realistic') : selectedSceneStyle.id;
-      parts.push(isZh ? `场景风格：${{sceneName}}` : `Scene style: ${{sceneName}}`);
+      parts.push(isZh ? `场景风格：${{selectedSceneStyle.id}}` : `Scene style: ${{selectedSceneStyle.id}}`);
     }}
   }} else {{
     if (selectedStyle) {{
@@ -1261,6 +1380,13 @@ function updatePrompt() {{
   // Theme color
   if (selectedColor) {{
     parts.push(isZh ? `主题色：${{selectedColor.id}}` : `Theme color: ${{selectedColor.id}}`);
+  }}
+
+  // Tone(s)
+  if (isToneActive && selectedTones && selectedTones.length > 0) {{
+    const toneParts = selectedTones.map(t => isZh ? `${{t.name}} (${{t.id}})` : `${{t.name_en || t.name}} (${{t.id}})`);
+    const sep = isZh ? '、' : ', ';
+    parts.push(isZh ? `影调：${{toneParts.join(sep)}}` : `Tone: ${{toneParts.join(sep)}}`);
   }}
 
   // Aspect ratio (optional, default empty)
@@ -1294,9 +1420,9 @@ function updatePrompt() {{
   const themeVal = inputTheme.value.trim();
   if (currentMode === 'article-illust') {{
     const articleDisplay = themeVal || t.articlePathEmptyText;
-    parts.push(isZh ? `文章文件地址：${{articleDisplay}}` : `Article file path: ${{articleDisplay}}`);
+    parts.push(isZh ? `文件或文章地址：${{articleDisplay}}` : `File or article path: ${{articleDisplay}}`);
   }} else if (currentMode === 'article-cover') {{
-    const articleDisplay = themeVal || (isZh ? '【输入文章文件地址或内容】' : '[Enter article file path or text]');
+    const articleDisplay = themeVal || (isZh ? '【输入文件/文件夹地址或文章内容】' : '[Enter file/folder path or article text]');
     parts.push(isZh ? `文章：${{articleDisplay}}` : `Article: ${{articleDisplay}}`);
     let scenario = isZh ? '公众号文章封面' : 'WeChat Official Account Cover';
     if (ratioVal === '5:2' || ratioVal === '16:9') scenario = isZh ? 'X文章封面' : 'X Article Cover';
@@ -1327,8 +1453,17 @@ function updatePrompt() {{
     parts.push(isZh ? `海报投放渠道：${{channelDisplay}}` : `Channel: ${{channelDisplay}}`);
   }}
 
+
+
   const delimiter = isZh ? '，' : ', ';
-  assembledText.textContent = parts.join(delimiter);
+  let promptText = parts.join(delimiter);
+  if (isBatchActive) {{
+    promptText += isZh ? ' | 批量出图' : ' | Batch Generation';
+    if (isMixLayoutsActive) {{
+      promptText += isZh ? ' | 混合多种图型' : ' | Mix Multiple Layouts';
+    }}
+  }}
+  assembledText.textContent = promptText;
 }}
 
 function updateSlotUI(type) {{
@@ -1340,6 +1475,39 @@ function updateSlotUI(type) {{
   const img = filled.querySelector('img');
   const code = filled.querySelector('.slot-code');
   const name = filled.querySelector('.slot-name');
+
+  if (type === 'tone') {{
+    const badge = slotEl.querySelector('#slot-tone-badge');
+    if (selectedTones && selectedTones.length > 0) {{
+      slotEl.classList.add('has-value');
+      trigger.hidden = true;
+      filled.hidden = false;
+      const first = selectedTones[0];
+      img.src = first.img;
+      img.alt = first.name;
+      if (selectedTones.length > 1) {{
+        if (badge) {{
+          badge.textContent = `+${{selectedTones.length - 1}}`;
+          badge.hidden = false;
+        }}
+        code.textContent = selectedTones.map(t => t.id).join(', ');
+        name.textContent = selectedTones.map(t => currentLang === 'en' ? (t.name_en || t.name) : t.name).join('、');
+      }} else {{
+        if (badge) badge.hidden = true;
+        code.textContent = first.id;
+        name.textContent = currentLang === 'en' ? (first.name_en || first.name) : first.name;
+      }}
+    }} else {{
+      slotEl.classList.remove('has-value');
+      trigger.hidden = false;
+      filled.hidden = true;
+      img.src = '';
+      if (badge) badge.hidden = true;
+      code.textContent = '';
+      name.textContent = '';
+    }}
+    return;
+  }}
 
   let item = null;
   if (type === 'layout') item = selectedLayout;
@@ -1354,13 +1522,8 @@ function updateSlotUI(type) {{
     filled.hidden = false;
     img.src = item.img;
     img.alt = item.name;
-    if (item.isRealistic) {{
-      code.textContent = '';
-      name.textContent = currentLang === 'en' ? (item.name_en || 'Realistic') : item.name;
-    }} else {{
-      code.textContent = item.id ? ((type === 'style' || type === 'char-style' || type === 'scene-style') ? `#${{item.id}}` : item.id) : '';
-      name.textContent = '';
-    }}
+    code.textContent = item.id ? ((type === 'style' || type === 'char-style' || type === 'scene-style') ? `#${{item.id}}` : item.id) : '';
+    name.textContent = (type === 'style' || type === 'char-style' || type === 'scene-style') ? (currentLang === 'en' && item.name_en ? item.name_en : (item.ref ? item.ref.split('/')[0].trim() : item.name)) || '' : '';
   }} else {{
     slotEl.classList.remove('has-value');
     trigger.hidden = false;
@@ -1438,6 +1601,7 @@ function setMode(mode) {{
     if (inputTheme) inputTheme.placeholder = I18N[currentLang].themePlaceholder;
   }}
   if (inputShootType) inputShootType.placeholder = I18N[currentLang].shootTypePlaceholder;
+  autoResizeTheme();
   updatePrompt();
 }}
 
@@ -1458,13 +1622,17 @@ function openPicker(type) {{
   pickerSearch.placeholder = I18N[currentLang].searchPlaceholder;
 
   if (modalAssetFooter) {{
-    modalAssetFooter.hidden = (type !== 'asset');
+    modalAssetFooter.hidden = !['asset', 'tone'].includes(type);
   }}
 
-  if (type === 'asset') {{
+   if (type === 'asset') {{
     pickerTitle.textContent = I18N[currentLang].pickerTitleAsset;
     renderAssetFilters();
     updateModalAssetCount();
+  }} else if (type === 'tone') {{
+    pickerTitle.textContent = I18N[currentLang].pickerTitleTone;
+    renderToneFilters();
+    updateModalToneCount();
   }} else if (type === 'layout') {{
     pickerTitle.textContent = I18N[currentLang].pickerTitleLayout;
     renderLayoutFilters();
@@ -1477,6 +1645,31 @@ function openPicker(type) {{
   }}
   renderPickerItems();
   pickerDialog.showModal();
+}}
+
+function renderToneFilters() {{
+  const t = I18N[currentLang];
+  const isZh = currentLang === 'zh';
+  const groups = [
+    {{ id: 'all', zh: t.filterAll, en: t.filterAll }},
+    {{ id: 'key', zh: t.filterToneKey, en: t.filterToneKey }},
+    {{ id: 'contrast', zh: t.filterToneContrast, en: t.filterToneContrast }},
+    {{ id: 'atmosphere', zh: t.filterToneAtmosphere, en: t.filterToneAtmosphere }}
+  ];
+  pickerFilters.innerHTML = groups.map(g => {{
+    const count = g.id === 'all' ? TONES_DATA.length : TONES_DATA.filter(x => x.cat === g.id).length;
+    const label = isZh ? g.zh : g.en;
+    const isActive = currentPickerFilter === g.id ? ' is-active' : '';
+    return `<button type="button" class="modal-filter-btn${{isActive}}" data-filter="${{g.id}}">${{label}} (${{count}})</button>`;
+  }}).join('');
+  attachFilterEvents();
+}}
+
+function updateModalToneCount() {{
+  if (!modalAssetSummary) return;
+  const t = I18N[currentLang];
+  const count = selectedTones.length;
+  modalAssetSummary.textContent = (t.modalToneCount || (currentLang === 'zh' ? '已选择 {{count}} 项影调' : '{{count}} Tone(s) Selected')).replace('{{count}}', count);
 }}
 
 function renderAssetFilters() {{
@@ -1522,10 +1715,18 @@ function renderStyleFilters() {{
     {{ id: 'FE', zh: 'FE 新国风非遗', en: 'FE Traditional' }},
     {{ id: 'FF', zh: 'FF 3D黏土纸雕', en: 'FF 3D & Paper' }},
     {{ id: 'FG', zh: 'FG 动漫和赛璐璐', en: 'FG Anime & Cel' }},
-    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }}
+    {{ id: 'FH', zh: 'FH 先锋综合', en: 'FH Mixed Media' }},
+    {{ id: 'FI', zh: 'FI 写实摄影', en: 'FI Photography' }}
   ];
   pickerFilters.innerHTML = groups.map(g => {{
-    const count = g.id === 'all' ? STYLES_DATA.length : STYLES_DATA.filter(x => x.group === g.id).length;
+    let count;
+    if (g.id === 'all') {{
+      count = STYLES_DATA.length + 1;
+    }} else if (g.id === 'FI') {{
+      count = STYLES_DATA.filter(x => x.group === 'FI').length + 1;
+    }} else {{
+      count = STYLES_DATA.filter(x => x.group === g.id).length;
+    }}
     const label = isZh ? g.zh : g.en;
     const isActive = currentPickerFilter === g.id ? ' is-active' : '';
     return `<button type="button" class="modal-filter-btn${{isActive}}" data-filter="${{g.id}}">${{label}} (${{count}})</button>`;
@@ -1560,15 +1761,15 @@ function renderPickerItems() {{
   let list = [];
   let selectedId = null;
 
-  if (currentPickerType === 'asset') {{
+   if (currentPickerType === 'asset') {{
     list = ASSETS_DATA;
+  }} else if (currentPickerType === 'tone') {{
+    list = TONES_DATA;
   }} else if (currentPickerType === 'layout') {{
     list = LAYOUTS_DATA;
     selectedId = selectedLayout ? selectedLayout.id : null;
   }} else if (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') {{
-    const realisticMatch = !query || '写实'.includes(query) || 'realistic'.includes(query) || '摄影'.includes(query) || 'photo'.includes(query);
-    const filterAllows = currentPickerFilter === 'all';
-    list = (realisticMatch && filterAllows) ? [REALISTIC_ITEM, ...STYLES_DATA] : STYLES_DATA;
+    list = STYLES_DATA;
     if (currentPickerType === 'style') selectedId = selectedStyle ? selectedStyle.id : null;
     else if (currentPickerType === 'char-style') selectedId = selectedCharStyle ? selectedCharStyle.id : null;
     else if (currentPickerType === 'scene-style') selectedId = selectedSceneStyle ? selectedSceneStyle.id : null;
@@ -1578,9 +1779,10 @@ function renderPickerItems() {{
   }}
 
   const filtered = list.filter(item => {{
-    if (item.isRealistic) return true;
     // Category match
     if (currentPickerType === 'asset') {{
+      if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
+    }} else if (currentPickerType === 'tone') {{
       if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
     }} else if (currentPickerType === 'layout') {{
       if (currentPickerFilter !== 'all' && item.cat !== currentPickerFilter) return false;
@@ -1591,19 +1793,24 @@ function renderPickerItems() {{
     }}
     // Search match
     if (query) {{
-      const idMatch = item.id && item.id.toLowerCase().includes(query);
-      const legacyMatch = item.legacy_id && item.legacy_id.includes(query);
-      const nameMatch = item.name && item.name.toLowerCase().includes(query);
-      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(query);
-      const refMatch = item.ref && item.ref.toLowerCase().includes(query);
-      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(query));
-      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch;
+      const q = query.toLowerCase();
+      const idMatch = item.id && item.id.toLowerCase().includes(q);
+      const legacyMatch = item.legacy_id && String(item.legacy_id).includes(q);
+      const nameMatch = item.name && item.name.toLowerCase().includes(q);
+      const nameEnMatch = item.name_en && item.name_en.toLowerCase().includes(q);
+      const refMatch = item.ref && item.ref.toLowerCase().includes(q);
+      const tagsMatch = item.tags && item.tags.some(t => String(t).toLowerCase().includes(q));
+      const descMatch = (item.desc_zh && item.desc_zh.toLowerCase().includes(q)) || (item.desc_en && item.desc_en.toLowerCase().includes(q));
+      const groupMatch = (item.group && item.group.toLowerCase().includes(q)) || (item.group_name && item.group_name.toLowerCase().includes(q));
+      const fiMatch = item.group === 'FI' && ('写实'.includes(q) || q.includes('写实') || '摄影'.includes(q) || q.includes('摄影') || '实景'.includes(q) || q.includes('实景') || '真实'.includes(q) || q.includes('真实') || 'photo'.includes(q) || 'realistic'.includes(q));
+      return idMatch || legacyMatch || nameMatch || nameEnMatch || refMatch || tagsMatch || descMatch || groupMatch || fiMatch;
     }}
     return true;
   }});
 
   pickerGrid.innerHTML = filtered.map(item => {{
     const displayName = currentLang === 'en' && item.name_en ? item.name_en : item.name;
+
     if (currentPickerType === 'asset') {{
       const isSel = selectedAssets.some(x => x.id === item.id);
       return `
@@ -1618,12 +1825,26 @@ function renderPickerItems() {{
       `;
     }}
 
+    if (currentPickerType === 'tone') {{
+      const isSel = selectedTones.some(x => x.id === item.id);
+      const desc = currentLang === 'en' && item.desc_en ? item.desc_en : item.desc_zh;
+      return `
+        <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}" data-id="${{item.id}}" title="${{desc || displayName}}">
+          <img class="picker-card-img" src="${{item.img}}" alt="${{displayName}}">
+          <span class="picker-card-check">✓</span>
+          <div class="picker-card-info">
+            <span class="picker-card-id">${{item.id}}</span>
+            <span class="picker-card-name" title="${{displayName}}">${{displayName}}</span>
+          </div>
+        </button>
+      `;
+    }}
+
     const isSel = selectedId === item.id;
-    const badge = item.isRealistic ? '' : ((currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') ? `#${{item.id}}` : item.id);
+    const badge = (currentPickerType === 'style' || currentPickerType === 'char-style' || currentPickerType === 'scene-style') ? `#${{item.id}}` : item.id;
     const badgeHtml = badge ? `<span class="picker-card-id">${{badge}}</span>` : '';
-    const extraCls = item.isRealistic ? ' is-realistic' : '';
     return `
-      <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}${{extraCls}}" data-id="${{item.id}}">
+      <button type="button" class="picker-card${{isSel ? ' is-selected' : ''}}" data-id="${{item.id}}">
         <img class="picker-card-img" src="${{item.img}}" alt="${{displayName}}">
         <div class="picker-card-info">
           ${{badgeHtml}}
@@ -1639,6 +1860,7 @@ function renderPickerItems() {{
       const found = list.find(x => x.id === id);
       if (!found) return;
 
+
       if (currentPickerType === 'asset') {{
         const existIdx = selectedAssets.findIndex(x => x.id === found.id);
         if (existIdx >= 0) {{
@@ -1650,6 +1872,21 @@ function renderPickerItems() {{
         }}
         updateModalAssetCount();
         renderAssetsTray();
+        updatePrompt();
+        return;
+      }}
+
+      if (currentPickerType === 'tone') {{
+        const existIdx = selectedTones.findIndex(x => x.id === found.id);
+        if (existIdx >= 0) {{
+          selectedTones.splice(existIdx, 1);
+          card.classList.remove('is-selected');
+        }} else {{
+          selectedTones.push(found);
+          card.classList.add('is-selected');
+        }}
+        updateModalToneCount();
+        updateSlotUI('tone');
         updatePrompt();
         return;
       }}
@@ -1684,16 +1921,28 @@ pickerDialog.addEventListener('click', e => {{ if (e.target === pickerDialog) pi
 
 if (btnModalClearAssets) {{
   btnModalClearAssets.addEventListener('click', () => {{
-    selectedAssets = [];
-    updateModalAssetCount();
-    renderPickerItems();
-    renderAssetsTray();
-    updatePrompt();
+     if (currentPickerType === 'asset') {{
+      selectedAssets = [];
+      updateModalAssetCount();
+      renderPickerItems();
+      renderAssetsTray();
+      updatePrompt();
+    }} else if (currentPickerType === 'tone') {{
+      selectedTones = [];
+      updateModalToneCount();
+      renderPickerItems();
+      updateSlotUI('tone');
+      updatePrompt();
+    }}
   }});
 }}
 
 if (btnModalConfirmAssets) {{
   btnModalConfirmAssets.addEventListener('click', () => {{
+    if (currentPickerType === 'tone') {{
+      updateSlotUI('tone');
+      updatePrompt();
+    }}
     pickerDialog.close();
   }});
 }}
@@ -1740,6 +1989,7 @@ document.addEventListener('click', e => {{
     if (type === 'char-style') selectedCharStyle = null;
     if (type === 'scene-style') selectedSceneStyle = null;
     if (type === 'color') selectedColor = null;
+    if (type === 'tone') selectedTones = [];
     updateSlotUI(type);
     updatePrompt();
     return;
@@ -1764,7 +2014,7 @@ function autoResizeTheme() {{
 }}
 
 [inputAudience, inputChannel].forEach(el => {{
-  el.addEventListener('input', updatePrompt);
+  if (el) el.addEventListener('input', updatePrompt);
 }});
 if (inputTheme) {{
   inputTheme.addEventListener('input', () => {{
@@ -1948,6 +2198,46 @@ if (checkboxFusion) {{
   }});
 }}
 
+// Tone Checkbox Listener
+if (checkboxTone) {{
+  checkboxTone.addEventListener('change', () => {{
+    isToneActive = checkboxTone.checked;
+    if (toneWrap) toneWrap.classList.toggle('is-active', isToneActive);
+    if (slotsGrid) slotsGrid.classList.toggle('is-tone', isToneActive);
+    if (slotTone) slotTone.hidden = !isToneActive;
+    updateSlotUI('tone');
+    updatePrompt();
+  }});
+}}
+
+// Batch Generation Checkbox Listener
+if (checkboxBatch) {{
+  checkboxBatch.addEventListener('change', () => {{
+    isBatchActive = checkboxBatch.checked;
+    if (batchWrap) batchWrap.classList.toggle('is-active', isBatchActive);
+    if (!isBatchActive) {{
+      isMixLayoutsActive = false;
+      if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+      if (mixLayoutsWrap) {{
+        mixLayoutsWrap.classList.remove('is-active');
+        mixLayoutsWrap.hidden = true;
+      }}
+    }} else {{
+      if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+    }}
+    updatePrompt();
+  }});
+}}
+
+// Mix Multiple Layouts Checkbox Listener
+if (checkboxMixLayouts) {{
+  checkboxMixLayouts.addEventListener('change', () => {{
+    isMixLayoutsActive = checkboxMixLayouts.checked;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.toggle('is-active', isMixLayoutsActive);
+    updatePrompt();
+  }});
+}}
+
 // Toolbar Actions: Gacha & Reset
 document.querySelector('#btn-gacha').addEventListener('click', () => {{
   // Random layout (skip in article-illust and article-cover mode)
@@ -1959,8 +2249,12 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
   // Random color
   selectedColor = COLORS_DATA[Math.floor(Math.random() * COLORS_DATA.length)];
 
+  if (isToneActive && TONES_DATA.length > 0) {{
+    selectedTones = [TONES_DATA[Math.floor(Math.random() * TONES_DATA.length)]];
+  }}
+
   if (isFusionActive) {{
-    const pool = [REALISTIC_ITEM, ...STYLES_DATA];
+    const pool = STYLES_DATA;
     selectedCharStyle = pool[Math.floor(Math.random() * pool.length)];
     const remain = pool.filter(x => x.id !== selectedCharStyle.id);
     selectedSceneStyle = remain[Math.floor(Math.random() * remain.length)];
@@ -1968,16 +2262,19 @@ document.querySelector('#btn-gacha').addEventListener('click', () => {{
     updateSlotUI('char-style');
     updateSlotUI('scene-style');
     updateSlotUI('color');
+    if (isToneActive) updateSlotUI('tone');
     updatePrompt();
     return;
   }}
 
   // Random style
-  selectedStyle = STYLES_DATA[Math.floor(Math.random() * STYLES_DATA.length)];
+  const stylePool = STYLES_DATA;
+  selectedStyle = stylePool[Math.floor(Math.random() * stylePool.length)];
 
   updateSlotUI('layout');
   updateSlotUI('style');
   updateSlotUI('color');
+  if (isToneActive) updateSlotUI('tone');
   updatePrompt();
 }});
 
@@ -1988,10 +2285,12 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
   selectedCharStyle = null;
   selectedSceneStyle = null;
   selectedColor = null;
+  selectedTones = [];
   inputTheme.value = '';
   inputTheme.style.height = '';
   inputAudience.value = '';
   inputChannel.value = '';
+
   if (inputShootType) inputShootType.value = '';
   if (btnClearShootType) btnClearShootType.hidden = true;
   document.querySelectorAll('.shoot-type-preset-btn').forEach(b => b.classList.remove('is-active'));
@@ -2005,12 +2304,22 @@ document.querySelector('#btn-reset').addEventListener('click', () => {{
     if (btnClearMood) btnClearMood.hidden = true;
     document.querySelectorAll('.mood-preset-btn').forEach(b => b.classList.remove('is-active'));
   }}
+  isBatchActive = false;
+  isMixLayoutsActive = false;
+  if (checkboxBatch) checkboxBatch.checked = false;
+  if (batchWrap) batchWrap.classList.remove('is-active');
+  if (checkboxMixLayouts) checkboxMixLayouts.checked = false;
+  if (mixLayoutsWrap) {{
+    mixLayoutsWrap.classList.remove('is-active');
+    mixLayoutsWrap.hidden = true;
+  }}
   renderAssetsTray();
   updateSlotUI('layout');
   updateSlotUI('style');
   updateSlotUI('char-style');
   updateSlotUI('scene-style');
   updateSlotUI('color');
+  updateSlotUI('tone');
   setWhitespace('normal');
   setMode('pure');
   try {{
@@ -2091,6 +2400,7 @@ function applyLang(lang) {{
   if (inputShootType) inputShootType.placeholder = t.shootTypePlaceholder;
   inputAudience.placeholder = t.audiencePlaceholder;
   inputChannel.placeholder = t.channelPlaceholder;
+  autoResizeTheme();
   if (inputRatio) inputRatio.placeholder = t.ratioPlaceholder;
   if (inputMood) inputMood.placeholder = t.moodPlaceholder;
 
@@ -2110,12 +2420,17 @@ function applyLang(lang) {{
   updateSlotUI('char-style');
   updateSlotUI('scene-style');
   updateSlotUI('color');
+  updateSlotUI('tone');
   updatePrompt();
   if (pickerDialog.open) {{
-    if (currentPickerType === 'asset') {{
+     if (currentPickerType === 'asset') {{
       pickerTitle.textContent = t.pickerTitleAsset;
       renderAssetFilters();
       updateModalAssetCount();
+    }} else if (currentPickerType === 'tone') {{
+      pickerTitle.textContent = t.pickerTitleTone;
+      renderToneFilters();
+      updateModalToneCount();
     }} else if (currentPickerType === 'layout') {{
       pickerTitle.textContent = t.pickerTitleLayout;
       renderLayoutFilters();
@@ -2138,10 +2453,18 @@ applyLang(currentLang);
 
 // URL Query Parameter Integration
 const urlParams = new URLSearchParams(window.location.search);
+const modeParam = urlParams.get('mode');
 const assetParam = urlParams.get('asset');
 const styleParam = urlParams.get('style');
 const layoutParam = urlParams.get('layout');
 const colorParam = urlParams.get('color');
+const toneParam = urlParams.get('tone');
+
+if (modeParam && ['pure', 'graphic-text', 'poster', 'article-illust', 'article-cover', 'photo'].includes(modeParam)) {{
+  setMode(modeParam);
+}}
+
+
 
 if (assetParam) {{
   const tokens = assetParam.split(/[,，\\s]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
@@ -2156,7 +2479,7 @@ if (assetParam) {{
 if (styleParam) {{
   const clean = styleParam.trim().replace(/^#/, '');
   const norm = clean.padStart(3, '0');
-  const found = STYLES_DATA.find(x => x.id === norm || x.id === styleParam.trim());
+  const found = STYLES_DATA.find(x => x.id === norm || x.id.toUpperCase() === clean.toUpperCase() || String(x.legacy_id) === clean);
   if (found) {{
     selectedStyle = found;
   }}
@@ -2175,14 +2498,45 @@ if (colorParam) {{
     selectedColor = found;
   }}
 }}
+if (toneParam) {{
+  const tokens = toneParam.split(/[,，\\s]+/).map(s => s.trim().toUpperCase()).filter(Boolean);
+  tokens.forEach(tok => {{
+    const found = TONES_DATA.find(x => x.id.toUpperCase() === tok);
+    if (found && !selectedTones.some(x => x.id === found.id)) {{
+      selectedTones.push(found);
+    }}
+  }});
+  if (selectedTones.length > 0) {{
+    isToneActive = true;
+    if (checkboxTone) checkboxTone.checked = true;
+    if (toneWrap) toneWrap.classList.add('is-active');
+    if (slotsGrid) slotsGrid.classList.add('is-tone');
+    if (slotTone) slotTone.hidden = false;
+  }}
+}}
 
-if (assetParam || styleParam || layoutParam || colorParam) {{
+const batchParam = urlParams.get('batch');
+if (batchParam === '1' || batchParam === 'true') {{
+  isBatchActive = true;
+  if (checkboxBatch) checkboxBatch.checked = true;
+  if (batchWrap) batchWrap.classList.add('is-active');
+  if (mixLayoutsWrap) mixLayoutsWrap.hidden = false;
+  const mixParam = urlParams.get('mix') || urlParams.get('mix_layouts');
+  if (mixParam === '1' || mixParam === 'true') {{
+    isMixLayoutsActive = true;
+    if (checkboxMixLayouts) checkboxMixLayouts.checked = true;
+    if (mixLayoutsWrap) mixLayoutsWrap.classList.add('is-active');
+  }}
+}}
+
+if (assetParam || styleParam || layoutParam || colorParam || toneParam || modeParam || batchParam) {{
   renderAssetsTray();
   updateSlotUI('layout');
   updateSlotUI('style');
   updateSlotUI('char-style');
   updateSlotUI('scene-style');
   updateSlotUI('color');
+  updateSlotUI('tone');
   updatePrompt();
   try {{
     if (window.history && window.history.replaceState && window.location.search) {{

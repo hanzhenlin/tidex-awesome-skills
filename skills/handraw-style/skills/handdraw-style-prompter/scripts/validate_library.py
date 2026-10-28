@@ -37,14 +37,16 @@ def main() -> None:
     alias_data = json.loads(alias_file.read_text(encoding="utf-8"))
     legacy_to_new = alias_data.get("legacy_to_new", {})
     new_to_legacy = alias_data.get("new_to_legacy", {})
-    if len(legacy_to_new) != 327 or len(new_to_legacy) != 327:
-        fail("style_alias_map.json must contain 327 bidirectional mappings")
+    if len(legacy_to_new) != len(styles) or len(new_to_legacy) != len(styles):
+        fail("style_alias_map.json must cover every style bidirectionally")
+    if set(new_to_legacy) != {item["number"] for item in styles} or any(new_to_legacy.get(value) != key for key, value in legacy_to_new.items()):
+        fail("style aliases must resolve to the canonical style set and round-trip")
 
     total_styles = len(styles)
-    if total_styles != 327:
-        fail(f"expected 327 styles, got {total_styles}")
+    if total_styles < 365:
+        fail(f"expected at least the 365 baseline styles, got {total_styles}")
 
-    CATEGORIES = ["FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH"]
+    CATEGORIES = ["FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH", "FI"]
     cat_counts = {}
     import re
     for item in styles:
@@ -139,10 +141,10 @@ def main() -> None:
     if any(not item["traits"] for item in fe_supplement):
         fail("FE-032–FE-047 core visual traits must be populated")
     style_205 = next(item for item in styles if item["number"] == "FE-036")
-    if not style_205["traits"] or "猫狗性格" not in style_205["traits"]:
+    if not style_205["traits"] or "冷幽默" not in style_205["traits"]:
         fail("style FE-036 (old 205) core visual traits are missing")
     if any(item["number"].split("-")[0] not in CATEGORIES for item in styles):
-        fail("all styles must belong to one of 8 categories")
+        fail(f"all styles must belong to one of {len(CATEGORIES)} categories")
     individual = ROOT / "images" / "individual"
     expected_individual = [single_path(s["number"]) for s in styles]
     if not all(path.exists() for path in expected_individual):
@@ -150,21 +152,23 @@ def main() -> None:
     if list(individual.glob("[0-9][0-9][0-9].webp")) or list(individual.glob("[0-9][0-9][0-9]_grid.webp")):
         fail("flat individual assets must be migrated into categorized folders")
     tweet_sheets = []
-    for path in (ROOT / "images").glob("[GH]_*.webp"):
+    for path in (ROOT / "images").glob("[GHI]_*.webp"):
         parsed = parse_sheet(path)
         if parsed:
             start, end = parsed
             if path.name.startswith("G_") and (start, end) != (201, 216):
                 fail("G contact sheets may only cover 201–216")
-            if path.name.startswith("H_") and start < 217:
-                fail("H contact sheets must start at 217 or later")
+            if path.name.startswith("H_") and not (217 <= start <= 331):
+                fail("H contact sheets must be between 217 and 331")
+            if path.name.startswith("I_") and start < 332:
+                fail("I contact sheets must start at 332 or later")
             tweet_sheets.append((*parsed, path))
     tweet_sheets.sort()
     expected_tweet_numbers = list(range(201, total_styles + 1))
     listed_tweet_numbers = [number for start, end, _ in tweet_sheets for number in range(start, end + 1)]
     if listed_tweet_numbers != expected_tweet_numbers:
         fail("Tweet contact sheets must cover each 201+ style exactly once")
-    if any(end - start + 1 != CAPACITY for start, end, _ in tweet_sheets[:-1]):
+    if any(end - start + 1 != CAPACITY for start, end, p in tweet_sheets if not (p.name.startswith("H_329-331") or p == tweet_sheets[-1][2])):
         fail("only the final Tweet contact sheet may be incomplete")
     if not STATE_FILE.exists():
         fail("Tweet contact-sheet state is missing")
@@ -180,7 +184,7 @@ def main() -> None:
     for cat in CATEGORIES:
         if f'data-group="{cat}"' not in gallery:
             fail(f"gallery does not classify style cards as {cat}")
-    for sample_id in ["FA-001", "FB-001", "FC-001", "FD-001", "FE-001", "FF-001", "FG-001", "FH-001", "FC-029", "FG-009"]:
+    for sample_id in ["FA-001", "FB-001", "FC-001", "FD-001", "FE-001", "FF-001", "FG-001", "FH-001", "FI-001", "FC-029", "FG-009"]:
         if f'data-number="{sample_id}"' not in gallery:
             fail(f"gallery style cards missing {sample_id}")
     if '#FA-018' not in gallery:

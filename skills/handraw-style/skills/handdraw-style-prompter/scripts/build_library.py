@@ -20,6 +20,52 @@ VERSION_FILE = SKILL / "references" / "version.json"
 ALIAS_MAP_FILE = SKILL / "references" / "style_alias_map.json"
 UPDATE_COMMAND = "请更新skill https://github.com/yang0/handraw-style"
 
+IMAGE_FALLBACK_SCRIPT = """<script>
+(function() {
+  function fixImg(img) {
+    if (!img || img.__fixed) return;
+    var src = img.getAttribute('src') || '';
+    var idx = src.indexOf('images/');
+    if (idx === -1) return;
+    var sub = src.substring(idx);
+    var step = parseInt(img.dataset.retry || '0', 10);
+    var candidates = [
+      '../../../../' + sub,
+      '../../../' + sub,
+      '../../' + sub,
+      '../' + sub,
+      './' + sub,
+      '/' + sub,
+      'https://img.handraw-style.com/' + sub,
+      'https://raw.githubusercontent.com/yang0/handraw-style/master/' + sub
+    ];
+    while (step < candidates.length) {
+      var nextSrc = candidates[step];
+      step++;
+      if (nextSrc !== src) {
+        img.dataset.retry = step.toString();
+        img.src = nextSrc;
+        return;
+      }
+    }
+    img.__fixed = true;
+  }
+  window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      fixImg(e.target);
+    }
+  }, true);
+  window.addEventListener('load', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      var card = e.target.closest('.style-card, .layout-card, .color-card, .asset-card');
+      if (card && e.target.src) {
+        card.dataset.image = e.target.src;
+      }
+    }
+  }, true);
+})();
+</script>"""
+
 GROUPS = (
     ("all", "全部", "All"),
     ("FA", "国际社论", "Editorial Humor"),
@@ -30,6 +76,7 @@ GROUPS = (
     ("FF", "3D黏土纸雕", "3D Clay & Paper"),
     ("FG", "动漫和赛璐璐", "Anime & Cel"),
     ("FH", "先锋综合", "Mixed Media"),
+    ("FI", "写实摄影", "Realistic Photography"),
 )
 
 GROUP_LABELS = {
@@ -41,6 +88,7 @@ GROUP_LABELS = {
     "FF": ("3D黏土毛毡与纸雕", "3D Clay, Felt & Papercraft"),
     "FG": ("动漫和赛璐璐", "Anime, Cel Animation & Retro Game"),
     "FH": ("先锋实验与综合媒介", "Mixed Media & Impasto Arts"),
+    "FI": ("写实摄影与视觉大片", "Realistic, Photography & Cinematic Styles"),
 }
 
 
@@ -140,7 +188,9 @@ def gallery_html(styles: list[dict[str, str]], sheets: list[dict[str, str]] | No
 
     return f'''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>手绘风格编号画廊</title><style>
+<title>手绘风格编号画廊</title>
+{IMAGE_FALLBACK_SCRIPT}
+<style>
 :root{{color:#24211e;background:#f7f5f0;font:16px/1.5 system-ui,"Microsoft YaHei",sans-serif}}
 body{{margin:0}}
 main{{max-width:1440px;margin:auto;padding:18px 30px 30px}}
@@ -520,7 +570,8 @@ function updateDialogContent(){{
 }}
 function openPreview(card){{
   activeCard=card;
-  preview.src=card.dataset.image;
+  const cardImg=card.querySelector('img');
+  preview.src=(cardImg&&cardImg.src)?cardImg.src:card.dataset.image;
   preview.alt=`#${{card.dataset.number}} ${{card.dataset.name}}`;
   updateDialogContent();
   dialog.showModal();
@@ -610,8 +661,8 @@ checkRepositoryUpdate();
 
 def main() -> None:
     styles = parse_styles()
-    if len(styles) != 327:
-        raise SystemExit(f"Expected exactly 327 styles, parsed {len(styles)}")
+    if len(styles) < 365:
+        raise SystemExit(f"Expected at least the 365 baseline styles, parsed {len(styles)}")
     cat_counts: dict[str, int] = {}
     for item in styles:
         m = re.match(r"^([A-Za-z]{2})-(\d{3})$", item["number"])
@@ -625,7 +676,7 @@ def main() -> None:
     STYLE_JSON.parent.mkdir(parents=True, exist_ok=True)
     GALLERY.parent.mkdir(parents=True, exist_ok=True)
     STYLE_JSON.write_text(json.dumps(styles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    GALLERY.write_text(gallery_html(styles), encoding="utf-8")
+    GALLERY.write_text(gallery_html(styles).replace("</body>", '<script src="personal-library.js" defer></script></body>'), encoding="utf-8")
     print(f"Built {len(styles)} styles into adaptive waterfall gallery.")
     try:
         import sys

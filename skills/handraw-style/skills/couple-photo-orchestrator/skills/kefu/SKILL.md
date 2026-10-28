@@ -1,10 +1,17 @@
 ---
 name: couple-photo-requirements-planner
 description: Confirm portrait, couple, family, group, wedding-party, team, cast, travel, period, or cosplay photo requirements and produce complete per-participant Looks, scenes, props, and a confirmed photography handoff for any number of subjects.
-version: 2.24.24
+version: 2.24.26
 ---
 
 # Universal People Photo Requirements Planner
+
+## 通用摄影关键词
+- 所有摄影拍摄类型均在可复制方案与最终生图提示词中原样加入：**高级摄影师风格，创意构图，强烈的戏剧张力**。
+- 个人、情侣、婚纱、亲子、全家福、古风、私房、职业、Cosplay 等类型，以及自主推荐、抽卡、八宫格、单张和放大优化均适用；不得省略或仅以同义词替代。
+- 通过机位、空间层次、光影和情绪落实关键词；继续遵守已确认的人物身份、服装、妆发、画幅及 Shot 动作约束。
+- 保持现有“先三方案选向 → 八宫格预览 → 按需单张/放大”的交付流程。
+
 
 本 Skill 已从“固定双人情侣模型”升级为“任意人数人物摄影模型”。情侣只是 `relationship_preset` 的一种，不再是数据结构前提。
 

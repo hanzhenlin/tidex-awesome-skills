@@ -1,6 +1,6 @@
-# 299 种人物 IP 手绘风格库（全新品类独立编号版）
+# 365 种人物 IP 手绘与视觉风格库（全新品类独立编号版）
 
-规则：采用 FA~FH 8 大品类独立编号（FA-001 ~ FH-043）；保留原参考名称用于索引；生图时优先使用“生图名称”。通用/历史风格保持短描述；当代个人创作者型条目使用稍详细的视觉描述，以减少只靠作者名造成的生成不稳定。
+规则：采用 FA~FI 9 大品类独立编号（FA-001 ~ FI-034）；保留原参考名称用于索引；生图时优先使用“生图名称”。通用/历史风格保持短描述；当代个人创作者型条目使用稍详细的视觉描述，以减少只靠作者名造成的生成不稳定。
 
 ## FA 国际社论幽默 / Editorial & Humor Doodle
 
@@ -48,9 +48,9 @@
 
 | FA-021 · Mari Andrew | Watercolor Handwritten Life Notes | 极简女性人物、细黑线、细长四肢、柔和水彩点染；以红色心形等单一物件承载生活情绪，画面保持白底、留白和轻微纸张质感。 |
 
-| FA-022 · Sally Nixon | Flat Everyday Women Lifestyle | 日常女性人物、蓬松手绘线稿、低饱和外套与围巾、旁边的小鸟；姿态自然站立，服装和动物用清楚色块区分，整体保留生活速写的轻松感。 |
+| FA-022 · Sally Nixon | Flat Everyday Women Lifestyle | 蓬松手绘线稿、质朴低饱和粉彩色块平涂、松弛生活速写感、克制留白与温暖呼吸感。 |
 
-| FA-023 · Agathe Sorlet | Warm Minimal Female Line Cartoon | 黑色简线、黑色长发女性、坐姿、白上衣与蓝色牛仔裤；以少量暖色腮红和红色鞋带点亮画面，背景保持干净，气质亲密而松弛。 |
+| FA-023 · Agathe Sorlet | Warm Minimal Female Line Cartoon | 极简黑色钢笔细线、克制几何平涂、少量高饱和暖色点睛、大面积纯净留白背景、亲密松弛的图形速写感。 |
 
 | FA-024 · Jean-Michel Tixier | Geometric Fashion Deadpan | 夸张大头、松散黑色短线、冷面人物、横条纹上衣、灰黑与浅色块；人物比例故意不协调，依靠简化脸部和粗略纹理形成时尚而疏离的幽默感。 |
 
@@ -68,7 +68,7 @@
 
 | FA-031 · Marjane Satrapi | High-Contrast Black-White Memoir Cartoon | 黑白高对比、粗黑剪影、盘坐女性、简化五官、大片纯黑服装；人物姿态直接而静止，依靠白色脸部和黑色轮廓形成克制的回忆录漫画感。 |
 
-| FA-032 · Joann Sfar | Loose French Improvised Ink | 松散法式墨线、蓬乱卷发、大眼女性、黑猫、随意坐姿；线条保留手绘停顿和轻微不齐整，配合少量暖色块，形成即兴、俏皮而略带怪诞的画面。 |
+| FA-032 · Joann Sfar | Loose French Improvised Ink | 松散即兴法式墨线、轻微抖动与手绘停顿笔触、少量暖色水彩晕染点缀、俏皮略带怪诞的插画张力。 |
 
 | FA-033 · Charles M. Schulz | Minimal Newspaper Comic | 极简报纸漫画线、圆头小人物、低动作高人格、细微表情。 |
 
@@ -142,19 +142,19 @@
 
 | FB-026 · OscarAI | Warm Gouache & Colored Pencil Storybook Character | 温暖水粉与彩色铅笔手绘绘本风、细腻柔和的铅笔颗粒质感与排线肌理、圆润饱满的卡通面部轮廓、大黑框眼镜与可爱红鼻头、治愈温馨的现代儿童插画质感。 |
 
-| FB-027 · OscarAI | Edwardian Vintage Ink Fashion Editorial | 爱德华时代复古时尚墨水插画风、精美利落的钢笔排线与羽化阴影、典雅复古的礼帽长裙剪影、极简复古蓝与芥末黄点缀平涂、大面积呼吸感留白与诗意文学氛围。 |
+| FB-027 · OscarAI | Edwardian Vintage Ink Fashion Editorial | 复古墨水插画风、精美利落的钢笔交叉排线与羽化阴影、修长典雅的图形化剪影、复古蓝与芥末黄点缀平涂、大面积呼吸感留白与诗意文学氛围。 |
 
 | FB-028 · OscarAI | Loose Ink & Gouache Storybook Studio | 松散墨水线条与水粉手绘插画风、率性写意的笔触排线、大头蓬松卷发与胡须大叔与宠物鸭子、温馨充满故事感的欧式生活日常画室。 |
 
 | FB-029 · 儿童蜡笔手绘绘本 | Charming Children Crayon Storybook | 儿童蜡笔手绘绘本风、粗蜡笔涂抹质感与明显手绘肌理、低幼绘本插画、童真可爱、造型简化与平视视角、画面干净简约、温暖柔和马卡龙配色、明亮轻快、线条自然稚拙、整体温暖治愈。 |
 
-| FB-030 · なっくす | Soft Crayon & Sumi-e Cat Storybook | 温润蜡笔与水墨和风绘本风、质朴手绘炭笔蜡笔颗粒肌理、巨型猫咪的翡翠绿眼与细腻毛流、微型人偶与红色印章、充满童趣温暖的日式日常绘本。 |
+| FB-030 · なっくす | Soft Crayon & Sumi-e Cat Storybook | 温润蜡笔与水墨和风绘本风、质朴手绘炭笔与蜡笔颗粒肌理、细腻毛流与柔和边缘晕染、微型对比构图与红色印章点缀、充满童趣温暖的日式日常绘本。 |
 
 | FB-031 · 几米 | Jimmy Liao Whimsical & Poetic Storybook Watercolor | 几米绘本插画风、大面积纯净留白与空灵通透构图、童真童趣与细腻温情、淡雅水彩晕染与柔和手绘线条、治愈诗意的绘本故事感。 |
 
 | FB-032 · yang02010 | Minimalist Atmospheric Storybook & Vast Scale Contrast | 现代极简绘本插画风、大面积同色系连续环境主导画面、背景极度简化并仅保留少量必要景物、人物微缩与宏大环境强烈尺度反差、安静松弛与诗意孤独氛围、非对称大面积负空间留白、主体轮廓简练概括、手绘笔触与纸张颗粒/蜡笔丙烯干刷纹理。 |
 
-| FB-033 · 森系儿童插画 | Forest Children Storybook Illustration | 新自然系童话绘本插画；孩子与自然环境共处；人物小巧可爱、造型圆润简洁；自然植物占据画面主体；嫩绿、草绿、深绿与少量暖色点缀；柔和自然光、树影斑驳、逆光透叶；雨露与水面高光；环境丰富但不过度写实；植物轮廓概括而有节奏；儿童绘本与动画背景结合；温暖、安静、清透、富有生命力；现代平面装饰型森林童话插画；高度二维化；圆润几何植物；大块纯色色形；弱透视、弱光影；简洁童真、安静治愈、装饰海报感 |
+| FB-033 · 森系儿童插画 | Forest Children Storybook Illustration | 新自然系治愈绘本风、高度二维平面化几何造型、清透嫩绿与大地色系点缀、圆润几何色块概括、柔和漫射环境光、弱透视与装饰性插画质感、安静温暖生命力。 |
 
 | FB-034 · 简笔与半写实融合风 | Minimalist Doodle & Semi-Realistic Hybrid Illustration | 写实与简笔融合的混合插画风。画面中同时存在两种清晰区分的视觉语言：一部分内容采用细腻写实或半写实表现，强调自然质感、真实纹理、柔和层次、细节刻画与轻盈光感；另一部分内容采用极简2D手绘简笔画表现，强调概括造型、轻柔线条、低细节、适度留白与天真趣味。两种画法并置共存，形成明确可辨的风格反差，同时保持统一、和谐、克制的审美协调。 主体角色或主要视觉对象优先采用2D插画化表现，保持平面感、手绘感与概括感，不要做成照片感、3D感或厚重写实感；其余环境、植物、材质、局部场景元素可适度引入细腻半写实表现，另有部分装饰性元素可继续使用极简手绘简笔语言。整体应保留“主体偏2D、局部写实、局部简笔”的清晰层次关系。 整体气质轻盈、温柔、治愈、清新、诗意，带有文艺感与绘本感。色彩以低饱和、高明度、柔和通透的浅色系为主，避免浓烈对比、厚重综合色块和高饱和炫目视觉。背景倾向干净、简洁、留白充足，不过度堆叠信息，画面重视呼吸感、秩序感与视觉节奏。 写实部分不要过度摄影化，不要强烈商业修图感，不要走照片级写实路线；简笔部分不要复杂化，不追求真实结构与繁复刻画，应保留手绘的松弛感、稚拙感与亲和力。线条细而柔和，造型圆润、概括、克制，整体呈现“精致与天真并存”“真实与童趣并存”的视觉效果。 风格重点不是把所有内容统一成单一画法，而是保留“精细写实”与“简洁手绘”之间清晰可辨的差异，并让这种差异成为画面的核心风格特征。整体不做厚涂，不做3D，不做强戏剧光影，不做复杂纹样堆砌，不做过强体积塑造，不做商业海报式锐利修饰。 |
 
@@ -288,6 +288,8 @@
 
 | FC-031 · 美式现代复古橡皮管卡通插画 | Modern Retro Rubber-Hose Cartoon Illustration | 灵感来自美式现代复古 Rubber-Hose 插画风格。但整体更加现代、明亮、干净、可爱。角色采用圆润、简洁、夸张的卡通造型，四肢像柔软的橡皮管一样自然弯曲和延伸，弱化真实关节与人体结构，让动作更自由、更有节奏感。整体以粗而流畅的黑色轮廓线搭配干净的平涂色块，减少复杂光影和厚重做旧效果。造型简洁时尚，比例可爱，表情有个性。整体清爽、协调、有设计感。画面具有轻松幽默、俏皮可爱和一点点怪趣感，动作夸张流畅，像带有爵士节奏的动态瞬间。整体视觉偏现代潮流插画、复古海报和独立品牌插画质感，干净、可爱、有辨识度，减少老旧胶片颗粒与过度怀旧感。 |
 
+| FC-032 · 阿尔丰斯·穆夏 / Alphonse Mucha | Alphonse Mucha Art Nouveau Illustration |  |
+
 ## FD 日本当代插画 / Japanese Contemporary & Manga
 
 | 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |
@@ -316,7 +318,7 @@
 
 | FD-012 · Yuko Higuchi | Ornate Strange Botanical Ink | 精密钢笔、奇异动植物、古典怪萌、细节密集；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；表情与肢体动作要服从该风格的人格机制，避免回落为统一的标准Q版表情。 |
 
-| FD-013 · きくちあつこ | Fashion Diary Sketch Girl | 女孩穿搭速写、手绘服装、Instagram 日记感；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
+| FD-013 · きくちあつこ | Fashion Diary Sketch Girl | 纸上手绘笔压与不齐整线条节奏、现代生活手账速写风、利落平面剪影与自然松弛造型、低饱和轻盈色彩点缀。 |
 
 | FD-014 · しまだなな | Loose Deadpan Everyday Sketch | 脱力人物、松散线条、生活吐槽；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；表情偏冷脸、尴尬或突然夸张，姿态要有明确喜剧节奏，避免统一的可爱微笑。 |
 
@@ -340,13 +342,13 @@
 
 | FD-024 · おべとも | Minimal Quirky Motion Character | 极简古怪人物、图形化、短动画式节奏；脸部与服装主动做减法，依靠清楚轮廓、眼口和少量关键形状建立人物辨识度；表情与肢体动作要服从该风格的人格机制，避免回落为统一的标准Q版表情。 |
 
-| FD-025 · そとこ / Sotoko | Elegant Sparse-Line Girl | 极少线条、纤细女孩、优雅留白；线条轻细并保留呼吸感，人物比例偏修长，眉眼与嘴角的小变化承担主要表情；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
+| FD-025 · そとこ / Sotoko | Elegant Sparse-Line Girl | 极少极轻钢笔线条、修长克制造型比例、利落平面剪影对比、大面积呼吸感留白空间、优雅空灵的现代日系审美。 |
 
 | FD-026 · yasuna | Delicate Emotional Female Line | 纤细人物线稿、女性情绪、长线条发丝；线条轻细并保留呼吸感，人物比例偏修长，眉眼与嘴角的小变化承担主要表情；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
 
 | FD-027 · オガワナツミ | Pop-Culture Minimal Figure | 简化人物、Pop Culture、年轻轻时尚；脸部与服装主动做减法，依靠清楚轮廓、眼口和少量关键形状建立人物辨识度；配色使用少量高纯度撞色和平涂，让人物剪影和服装保持强图形对比。 |
 
-| FD-028 · Mira Lou | Modern Editorial Female Line | 现代女性线稿、编辑插画、清爽人物；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
+| FD-028 · Mira Lou | Modern Editorial Female Line | 现代都市插画线稿、利落流畅钢笔线条、克制几何剪影、大面积呼吸感留白、优雅独立的现代视觉语言。 |
 
 | FD-029 · ソウノナホ | Soft Magazine Line-and-Wash | 细线 + 淡水彩、生活方式、日系杂志感；线条轻细并保留呼吸感，人物比例偏修长，眉眼与嘴角的小变化承担主要表情；上色保留透明叠染、柔软边缘和纸纹，允许轻微颜色不均与留白。 |
 
@@ -356,7 +358,7 @@
 
 | FD-032 · 北澤平祐 | Playful Marker Fairytale Character | 彩色马克笔、奇想小物、轻童话人物；以醒目外轮廓和大形组织人物，五官少而有力，动作通过肩胯与手脚方向直接传达；表情与肢体动作要服从该风格的人格机制，避免回落为统一的标准Q版表情。 |
 
-| FD-033 · 白根ゆたんぽ | Loose Pop Advertising Girl | 女孩、奇怪姿态、广告 Pop、松弛幽默；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色使用少量高纯度撞色和平涂，让人物剪影和服装保持强图形对比。 |
+| FD-033 · 白根ゆたんぽ | Loose Pop Advertising Girl | 现代广告波普风、极简图形化几何造型、高纯度平面撞色平涂、强对比剪影轮廓、幽默夸张的造型张力。 |
 
 | FD-034 · 藍にいな / Ai Niina | Transparent Emotional Youth Illustration | 青春情绪、透明色、MV 感、线条流动；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；上色保留透明叠染、柔软边缘和纸纹，允许轻微颜色不均与留白。 |
 
@@ -364,15 +366,15 @@
 
 | FD-036 · はまふぐ | Soft Empathy Social Comic | 柔软人物、共感型短漫画、社交媒体情绪；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色控制在柔和低刺激色域，用少量点色区分层次，背景保持轻和干净。 |
 
-| FD-037 · Nah | High-Saturation Gen-Z Fashion Girl | 潮流女孩、高饱和、Z 世代、Graphic Fashion；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色使用少量高纯度撞色和平涂，让人物剪影和服装保持强图形对比。 |
+| FD-037 · Nah | High-Saturation Gen-Z Fashion Girl | 高饱和度潮流波普平面插画、Z世代图形化色块、利落硬边轮廓线、纯色大块平涂与强烈色相对比。 |
 
 | FD-038 · misato. | Soft Dreamy Animated Illustration | 柔和幻想、轻动画感、梦境人物；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色控制在柔和低刺激色域，用少量点色区分层次，背景保持轻和干净。 |
 
 | FD-039 · min² | Pastel Yami-Kawaii Girly | Pastel Girly、梦幻、Yami-kawaii、低对比；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
 
-| FD-040 · A.YAMI | Tokyo Street Graphic Girl | 东京街头、图形化女孩、年轻潮流；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
+| FD-040 · A.YAMI | Tokyo Street Graphic Girl | 现代日系图形插画、利落几何色块拼接、清晰剪影节奏、潮流冷暖撞色平涂、极简平面装饰感。 |
 
-| FD-041 · めめんち | Mystic Fashion Character Graphic | 强配色、神秘女孩、Fashion × Character；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。 |
+| FD-041 · めめんち | Mystic Fashion Character Graphic | 神秘冷艳的暗调与荧光高对比色彩、利落锐利的图形化剪影、平涂色块与细黑轮廓线融合、时尚平面张力。 |
 
 | FD-042 · 日系超萌1.5头身Q版 | Japanese Kawaii Mini Chibi 2D Illustration | Japanese Mini Chibi /Kawaii Chibi, 2d, 1.5 头身。 |
 
@@ -404,7 +406,7 @@
 
 | FE-012 · 李旻 | Contemporary Chinese Cultural Editorial | 传统文化现代编辑化、干净构图、当代中国气质；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；线条带书写性与留白意识，衣褶、发丝和姿势顺势流动，东方感来自形与节奏。 |
 
-| FE-013 · 伊吹五月 | Freehand Ink-Wash Ancient Figure | 水墨人物、古风衣袂、潇洒笔触、大面积留白；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；上色保留透明叠染、柔软边缘和纸纹，允许轻微颜色不均与留白。 |
+| FE-013 · 伊吹五月 | Freehand Ink-Wash Ancient Figure | 写意水墨枯笔飞白、透明水色叠染与宣纸晕染肌理、大开大合的潇洒运笔气韵、大面积空灵留白布局。 |
 
 | FE-014 · 早稻 ZAODAO | Wild Ink Eastern Weirdness | 野生墨线、水墨怪人、东方妖异、极强作者手感；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；线条带书写性与留白意识，衣褶、发丝和姿势顺势流动，东方感来自形与节奏。 |
 
@@ -450,9 +452,9 @@
 
 | FE-035 · 呼葱觅蒜 | Faceless New-Chinese Figure Illustration | 标志性的“无脸古装群像”；以发型、服装、轮廓、动作和环境传达身份与情绪；人物多修长、弱化五官，强调衣袂节奏、光影和电影感构图，追求“无脸有魂”。 |
 
-| FE-036 · 白茶 | Chinese Pet Deadpan Cartoon | 以猫狗性格和“内心戏”驱动笑点；造型概括、表情高度角色化，常配短句或对白；画面干净、留白多，兼具漫画感和中国绘画趣味，核心不是单纯“可爱”。 |
+| FE-036 · 白茶 | Chinese Pet Deadpan Cartoon | 新国风冷幽默萌系手绘、纸上手绘墨线停顿笔压、透明国画水色叠染与纸纹肌理、留白透气、诙谐解构的轻中式日常趣味。 |
 
-| FE-037 · 慕容引刀 | Philosophical Minimal Dog Cartoon | 简洁的轮廓线与大面积留白；白色小狗“刀刀”以沉静旁观者姿态出现，常站在屋顶、街角、栏杆或城市边缘；配合短句、独白和轻哲思，形成温柔、孤独、幽默的都市寓言感。 |
+| FE-037 · 慕容引刀 | Philosophical Minimal Dog Cartoon | 极简哲学手绘风、大面积空灵纸面留白、极简线条勾勒孤立主体、少量暖色平涂点缀、微小与空旷对比构图、充满冷幽默与现代哲思寓言感。 |
 
 | FE-038 · Tango | Minimal Visual-Pun Cartoon | 寥寥几笔、黑白或极少色彩、大留白；把日常物件、人物和动物重新组合形成视觉双关；逻辑清晰但结果荒诞，常用无字或极少文字制造“看懂后一笑”的瞬间。 |
 
@@ -513,6 +515,7 @@
 | FE-066 · 尘世梦影·彩绘红楼梦 | Dreams of the Mortal World: Red Chamber Color Illustration | 参考风格：尘世梦影：彩绘红楼梦， 孙温，但是整体略微明亮鲜润，亮度提升约15%，饱和度适度提升，画面适当留白有呼吸感，更符合现代年轻人审美 |
 
 | FE-067 · 天书奇谭 | The Legend of Sealed Book Animation Style |  |
+| FE-068 · 唐山皮影 | Tangshan Shadow Puppet |  |
 
 ## FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft
 
@@ -522,7 +525,7 @@
 
 | FF-002 · OscarAI | Stylized Graphic 2D Animation Character | 现代2D动画概念设计风、干练利落的几何剪影、大块平涂与微质感光影、夸张修长的身体比例、极富个性的面部轮廓与黑框眼镜造型、清新明快的角色概念原画感。 |
 
-| FF-003 · OscarAI | Tactile Felt & Knitted 3D Puppet | 定格动画式手工毛毡与针织3D人偶、温润质朴的毛线与布料绒毛纤维肌理、童趣复古粉彩色调、夸张头身比与古怪时尚着装、触感真实的微缩实体模型感。 |
+| FF-003 · OscarAI | Tactile Felt & Knitted 3D Puppet | 定格动画微缩实体质感、温润质朴的手工羊毛毡与微毛绒纤维肌理、童趣复古粉彩低饱和色系、柔和漫射影棚柔光。 |
 
 | FF-004 · OscarAI | Retro 70s Tactile Wool & Clay Stop-Motion Puppet | 70年代复古定格动画人偶风、温润黏土与羊羔绒/颗粒毛圈布料触感、暖调复古暖棕与姜黄配色、朴拙可爱的五官与夸张大脚大耳、怀旧儿童剧集的微缩实体感。 |
 
@@ -532,13 +535,13 @@
 
 | FF-007 · OscarAI | Scandinavian Folk-Art Naive Storybook | 北欧极简民间艺术绘本风、质朴稚拙的童趣造型、柔和哑光大地色系、松弛质感手绘笔触与克制留白、带有温暖手工民俗温度。 |
 
-| FF-008 · OscarAI | Fuzzy Plush Toy 3D Character | 治愈系毛绒玩具与雪尼尔毛线3D人偶、逼真蓬松的绒毛与针织纤维触感、明快鲜艳的冰淇淋马卡龙配色、憨萌可爱的几何形体与大头小短腿比例、潮流艺术玩具感。 |
+| FF-008 · OscarAI | Fuzzy Plush Toy 3D Character | 蓬松柔软的雪尼尔毛绒纤维触感、明快马卡龙粉彩配色、圆润几何微缩体块感、温和无影柔光照明、潮流艺术玩具立体质感。 |
 
-| FF-009 · OscarAI | Chunky Knit Mohair Stop-Motion Puppet | 定格动画式粗针马海毛毛衣人偶风、逼真细腻的毛圈毛线编织与毛绒长毛纤维肌理、冷脸呆萌的死鱼眼黑框眼镜宅男造型、夸张长款大衣与修长小腿、微缩实体手办质感。 |
+| FF-009 · OscarAI | Chunky Knit Mohair Stop-Motion Puppet | 定格动画式粗棒针编织与长毛马海毛微纤维肌理、微缩实体定格偶模型质感、低调复古暖调光影、手工艺温润体块感。 |
 
-| FF-010 · OscarAI | Stylized 3D Animation Feature Character | 现代3D动画长片角色风、温润雕刻感面部轮廓与胡须发丝、颗粒毛衣针织纹理、富有神采的大眼与微表情、暖调柔和的工作室柔光光影。 |
+| FF-010 · OscarAI | Stylized 3D Animation Feature Character | 现代3D动画长片角色概念质感、温润细腻的次表面散射材质（SSS）、圆润流线形体雕刻感、柔和三点式工作棚暖调布光。 |
 
-| FF-011 · OscarAI | Chubby Pastel Knitted Toy 3D Character | 圆滚滚软萌针织与黏土3D玩偶风、细腻质感的棉线针织围巾手套与毛衣、糖果粉彩马卡龙色调、圆润夸张的身材与呆萌微怒表情、潮玩治愈系微缩模型感。 |
+| FF-011 · OscarAI | Chubby Pastel Knitted Toy 3D Character | 软萌棉线织物与哑光黏土复合3D质感、糖果粉彩马卡龙高明度配色、圆润饱满的微缩实体造型感、柔和清澈的工作室柔光。 |
 
 | FF-012 · OscarAI | Tactile Soft 3D Claymation & Storybook Character | 手作触感软萌3D黏土定格动画风、圆润柔和造型与趣味夸张身体比例、微颗粒手作黏土肌理、生动鲜明的个性化角色、介于定格动画玩偶与现代儿童插画绘本之间的温暖美学。 |
 
@@ -598,6 +601,10 @@
 
 | FG-021 · 韩漫webtoon / Korean Webtoon | Korean Webtoon |  |
 
+| FG-022 · 动画片《蜘蛛侠：平行宇宙》 / Spider-Man: Into the Spider-Verse | Spider-Man: Into the Spider-Verse Animation Style |  |
+
+| FG-023 · 复古日系赛璐璐与韩系情绪动画 / Retro 90s Cel Anime & Korean Mood Webtoon | Retro 90s Cel Anime & Korean Emotional Webtoon Illustration, Grainy Nostalgic Film Aesthetic | 复古日系二维动画与现代韩系情绪漫画融合的插画风格，具有1990年代手绘赛璐璐动画的朴素视觉质感。二维平面绘制，清晰但略带自然手绘感的深色轮廓线，线条轻微不规则，轮廓简洁，细节适度省略。大面积平涂色块，硬边赛璐璐阴影，明暗层次简化，阴影以完整、清晰的形状呈现，几乎没有柔和渐变或复杂体积塑造。整体配色低饱和、暗调、褪色感，偏砖红、暗青绿、灰蓝、灰褐、褪色粉橙与米灰色，色彩之间具有克制的冷暖对比，暗部厚重，黑色深沉。背景采用概括性的色块、简化的形体与有限的细节，呈现二维动画背景美术的平面感，不刻意追求写实精度。全画面覆盖明显、均匀、细密的模拟胶片噪点，颗粒与画面色彩自然融合，轻微色彩漂移、柔和的旧胶片褪色感，带有细微的模拟影像粗糙度。画面具有克制的光影、略低的清晰度、自然的暗部色彩沉积，整体像经过模拟胶片扫描和统一调色处理的旧动画截图。视觉语言安静、内敛、忧郁、怀旧，带有轻微的梦境感和疏离感，质朴而不精致化，强调二维手绘痕迹、色彩氛围和年代质感。 |
+
 ## FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts
 
 | 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |
@@ -610,7 +617,7 @@
 
 | FH-004 · New Yorker 单格社论漫画 | Classic Magazine Single-Panel Cartoon | 黑线、成人场景、冷脸人物、一个情境一个笑点。 |
 
-| FH-005 · 法式 Café Sketch | French Café Sketch | 钢笔速写、细长人物、咖啡馆日常、少量淡彩。 |
+| FH-005 · 法式 Café Sketch | French Café Sketch | 轻盈钢笔墨线速写、修长写意造型、透明水彩淡彩点染、大面积自然留白、松弛明快的都市速写感。 |
 
 | FH-006 · 日系脱力线稿漫画 | Japanese Deadpan Loose-Line Cartoon | 极细线、松垮人体、无力表情、社畜/日常梗。 |
 
@@ -660,13 +667,13 @@
 
 | FH-029 · Copic Pastel | Copic Pastel | 马克笔叠色、柔和糖果色、纸面笔触。 |
 
-| FH-030 · 喫茶店 Retro Sketch | Kissaten Retro Sketch | 昭和咖啡馆、钢笔淡彩、棕橙复古。 |
+| FH-030 · 喫茶店 Retro Sketch | Kissaten Retro Sketch | 昭和复古暖褐调、钢笔轻线淡彩、温润琥珀与焦糖色系、质朴慢节奏复古插画质感。 |
 
 | FH-031 · 小红书奶油手绘 | Creamy Social-Media Doodle | 奶油白、粉黄绿、圆线、轻松可爱。 |
 
 | FH-032 · 小红书高饱和涂鸦 | High-Saturation Social Doodle | 橙蓝绿粉、高饱和、粗线、Sticker 与 doodle 元素。 |
 
-| FH-033 · 韩国高饱和涂鸦 | Korean High-Saturation Pop Doodle | 高饱和 Pop、潮流女孩、圆润线条、图标式装饰。 |
+| FH-033 · 韩国高饱和涂鸦 | Korean High-Saturation Pop Doodle | 高饱和韩系波普风、圆润流畅粗黑轮廓线、明艳色块平涂、图形化小元素点缀、活泼跳跃的平面节奏。 |
 
 | FH-034 · 油画棒治愈手绘 | Oil-Pastel Healing Illustration | 粗颗粒、蜡质色块、奶油高饱和、拙朴人物。 |
 
@@ -687,3 +694,77 @@
 | FH-042 · 梵高 | Van Gogh Expressive Impasto Oil Painting | 后印象派厚涂油画质感、短促而强烈的雕塑感厚堆笔触、充满律动感与生命力的线条走势、纯正浓郁的色彩并置与情感张力；只采用梵高标志性的油画画风与笔触肌理，画面元素的选择必须完全切合指定主题，除非用户明确指定，杜绝默认套用星空漩涡、柏树、向日葵、麦田等梵高惯用符号。 |
 
 | FH-043 · 复古 Risograph 与丝网印刷插画 | Vintage Risograph and Silkscreen Print Illustration | 暖象牙色纤维旧纸底；深普鲁士蓝与灰珊瑚红限色双色套印；大量纸白留白与大面积负空间；手绘轮廓、蚀刻排线、断续干笔、粗颗粒半调网点、点描与平涂墨块塑形；墨色浓淡不均、磨损边缘、纸纹透出、轻微双色套印错位与局部掉墨；构图简洁疏朗，主体突出，背景层叠概括；20世纪中期复古旅行宣传插画与私人速写怀旧文学感 |
+
+| FH-044 · 莫奈 / Claude Monet | Claude Monet |  |
+
+## FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles
+
+| 编号 / 原参考名称 | 生图名称 | 核心视觉特征 |
+|---|---|---|
+| FI-001 · Apple / 苹果 | Apple Minimalist Tech Product Commercial Photography | 科技品牌极简商业摄影 |
+
+| FI-002 · MUJI / 无印良品 | MUJI Japanese Naturalist Warm Home Photography | 日式自然主义家居品牌摄影 |
+
+| FI-003 · IKEA / 宜家 | IKEA Nordic Cozy Lifestyle Interior Photography | 北欧温馨日常家居品牌摄影 |
+
+| FI-004 · Aesop / 伊索 | Aesop Earthy Terrazzo Minimalist Botanical Space Photography | 澳洲极简矿物美学品牌空间摄影 |
+
+| FI-005 · Nike / 耐克 | Nike Dynamic Athletic Action & Dramatic Contrast Photography | 运动品牌高对比高动态广告摄影 |
+
+| FI-006 · Patagonia / 巴塔哥尼亚 | Patagonia Rugged Wilderness & Extreme Outdoor Documentary | 户外探险品牌原生态自然纪实摄影 |
+
+| FI-007 · Gucci / 古驰 | Gucci 1970s Vintage Glamour Cinematic Editorial Photography | 意大利奢侈品牌1970年代复古时尚大片 |
+
+| FI-008 · Jacquemus / 雅克慕斯 | Jacquemus French Riviera Sun-Drenched Minimal Fashion Photography | 法国极简阳光时装大片摄影 |
+
+| FI-009 · National Geographic / 国家地理 | National Geographic Epic Wildlife & Cultural Documentary Photography | 美国自然探索与人文纪实摄影杂志 |
+
+| FI-010 · Vogue / 时尚杂志 | Vogue Haute Couture Dramatic Lighting Fashion Editorial | 国际高级时装大片与戏剧光影杂志 |
+
+| FI-011 · Kinfolk | Kinfolk Slow-Living Low-Saturation Natural Light Photography | 低饱和慢生活方式独立杂志摄影 |
+
+| FI-012 · Wallpaper* | Wallpaper* Architectural Modernist Geometric Interior Photography | 英国现代建筑与几何室内设计杂志摄影 |
+
+| FI-013 · i-D | i-D Raw Youth Subculture Direct-Flash Portrait Photography | 英国青年街头亚文化硬直闪肖像杂志 |
+
+| FI-014 · Dazed | Dazed Avant-Garde Experimental Fashion & Expressive Mood Photography | 英国前卫实验时尚与青年文化杂志 |
+
+| FI-015 · The Gentlewoman | The Gentlewoman Restrained Monochrome Modern Female Portrait | 英国克制现代女性黑白肖像杂志 |
+
+| FI-016 · Annie Leibovitz / 安妮·莱博维茨 | Annie Leibovitz Cinematic Staged Narrative Portrait Photography | 美国电影感置景与叙事肖像摄影大师 |
+
+| FI-017 · Richard Avedon / 理查德·阿维顿 | Richard Avedon Stark White Studio Pure Black-and-White Portrait | 美国无缝纯白影棚纯黑白肖像摄影大师 |
+
+| FI-018 · Peter Lindbergh / 彼得·林德伯格 | Peter Lindbergh Natural Raw Windblown Monochrome Fashion Photography | 德国素颜自然人文黑白时尚摄影大师 |
+
+| FI-019 · Helmut Newton / 赫尔穆特·牛顿 | Helmut Newton High-Contrast Bold Monochrome Seductive Noir | 德裔澳大利亚黑白高反差冷艳时尚摄影大师 |
+
+| FI-020 · Steve McCurry / 史蒂夫·麦凯瑞 | Steve McCurry Saturated Soulful Humanist Cultural Portrait | 美国国家地理人文摄影大师，代表作：《阿富汗少女》 |
+
+| FI-021 · Martin Parr / 马丁·帕尔 | Martin Parr Saturated Direct-Flash Satirical Everyday Documentary | 英国高饱和直闪讽刺日常纪实摄影大师，玛格南图片社成员 |
+
+| FI-022 · Gregory Crewdson / 格雷戈里·克鲁德森 | Gregory Crewdson Twilight Cinematic Mystery Staged Photography | 美国电影级大型置景戏剧摄影大师，代表作：《黄昏》《玫瑰之下》 |
+
+| FI-023 · Saul Leiter / 索尔·莱特 | Saul Leiter Poetic Rainy Street & Window Reflection Color Photography | 美国诗意街头倒影与彩色胶片摄影先驱，代表作：《Early Color》 |
+
+| FI-024 · Slim Aarons / 斯利姆·亚伦斯 | Slim Aarons Luxurious Poolside Resort & Villa High-Society Photography | 美国复古名流度假摄影大师，代表作：《池畔闲谈》(Poolside Gossip) |
+
+| FI-025 · Daido Moriyama / 森山大道 | Daido Moriyama Grainy High-Contrast Noir Street Photography | 日本粗颗粒高反差黑白街头摄影大师，代表作：《野犬》《新宿》 |
+
+| FI-026 · Andreas Gursky / 安德烈亚斯·古尔斯基 | Andreas Gursky Monumental Scale Repetitive Geometric Architecture Photography | 德国超大画幅上帝视角几何秩序摄影大师，代表作：《莱茵河二号》《99美分》 |
+
+| FI-027 · Wes Anderson / 韦斯·安德森 | Wes Anderson Pastel Symmetry & Retro Whimsical Cinematic Aesthetic | 美国对称美学与马卡龙色调电影导演，代表作：《布达佩斯大饭店》《月升王国》 |
+
+| FI-028 · Wong Kar-wai / 王家卫 | Wong Kar-wai Hong Kong Retro Neon Glow Atmospheric Cinematic Mood | 中国香港复古港风与霓虹光影电影导演，代表作：《花样年华》《重庆森林》《堕落天使》 |
+
+| FI-029 · Stanley Kubrick / 斯坦利·库布里克 | Stanley Kubrick One-Point Perspective Cold Symmetrical Sci-Fi Cinema | 美国一点透视与冷峻理性科幻电影导演，代表作：《2001太空漫游》《闪灵》 |
+
+| FI-030 · David Fincher / 大卫·芬奇 | David Fincher Desaturated Moody Green-Toned Precision Thriller Cinema | 美国低饱和冷调心理悬疑电影导演，代表作：《七宗罪》《搏击俱乐部》《消失的爱人》 |
+
+| FI-031 · 淘宝电商图 / Taobao E-Commerce | Taobao E-Commerce Product Commercial Photography |  |
+
+| FI-032 · iPhone 17 随手拍 / iPhone 17 Snapshot | iPhone 17 Candid Everyday Snapshot Photography |  |
+
+| FI-033 · 监控摄像头截屏 / Security Camera Screenshot | Security Camera CCTV & Doorbell Surveillance Footage Photography | 安防监控摄像头广角鱼眼与夜视真实视频录像截屏 |
+
+| FI-034 · 大疆无人机航拍 / DJI Drone Aerial | DJI Drone Cinematic Aerial Landscape Photography | 大疆无人机高清高空俯拍与全景航拍摄影 |

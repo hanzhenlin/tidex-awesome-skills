@@ -597,6 +597,51 @@ dialog#wechat-modal p { margin: 0 0 16px; font-size: 13.5px; color: #665f57; }
   .char-grid { grid-template-columns: 1fr; }
 }
 </style>
+<script>
+(function() {
+  function fixImg(img) {
+    if (!img || img.__fixed) return;
+    var src = img.getAttribute('src') || '';
+    var idx = src.indexOf('images/');
+    if (idx === -1) return;
+    var sub = src.substring(idx);
+    var step = parseInt(img.dataset.retry || '0', 10);
+    var candidates = [
+      '../../../../' + sub,
+      '../../../' + sub,
+      '../../' + sub,
+      '../' + sub,
+      './' + sub,
+      '/' + sub,
+      'https://img.handraw-style.com/' + sub,
+      'https://raw.githubusercontent.com/yang0/handraw-style/master/' + sub
+    ];
+    while (step < candidates.length) {
+      var nextSrc = candidates[step];
+      step++;
+      if (nextSrc !== src) {
+        img.dataset.retry = step.toString();
+        img.src = nextSrc;
+        return;
+      }
+    }
+    img.__fixed = true;
+  }
+  window.addEventListener('error', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      fixImg(e.target);
+    }
+  }, true);
+  window.addEventListener('load', function(e) {
+    if (e.target && e.target.tagName === 'IMG') {
+      var card = e.target.closest('.style-card, .layout-card, .color-card, .asset-card, .picker-card');
+      if (card && e.target.src) {
+        card.dataset.image = e.target.src;
+      }
+    }
+  }, true);
+})();
+</script>
 </head>
 <body>
 <header class="sticky-header">
@@ -743,7 +788,7 @@ dialog#wechat-modal p { margin: 0 0 16px; font-size: 13.5px; color: #665f57; }
     <div class="qr-card">
       <span class="qr-tag" data-i18n="wechatGroupLabel">① 优先加入群聊</span>
       <img src="../../../images/wechat_group.png" alt="微信交流群二维码">
-      <span class="qr-tip">群聊：手绘4</span>
+      <span class="qr-tip">群聊：手绘9</span>
     </div>
     <div class="qr-card">
       <span class="qr-tag" data-i18n="wechatPersonalLabel">② 个人微信备用</span>
@@ -762,8 +807,8 @@ const I18N = {
     stylesNav: "风格画廊",
     layoutsNav: "图型画廊",
     colorsNav: "色彩画廊",
-    tutorialsNav: "提示词",
     assetsNav: "自建图库",
+    tutorialsNav: "提示词",
     wechatBtn: "💬 创作变现交流群",
     wechatTitle: "💬 创作变现交流群",
     wechatSub: "请优先加群，满了的话也可以尝试加我个人微信",
@@ -807,8 +852,8 @@ const I18N = {
     stylesNav: "Styles",
     layoutsNav: "Layouts",
     colorsNav: "Colors",
-    tutorialsNav: "Prompts",
     assetsNav: "Custom Library",
+    tutorialsNav: "Prompts",
     wechatBtn: "💬 Creator Community",
     wechatTitle: "💬 Creator Monetization Community",
     wechatSub: "Please prioritize joining the group; if full, try adding personal WeChat",

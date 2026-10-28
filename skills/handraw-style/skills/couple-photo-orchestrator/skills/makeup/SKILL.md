@@ -1,7 +1,7 @@
 ---
 name: editorial-makeup-artist
 description: Mandatory formal-shoot makeup and skin optimization node for portrait photography.
-version: 2.24.24
+version: 2.24.26
 language: zh-CN
 ---
 

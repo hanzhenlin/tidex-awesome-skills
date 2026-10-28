@@ -20,6 +20,7 @@ sys.path.insert(0, str(THEME_SCRIPT_DIR))
 from theme_workspace import resolve_theme, sync_theme
 
 
+PHOTOGRAPHY_KEYWORDS = "高级摄影师风格，创意构图，强烈的戏剧张力"
 BOARD_SIZE = 8
 GRID_MODE_SINGLE = "single_grid"
 GRID_MODE_LEGACY = "composed_cells"
@@ -435,7 +436,7 @@ def inject_visual_lock(shots: list[dict], lock: dict) -> list[dict]:
             per_person = ""
         location_line = f"完整地点锚点：{item.get('location_context') or compact(lock.get('location_lock'))}；具体拍摄节点：{item.get('scene_area')}；时代/作品状态：{item.get('era_or_world_context') or compact(lock.get('world_context'))}"
         item["continuity"] = f"{lock_prompt.replace(chr(10), '；')}；{location_line}；{per_person}；{item['continuity']}"
-        item["prompt"] = f"{lock_prompt}\n\n本格地点锁定：\n{location_line}\n\n本格出镜与逐人调度：\n{per_person or item['interaction']}\n\n本格 Shot 的动作与构图：\n{item['prompt']}\n\n再次确认：所有出镜人物的身份、服装、具体地点、作品／时代语境与避免项均不得替换或泛化。"
+        item["prompt"] = f"摄影关键词：{PHOTOGRAPHY_KEYWORDS}。\n\n{lock_prompt}\n\n本格地点锁定：\n{location_line}\n\n本格出镜与逐人调度：\n{per_person or item['interaction']}\n\n本格 Shot 的动作与构图：\n{item['prompt']}\n\n再次确认：所有出镜人物的身份、服装、具体地点、作品／时代语境与避免项均不得替换或泛化。"
         injected.append(item)
     return injected
 
@@ -557,6 +558,7 @@ def grid_prompt(board: dict) -> str:
     identity_block = identity_lock_v2_prompt(board.get("visual_lock", {}))
     lines = [
         "Generate ONE SINGLE IMAGE: an editorial contact sheet with exactly eight distinct photographic panels.",
+        f"摄影关键词：{PHOTOGRAPHY_KEYWORDS}。",
     ]
     if identity_block:
         lines.extend([identity_block, "FACE READABILITY RULE — Across the whole board, whenever a face is meant to be visible, keep the real face sufficiently clear, sufficiently large and identity-readable. Do not sacrifice facial identity readability merely to make the environment wider or more dramatic."])
@@ -815,6 +817,7 @@ def select(args: argparse.Namespace) -> None:
         }
         reference_relation = "两人姿势互动" if legacy_pair else "所有出镜人物的姿势互动、逐人调度"
         render_prompt = (
+            f"摄影关键词：{PHOTOGRAPHY_KEYWORDS}。\n\n"
             f"{item['shot']['prompt']}\n\n"
             f"构图参考要求：随附的 8 宫格/单格派生图只用于 composition/pose continuity，不是人物身份来源。仅将自然视觉阅读顺序中的第 {panel_position} 格（对应 Shot {shot_id}）作为构图视觉锚点；忽略其他格。先理解目标格中的{reference_relation}、相对站位、身体朝向、手部与道具关系、视线方向、人物与环境的空间关系，以及镜头构图意图。人物脸部身份必须直接重新从该 participant 的 active identity reference 恢复；默认仍是最初上传的真人原图，除非用户明确提升了新的身份参考。禁止继承目标格里已经生成的人脸，禁止把八宫格中的脸继续迭代成身份来源。必须保持脸型与长宽比、额头比例、眼型与眼距、眉位、鼻梁/鼻宽/鼻尖结构、颧骨、嘴宽与唇比例、下颌线与下巴、年龄印象与整体辨识度。"
             f"在 {orientation}、画幅比例 {ORIENTATIONS[orientation]['ratio']} 下重新生成一张完整图片，保持上述关系连续性与所有已确认人物、各自服装、时代/作品世界；允许为目标画幅自然重新取景和扩展环境空间。"

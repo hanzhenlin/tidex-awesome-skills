@@ -101,13 +101,13 @@ def resolve_style_entry(style_input: str, styles: list[dict]) -> tuple[dict, str
         s_obj = next((s for s in styles if s["number"] == canonical), None)
 
     if not s_obj:
-        raise ValueError(f"Style '{style_input}' not found. Use a valid ID like FA-001 or legacy number 001-327.")
+        raise ValueError(f"Style '{style_input}' not found. Use a valid ID like FA-001 or legacy number 001-365.")
     return s_obj, canonical
 
 
 def recommend_combination(theme: str, user_style: str | None, user_color: str | None) -> tuple[str, str, str]:
     """
-    Dynamic whole-library recommendation engine across all 327 styles and 36 theme colors.
+    Dynamic whole-library recommendation engine across all 366 styles and 36 theme colors.
     Note: In AI agent workflows (Codex, Antigravity, Claude Code), the LLM dynamically reasons
     and evaluates styles and colors at runtime. This function provides a robust, non-hardcoded
     heuristic scoring fallback for offline and CLI usage.
@@ -122,7 +122,7 @@ def recommend_combination(theme: str, user_style: str | None, user_color: str | 
     ngrams = [t[i:i+n] for n in (2, 3, 4) for i in range(len(t)-n+1)]
     words = re.findall(r'[a-zA-Z0-9]+|[\u4e00-\u9fa5]', t)
 
-    # 1. Dynamically resolve style from full 327 styles library
+    # 1. Dynamically resolve style from full 366 styles library
     if user_style:
         try:
             s_obj, final_style = resolve_style_entry(user_style, styles)
@@ -361,8 +361,12 @@ def main() -> None:
     reference_image_zh = ""
     reference_image_en = ""
     if decision["use_reference_image"] and args.mode == "pure-image":
-        reference_image_zh = f"参考图：请上传本地参考图 {decision['reference_path']}。{REFERENCE_ISOLATION_ZH}"
-        reference_image_en = f" Reference image: upload local reference image {decision['reference_path']}. {REFERENCE_ISOLATION_EN}"
+        if decision.get("reference_path"):
+            reference_image_zh = f"参考图：请上传本地参考图 {decision['reference_path']}。{REFERENCE_ISOLATION_ZH}"
+            reference_image_en = f" Reference image: upload local reference image {decision['reference_path']}. {REFERENCE_ISOLATION_EN}"
+        else:
+            reference_image_zh = f"参考图：{REFERENCE_ISOLATION_ZH}"
+            reference_image_en = f" Reference image: {REFERENCE_ISOLATION_EN}"
     color_zh = f"{color_info['prompt_zh']}" if color_info else ""
     color_en = f" {color_info['prompt_en']}" if color_info else ""
     print(f"风格名称：{selected['generation_name']}。{color_zh}主题：{args.theme}。{reference_zh}{traits_zh}{reference_image_zh}{zh_extra}{redraw_zh}{graphic_text_suffix}")

@@ -1,7 +1,7 @@
 ---
 name: reference-beauty-prep
 description: Turns a real-person reference into a reusable polished identity reference through a visual three-panel beauty exploration.
-version: 2.24.24
+version: 2.24.26
 language: zh-CN
 ---
 

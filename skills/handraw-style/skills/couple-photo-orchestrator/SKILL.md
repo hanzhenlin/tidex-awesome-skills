@@ -1,7 +1,7 @@
 ---
 name: couple-photo-orchestrator
 description: Orchestrates professional portrait, couple, wedding, family, cosplay, and themed photography planning from direction selection through Look, scene micro-zones, Shot List, and on-demand image generation.
-version: 2.24.24
+version: 2.24.26
 language: zh-CN
 ---
 
@@ -13,6 +13,12 @@ language: zh-CN
 支持：个人写真、私房、情侣、婚纱、亲子、全家福、古风/汉服/唐风、旗袍、新中式、民国、旅行、职业形象、Cosplay、主题创意等。
 
 默认目标不是普通游客照、自拍、网红照或泛 AI 美女图，而是具有完整人物、造型、美术、动作、光线、色彩和构图关系的专业样片。
+
+## 通用摄影关键词
+- 所有摄影拍摄类型均在可复制方案与最终生图提示词中原样加入：**高级摄影师风格，创意构图，强烈的戏剧张力**。
+- 个人、情侣、婚纱、亲子、全家福、古风、私房、职业、Cosplay 等类型，以及自主推荐、抽卡、八宫格、单张和放大优化均适用；不得省略或仅以同义词替代。
+- 通过机位、空间层次、光影和情绪落实关键词；继续遵守已确认的人物身份、服装、妆发、画幅及 Shot 动作约束。
+- 保持现有“先三方案选向 → 八宫格预览 → 按需单张/放大”的交付流程。
 
 ## 2. Source of Truth
 执行前优先遵循根目录 `CORE_REQUIREMENTS.md`。
@@ -171,6 +177,7 @@ few-shot 的唯一用途：示范结构、字段、长度、语气、交互。�
 …逐人妆发：{所有人物分别输出；禁止合并}
 色彩 / 光线：{主色关系 + 光源逻辑}
 人物状态：{可执行动作/关系事件}
+通用摄影关键词：高级摄影师风格，创意构图，强烈的戏剧张力
 摄影语言：{景别、机位、构图、镜头观察方式}
 出8宫格图片。
 ```

@@ -41,9 +41,14 @@ def positive_traits(traits: str) -> str:
     return "；".join(kept)
 
 
-def get_reference_path(number: str) -> str:
+def get_reference_path(number: str) -> str | None:
     reference_grid = grid_path(number)
-    return str(reference_grid if reference_grid.exists() else single_path(number))
+    if reference_grid.exists():
+        return str(reference_grid)
+    reference_single = single_path(number)
+    if reference_single.exists():
+        return str(reference_single)
+    return None
 
 
 def resolve(model: str, style: str, policy: dict | None = None) -> dict:

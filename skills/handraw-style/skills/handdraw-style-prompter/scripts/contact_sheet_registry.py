@@ -16,11 +16,15 @@ IMAGES = ROOT / "images"
 STATE_FILE = Path(__file__).resolve().parents[1] / "references" / "contact_sheet_state.json"
 CAPACITY = 16
 SHEET_SIZE = 1254
-SHEET = re.compile(r"^[GH]_(\d{3})(?:-(\d{3}))?\.webp$")
+SHEET = re.compile(r"^[GHI]_(\d{3})(?:-(\d{3}))?\.webp$")
 
 
 def sheet_group(start: int) -> str:
-    return "G" if start <= 216 else "H"
+    if start <= 216:
+        return "G"
+    if start <= 331:
+        return "H"
+    return "I"
 
 
 def sheet_path(start: int, end: int) -> Path:

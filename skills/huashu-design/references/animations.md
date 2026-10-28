@@ -232,7 +232,7 @@ function Scene() {
 这个skill做的是**HTML动画**（在浏览器里跑的）。如果最终产出要作为视频素材：
 
 - **短动画/concept demo**：用这里的方法做HTML动画 → 屏幕录制
-- **长视频/叙事**（5-20 分钟带解说）：走 SKILL.md Step 9.5 解说驱动管线（`voiceover-pipeline.md`），不外推给其他工具
+- **长视频/叙事**（5-20 分钟带解说）：走 `references/modules/motion.md` 的解说驱动线（`voiceover-pipeline.md`），不外推给其他工具
 - **motion graphics**：专业的After Effects/Motion Canvas更合适
 
 ## 需要物理动画（spring / decay）时

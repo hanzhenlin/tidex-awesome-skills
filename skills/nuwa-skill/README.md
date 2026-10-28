@@ -3,9 +3,9 @@
 # 女娲.skill
 
 <p align="center">
-  <img src="assets/hero.gif" alt="nuwa-skill Hero Animation" />
+  <img src="assets/hero.gif" alt="女娲.skill 宣传动画" />
   <br/>
-  <sub>动画由 <a href="https://github.com/alchaincyf/huashu-design">huashu-design</a> skill 制作</sub>
+  <sub>动画由 huashu-motion 制作，女娲形象与每一种画风都由代码绘制</sub>
 </p>
 
 > *「你想蒸馏的下一个员工，何必是同事」*

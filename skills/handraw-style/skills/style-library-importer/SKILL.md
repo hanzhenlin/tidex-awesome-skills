@@ -7,6 +7,24 @@ description: Add a named or text-defined visual style to the numbered hand-drawn
 
 Use this Skill when the user wants to add a visual style to the local hand-drawn style library with a style name, visual traits, or both. It is separate from `tweet-style-importer`: an image-only request belongs to the Tweet workflow and must not receive a new number here.
 
+## 核心铁律：严禁从示意图提取具体画面内容到特征描述 (Prohibition on Content Extraction)
+
+> [!CAUTION]
+> **绝对禁止“图意解析污染”**：
+> 当用户提供示意图/参考图（或 AI 解析图片）录入风格时，**绝对严禁**将图中的具体主体内容提取写入 `--traits` 特征描述中！
+> - **严禁提取的画面内容（Content/Subject）**：
+>   - 任何人物主体（如“年轻女性”、“女孩”、“男人”、“老人”、“幼童”等）；
+>   - 人物外貌与穿着（如“短发”、“长发”、“白色棉麻长裙”、“风衣”、“T恤”等）；
+>   - 人物动作与姿态（如“侧身回眸”、“奔跑”、“坐在长椅上”、“微笑”等）；
+>   - 具体道具与物品（如“咖啡杯”、“雨伞”、“自行车”、“书本”等）；
+>   - 具体场景与地貌（如“黄色花田”、“海湾远山”、“街道”、“樱花树”等）。
+> - **允许且仅允许提取的纯艺术视觉语言（Aesthetic & Medium Traits Only）**：
+>   - 笔触线条（如细钢笔线、松散手绘线条、粗粝炭笔线条、色块轮廓）；
+>   - 材质媒介（如水彩晕染、胶片颗粒、赛璐珞、油画厚涂、复古丝网印）；
+>   - 光影色彩（如高饱和通透、日系青蓝调、低饱和灰调、柔和侧逆光、高动态自然光）；
+>   - 空间虚实（如中长焦浅景深背景虚化、前景光斑、大面积留白、平铺无透视）。
+> 风格特征必须对任何新主题保持绝对中立。画面中的一切主体、服饰与环境必须 100% 交由未来用户的具体主题（Theme）决定。
+
 ## Interpret the input
 
 - **Name only:** keep the supplied name as the style label, do not invent or store visual traits, and register `name_activation=strong`, `traits_activation=none` for `gpt-image-2`.

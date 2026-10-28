@@ -13,6 +13,7 @@ project:
     internal_direction_candidates: []
     selected_direction: null
     selection_reason: null
+  photography_keywords: "高级摄影师风格，创意构图，强烈的戏剧张力"
   shoot_type: null
   purpose: null
   participant_count: 1

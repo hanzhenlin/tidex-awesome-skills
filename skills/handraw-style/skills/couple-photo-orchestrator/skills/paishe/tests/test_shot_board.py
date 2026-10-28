@@ -97,6 +97,7 @@ class ShotBoardTests(unittest.TestCase):
             self.command(str(VALIDATE), str(root))
             board_before_grid = yaml.safe_load((project / "deliverables" / "shot-boards" / "SHOTBOARD-001.yaml").read_text(encoding="utf-8"))
             self.assertIn("芙宁娜的枫丹舞台礼服", board_before_grid["visual_lock"]["female_outfit"])
+            self.assertTrue(all("高级摄影师风格，创意构图，强烈的戏剧张力" in shot["prompt"] for shot in board_before_grid["shots"]))
             self.assertIn("深蓝短斗篷", board_before_grid["shots"][0]["prompt"])
             self.assertIn("不得把任一方替换为普通西装", board_before_grid["shots"][0]["prompt"])
             output = self.prepare_grid(project, "SHOTBOARD-001")
@@ -105,6 +106,7 @@ class ShotBoardTests(unittest.TestCase):
             self.assertIn("深蓝短斗篷", output)
             brief = project / "deliverables" / "shot-grid-briefs" / "SHOTBOARD-001-grid-v1.yaml"
             data = yaml.safe_load(brief.read_text(encoding="utf-8"))
+            self.assertIn("高级摄影师风格，创意构图，强烈的戏剧张力", data["render_prompt"])
             self.assertEqual(data["grid_mode"], "single_grid")
             self.assertIsNone(data["panel_aspect_ratio"])
             self.assertEqual(data["layout_policy"]["mode"], "free_ai")
@@ -131,6 +133,7 @@ class ShotBoardTests(unittest.TestCase):
             self.assertTrue(anchor.exists())
             with Image.open(anchor) as reference:
                 self.assertEqual(reference.size, (3200, 2000))
+            self.assertIn("高级摄影师风格，创意构图，强烈的戏剧张力", detail_data["render_prompt"])
             self.assertIn("重新生成一张完整图片", detail_data["render_prompt"])
             self.assertIn("不要机械外延画布", detail_data["render_prompt"])
             self.assertIn("两人的姿势互动", detail_data["preservation_contract"]["required"])

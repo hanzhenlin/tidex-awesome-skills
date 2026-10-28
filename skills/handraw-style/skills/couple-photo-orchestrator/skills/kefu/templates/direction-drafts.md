@@ -12,6 +12,7 @@
 {{per_participant_styling_fields}}
 色彩 / 光线：{{palette_lighting}}
 人物状态：{{human_state}}
+通用摄影关键词：高级摄影师风格，创意构图，强烈的戏剧张力
 摄影语言：{{photographic_language}}
 出8宫格图片。
 ```
@@ -26,6 +27,7 @@
 {{per_participant_styling_fields}}
 色彩 / 光线：{{palette_lighting}}
 人物状态：{{human_state}}
+通用摄影关键词：高级摄影师风格，创意构图，强烈的戏剧张力
 摄影语言：{{photographic_language}}
 出8宫格图片。
 ```
@@ -40,6 +42,7 @@
 {{per_participant_styling_fields}}
 色彩 / 光线：{{palette_lighting}}
 人物状态：{{human_state}}
+通用摄影关键词：高级摄影师风格，创意构图，强烈的戏剧张力
 摄影语言：{{photographic_language}}
 出8宫格图片。
 ```

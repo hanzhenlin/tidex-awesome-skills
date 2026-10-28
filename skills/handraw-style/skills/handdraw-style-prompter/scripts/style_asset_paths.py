@@ -6,15 +6,19 @@ import re
 from pathlib import Path
 
 # Locate root directory
-ROOT = Path(__file__).resolve().parents[3]
-if not (ROOT / "images" / "individual").exists():
-    for p in Path(__file__).resolve().parents:
-        if (p / "images" / "individual").exists():
-            ROOT = p
-            break
+PACKAGE_ROOT = Path(__file__).resolve().parents[1]
+ROOT = PACKAGE_ROOT
+for p in Path(__file__).resolve().parents:
+    if (p / "images" / "individual").exists():
+        ROOT = p
+        break
 
 INDIVIDUAL_ROOT = ROOT / "images" / "individual"
-ALIAS_MAP_FILE = ROOT / "skills" / "handdraw-style-prompter" / "references" / "style_alias_map.json"
+ALIAS_MAP_FILE = PACKAGE_ROOT / "references" / "style_alias_map.json"
+if not ALIAS_MAP_FILE.exists():
+    ALIAS_MAP_FILE = ROOT / "skills" / "handdraw-style-prompter" / "references" / "style_alias_map.json"
+if not ALIAS_MAP_FILE.exists():
+    ALIAS_MAP_FILE = ROOT / "references" / "style_alias_map.json"
 
 _ALIAS_CACHE: dict[str, str] | None = None
 

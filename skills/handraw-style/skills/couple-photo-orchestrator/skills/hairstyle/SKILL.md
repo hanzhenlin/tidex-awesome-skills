@@ -1,7 +1,7 @@
 ---
 name: editorial-hairstylist
 description: Early professional hairstylist node that designs and locks formal shoot hair for each candidate direction before downstream Look expansion.
-version: 2.24.24
+version: 2.24.26
 language: zh-CN
 ---
 

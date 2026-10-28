@@ -1,7 +1,7 @@
 ---
 name: couple-photo-wardrobe-board
 description: Design numbered six-look wardrobe boards for one or any number of participants inside a confirmed portrait theme, preserving full per-person outfit detail.
-version: 2.24.24
+version: 2.24.26
 ---
 
 # 任意人数换装 6 宫格

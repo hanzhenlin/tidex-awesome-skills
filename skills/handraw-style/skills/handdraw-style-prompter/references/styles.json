@@ -151,14 +151,14 @@
     "group": "FA 国际社论幽默 / Editorial & Humor Doodle",
     "reference": "Sally Nixon",
     "generation_name": "Flat Everyday Women Lifestyle",
-    "traits": "日常女性人物、蓬松手绘线稿、低饱和外套与围巾、旁边的小鸟；姿态自然站立，服装和动物用清楚色块区分，整体保留生活速写的轻松感。"
+    "traits": "蓬松手绘线稿、质朴低饱和粉彩色块平涂、松弛生活速写感、克制留白与温暖呼吸感。"
   },
   {
     "number": "FA-023",
     "group": "FA 国际社论幽默 / Editorial & Humor Doodle",
     "reference": "Agathe Sorlet",
     "generation_name": "Warm Minimal Female Line Cartoon",
-    "traits": "黑色简线、黑色长发女性、坐姿、白上衣与蓝色牛仔裤；以少量暖色腮红和红色鞋带点亮画面，背景保持干净，气质亲密而松弛。"
+    "traits": "极简黑色钢笔细线、克制几何平涂、少量高饱和暖色点睛、大面积纯净留白背景、亲密松弛的图形速写感。"
   },
   {
     "number": "FA-024",
@@ -221,7 +221,7 @@
     "group": "FA 国际社论幽默 / Editorial & Humor Doodle",
     "reference": "Joann Sfar",
     "generation_name": "Loose French Improvised Ink",
-    "traits": "松散法式墨线、蓬乱卷发、大眼女性、黑猫、随意坐姿；线条保留手绘停顿和轻微不齐整，配合少量暖色块，形成即兴、俏皮而略带怪诞的画面。"
+    "traits": "松散即兴法式墨线、轻微抖动与手绘停顿笔触、少量暖色水彩晕染点缀、俏皮略带怪诞的插画张力。"
   },
   {
     "number": "FA-033",
@@ -466,7 +466,7 @@
     "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
     "reference": "OscarAI",
     "generation_name": "Edwardian Vintage Ink Fashion Editorial",
-    "traits": "爱德华时代复古时尚墨水插画风、精美利落的钢笔排线与羽化阴影、典雅复古的礼帽长裙剪影、极简复古蓝与芥末黄点缀平涂、大面积呼吸感留白与诗意文学氛围。"
+    "traits": "复古墨水插画风、精美利落的钢笔交叉排线与羽化阴影、修长典雅的图形化剪影、复古蓝与芥末黄点缀平涂、大面积呼吸感留白与诗意文学氛围。"
   },
   {
     "number": "FB-028",
@@ -487,7 +487,7 @@
     "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
     "reference": "なっくす",
     "generation_name": "Soft Crayon & Sumi-e Cat Storybook",
-    "traits": "温润蜡笔与水墨和风绘本风、质朴手绘炭笔蜡笔颗粒肌理、巨型猫咪的翡翠绿眼与细腻毛流、微型人偶与红色印章、充满童趣温暖的日式日常绘本。"
+    "traits": "温润蜡笔与水墨和风绘本风、质朴手绘炭笔与蜡笔颗粒肌理、细腻毛流与柔和边缘晕染、微型对比构图与红色印章点缀、充满童趣温暖的日式日常绘本。"
   },
   {
     "number": "FB-031",
@@ -508,7 +508,7 @@
     "group": "FB 经典绘本叙事 / Picture Book & Watercolor",
     "reference": "森系儿童插画",
     "generation_name": "Forest Children Storybook Illustration",
-    "traits": "新自然系童话绘本插画；孩子与自然环境共处；人物小巧可爱、造型圆润简洁；自然植物占据画面主体；嫩绿、草绿、深绿与少量暖色点缀；柔和自然光、树影斑驳、逆光透叶；雨露与水面高光；环境丰富但不过度写实；植物轮廓概括而有节奏；儿童绘本与动画背景结合；温暖、安静、清透、富有生命力；现代平面装饰型森林童话插画；高度二维化；圆润几何植物；大块纯色色形；弱透视、弱光影；简洁童真、安静治愈、装饰海报感"
+    "traits": "新自然系治愈绘本风、高度二维平面化几何造型、清透嫩绿与大地色系点缀、圆润几何色块概括、柔和漫射环境光、弱透视与装饰性插画质感、安静温暖生命力。"
   },
   {
     "number": "FB-034",
@@ -959,6 +959,13 @@
     "traits": "灵感来自美式现代复古 Rubber-Hose 插画风格。但整体更加现代、明亮、干净、可爱。角色采用圆润、简洁、夸张的卡通造型，四肢像柔软的橡皮管一样自然弯曲和延伸，弱化真实关节与人体结构，让动作更自由、更有节奏感。整体以粗而流畅的黑色轮廓线搭配干净的平涂色块，减少复杂光影和厚重做旧效果。造型简洁时尚，比例可爱，表情有个性。整体清爽、协调、有设计感。画面具有轻松幽默、俏皮可爱和一点点怪趣感，动作夸张流畅，像带有爵士节奏的动态瞬间。整体视觉偏现代潮流插画、复古海报和独立品牌插画质感，干净、可爱、有辨识度，减少老旧胶片颗粒与过度怀旧感。"
   },
   {
+    "number": "FC-032",
+    "group": "FC 现代平面艺术 / Modern Graphic & Pop",
+    "reference": "阿尔丰斯·穆夏 / Alphonse Mucha",
+    "generation_name": "Alphonse Mucha Art Nouveau Illustration",
+    "traits": ""
+  },
+  {
     "number": "FD-001",
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "Yuko Shimizu",
@@ -1047,7 +1054,7 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "きくちあつこ",
     "generation_name": "Fashion Diary Sketch Girl",
-    "traits": "女孩穿搭速写、手绘服装、Instagram 日记感；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。"
+    "traits": "纸上手绘笔压与不齐整线条节奏、现代生活手账速写风、利落平面剪影与自然松弛造型、低饱和轻盈色彩点缀。"
   },
   {
     "number": "FD-014",
@@ -1131,7 +1138,7 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "そとこ / Sotoko",
     "generation_name": "Elegant Sparse-Line Girl",
-    "traits": "极少线条、纤细女孩、优雅留白；线条轻细并保留呼吸感，人物比例偏修长，眉眼与嘴角的小变化承担主要表情；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。"
+    "traits": "极少极轻钢笔线条、修长克制造型比例、利落平面剪影对比、大面积呼吸感留白空间、优雅空灵的现代日系审美。"
   },
   {
     "number": "FD-026",
@@ -1152,7 +1159,7 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "Mira Lou",
     "generation_name": "Modern Editorial Female Line",
-    "traits": "现代女性线稿、编辑插画、清爽人物；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。"
+    "traits": "现代都市插画线稿、利落流畅钢笔线条、克制几何剪影、大面积呼吸感留白、优雅独立的现代视觉语言。"
   },
   {
     "number": "FD-029",
@@ -1187,7 +1194,7 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "白根ゆたんぽ",
     "generation_name": "Loose Pop Advertising Girl",
-    "traits": "女孩、奇怪姿态、广告 Pop、松弛幽默；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色使用少量高纯度撞色和平涂，让人物剪影和服装保持强图形对比。"
+    "traits": "现代广告波普风、极简图形化几何造型、高纯度平面撞色平涂、强对比剪影轮廓、幽默夸张的造型张力。"
   },
   {
     "number": "FD-034",
@@ -1215,7 +1222,7 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "Nah",
     "generation_name": "High-Saturation Gen-Z Fashion Girl",
-    "traits": "潮流女孩、高饱和、Z 世代、Graphic Fashion；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；配色使用少量高纯度撞色和平涂，让人物剪影和服装保持强图形对比。"
+    "traits": "高饱和度潮流波普平面插画、Z世代图形化色块、利落硬边轮廓线、纯色大块平涂与强烈色相对比。"
   },
   {
     "number": "FD-038",
@@ -1236,14 +1243,14 @@
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "A.YAMI",
     "generation_name": "Tokyo Street Graphic Girl",
-    "traits": "东京街头、图形化女孩、年轻潮流；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。"
+    "traits": "现代日系图形插画、利落几何色块拼接、清晰剪影节奏、潮流冷暖撞色平涂、极简平面装饰感。"
   },
   {
     "number": "FD-041",
     "group": "FD 日本当代插画 / Japanese Contemporary & Manga",
     "reference": "めめんち",
     "generation_name": "Mystic Fashion Character Graphic",
-    "traits": "强配色、神秘女孩、Fashion × Character；人物轮廓优先于细节堆砌，脸型、头身比例与手脚形状要形成清楚而独立的视觉语言；人物姿态松弛自然，服装靠清楚剪影体现时尚感，避免模板化甜美脸。"
+    "traits": "神秘冷艳的暗调与荧光高对比色彩、利落锐利的图形化剪影、平涂色块与细黑轮廓线融合、时尚平面张力。"
   },
   {
     "number": "FD-042",
@@ -1341,7 +1348,7 @@
     "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
     "reference": "伊吹五月",
     "generation_name": "Freehand Ink-Wash Ancient Figure",
-    "traits": "水墨人物、古风衣袂、潇洒笔触、大面积留白；保留明显手绘笔压、停顿与轻微不齐整感，让轮廓产生真实纸上绘制的节奏；上色保留透明叠染、柔软边缘和纸纹，允许轻微颜色不均与留白。"
+    "traits": "写意水墨枯笔飞白、透明水色叠染与宣纸晕染肌理、大开大合的潇洒运笔气韵、大面积空灵留白布局。"
   },
   {
     "number": "FE-014",
@@ -1502,14 +1509,14 @@
     "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
     "reference": "白茶",
     "generation_name": "Chinese Pet Deadpan Cartoon",
-    "traits": "以猫狗性格和“内心戏”驱动笑点；造型概括、表情高度角色化，常配短句或对白；画面干净、留白多，兼具漫画感和中国绘画趣味，核心不是单纯“可爱”。"
+    "traits": "新国风冷幽默萌系手绘、纸上手绘墨线停顿笔压、透明国画水色叠染与纸纹肌理、留白透气、诙谐解构的轻中式日常趣味。"
   },
   {
     "number": "FE-037",
     "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
     "reference": "慕容引刀",
     "generation_name": "Philosophical Minimal Dog Cartoon",
-    "traits": "简洁的轮廓线与大面积留白；白色小狗“刀刀”以沉静旁观者姿态出现，常站在屋顶、街角、栏杆或城市边缘；配合短句、独白和轻哲思，形成温柔、孤独、幽默的都市寓言感。"
+    "traits": "极简哲学手绘风、大面积空灵纸面留白、极简线条勾勒孤立主体、少量暖色平涂点缀、微小与空旷对比构图、充满冷幽默与现代哲思寓言感。"
   },
   {
     "number": "FE-038",
@@ -1722,6 +1729,13 @@
     "traits": ""
   },
   {
+    "number": "FE-068",
+    "group": "FE 新国风与传统工艺 / Chinese Traditional & Folk Craft",
+    "reference": "唐山皮影",
+    "generation_name": "Tangshan Shadow Puppet",
+    "traits": ""
+  },
+  {
     "number": "FF-001",
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
@@ -1740,7 +1754,7 @@
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
     "generation_name": "Tactile Felt & Knitted 3D Puppet",
-    "traits": "定格动画式手工毛毡与针织3D人偶、温润质朴的毛线与布料绒毛纤维肌理、童趣复古粉彩色调、夸张头身比与古怪时尚着装、触感真实的微缩实体模型感。"
+    "traits": "定格动画微缩实体质感、温润质朴的手工羊毛毡与微毛绒纤维肌理、童趣复古粉彩低饱和色系、柔和漫射影棚柔光。"
   },
   {
     "number": "FF-004",
@@ -1775,28 +1789,28 @@
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
     "generation_name": "Fuzzy Plush Toy 3D Character",
-    "traits": "治愈系毛绒玩具与雪尼尔毛线3D人偶、逼真蓬松的绒毛与针织纤维触感、明快鲜艳的冰淇淋马卡龙配色、憨萌可爱的几何形体与大头小短腿比例、潮流艺术玩具感。"
+    "traits": "蓬松柔软的雪尼尔毛绒纤维触感、明快马卡龙粉彩配色、圆润几何微缩体块感、温和无影柔光照明、潮流艺术玩具立体质感。"
   },
   {
     "number": "FF-009",
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
     "generation_name": "Chunky Knit Mohair Stop-Motion Puppet",
-    "traits": "定格动画式粗针马海毛毛衣人偶风、逼真细腻的毛圈毛线编织与毛绒长毛纤维肌理、冷脸呆萌的死鱼眼黑框眼镜宅男造型、夸张长款大衣与修长小腿、微缩实体手办质感。"
+    "traits": "定格动画式粗棒针编织与长毛马海毛微纤维肌理、微缩实体定格偶模型质感、低调复古暖调光影、手工艺温润体块感。"
   },
   {
     "number": "FF-010",
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
     "generation_name": "Stylized 3D Animation Feature Character",
-    "traits": "现代3D动画长片角色风、温润雕刻感面部轮廓与胡须发丝、颗粒毛衣针织纹理、富有神采的大眼与微表情、暖调柔和的工作室柔光光影。"
+    "traits": "现代3D动画长片角色概念质感、温润细腻的次表面散射材质（SSS）、圆润流线形体雕刻感、柔和三点式工作棚暖调布光。"
   },
   {
     "number": "FF-011",
     "group": "FF 3D黏土毛毡与纸雕 / 3D Clay, Felt & Papercraft",
     "reference": "OscarAI",
     "generation_name": "Chubby Pastel Knitted Toy 3D Character",
-    "traits": "圆滚滚软萌针织与黏土3D玩偶风、细腻质感的棉线针织围巾手套与毛衣、糖果粉彩马卡龙色调、圆润夸张的身材与呆萌微怒表情、潮玩治愈系微缩模型感。"
+    "traits": "软萌棉线织物与哑光黏土复合3D质感、糖果粉彩马卡龙高明度配色、圆润饱满的微缩实体造型感、柔和清澈的工作室柔光。"
   },
   {
     "number": "FF-012",
@@ -1988,6 +2002,20 @@
     "traits": ""
   },
   {
+    "number": "FG-022",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "动画片《蜘蛛侠：平行宇宙》 / Spider-Man: Into the Spider-Verse",
+    "generation_name": "Spider-Man: Into the Spider-Verse Animation Style",
+    "traits": ""
+  },
+  {
+    "number": "FG-023",
+    "group": "FG 动漫和赛璐璐 / Anime, Cel Animation & Retro Game",
+    "reference": "复古日系赛璐璐与韩系情绪动画 / Retro 90s Cel Anime & Korean Mood Webtoon",
+    "generation_name": "Retro 90s Cel Anime & Korean Emotional Webtoon Illustration, Grainy Nostalgic Film Aesthetic",
+    "traits": "复古日系二维动画与现代韩系情绪漫画融合的插画风格，具有1990年代手绘赛璐璐动画的朴素视觉质感。二维平面绘制，清晰但略带自然手绘感的深色轮廓线，线条轻微不规则，轮廓简洁，细节适度省略。大面积平涂色块，硬边赛璐璐阴影，明暗层次简化，阴影以完整、清晰的形状呈现，几乎没有柔和渐变或复杂体积塑造。整体配色低饱和、暗调、褪色感，偏砖红、暗青绿、灰蓝、灰褐、褪色粉橙与米灰色，色彩之间具有克制的冷暖对比，暗部厚重，黑色深沉。背景采用概括性的色块、简化的形体与有限的细节，呈现二维动画背景美术的平面感，不刻意追求写实精度。全画面覆盖明显、均匀、细密的模拟胶片噪点，颗粒与画面色彩自然融合，轻微色彩漂移、柔和的旧胶片褪色感，带有细微的模拟影像粗糙度。画面具有克制的光影、略低的清晰度、自然的暗部色彩沉积，整体像经过模拟胶片扫描和统一调色处理的旧动画截图。视觉语言安静、内敛、忧郁、怀旧，带有轻微的梦境感和疏离感，质朴而不精致化，强调二维手绘痕迹、色彩氛围和年代质感。"
+  },
+  {
     "number": "FH-001",
     "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
     "reference": "Editorial Doodle / 社论涂鸦",
@@ -2020,7 +2048,7 @@
     "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
     "reference": "法式 Café Sketch",
     "generation_name": "French Café Sketch",
-    "traits": "钢笔速写、细长人物、咖啡馆日常、少量淡彩。"
+    "traits": "轻盈钢笔墨线速写、修长写意造型、透明水彩淡彩点染、大面积自然留白、松弛明快的都市速写感。"
   },
   {
     "number": "FH-006",
@@ -2195,7 +2223,7 @@
     "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
     "reference": "喫茶店 Retro Sketch",
     "generation_name": "Kissaten Retro Sketch",
-    "traits": "昭和咖啡馆、钢笔淡彩、棕橙复古。"
+    "traits": "昭和复古暖褐调、钢笔轻线淡彩、温润琥珀与焦糖色系、质朴慢节奏复古插画质感。"
   },
   {
     "number": "FH-031",
@@ -2216,7 +2244,7 @@
     "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
     "reference": "韩国高饱和涂鸦",
     "generation_name": "Korean High-Saturation Pop Doodle",
-    "traits": "高饱和 Pop、潮流女孩、圆润线条、图标式装饰。"
+    "traits": "高饱和韩系波普风、圆润流畅粗黑轮廓线、明艳色块平涂、图形化小元素点缀、活泼跳跃的平面节奏。"
   },
   {
     "number": "FH-034",
@@ -2287,5 +2315,250 @@
     "reference": "复古 Risograph 与丝网印刷插画",
     "generation_name": "Vintage Risograph and Silkscreen Print Illustration",
     "traits": "暖象牙色纤维旧纸底；深普鲁士蓝与灰珊瑚红限色双色套印；大量纸白留白与大面积负空间；手绘轮廓、蚀刻排线、断续干笔、粗颗粒半调网点、点描与平涂墨块塑形；墨色浓淡不均、磨损边缘、纸纹透出、轻微双色套印错位与局部掉墨；构图简洁疏朗，主体突出，背景层叠概括；20世纪中期复古旅行宣传插画与私人速写怀旧文学感"
+  },
+  {
+    "number": "FH-044",
+    "group": "FH 先锋实验与综合媒介 / Mixed Media & Impasto Arts",
+    "reference": "莫奈 / Claude Monet",
+    "generation_name": "Claude Monet",
+    "traits": ""
+  },
+  {
+    "number": "FI-001",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Apple / 苹果",
+    "generation_name": "Apple Minimalist Tech Product Commercial Photography",
+    "traits": "科技品牌极简商业摄影"
+  },
+  {
+    "number": "FI-002",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "MUJI / 无印良品",
+    "generation_name": "MUJI Japanese Naturalist Warm Home Photography",
+    "traits": "日式自然主义家居品牌摄影"
+  },
+  {
+    "number": "FI-003",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "IKEA / 宜家",
+    "generation_name": "IKEA Nordic Cozy Lifestyle Interior Photography",
+    "traits": "北欧温馨日常家居品牌摄影"
+  },
+  {
+    "number": "FI-004",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Aesop / 伊索",
+    "generation_name": "Aesop Earthy Terrazzo Minimalist Botanical Space Photography",
+    "traits": "澳洲极简矿物美学品牌空间摄影"
+  },
+  {
+    "number": "FI-005",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Nike / 耐克",
+    "generation_name": "Nike Dynamic Athletic Action & Dramatic Contrast Photography",
+    "traits": "运动品牌高对比高动态广告摄影"
+  },
+  {
+    "number": "FI-006",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Patagonia / 巴塔哥尼亚",
+    "generation_name": "Patagonia Rugged Wilderness & Extreme Outdoor Documentary",
+    "traits": "户外探险品牌原生态自然纪实摄影"
+  },
+  {
+    "number": "FI-007",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Gucci / 古驰",
+    "generation_name": "Gucci 1970s Vintage Glamour Cinematic Editorial Photography",
+    "traits": "意大利奢侈品牌1970年代复古时尚大片"
+  },
+  {
+    "number": "FI-008",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Jacquemus / 雅克慕斯",
+    "generation_name": "Jacquemus French Riviera Sun-Drenched Minimal Fashion Photography",
+    "traits": "法国极简阳光时装大片摄影"
+  },
+  {
+    "number": "FI-009",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "National Geographic / 国家地理",
+    "generation_name": "National Geographic Epic Wildlife & Cultural Documentary Photography",
+    "traits": "美国自然探索与人文纪实摄影杂志"
+  },
+  {
+    "number": "FI-010",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Vogue / 时尚杂志",
+    "generation_name": "Vogue Haute Couture Dramatic Lighting Fashion Editorial",
+    "traits": "国际高级时装大片与戏剧光影杂志"
+  },
+  {
+    "number": "FI-011",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Kinfolk",
+    "generation_name": "Kinfolk Slow-Living Low-Saturation Natural Light Photography",
+    "traits": "低饱和慢生活方式独立杂志摄影"
+  },
+  {
+    "number": "FI-012",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Wallpaper*",
+    "generation_name": "Wallpaper* Architectural Modernist Geometric Interior Photography",
+    "traits": "英国现代建筑与几何室内设计杂志摄影"
+  },
+  {
+    "number": "FI-013",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "i-D",
+    "generation_name": "i-D Raw Youth Subculture Direct-Flash Portrait Photography",
+    "traits": "英国青年街头亚文化硬直闪肖像杂志"
+  },
+  {
+    "number": "FI-014",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Dazed",
+    "generation_name": "Dazed Avant-Garde Experimental Fashion & Expressive Mood Photography",
+    "traits": "英国前卫实验时尚与青年文化杂志"
+  },
+  {
+    "number": "FI-015",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "The Gentlewoman",
+    "generation_name": "The Gentlewoman Restrained Monochrome Modern Female Portrait",
+    "traits": "英国克制现代女性黑白肖像杂志"
+  },
+  {
+    "number": "FI-016",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Annie Leibovitz / 安妮·莱博维茨",
+    "generation_name": "Annie Leibovitz Cinematic Staged Narrative Portrait Photography",
+    "traits": "美国电影感置景与叙事肖像摄影大师"
+  },
+  {
+    "number": "FI-017",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Richard Avedon / 理查德·阿维顿",
+    "generation_name": "Richard Avedon Stark White Studio Pure Black-and-White Portrait",
+    "traits": "美国无缝纯白影棚纯黑白肖像摄影大师"
+  },
+  {
+    "number": "FI-018",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Peter Lindbergh / 彼得·林德伯格",
+    "generation_name": "Peter Lindbergh Natural Raw Windblown Monochrome Fashion Photography",
+    "traits": "德国素颜自然人文黑白时尚摄影大师"
+  },
+  {
+    "number": "FI-019",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Helmut Newton / 赫尔穆特·牛顿",
+    "generation_name": "Helmut Newton High-Contrast Bold Monochrome Seductive Noir",
+    "traits": "德裔澳大利亚黑白高反差冷艳时尚摄影大师"
+  },
+  {
+    "number": "FI-020",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Steve McCurry / 史蒂夫·麦凯瑞",
+    "generation_name": "Steve McCurry Saturated Soulful Humanist Cultural Portrait",
+    "traits": "美国国家地理人文摄影大师，代表作：《阿富汗少女》"
+  },
+  {
+    "number": "FI-021",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Martin Parr / 马丁·帕尔",
+    "generation_name": "Martin Parr Saturated Direct-Flash Satirical Everyday Documentary",
+    "traits": "英国高饱和直闪讽刺日常纪实摄影大师，玛格南图片社成员"
+  },
+  {
+    "number": "FI-022",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Gregory Crewdson / 格雷戈里·克鲁德森",
+    "generation_name": "Gregory Crewdson Twilight Cinematic Mystery Staged Photography",
+    "traits": "美国电影级大型置景戏剧摄影大师，代表作：《黄昏》《玫瑰之下》"
+  },
+  {
+    "number": "FI-023",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Saul Leiter / 索尔·莱特",
+    "generation_name": "Saul Leiter Poetic Rainy Street & Window Reflection Color Photography",
+    "traits": "美国诗意街头倒影与彩色胶片摄影先驱，代表作：《Early Color》"
+  },
+  {
+    "number": "FI-024",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Slim Aarons / 斯利姆·亚伦斯",
+    "generation_name": "Slim Aarons Luxurious Poolside Resort & Villa High-Society Photography",
+    "traits": "美国复古名流度假摄影大师，代表作：《池畔闲谈》(Poolside Gossip)"
+  },
+  {
+    "number": "FI-025",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Daido Moriyama / 森山大道",
+    "generation_name": "Daido Moriyama Grainy High-Contrast Noir Street Photography",
+    "traits": "日本粗颗粒高反差黑白街头摄影大师，代表作：《野犬》《新宿》"
+  },
+  {
+    "number": "FI-026",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Andreas Gursky / 安德烈亚斯·古尔斯基",
+    "generation_name": "Andreas Gursky Monumental Scale Repetitive Geometric Architecture Photography",
+    "traits": "德国超大画幅上帝视角几何秩序摄影大师，代表作：《莱茵河二号》《99美分》"
+  },
+  {
+    "number": "FI-027",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Wes Anderson / 韦斯·安德森",
+    "generation_name": "Wes Anderson Pastel Symmetry & Retro Whimsical Cinematic Aesthetic",
+    "traits": "美国对称美学与马卡龙色调电影导演，代表作：《布达佩斯大饭店》《月升王国》"
+  },
+  {
+    "number": "FI-028",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Wong Kar-wai / 王家卫",
+    "generation_name": "Wong Kar-wai Hong Kong Retro Neon Glow Atmospheric Cinematic Mood",
+    "traits": "中国香港复古港风与霓虹光影电影导演，代表作：《花样年华》《重庆森林》《堕落天使》"
+  },
+  {
+    "number": "FI-029",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "Stanley Kubrick / 斯坦利·库布里克",
+    "generation_name": "Stanley Kubrick One-Point Perspective Cold Symmetrical Sci-Fi Cinema",
+    "traits": "美国一点透视与冷峻理性科幻电影导演，代表作：《2001太空漫游》《闪灵》"
+  },
+  {
+    "number": "FI-030",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "David Fincher / 大卫·芬奇",
+    "generation_name": "David Fincher Desaturated Moody Green-Toned Precision Thriller Cinema",
+    "traits": "美国低饱和冷调心理悬疑电影导演，代表作：《七宗罪》《搏击俱乐部》《消失的爱人》"
+  },
+  {
+    "number": "FI-031",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "淘宝电商图 / Taobao E-Commerce",
+    "generation_name": "Taobao E-Commerce Product Commercial Photography",
+    "traits": ""
+  },
+  {
+    "number": "FI-032",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "iPhone 17 随手拍 / iPhone 17 Snapshot",
+    "generation_name": "iPhone 17 Candid Everyday Snapshot Photography",
+    "traits": ""
+  },
+  {
+    "number": "FI-033",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "监控摄像头截屏 / Security Camera Screenshot",
+    "generation_name": "Security Camera CCTV & Doorbell Surveillance Footage Photography",
+    "traits": "安防监控摄像头广角鱼眼与夜视真实视频录像截屏"
+  },
+  {
+    "number": "FI-034",
+    "group": "FI 写实摄影与视觉大片 / Realistic, Photography & Cinematic Styles",
+    "reference": "大疆无人机航拍 / DJI Drone Aerial",
+    "generation_name": "DJI Drone Cinematic Aerial Landscape Photography",
+    "traits": "大疆无人机高清高空俯拍与全景航拍摄影"
   }
 ]

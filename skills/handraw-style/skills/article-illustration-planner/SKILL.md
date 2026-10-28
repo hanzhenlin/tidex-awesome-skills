@@ -1,6 +1,6 @@
 ---
 name: article-illustration-planner
-description: 深度分析文章脉络，精准规划插图点位与视觉意象。对知识类/教程类文章默认启动“认知降负与高保真图替繁文机制”，严禁删除公式与量化指标，强制协同 165 种排版图型（IG-*信息图/SC-*社媒卡）与 327 种手绘风格/36 种经典配色，杜绝微缩杂物摆拍；对非知识类文章保持叙事氛围与意境。严格执行双向间距（400~1200字）与全篇章节均衡覆盖，支持自主生图或全自动插图回填排版。
+description: 深度分析文章脉络，精准规划插图点位与视觉意象。对知识类/教程类文章默认启动“认知降负与高保真图替繁文机制”，严禁删除公式与量化指标，强制协同 170 种排版图型（IG-*信息图/SC-*社媒卡）与 365 种视觉风格/36 种经典配色，杜绝微缩杂物摆拍；对非知识类文章保持叙事氛围与意境。严格执行双向间距（400~1200字）与全篇章节均衡覆盖，支持自主生图或全自动插图回填排版。
 ---
 
 # Article Illustration Planner (文章配图规划与插图回填)
@@ -46,9 +46,9 @@ description: 深度分析文章脉络，精准规划插图点位与视觉意象�
     - 心理锚定对比 $\to$ **三列高低梯形 / 视觉视线焦点引导**；
   - 严禁只是画几个方块把文字抄一遍！
 
-#### 2. 原生协同 165 种排版图型库（Layout Library Integration）
+#### 2. 原生协同 170 种排版图型库（Layout Library Integration）
 知识类配图**强制从项目排版图型库（特别是 35 种 `IG-*` 信息图与 21 种 `SC-*` 社媒卡）中精准匹配图型 ID**！
-直接继承排版图型的原生构图指令（纯色背景、留白舒适、几何结构），再注入业务主题、步骤标签、手绘风格（#001–#327，优先纯净清爽的线稿/扁平/矢量风格如 `#001 极简白描`、`#054 包豪斯几何`、`#216 扁平矢量设计`、`#018 极简冷面幽默`）与经典主题色（C-01–C-36）。
+直接继承排版图型的原生构图指令（纯色背景、留白舒适、几何结构），再注入业务主题、步骤标签、手绘风格（#001–#366，优先纯净清爽的线稿/扁平/矢量风格如 `#001 极简白描`、`#054 包豪斯几何`、`#216 扁平矢量设计`、`#018 极简冷面幽默`）与经典主题色（C-01–C-36）。
 
 #### 3. 双向间距约束与全篇章节巡检（Balanced Spacing & Global Chapter Audit）
 - **最小物理间距约束（Minimum Separation Distance）**：
@@ -91,12 +91,16 @@ description: 深度分析文章脉络，精准规划插图点位与视觉意象�
 
 1. **文章内容或本地路径**：直接粘贴正文，或提供本地路径（如 `D:\path\to\article.md`）。
 2. **手绘风格与色彩基调**：
-   - 风格编号：全库 `#001`–`#327`；
+   - 风格编号：全库 `#001`–`#366`；
    - 知识类文章推荐准则：严禁推荐儿童童话风、抽象乱涂风；优先推荐纯净清爽、线稿块面分明、利于信息传达的风格（如 `#001 极简白描`、`#054 包豪斯几何构成`、`#216 扁平矢量设计`、`#018 极简冷面幽默` 等）；
    - 主题色编号：全库 `C-01`–`C-36`，优先稳重专业色调（如 `C-01 经典蓝`、`C-10 鼠尾草绿`、`C-31 佩恩灰`、`C-05 暖赭石`、`C-22 普鲁士蓝`）；
    - 动态研判：若未指定，由 AI 结合文章语境动态推荐一套贯穿全篇的单一风格与单色调（严禁全篇风格杂乱）。
-3. **画幅比例 (Aspect Ratio)**：
-   - **默认 4:3**（长文横向阅读流标准）；移动端社交卡支持 `3:4` 或 `16:9`。
+3. **画幅比例与多平台防截断规范 (Aspect Ratio & Multi-Platform Safe Sizing)**：
+   - **竖版插图 / 社媒卡片 / 连载组图**：**严格采用 3:4 黄金画幅（分辨率 `1086×1448`）**。
+     - **【绝对红线】绝对严禁使用 2:3 (`1024×1536`) 或 9:16！** 在 X (Twitter) Articles 与自媒体多端分发中，垂直高度超过 3:4 的长图会被强制上下截断，导致大标题与底部结论丢失。3:4 是全平台唯一完美无损展示的黄金画幅。
+   - **横版插图 / 架构图 / 全景图**：**默认 4:3（分辨率 `1448×1086`）** 或 16:9（`1792×1024`）。
+   - **文章封面大图**：**固定 2.35:1（`1792×1024`）**，核心隐喻与大标题居中收拢在中央水平安全带，上下充分留白。
+   - **【画面文案红线】**：严禁在图内标题、标签、印章中写入“新中式”、“东方”、“国潮”、“慢生活”等美学标签或空洞套话。文案必须 100% 扎根具体的业务步骤、数据指标或真实生活细节。
 4. **留白与背景控制 (Whitespace & Background)**：
    - 知识类图解强制纯净背景与舒适留白，严禁杂物背景。
 
@@ -149,11 +153,11 @@ replaces complex text (文字替换与认知降负) / supplements text (内容�
 **生图提示词 (Prompt):**
 - **中文提示词**:
 ```text
-小红书信息图。排版：{layout_prompt}。纯净背景，大面积舒适留白，严禁桌椅、文具、咖啡杯等任何物理杂物摆设，严禁童话/小精灵角色，图表主体占满画幅90%以上。核心内容：{visual_metaphor_and_labels}。画风：{style_prompt}。色彩：{color_prompt}。画幅比例 4:3。
+小红书信息图。排版：{layout_prompt}。纯净背景，大面积舒适留白，严禁桌椅、文具、咖啡杯等任何物理杂物摆设，严禁童话/小精灵角色，图表主体占满画幅90%以上。核心内容：{visual_metaphor_and_labels}。严禁在画面文字中出现“新中式”、“东方”、“国潮”、“慢生活”等空洞风格标签，文案必须100%扎根具体业务与数据。画风：{style_prompt}。色彩：{color_prompt}。画幅规格：3:4 黄金画幅（1086x1448，严防 X 截断，横版图解则用 4:3）。
 ```
 - **English Prompt**:
 ```text
-Xiaohongshu infographic. Layout: {layout_prompt_en}. Clean background with generous negative space, strictly NO physical desks, stationery, coffee cups or props, strictly NO fairy/doll characters, chart fills over 90% of frame. Core content: {visual_metaphor_and_labels_en}. Style: {style_prompt_en}. Color palette: {color_prompt_en}. Aspect ratio: 4:3.
+Xiaohongshu infographic. Layout: {layout_prompt_en}. Clean background with generous negative space, strictly NO physical desks, stationery, coffee cups or props, strictly NO fairy/doll characters, chart fills over 90% of frame. Core content: {visual_metaphor_and_labels_en}. Strictly NO generic style slogans ('New Chinese', 'Eastern', 'Guochao') in text; keep copy grounded in real facts. Style: {style_prompt_en}. Color palette: {color_prompt_en}. Aspect ratio: 3:4 portrait (1086x1448 to prevent clipping on X; use 4:3 for landscape).
 ```
 ```
 
@@ -182,7 +186,7 @@ Xiaohongshu infographic. Layout: {layout_prompt_en}. Clean background with gener
 当用户触发回填时：
 1. **自动组织资源**：将图片规范命名保存为 `<article_dir>/images/illus_01.webp`（或 `.png`）；
 2. **执行图文装配与高保真文字替换**：
-   - 知识类文章若定义了 `Text to Replace`：自动将原文对应的复杂繁琐文字**修剪替换**为 `![插图](images/illus_0N.webp)` + `*▲ 图N：说明*` + `[精炼导读/公式清单]`；
+   - 知识类文章若定义了 `Text to Replace`：自动将原文对应的复杂繁琐文字**修剪替换**为插图Markdown、`*▲ 图N：说明*`和`[精炼导读/公式清单]`；图片地址按本期实际文件填入`images/illus_编号.webp`，不是随包静态文件；
    - 严格执行**保真检查**：确保精炼导读中包含原有核心公式与数据；
    - 若未定义文字替换：规范将图片插入指定锚点之后；
 3. **输出定稿**：生成 `[article_name]_illustrated.md`。
