@@ -20,13 +20,14 @@
 
 ---
 
-## 🧭 精选明星技能大盘（已收录 11 款顶级神作）
+## 🧭 精选明星技能大盘（已收录 12 款顶级神作）
 
 ### 🧬 1. 元技能与认知进化操作系统 (Meta & Evolution)
 
 | 技能名称 | 原创作者 / 来源 | 协议 | 技能定位与核心能力 | 常见触发词 |
 | :--- | :--- | :--- | :--- | :--- |
 | **`nuwa-skill`**<br>(女娲造人) | [花叔 @alchaincyf](https://github.com/alchaincyf/nuwa-skill) | MIT | • 从一手语料（著作/访谈/决策史）蒸馏认知操作系统<br>• 提炼心智模型、决策启发式、表达 DNA 与行为反模式<br>• 内置 15+ 精品人物视角范例（马斯克/乔布斯/费曼等） | `女娲`、`造skill`、`造人`、`蒸馏XX`、`做个XX视角`、`我想提升决策质量` |
+| **`cangjie-skill`**<br>(仓颉拆书蒸馏) | [袋鼠王 @kangarooking](https://github.com/kangarooking/cangjie-skill) | MIT | • **长内容方法论蒸馏元技能（RIA-TV++ 流水线，v2.5 Bundle 架构）**<br>• 将书籍/长视频/播客/课程沉淀的方法论转化为原子化、可执行 AI 技能<br>• 产出 Capability Bundle，支持单路由（single）与紧凑包（pack）确定性编译 | `拆书`、`蒸馏一本书`、`把XX做成skill`、`cangjie`、`仓颉`、`方法论蒸馏` |
 | **`yao-meta-skill`**<br>(Skill OS 2.0) | [Yao Team @yaojingang](https://github.com/yaojingang/yao-meta-skill) | MIT | • **Yielding AI Outcomes**：全生命周期技能工程系统<br>• 引入 Skill IR（中间表示）实现多端编译器（OpenAI/Claude/Codex/VS Code）<br>• 严苛 Output Eval Lab 评测实验室 + Review Studio 2.0 门禁看板 | `yao-meta-skill`、`制作skill`、`Skill OS`、`评测skill`、`skill治理` |
 | **`darwin-skill`**<br>(达尔文进化) | [花叔 @alchaincyf](https://github.com/alchaincyf/darwin-skill) | MIT | • 借鉴 Karpathy autoresearch 的自主实验进化循环<br>• 吸收微软 SkillLens 9 维静态评分 + SkillOpt 动态验证<br>• 自动化：评估→改进→实测验证→棘轮保留/回滚 | `达尔文`、`darwin`、`优化skill`、`skill评分`、`自动优化`、`skill review` |
 | **`typesafe-ai`**<br>(决策模型编程原语) | [TypeSafe @typesafe-ai](https://github.com/typesafe-ai/skills) | MIT | • 将 System One 决策模型（Jev）转化为可类型化编程原语<br>• 自然语言与应用状态转化为 Choice/Noul/Score 等强类型判定与置信度<br>• 为复杂 AI Agent 提供可组合、可约束的确定性决策微原语 | `typesafe-ai`、`类型化决策`、`Jev`、`状态判断`、`System One` |
@@ -120,6 +121,7 @@ bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤�
 - 感谢 [**姚金刚老师及 Yao 团队 (@yaojingang)**](https://github.com/yaojingang) 创造的 `yao-meta-skill`（Skill OS 2.0）全生命周期技能编译与治理架构；
 - 感谢 [**yang0 (@yang0)**](https://github.com/yang0/handraw-style) 创造的 `handraw-style` 手绘风格与排版图型生图引擎；
 - 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语；
-- 感谢 [**tt-a1i (@tt-a1i)**](https://github.com/tt-a1i/archify) 及 Cocoon AI 创造的 `archify` 交互式架构与流程可视化引擎。
+- 感谢 [**tt-a1i (@tt-a1i)**](https://github.com/tt-a1i/archify) 及 Cocoon AI 创造的 `archify` 交互式架构与流程可视化引擎；
+- 感谢 [**袋鼠王 (@kangarooking)**](https://github.com/kangarooking/cangjie-skill) 创造的 `cangjie-skill`（仓颉）长内容方法论蒸馏与原子技能工厂架构。
 
 **协议边界**：本仓库工程化套件与脚本采用 [MIT License](./LICENSE)；`skills/` 下收录的各技能版权完全归原作者所有，均保留其原始 LICENSE 与署名，授权条款以上游为准。完整声明见 [NOTICE.md](./NOTICE.md)。
