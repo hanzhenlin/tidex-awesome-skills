@@ -32,13 +32,13 @@ Before parsing a creative request, preserve the user's original creative message
 > [!IMPORTANT]
 > **【核心准则：每次由 AI 实时动态判断，严禁写死/机械套用】**
 > - **实时动态研判**：严禁在记忆、规则或提示词中维护任何“主题关键词 -> 固定风格编号/颜色编号”的静态死板映射（例如严禁一见节气/传统就推 268、一见自然就推 266、一见科技就推 011/054、一见生活就推 018）。
-> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 365 种视觉风格（#001–#366）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
-> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 366 种画风与 36 种色彩的丰富生命力。
+> - **全库开放式匹配**：每次推荐必须由 AI 结合当前用户具体主题的深层语境、精神内核、视觉隐喻与画面构图，在全库 365 种视觉风格（#001–#367）与 36 种经典主题色（C-01–C-36）中进行**实时、开放式的审美推理与动态搭配**。
+> - **激发全库多样性**：同一个主题在不同设计视角下具备多维的美学可能性（如“菜园”既可以是水墨写意、也可以是田园木刻版画、粗粒油画棒、或包豪斯几何构成）。每次推荐都应根据具体切入点构思，充分展现全库 367 种画风与 36 种色彩的丰富生命力。
 > - **美学理由具象化**：AI 给出的美学推荐理由必须紧扣当前主题的视觉隐喻和画面构图，说明为什么该画风的笔触/质感与该色彩的情绪能完美传达这一主题，杜绝套话。
 
-1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 365 种视觉风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#366) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
+1. **风格与主题色均未指定**：根据用户输入的主题语义、情感基调、受众与使用场景，由 AI 实时动态从 365 种视觉风格与 36 种经典单色库中推荐 1 组契合度最高的【风格编号 (#001–#367) + 主题色编号 (C-01–C-36)】组合。主题色数量不设死限，依据画面层次灵活决定单色统领、双色搭配（主色+点缀色）或三色调和，简述 1 句具象化美学推荐理由，并直接输出完整生图提示词（或执行出图）。
 2. **仅指定风格，未指定主题色**：严格保留用户指定的风格，根据该风格与画面主题，由 AI 实时动态推荐最协调的【主题色 (C-01–C-36)】搭配（可为单色或多色组合）。
-3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【视觉风格 (#001–#366)】搭配。
+3. **仅指定主题色，未指定风格**：严格保留用户指定的主题色，根据色彩调性与画面主题，由 AI 实时动态推荐 1 款最契合的【视觉风格 (#001–#367)】搭配。
 4. **两者皆指定**：完全遵照用户指定的内容输出。
 
 ## Style activation policy
@@ -47,7 +47,8 @@ Use the same capability decision for prompt-only and explicit image-generation r
 
 - `name_activation=strong`: use only the indexed author name, generated style name, and theme. (Specifically for styles like #042 Beatrix Potter, #011 David Shrigley, #269 Socialist Realist Propaganda Poster, and other strong-activation styles: the model understands the aesthetic natively; output only the reference author and style name, and STRICTLY DO NOT output core traits or reference-isolation blocks.)
 - Otherwise, compile and output every available positive core trait with the author/style name and theme directly from `references/styles.json`.
-- If name plus traits is not strongly activated, or when user provides a reference photo, append the reference-isolation instruction to ensure the AI only absorbs style and does not copy the reference photo's subjects.
+- If name plus traits is not strongly activated, also require the configured reference asset. For explicit generation, pass it through `referenced_image_paths`. In `pure-image` prompt-only output, write the local asset path and reference-isolation instruction inside both prompts for the user to upload manually ("Use the attached image only as a style reference. The user's written theme is the sole source for the image content."). In `graphic-text` prompt-only output, do not place a path, upload instruction, or isolation block inside either copyable prompt; show the resolved reference image to the user outside the prompts instead. Assets live under the installed package root in categorized folders: for example, FF-001 uses `images/individual/FF/FF-001_grid.webp`, single-image styles use `images/individual/{category}/{number}.webp`.
+- If no positive core trait exists and name is not strongly activated, use the author/style name, theme, and reference image.
 - Use `python scripts/resolve_reference.py --model <model> --style <number>` when a deterministic decision check is useful. The script prints JSON and never guesses an unknown model's capability.
 - When a reference image or photo is attached, inject the following reference-isolation block into the prompt:
 
@@ -74,7 +75,7 @@ This initialization applies only when this Skill is invoked for the first time i
 
 ## Inputs
 
-For style-only work, if the style number (`001`–`366`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
+For style-only work, if the style number (`001`–`367`) is omitted, automatically recommend an optimal style and theme color combination based on theme semantics. For layout work, require a layout ID (`SC-001` or `IG-001`); if style and/or theme color are omitted, automatically recommend harmonious ones. Accept optional theme color (`C-01`–`C-36` or color name), aspect ratio, subject constraints, text requirements, and a mode. When the user requests a prompt (e.g. specifying a style and/or layout) without providing a theme, do NOT pause or halt to ask for a theme—immediately output the complete prompt with a clear placeholder (such as `【请在此输入画面主题，或在生图模型中垫入你的照片】` / `[Enter theme here, or attach your photo in the image AI]`). If a supplied number, layout ID, or color ID is invalid, ask the user to choose a valid indexed value; do not invent one. Do not add an aspect ratio when none was supplied.
 
 Users can browse `gallery/index.html` for numbered style contact sheets, `gallery/layouts.html` for layout thumbnails, and `gallery/colors.html` for classic monochrome theme colors. Style metadata is `references/styles.json`. Layout metadata is `references/layouts.json`. Monochrome color metadata is `references/colors.json`.
 
@@ -113,12 +114,24 @@ Users can browse `gallery/index.html` for numbered style contact sheets, `galler
 - Return a single complete layout-combination prompt in the language of the user's theme. Chinese characters select Chinese; otherwise use English. Treat mixed input as Chinese. Existing style-only requests retain their normal bilingual output.
 - The layout gallery is browse-only: it has no prompt input form. It shows a numbered thumbnail, opens a large preview on click, and copies the canonical Chinese layout prompt on request.
 
+## Session initialization
+
+On the first turn in the current Codex task/thread where this Skill is invoked, perform both initialization actions before handling the user's request. This applies to **任何首次请求**, including opening the gallery, browsing the index, requesting prompts, or requesting image generation:
+
+1. If this task has not already displayed the gallery, dynamically resolve the absolute `file://` URI to `gallery/index.html` based on this Skill's directory in the current environment, and call `mcp__codex_app__open_in_codex` in a browser tab with `target.type="browser"` and that URL. Never open `gallery/index.html` as `target.type="file"`, in an editor, or as a file preview.
+2. Include the exact standalone status line `当前处于纯图模式，可切换为图文模式。` in the same final reply, even when the request produces no prompt.
+3. Continue with the user's request after the browser call; opening the gallery must not block prompt generation or an explicitly requested image-generation follow-up. If the same first reply would also add the pure-image mode note, show this status line only once.
+4. Do not repeat the browser call or this first-session status notice on later turns in the same task/thread. Use the conversation context (not a persistent state file) to determine whether initialization already happened.
+5. If the browser call is unavailable or fails, provide the dynamically resolved local `file://` fallback link, then continue normally.
+
+This initialization applies only when this Skill is invoked for the first time in a task/thread; unrelated conversations must not open the gallery.
+
 ## Prompt modes
 
 Default to `pure-image`. Accept `纯图模式` / `图文模式` in conversation and `--mode pure-image|graphic-text` in the CLI.
 
 - `pure-image`: preserve the current prompt workflow. After the normal reply, add the small note `当前处于纯图模式，可切换为图文模式。`.
-- `graphic-text`: preserve the user's theme exactly after `主题：` / `Theme:`. Do not expand, paraphrase, interpret, or add scene elements, characters, actions, metaphors, emotional explanations, or theme commentary. Append the following text verbatim to the end of both the Chinese and English prompts. Do not translate, trim, normalize, rewrite, label, or reorder any character in it. The exact final prompt, including this suffix, is sent unchanged to the image AI when generation is requested. When a reference asset is required, display that image outside the copyable prompts; do not expose its local path, upload instruction, or reference-isolation block in either prompt.
+- `graphic-text`: preserve the user's theme exactly after `主题：` / `Theme:`. Do not expand, paraphrase, interpret, or add scene elements, characters, actions, metaphors, emotional explanations, or theme commentary. Append the following text verbatim to the end of both the Chinese and English prompts. Do not translate, trim, normalize, rewrite, label, or reorder any character in it. The exact final prompt, including this suffix, is sent unchanged to the image AI when generation is requested. When a reference asset is required, show the resolved reference image to the user outside the prompts; do not expose its local path, upload instruction, or reference-isolation block in either prompt (Do not inject it into a `graphic-text` copyable prompt).
 
   `【如果主题直白包含画面元素那就按主题出图，文案由你来升华，但是不要直接描述画面。 如果主题比较概念化，那么文案和主题尽量保持一致，如果文案较长由你提炼，由你先设计画面隐喻（人类和非人类都行）再出图   。    文字参与构图，图文一体】`
 
