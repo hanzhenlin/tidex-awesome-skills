@@ -13,3 +13,5 @@ typesafe-ai|TypeSafe|https://github.com/typesafe-ai/skills.git|MIT|TypeSafe AI�
 handraw-style|yang0|https://github.com/yang0/handraw-style.git|MIT|手绘风格与排版提示词库：277 种插画风格/119 种排版图型/30 种主题色生图引擎
 archify|tt-a1i|https://github.com/tt-a1i/archify.git|MIT|交互式架构可视化引擎：一键生成自包含HTML高保真拓扑/时序/数据流与源码级追踪
 cangjie-skill|kangarooking|https://github.com/kangarooking/cangjie-skill.git|MIT|仓颉：长内容方法论蒸馏元技能，将书/课/长视频转化为原子化可执行AI技能工厂
+huashu-art-motion|alchaincyf|https://github.com/alchaincyf/huashu-art-motion.git|MIT|艺术动画视听工坊：36种艺术风格/9种解说语法/纯代码驱动SVG与Canvas动态视频
+huashu-motion|alchaincyf|https://github.com/alchaincyf/huashu-motion.git|MIT|产品发布片直出：商业级产品宣传片代码生成/3D空间景深/自动配乐/指屏微调

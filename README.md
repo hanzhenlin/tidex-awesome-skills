@@ -20,7 +20,7 @@
 
 ---
 
-## 🧭 精选明星技能大盘（已收录 12 款顶级神作）
+## 🧭 精选明星技能大盘（已收录 14 款顶级神作）
 
 ### 🧬 1. 元技能与认知进化操作系统 (Meta & Evolution)
 
@@ -44,6 +44,8 @@
 | **`huashu-excel`**<br>(数据分析大师) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-excel) | MIT | • 严肃数据分析全流程：体检脏表→数据清洗→定口径→算指标→对账→报告<br>• 极简轻量（依赖仅 `openpyxl`），让每个算出来的数字经得起追问 | `数据分析`、`分析表格`、`清洗Excel`、`对账`、`算指标` |
 | **`tramstop-skill`**<br>(电车站去AI味) | [花叔 @alchaincyf](https://github.com/alchaincyf/tramstop-skill) | MIT | • 实证驱动的「去 AI 腔」方法论（来自四版本真实盲测对照实验）<br>• 四层 AI 味诊断：词汇层、句式层、结构层、经验层<br>• 结构外科手术 + 真实经验素材注入，拒绝假大空套话 | `去AI味`、`AI味太重`、`像AI写的`、`没人味`、`降AI感`、`humanize` |
 | **`archify`**<br>(交互式架构可视化) | [tt-a1i @tt-a1i](https://github.com/tt-a1i/archify) | MIT | • **GitHub 81k+ Stars 登顶周榜神作，全量纯原生 JS 渲染校验**<br>• 将需求、设计方案或真实代码库转化为高保真自包含可交互单文件 HTML<br>• 涵盖 Architecture、Workflow、Sequence、Dataflow、Lifecycle 5 大图表<br>• 支持深浅色切换、上下游影响链路追踪 (Reach Trace)、代码行号精准锚定 (`SRC`) | `archify`、`系统架构图`、`交互式架构`、`时序图`、`数据流图`、`状态机`、`流程图` |
+| **`huashu-art-motion`**<br>(艺术动画视听工坊) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-art-motion) | MIT | • 艺术与视频动画工坊：纯代码驱动 SVG 与 Canvas 动态视频生成<br>• 内置 36 种实做艺术风格＋16 种可迁移配方、9 种解说动画语法<br>• 严苛交付流水线：镜头表 lint、分镜出片、音画混剪、QA 门禁 | `huashu-art-motion`、`艺术动画`、`科普视频`、`解说动画`、`动态视频` |
+| **`huashu-motion`**<br>(产品发布片直出) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-motion) | MIT | • 商业级产品发布片与宣传片直出工坊（HTML+GSAP 逐帧代码渲染）<br>• 智能导演为产品智能适配镜头动效语言，指着画面微调（Point & Edit）<br>• 内置 3D 景深、卡片蒙太奇、动效文字、连续变形与自动配乐对齐 | `huashu-motion`、`产品宣传片`、`发布片`、`宣传片`、`动效视频` |
 
 ---
 
@@ -117,7 +119,7 @@ bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤�
 
 本仓库收录的所有技能版权完全归原作者所有，各技能均严格保留其原始 LICENSE 与署名。衷心感谢开源社区杰出创作者的开拓性贡献：
 
-- 感谢 [**花叔 (@alchaincyf)**](https://github.com/alchaincyf) 创造的 `nuwa-skill`、`huashu-design`、`darwin-skill`、`huashu-md-html`、`huashu-excel`、`tramstop-skill`、`zhangxuefeng-skill` 及其开拓性的 Agent Skills 开源生态体系；
+- 感谢 [**花叔 (@alchaincyf)**](https://github.com/alchaincyf) 创造的 `nuwa-skill`、`huashu-design`、`darwin-skill`、`huashu-md-html`、`huashu-excel`、`tramstop-skill`、`zhangxuefeng-skill`、`huashu-art-motion`、`huashu-motion` 及其开拓性的 Agent Skills 开源生态体系；
 - 感谢 [**姚金刚老师及 Yao 团队 (@yaojingang)**](https://github.com/yaojingang) 创造的 `yao-meta-skill`（Skill OS 2.0）全生命周期技能编译与治理架构；
 - 感谢 [**yang0 (@yang0)**](https://github.com/yang0/handraw-style) 创造的 `handraw-style` 手绘风格与排版图型生图引擎；
 - 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语；
