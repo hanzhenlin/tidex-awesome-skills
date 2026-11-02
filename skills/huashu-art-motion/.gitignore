@@ -30,3 +30,4 @@ _private/
 .huashu/
 media.local.json
 .last-update-check
+assets/showcase/*.gif
