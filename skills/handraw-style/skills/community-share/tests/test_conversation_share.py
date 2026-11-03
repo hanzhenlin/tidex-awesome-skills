@@ -38,10 +38,24 @@ class FakeAPI:
         self.works.append(entry)
         if self.uncertain:
             raise share.PostOutcomeUnknown("response lost")
-        return {"id": "12345678-1234-1234-1234-123456789abc", "kind": "work"}
+        work_id = "12345678-1234-1234-1234-123456789abc"
+        return {"id": work_id, "kind": "work",
+                "url": f"/forum/?view=resource&kind=work&id={work_id}"}
 
     def get_work(self, entry_id):
-        return {"id": entry_id, **self.works[-1]}
+        """Mirror the resource payload the real API returns for readback."""
+        entry = self.works[-1]
+        styles = [a["ref"].split(":", 1)[1] for a in entry["assets"] if a.get("role") == "style"]
+        layouts = [a["ref"].split(":", 1)[1] for a in entry["assets"] if a.get("role") == "layout"]
+        images = [entry["cover_url"]] + [e["image"] for e in entry["content"]["examples"]]
+        return {"resource": {
+            "id": entry_id,
+            "kind": "work",
+            "prompt": entry["content"]["prompt"],
+            "images": images,
+            "styles": styles,
+            "layout": layouts[0] if layouts else "",
+        }}
 
     def get_work_content(self, entry_id):
         return {"content": self.works[-1]["content"]}
@@ -82,7 +96,11 @@ def test_publish_uploads_all_images_and_posts_only_original_request(tmp_path):
     assert "风格名称" not in body and "api_key" not in body
     assert api.works[0]['kind'] == 'work' and api.works[0]['price'] == 0
     assert api.works[0]['assets'] == [{'ref':'official:FA-013','role':'style'}]
-    assert receipt["verified"] and receipt['associations_verified'] and '/studio?entry=' in receipt["url"]
+    # The receipt now carries the server-issued canonical work address, and the
+    # payload must carry a stable requestId so a retry cannot duplicate the work.
+    assert receipt["verified"] and receipt['associations_verified']
+    assert '/forum/?view=resource&kind=work&id=' in receipt["url"], receipt["url"]
+    assert api.works[0]['requestId'].startswith('skill-'), api.works[0].get('requestId')
 
 
 def test_repeat_click_returns_original_post_without_reupload(tmp_path):
@@ -234,7 +252,7 @@ def test_api_credentials_stay_in_headers_and_use_fixed_official_origin(monkeypat
     class Response:
         def __enter__(self): return self
         def __exit__(self, *args): pass
-        def read(self): return b'{"current_user":{"username":"creator","id":7}}'
+        def read(self): return b'{"user":{"username":"creator","id":7}}'
     class Opener:
         def open(self, request, timeout):
             captured.append(request)
@@ -243,7 +261,7 @@ def test_api_credentials_stay_in_headers_and_use_fixed_official_origin(monkeypat
     api = share.CommunityAPI("test-personal-key-123456789")
     assert api.current_user()["username"] == "creator"
     request = captured[0]
-    assert request.full_url == "https://handraw-style.com/session/current.json"
+    assert request.full_url == "https://handraw-style.com/api/boot"
     assert request.get_header("Api-key") == "test-personal-key-123456789"
     assert not request.has_header("Api-username")
     assert "test-personal-key" not in request.full_url
@@ -270,7 +288,7 @@ def test_work_api_sends_native_entry_with_asset_links_not_forum_raw(monkeypatch,
         return {'id':'12345678-1234-1234-1234-123456789abc','kind':'work'}
     monkeypatch.setattr(api,'request',request)
     api.create_work(payload)
-    assert captured[0][0:2] == ('POST','/studio/api/entries')
+    assert captured[0][0:2] == ('POST','/api/entries')
     entry = captured[0][2]['entry']
     assert entry['kind']=='work' and entry['price']==0 and not entry['paid_opt_in']
     assert entry['assets']==[{'ref':'official:FA-013','role':'style'}]
@@ -339,7 +357,12 @@ def test_readback_with_missing_assets_does_not_claim_verified_associations(tmp_p
     path,_,_=draft(tmp_path)
     api=FakeAPI()
     original_get=api.get_work
-    api.get_work=lambda entry_id:{**original_get(entry_id),'assets':[]}
+    def without_styles(entry_id):
+        detail=original_get(entry_id)
+        detail["resource"]["styles"]=[]
+        detail["resource"]["layout"]=""
+        return detail
+    api.get_work=without_styles
     receipt=share.publish_draft(path,api)
     assert receipt['destination']=='work_square'
     assert not receipt['verified'] and not receipt['associations_verified']
