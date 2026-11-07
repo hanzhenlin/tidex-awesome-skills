@@ -13,13 +13,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green)](https://agentskills.io)
 [![skills.sh](https://img.shields.io/badge/skills.sh-Compatible-blue)](https://skills.sh)
-[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20OpenClaw%20·%20Hermes-blueviolet)](#安装)
+[![Multi-Runtime](https://img.shields.io/badge/Runtime-Claude%20Code%20·%20Codex%20·%20Cursor%20·%20OpenClaw%20·%20Hermes%20·%20DeepSeek%20Harness-blueviolet)](#安装)
 
 <br>
 
 **女娲帮你蒸馏任何人的思维方式，让乔布斯、马斯克、芒格、费曼都给你打工。**
 
-<sub>基于开放的 [Agent Skills 协议](https://agentskills.io)，可在 Claude Code、Codex、Cursor、OpenClaw、Hermes Agent、CodeBuddy、Workbuddy、Gemini CLI、OpenCode 等 50+ 兼容 runtime 中运行。</sub>
+<sub>基于开放的 [Agent Skills 协议](https://agentskills.io)，可在 Claude Code、Codex、Cursor、OpenClaw、Hermes Agent、CodeBuddy、Workbuddy、Gemini CLI、OpenCode、DeepSeek Harness 等 50+ 兼容 runtime 中运行。</sub>
 
 <br>
 
@@ -128,6 +128,7 @@ npx skills add alchaincyf/nuwa-skill
 | Codex CLI | `~/.codex/skills/nuwa-skill/` |
 | Cursor | `~/.cursor/skills/nuwa-skill/` |
 | OpenClaw | `~/.openclaw/workspace/skills/nuwa-skill/` |
+| DeepSeek Harness | `~/.dsh/skills/nuwa-skill/` |
 | Hermes Agent | 跑 `tools/install_hermes_skill.py` |
 | 其他 runtime | clone 到对应 runtime 的 `skills/` 目录 |
 
@@ -136,6 +137,16 @@ git clone https://github.com/alchaincyf/nuwa-skill <上面对应的路径>
 ```
 
 </details>
+
+### DeepSeek Harness 插件
+
+女娲也是一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）插件，一行命令装进你的 profile（以 `web` 为例），重新启动 DSH 后生效：
+
+```bash
+dsh plugin --profile web add github:alchaincyf/nuwa-skill
+```
+
+卸载：`dsh plugin --profile web remove huashu-nuwa`。在 DSH 里蒸馏出的人物 Skill 会写进项目的 `.dsh/skills/`，DSH 会自动加载。
 
 ### 方式三：作为参考资料使用
 
@@ -370,6 +381,8 @@ Nuwa is an [Agent Skill](https://agentskills.io) that extracts cognitive framewo
 Not role-playing. Cognitive architecture extraction.
 
 **Install** (cross-runtime, auto-detects your agent): `npx skills add alchaincyf/nuwa-skill`
+
+**DeepSeek Harness**: `dsh plugin --profile web add github:alchaincyf/nuwa-skill`, then restart DSH. Remove with `dsh plugin --profile web remove huashu-nuwa`.
 
 **How it works**: Input a name → 6 parallel research agents → 40+ primary sources → triple-verified mental models → quality-validated SKILL.md
 
