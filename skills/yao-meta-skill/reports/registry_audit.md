@@ -2,12 +2,12 @@
 
 - OK: `True`
 - Package: `yao-meta-skill`
-- Version: `2.1.0`
+- Version: `2.1.1`
 - Maturity: `governed`
 - Owner: `Yao Team`
 - License: `MIT`
-- Package SHA256: `54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8`
-- Archive SHA256: `f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7`
+- Package SHA256: `9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef`
+- Archive SHA256: `ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b`
 - Install simulated: `True`
 
 ## Compatibility

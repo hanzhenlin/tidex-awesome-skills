@@ -1,45 +1,45 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "skill_dir": ".",
-  "commit": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
+  "commit": "6486184211a9c781f618bb953d8c2f1f65293f41",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 24,
+    "changed_file_count": 13,
     "generated_dirty": true,
-    "generated_changed_file_count": 24,
+    "generated_changed_file_count": 13,
     "source_dirty": false,
     "source_changed_file_count": 0,
     "sample": [
+      " M registry/packages/yao-meta-skill.json",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
       " M reports/context_budget.json",
-      " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
       " M reports/evidence_consistency.json",
-      " M reports/review-studio.html",
+      " M reports/package_verification.json",
+      " M reports/package_verification.md",
+      " M reports/registry_audit.json",
+      " M reports/registry_audit.md",
       " M reports/review-studio.json",
       " M reports/review-viewer.json",
-      " M reports/skill-interpretation.html",
-      " M reports/skill-interpretation.json",
-      " M reports/skill-os-2-review.md"
+      " M reports/skill-interpretation.json"
     ],
     "source_sample": [],
     "generated_sample": [
+      " M registry/packages/yao-meta-skill.json",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
       " M reports/context_budget.json",
-      " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
       " M reports/evidence_consistency.json",
-      " M reports/review-studio.html",
+      " M reports/package_verification.json",
+      " M reports/package_verification.md",
+      " M reports/registry_audit.json",
+      " M reports/registry_audit.md",
       " M reports/review-studio.json",
       " M reports/review-viewer.json",
-      " M reports/skill-interpretation.html",
-      " M reports/skill-interpretation.json",
-      " M reports/skill-os-2-review.md"
+      " M reports/skill-interpretation.json"
     ],
     "generated_dirty_prefixes": [
       "dist/",
@@ -57,9 +57,9 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "ec52890423f7cb86c63078e55f4df33df8728efe5f84807902ba8b178fa436dd",
-    "source_contract_sha256": "54d1fb49b5de9d73a5a312204ffdfad76937ed8e877571521c569139d9630bd8",
-    "archive_sha256": "f5275f7471c04e62dfc862d714e5d752a688d66952277bee848364634c0046e7",
+    "evidence_bundle_sha256": "2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0",
+    "source_contract_sha256": "9a19145cea00d1645c5d1d7303b3065840fe2c1e636caf903b475748fe6a4bef",
+    "archive_sha256": "ddf302b53d41a008388cd36639754183d6de00b8895f1f7deb1c38a5545a9f3b",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 23,
@@ -86,11 +86,11 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 3,
     "working_tree_dirty": true,
-    "changed_file_count": 24,
+    "changed_file_count": 13,
     "source_tree_dirty": false,
     "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 24
+    "generated_changed_file_count": 13
   },
   "beta_test_release": {
     "ready": true,
@@ -133,10 +133,10 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "4f77b8a6ee7e59284219d0adcbbceef4dcdcdca9",
+    "commit": "6486184211a9c781f618bb953d8c2f1f65293f41",
     "status_scope": "generation-time status before this report is written",
     "source_changed_file_count": 0,
-    "generated_changed_file_count": 24,
+    "generated_changed_file_count": 13,
     "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
@@ -145,7 +145,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "ec52890423f7cb86c63078e55f4df33df8728efe5f84807902ba8b178fa436dd"
+    "sha256": "2aa47595df55a42b807c3104bef81847ade87d9f3925389fb8d23787ece124c0"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -253,92 +253,92 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 154475,
-      "sha256": "b5d459f5be1a38834ea09986559ef5aa3ef868e706ece8524064ced4d69c17e2"
+      "bytes": 154650,
+      "sha256": "47d470550872daf52ca04a3689851314bdabdae36a0fc252a5ad904ae887c6e2"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 33893,
-      "sha256": "195e3f822f6f54ef6808bb3e6c61fec955d53705ab1014eba8bb7b5941443063"
+      "bytes": 34152,
+      "sha256": "cb2f2fbe8e290e31fc019445a079be651fbbd3401ba24c24c2df5875687bc706"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3234,
-      "sha256": "adbd9e56a47a9c59096a3fd434dbbd3ee943de6c9f340979d64e9ba32e95c7f7"
+      "sha256": "c393f7940435d9a163e1efdcfff5e6cd108affabaec6c82feed5ae7effb02dad"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
-      "bytes": 19705,
-      "sha256": "15cd1826ede3c233c63f7a5bac5adcf4357fad9a13bab11b92e4a131fa972f0b"
+      "bytes": 19893,
+      "sha256": "945edf619fdf0efbd52007125fdce797741e3516a9a20a79a784e00041b7b2a4"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8793,
-      "sha256": "8def0abf208a4eb55b5c78af9b1a233e6fabb4724a583de32141cf79afecf953"
+      "sha256": "7522f58bd1a2d30fa67a4aeae9d32ee7a8dc0272b02ba43f3fcd359de534adbf"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13191,
-      "sha256": "14a436c5b835b297f423e76709b75f79e20d4855689c4a90c6ec9f15e8f35004"
+      "sha256": "fa5e989c68647688fd0c5dad3746e9ebef4aac35e675b033dce840656b8aabe2"
     },
     {
       "label": "world_class_evidence_plan",
       "path": "reports/world_class_evidence_plan.json",
       "exists": true,
       "bytes": 22112,
-      "sha256": "f283c5487869cbbf8c88361d57750abaad05950002aaea8b311b34d519ba9b9c"
+      "sha256": "9a27ba542b7c0309c10dde5d5c60deda4776802f8f5c8778c81e4a6796ff19cc"
     },
     {
       "label": "world_class_evidence_ledger",
       "path": "reports/world_class_evidence_ledger.json",
       "exists": true,
       "bytes": 23237,
-      "sha256": "0a085d12960eb957bdbb3d1e6d9098f0acc85c22942eaccf15f889426d9560f4"
+      "sha256": "e93c9f790b29d1fa8dbae4c74d1d27aed5dc88640313e9331ba4f2d610577bf2"
     },
     {
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
       "bytes": 20128,
-      "sha256": "fd6cce982d532288527c57208fd48ea8244e6d098e07e2d34a3bd1dad825b1f9"
+      "sha256": "116429bac1af76cfec7d475d9b4d895a4fe8b2542e371627930d92f22a6eb557"
     },
     {
       "label": "world_class_evidence_preflight",
       "path": "reports/world_class_evidence_preflight.json",
       "exists": true,
       "bytes": 72219,
-      "sha256": "a82935a492183abe52865d9881b9292b22905167c0b149f1b5de8438e011af2d"
+      "sha256": "c726d96e43207c9c9e8f3b93ff8a6ed5a039a3eef82637452abcb47df6f3be95"
     },
     {
       "label": "world_class_submission_review",
       "path": "reports/world_class_submission_review.json",
       "exists": true,
       "bytes": 14264,
-      "sha256": "08c79e2645137861c56a5fe7faf091d9ea006a72225a8168d7c407cae6b6dce1"
+      "sha256": "b2bfcbb9315c3430d9042e16d7523a71c62415625b90a81ef40bf598b8ed453c"
     },
     {
       "label": "world_class_operator_runbook",
       "path": "reports/world_class_operator_runbook.json",
       "exists": true,
       "bytes": 67569,
-      "sha256": "3734f7f2dacb3cb91e32905a54f93bec7ae47eda6b605fcd9f1186f4150d5440"
+      "sha256": "3d94058a4686f13337a93aec3c7ef3ad2b87bcc0762d7dea17ad9350059d74c1"
     },
     {
       "label": "world_class_operator_runbook_markdown",
       "path": "reports/world_class_operator_runbook.md",
       "exists": true,
       "bytes": 23832,
-      "sha256": "05620822172d8c67388a566a2e22258648dd95a17035aeaf2d0f0de5ae6003dd"
+      "sha256": "14ae2a3d1907e38fcef335c6b6dfc97937f39b45aab59b17feb4cf4b0be430b9"
     },
     {
       "label": "world_class_operator_runbook_html",
@@ -351,8 +351,8 @@
       "label": "world_class_claim_guard",
       "path": "reports/world_class_claim_guard.json",
       "exists": true,
-      "bytes": 23696,
-      "sha256": "251d3d4873084d97f85afb34d25a81f5849b6d6856d3931f29aa24866355f824"
+      "bytes": 24074,
+      "sha256": "a8a9eae61400b381ebba1ba91f30b4c66dfa1830b0cf9879cec44b61d23892ee"
     }
   ],
   "missing_artifacts": [],

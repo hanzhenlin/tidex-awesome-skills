@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-08-17",
+  "generated_at": "2026-11-09",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 262,
+    "file_count": 264,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -1361,6 +1361,12 @@
       "issues": []
     },
     {
+      "path": "tests/verify_review_studio_serialization.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "tests/verify_review_viewer.py",
       "ok": true,
       "issue_count": 0,
@@ -1506,6 +1512,12 @@
     },
     {
       "path": "tests/verify_weekly_curator.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_workbuddy_compat.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
