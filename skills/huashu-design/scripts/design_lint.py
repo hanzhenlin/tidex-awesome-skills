@@ -20,6 +20,7 @@ design_lint.py — 只量事实的设计体检，外加「外观指纹」：三�
 依赖：pip install playwright pillow && playwright install chromium
 """
 
+from _ready import wait_ready, NOT_READY, use_vendor
 import argparse
 import glob
 import io
@@ -76,7 +77,15 @@ COLLECT_JS = r"""
   };
   const opacityOf = (el) => { let o = 1; for (let e = el; e && e.nodeType === 1; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity); return o; };
   // SVG 里的字按渲染后的大小算（viewBox 会放大缩小）
-  const scaleOf = (el) => { if (!(el instanceof SVGElement) || !el.getScreenCTM) return 1; const m = el.getScreenCTM(); return m ? Math.hypot(m.a, m.b) || 1 : 1; };
+  // SVG 里的字要乘上 viewBox 的缩放才是它画出来的大小；但外层 CSS transform（比如展示板上缩到 0.8 倍的手机）要扣掉，
+  // HTML 的字也不算这层，两边口径一致
+  const scaleOf = (el) => {
+    if (!(el instanceof SVGElement) || !el.getScreenCTM) return 1;
+    const m = el.getScreenCTM(); if (!m) return 1;
+    const root = el.ownerSVGElement ? (function r(n) { return n.ownerSVGElement ? r(n.ownerSVGElement) : n; })(el) : el;
+    const css = root.clientWidth ? root.getBoundingClientRect().width / root.clientWidth : 1;
+    return (Math.hypot(m.a, m.b) || 1) / (css || 1);
+  };
   const CAPTION = 'figcaption, footer, small, caption, aside, sup, sub, [class*=caption], [class*=credit], [class*=footnote], [class*=meta]';
   const visible = (el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el);
     return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && parseFloat(cs.opacity) > 0.05; };
@@ -86,13 +95,14 @@ COLLECT_JS = r"""
   const out = { small: [], lowContrast: [], eyebrows: [], dots: 0, emDashLabels: 0, arrows: 0, numbered: [],
                 accentWord: [], cardKit: 0, hairlines: 0, radiusZero: 0, radiusTotal: 0, monoSmall: 0,
                 broken: [], fonts: {}, display: null, body: null, headlineSerif: false, textColors: {}, bg: null,
-                bodySmall: [], relImgs: [], textTotal: 0 };
+                bodySmall: [], relImgs: [], textTotal: 0, devices: [] };
 
   const all = Array.from(document.body ? document.body.querySelectorAll('*') : []);
   const cardSig = {};
   let displayEl = null, maxFs = 0;   // 标题字体 = 页面上字号最大的那段文字用的字体
   for (const el of all) {
     if (!visible(el)) continue;
+    if (el.closest('[data-lint-skip]')) continue;   // 设备外壳、微信胶囊和原生 tabBar 这类不归设计稿管的东西
     const cs = getComputedStyle(el);
     const t = ownText(el);
     const fs = parseFloat(cs.fontSize) * scaleOf(el);
@@ -124,6 +134,7 @@ COLLECT_JS = r"""
     const r = el.getBoundingClientRect();
     // 手机机身不算：展示板上并排四台手机，是同一圆角同一阴影重复四次，但那是设备，不是卡片
     const device = r.width >= 160 && r.height / r.width >= 1.7 && r.height / r.width <= 2.4 && parseFloat(cs.borderRadius) >= 24;
+    if (device && !out.devices.some((d) => d.el.contains(el))) out.devices.push({ el, x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height });
     if (cs.boxShadow !== 'none' && parseFloat(cs.borderRadius) > 0 && !device) {
       const sig = cs.borderRadius + '|' + cs.boxShadow; cardSig[sig] = (cardSig[sig] || 0) + 1;
     }
@@ -133,6 +144,7 @@ COLLECT_JS = r"""
     }
   }
   out.cardKit = Math.max(0, ...Object.values(cardSig));
+  out.devices = out.devices.map(({ x, y, w, h }) => ({ x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) }));
 
   // 标题里只给一个词换色/斜体
   for (const h of document.querySelectorAll('h1, h2')) {
@@ -288,6 +300,7 @@ def collect(paths, viewport=(1440, 900), min_body=14, min_label=12):
         browser = pw.chromium.launch()
         for path in expand(paths):
             page = browser.new_page(viewport={'width': viewport[0], 'height': viewport[1]})
+            use_vendor(page)
             errors = []
             page.on('pageerror', lambda e: errors.append(str(e)[:160]))
             page.on('console', lambda m: errors.append(m.text[:160]) if m.type == 'error' else None)
@@ -303,9 +316,14 @@ def collect(paths, viewport=(1440, 900), min_body=14, min_label=12):
                 except Exception:
                     pass
                 page.wait_for_timeout(800)
+                if not wait_ready(page):
+                    errors.append(NOT_READY.format(s=15) + '；下面的色板和骨架可能是空白页量出来的')
                 facts = page.evaluate(COLLECT_JS)
                 shot = panels_shot(page, facts['panels']) if facts.get('panels') else page.screenshot()
                 facts['palette'] = palette(shot)
+                if facts['palette'] and facts['palette'][0]['share'] > 0.97:
+                    errors.append('截图几乎只有一种颜色：页面可能还没渲染出来，色板比较不作数，先打开页面确认')
+                    facts['blank'] = True
                 facts['layout'] = layout_vector(shot)
             except Exception as e:
                 facts = {'fatal': str(e).split('\n')[0][:200]}
@@ -365,9 +383,28 @@ def judge(f):
         yellow.append(f'标题里只给一个词换色/斜体 {len(f["accentWord"])} 处（{f["accentWord"][:2]}）')
     if len(f['numbered']) >= 3:
         yellow.append(f'01/02/03 编号 {len(f["numbered"])} 个——内容真是序列吗？')
+    row = device_row(f.get('devices') or [])
+    if row:
+        yellow.append(f'展示板：{row} 台一样大的手机排成一排——像一张表格，不像海报。换主次（主屏放大、其余错落）、'
+                      '流程串联或局部特写，见 references/app-prototype.md「展示板」，起步可用 assets/showboard.jsx；三个方向的构图也要各不一样')
     if f['display'] and f['display'].lower() in ('inter', 'roboto', 'arial', 'helvetica', 'system-ui', '-apple-system'):
         yellow.append(f'标题字体是 {f["display"]}（UI 小字体当 display）')
     return red, yellow
+
+
+def device_row(devs):
+    """四台以上一样大、顶边齐平的手机：返回台数，否则 0。"""
+    if len(devs) < 4:
+        return 0
+    ws = sorted(d['w'] for d in devs)
+    med = ws[len(ws) // 2]
+    same = [d for d in devs if abs(d['w'] - med) <= med * 0.04]
+    rows = {}
+    for d in same:
+        k = next((y for y in rows if abs(y - d['y']) <= 24), d['y'])
+        rows.setdefault(k, []).append(d)
+    best = max((len(v) for v in rows.values()), default=0)
+    return best if best >= 4 and best >= len(devs) * 0.6 else 0
 
 
 def families(f):
@@ -422,12 +459,26 @@ def ledger_summary(rows):
     return '\n'.join(lines)
 
 
+def accents_differ(p, q):
+    """整体色板接近，常常只是因为两版都被大面积浅底（或 App 展示板＋黑机身）占满。
+    这时再看有彩度的那几块：一边有成片彩色、另一边没有，或两边的彩色本身差得远，就不是同一套色。"""
+    def acc(x):
+        return [c for c in x if lch(c['rgb'])[1] > 0.04 and c['share'] >= 0.02]
+    ap, aq = acc(p), acc(q)
+    sp, sq = sum(c['share'] for c in ap), sum(c['share'] for c in aq)
+    if bool(ap) != bool(aq):
+        return max(sp, sq) >= 0.08
+    return bool(ap) and palette_distance(ap, aq) >= 0.08
+
+
 def similar(a, b, brand=False, ignore_layout=False):
     """返回两版撞在哪里（空表示没撞）。brand=颜色字体受品牌约束，只比骨架；ignore_layout=App 多机并排这类骨架天然相同的形态。"""
     hits = []
+    if a.get('blank') or b.get('blank'):
+        return ['有一版截图是空白，没法比（先确认页面能渲染出来）'], 1.0, 0.0
     pd = palette_distance(a['palette'], b['palette'])
     lc = corr(a['layout'], b['layout'])
-    if pd < 0.06 and not brand:
+    if pd < 0.06 and not brand and not accents_differ(a['palette'], b['palette']):
         hits.append(f'色板几乎相同（距离 {pd}）')
     if lc > 0.55 and not ignore_layout:
         hits.append(f'版式骨架高度相似（相关 {lc:.2f}）')

@@ -4,6 +4,8 @@
 > 单文件 inline React 的三条技术红线（样式对象必须唯一命名，如 `const terminalStyles = {}`；多个 babel script 之间用 `Object.assign(window, …)` 共享组件；不用 `scrollIntoView`）和 pinned 版本见 `references/react-setup.md`，写之前先读。三方向门照走（`references/directions.md`），三版手机并排时 compare 加 `--ignore-layout`。
 
 
+做的是**微信小程序**时，先读 `references/modules/miniprogram.md`（胶囊、tabBar、转发卡片、交给 WorkBuddy），外壳用 `assets/wechat_frame.jsx`，下面的形态先行、真图、展示板照用。
+
 做 iOS/Android/移动 app 原型时（触发：「app 原型」「iOS mockup」「移动应用」「做个 app」），下面四条**覆盖**通用 placeholder 原则——app 原型是 demo 现场，静态摆拍和米白占位卡没有说服力。
 
 ### 先定形态，再画屏
@@ -132,6 +134,8 @@ Screen 组件接 callback props（`onTabChange`、`onOpen`、`onClose`、`onTogg
 | 局部特写 | 在某一屏旁边放一个关键组件的 2–3 倍特写：签名交互、数据可视化、一个精心做的控件 | 有一个值得被记住的细节 |
 | 语境底 | 展示板背景用这个 App 的使用语境：真图、题材色、它的材质，而不是白画布 | 题材有很强的场景（户外、厨房、夜晚） |
 | 板面排版 | 展示板自己有标题区：App 名、一句定位、屏幕标签，字体和颜色用这个方向自己的系统 | 都适用 |
+
+**起步可以用 `assets/showboard.jsx`**：`<Showboard layout="hero|flow|closeup" …>` 三种摆法（主次、流程串联、局部特写）已经算好位置，传入每台手机、标签、转发卡片就有一块有构图的板。三个方向各用一种，构图自然不一样；用熟了再按方向自己改。`design_lint.py check` 看到四台以上一样大的手机排成一排会亮黄灯。
 
 规则只有三条：展示板的底色和字体跟着这个方向走（暗色方向用暗底板，不要统一白画布）；每台手机仍然能点；屏幕不缩到看不清字（单台宽度不小于 300px）。三个方向的展示板构图也要不一样——这是三个方向最容易被忽略的差异。
 

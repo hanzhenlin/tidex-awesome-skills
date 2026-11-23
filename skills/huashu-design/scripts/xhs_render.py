@@ -23,6 +23,7 @@ HTML 约定（照 assets/style-specimens/xhs/ 里的模板写）：
 import argparse
 import os
 import sys
+from _ready import wait_ready, NOT_READY, use_vendor
 import tempfile
 from pathlib import Path
 
@@ -141,6 +142,7 @@ def main():
         except Exception as e:
             sys.exit(f'Chromium 启动失败：{str(e).splitlines()[0]}\n装一下：python3 -m playwright install chromium')
         page = browser.new_page(viewport={'width': W, 'height': H})
+        use_vendor(page)
         for f in a.files:
             src = Path(f).resolve()
             try:
@@ -149,6 +151,8 @@ def main():
                 print(f'  ! {src.name}：30 秒内网络资源没加载完（多半是字体外链），按系统字体兜底继续出图')
             page.evaluate('document.fonts.ready')
             page.wait_for_timeout(400)
+            if not wait_ready(page):
+                print(f'  ! {src.name}：' + NOT_READY.format(s=15))
             secs = page.locator('.xhs-page, .xhs-strip')
             if secs.count() == 0:
                 print(f'✗ {src.name}：没有 .xhs-page / .xhs-strip'); bad += 1; continue

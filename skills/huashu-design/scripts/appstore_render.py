@@ -25,6 +25,7 @@ HTML 约定（照 assets/appstore/template.html 写）：
 import argparse
 import os
 import sys
+from _ready import wait_ready, NOT_READY, use_vendor
 import tempfile
 from pathlib import Path
 
@@ -98,6 +99,7 @@ def main(argv=None):
             print(f'Chromium 启动失败：{str(e).splitlines()[0]}\n装一下：python3 -m playwright install chromium')
             return 2
         probe = browser.new_page()
+        use_vendor(probe)
         probe.goto(src.as_uri(), wait_until='load')
         first = probe.locator('.as-panel, .as-strip').first
         if first.count() == 0:
@@ -108,12 +110,15 @@ def main(argv=None):
         scale = W / (box['width'] / n0)
         probe.close()
         page = browser.new_page(device_scale_factor=scale)
+        use_vendor(page)
         try:
             page.goto(src.as_uri(), wait_until='networkidle', timeout=30000)
         except Exception:
             print(f'  ! {src.name}：30 秒内网络资源没加载完（多半是字体外链），按系统字体兜底继续出图')
         page.evaluate('document.fonts.ready')
         page.wait_for_timeout(400)
+        if not wait_ready(page):
+            print(f'  ! {src.name}：' + NOT_READY.format(s=15))
         report = page.evaluate(PROBE)
         secs = page.locator('.as-panel, .as-strip')
         for si in range(secs.count()):
