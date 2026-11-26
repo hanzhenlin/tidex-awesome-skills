@@ -211,6 +211,8 @@ resolve_skill_source() {
                     effective="${effective}/${name}"
                 elif [ -f "${effective}/skills/${name}/SKILL.md" ]; then
                     effective="${effective}/skills/${name}"
+                elif [ -f "${effective}/.claude/skills/${name}/SKILL.md" ]; then
+                    effective="${effective}/.claude/skills/${name}"
                 fi
             fi
             RESOLVED_PATH="${effective}"

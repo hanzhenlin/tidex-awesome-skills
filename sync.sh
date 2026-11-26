@@ -82,7 +82,14 @@ sync_one() {
             source_content="${tmp}/${name}"
         elif [ -f "${tmp}/skills/${name}/SKILL.md" ]; then
             source_content="${tmp}/skills/${name}"
+        elif [ -f "${tmp}/.claude/skills/${name}/SKILL.md" ]; then
+            source_content="${tmp}/.claude/skills/${name}"
         fi
+    fi
+
+    # 若提取自子目录且缺少 LICENSE，从仓库根目录补齐原始 LICENSE 以遵循版权声明
+    if [ "${source_content}" != "${tmp}" ] && [ ! -f "${source_content}/LICENSE" ] && [ -f "${tmp}/LICENSE" ]; then
+        cp "${tmp}/LICENSE" "${source_content}/LICENSE"
     fi
 
     if [ -d "${snapshot}" ]; then
