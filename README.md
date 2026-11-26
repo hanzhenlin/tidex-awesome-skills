@@ -20,7 +20,7 @@
 
 ---
 
-## 🧭 精选明星技能大盘（已收录 14 款顶级神作）
+## 🧭 精选明星技能大盘（已收录 16 款顶级神作）
 
 ### 🧬 1. 元技能与认知进化操作系统 (Meta & Evolution)
 
@@ -46,6 +46,8 @@
 | **`archify`**<br>(交互式架构可视化) | [tt-a1i @tt-a1i](https://github.com/tt-a1i/archify) | MIT | • **GitHub 81k+ Stars 登顶周榜神作，全量纯原生 JS 渲染校验**<br>• 将需求、设计方案或真实代码库转化为高保真自包含可交互单文件 HTML<br>• 涵盖 Architecture、Workflow、Sequence、Dataflow、Lifecycle 5 大图表<br>• 支持深浅色切换、上下游影响链路追踪 (Reach Trace)、代码行号精准锚定 (`SRC`) | `archify`、`系统架构图`、`交互式架构`、`时序图`、`数据流图`、`状态机`、`流程图` |
 | **`huashu-art-motion`**<br>(艺术动画视听工坊) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-art-motion) | MIT | • 艺术与视频动画工坊：纯代码驱动 SVG 与 Canvas 动态视频生成<br>• 内置 36 种实做艺术风格＋16 种可迁移配方、9 种解说动画语法<br>• 严苛交付流水线：镜头表 lint、分镜出片、音画混剪、QA 门禁 | `huashu-art-motion`、`艺术动画`、`科普视频`、`解说动画`、`动态视频` |
 | **`huashu-motion`**<br>(产品发布片直出) | [花叔 @alchaincyf](https://github.com/alchaincyf/huashu-motion) | MIT | • 商业级产品发布片与宣传片直出工坊（HTML+GSAP 逐帧代码渲染）<br>• 智能导演为产品智能适配镜头动效语言，指着画面微调（Point & Edit）<br>• 内置 3D 景深、卡片蒙太奇、动效文字、连续变形与自动配乐对齐 | `huashu-motion`、`产品宣传片`、`发布片`、`宣传片`、`动效视频` |
+| **`ui-ux-pro-max`**<br>(UI/UX 设计智能引擎) | [Next Level Builder @nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT | • **设计类绝对一哥（90k+ Stars），补齐生产级前后端项目 UI/UX 短板**<br>• 内置纯 Python 零依赖本地检索引擎：80 种风格、194 套行业配色、74 组字体配对、141 条 UX/无障碍规则、25 种图表<br>• 覆盖 React / Next.js / Vue / Svelte / Tailwind / SwiftUI / Flutter / React Native 等 23 种技术栈 | `ui-ux-pro-max`、`UI设计`、`UX规范`、`设计系统`、`配色字体`、`前端重构` |
+| **`taste-skill`**<br>(去 AI 味前端审美) | [Leonxlnx @Leonxlnx](https://github.com/Leonxlnx/taste-skill) | MIT | • **前端反模板化/去 AI 味王牌（41k+ Stars），对标 figma.com / x.ai 商业官网水准**<br>• 强约束构图与审美克制：一屏一节、真实产品 UI 与摄影图、精准微交互，杜绝廉价卡片堆砌<br>• 内置真实浏览器验收门禁（需 Node 22+ 与 Chrome/Chromium） | `taste-skill`、`design-taste-frontend`、`官网设计`、`落地页`、`去AI味前端` |
 
 ---
 
@@ -124,6 +126,8 @@ bash install.sh -u           # 安全卸载（仅清理本套件软链，不伤�
 - 感谢 [**yang0 (@yang0)**](https://github.com/yang0/handraw-style) 创造的 `handraw-style` 手绘风格与排版图型生图引擎；
 - 感谢 [**TypeSafe (@typesafe-ai)**](https://github.com/typesafe-ai/skills) 创造的 `typesafe-ai` 类型化决策模型编程原语；
 - 感谢 [**tt-a1i (@tt-a1i)**](https://github.com/tt-a1i/archify) 及 Cocoon AI 创造的 `archify` 交互式架构与流程可视化引擎；
-- 感谢 [**袋鼠王 (@kangarooking)**](https://github.com/kangarooking/cangjie-skill) 创造的 `cangjie-skill`（仓颉）长内容方法论蒸馏与原子技能工厂架构。
+- 感谢 [**袋鼠王 (@kangarooking)**](https://github.com/kangarooking/cangjie-skill) 创造的 `cangjie-skill`（仓颉）长内容方法论蒸馏与原子技能工厂架构；
+- 感谢 [**Next Level Builder (@nextlevelbuilder)**](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) 创造的 `ui-ux-pro-max` 跨技术栈 UI/UX 设计智能引擎；
+- 感谢 [**Leonxlnx (@Leonxlnx)**](https://github.com/Leonxlnx/taste-skill) 创造的 `taste-skill` 反模板化前端审美与浏览器验收门禁体系。
 
 **协议边界**：本仓库工程化套件与脚本采用 [MIT License](./LICENSE)；`skills/` 下收录的各技能版权完全归原作者所有，均保留其原始 LICENSE 与署名，授权条款以上游为准。完整声明见 [NOTICE.md](./NOTICE.md)。
